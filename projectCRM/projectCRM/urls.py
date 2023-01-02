@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/',include('admin.urls')),  
     path('projectmanager/',include('projectmanager.urls')),  
     path('developer/',include('developer.urls')),  
+    path('client/',include('client.urls')),  
 ]
 
 

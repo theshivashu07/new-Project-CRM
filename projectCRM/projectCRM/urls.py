@@ -18,13 +18,17 @@ from django.urls import path,include
 
 urlpatterns = [
     path('defaultadmin/', admin.site.urls),
-    #path('',include('guest.urls')),
-    path('guest/',include('guest.urls')), 
-    path('hr/',include('hr.urls')), 
-    path('admin/',include('admin.urls')),  
-    path('projectmanager/',include('projectmanager.urls')),  
-    path('developer/',include('developer.urls')),  
-    path('client/',include('client.urls')),  
+    #path('',include('project_Guest.urls')),
+    path('guest/',include('project_Guest.urls')), 
+    path('hr/',include('project_HR.urls')), 
+    path('admin/',include('project_Admin.urls')),  
+    path('projectmanager/',include('project_ProjectManager.urls')),  
+    path('developer/',include('project_Developer.urls')),  
+    path('client/',include('project_Client.urls')),  
 ]
+
+
+
+
 
 

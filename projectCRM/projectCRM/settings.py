@@ -60,7 +60,7 @@ ROOT_URLCONF = 'projectCRM.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR,"_templates"],    # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,10 +120,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
+STATIC_URL = '_static/'
 
-STATIC_URL = 'static/'
+# Addituinal Adding, So that static files are accessable, 
+STATICFILES_DIRS = [
+    BASE_DIR,"_static"
+    # BASE_DIR/"_static"
+] 
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -2184,7 +2184,7 @@ progress {
   font-weight: 400;
   line-height: 1.53;
   color: #697a8d;
-  background-color: #d0d0d045;
+  background-color: #2c3c4c;
   background-clip: padding-box;
   border: 1px solid #d9dee3;
   -webkit-appearance: none;
@@ -3891,7 +3891,7 @@ textarea.form-control-lg {
 .card-header {
   padding: 1.5rem 1.5rem;
   margin-bottom: 0;
-  background-color: transparent;
+  background-color: white;
   border-bottom: 0 solid #d9dee3;
 }
 .card-header:first-child {
@@ -6226,9 +6226,10 @@ a.invert-bg-dark:hover, a.invert-bg-dark:focus {
   text-transform: uppercase;
   font-size: 0.75rem;
   letter-spacing: 1px;
+  font-weight: bold;
 }
 .table:not(.table-dark) th {
-  color: #566a7f;
+  color: #ffffff;
 }
 
 .table-border-bottom-0 tr:last-child td,
@@ -15275,7 +15276,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   position: relative;
   padding-top: 0.25rem;
   padding-bottom: 0.2rem;
-  height: 3.875rem;
+  height: 4rem;
   flex-wrap: nowrap;
   color: #697a8d;
   z-index: 2;

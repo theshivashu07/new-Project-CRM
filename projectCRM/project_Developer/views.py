@@ -10,5 +10,8 @@ def index(request):
 def index(request):
 	return render(request,"otherapps/developer/index.html");
 
+def allprojects(request):
+	return render(request,"otherapps/developer/allprojects.html");
+
 
 

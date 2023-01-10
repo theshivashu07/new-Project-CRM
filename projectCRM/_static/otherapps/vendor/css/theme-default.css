@@ -104,7 +104,7 @@
 }
 
 .bg-primary {
-  background-color: #ff4809 !important;
+  background-color: #ff2525 !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus {
@@ -167,8 +167,8 @@ button.list-group-item-primary.active {
 }
 
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
-  border-color: #ff4809;
-  background-color: #ff4809;
+  border-color: #000000db;
+  background-color: #ffffff;
 }
 
 .alert-primary {
@@ -677,6 +677,7 @@ a:hover {
 .bg-menu-theme .menu-item.open:not(.menu-item-closing) > .menu-toggle,
 .bg-menu-theme .menu-item.active > .menu-link {
   color: #566a7f;
+  background-color: #ffffff1f;
 }
 .bg-menu-theme .menu-item.active > .menu-link:not(.menu-toggle) {
   background-color: #fff;
@@ -739,7 +740,7 @@ a:hover {
 html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item.open > .menu-link, .layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item.open > .menu-link,
 html:not(.layout-menu-collapsed) .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover,
 .layout-menu-hover.layout-menu-collapsed .bg-menu-theme .menu-inner .menu-item .menu-link:not(.active):hover {
-  background-color: rgba(67, 89, 113, 0.04);
+  background-color: #ffffff1f;
 }
 .bg-menu-theme .menu-inner .menu-sub > .menu-item.active > .menu-link.menu-toggle {
   background-color: rgba(67, 89, 113, 0.04);

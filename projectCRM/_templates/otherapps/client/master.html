@@ -136,9 +136,12 @@
                   </g>
                 </svg>
               </span>
-              <center>
-                  <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color:lightyellow;">||  @theshivashu07  ||</span>
-              </center>
+              
+                  <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color:lightyellow;">
+                    <center>
+                      ||  @theshivashu07  ||
+                    </center>
+                  </span>
             </a>
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
@@ -147,19 +150,57 @@
           <div class="menu-inner-shadow"></div>
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            {{request.path}}
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Home</span>
+            </li>
             <li class="menu-item {% if request.path == '/' %}active{% endif %}">
               <a href="/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item {% if request.path == '/clientdetails' %}active{% endif %}">
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Pages</span>
+            </li>
+            {% if request.path == "/clientdetails" or request.path == "/clientnotification" or request.path == "/clientconnections" or request.path == "/clientdeactivate" %}
+              <li class="menu-item active open" style="">
+            {% else %}
+              <li class="menu-item" style="">
+            {% endif %}
+            <!-- <li class="menu-item active open" style=""> -->
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Account Settings</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item {% if request.path == '/clientdetails' %}active{% endif %}">
+                  <a href="clientdetails" class="menu-link">
+                    <div data-i18n="Account">Account</div>
+                  </a>
+                </li>
+                <li class="menu-item {% if request.path == '/clientnotification' %}active{% endif %}">
+                  <a href="clientnotification" class="menu-link">
+                    <div data-i18n="Notifications">Notifications</div>
+                  </a>
+                </li>
+                <li class="menu-item {% if request.path == '/clientconnections' %}active{% endif %}">
+                  <a href="clientconnections" class="menu-link">
+                    <div data-i18n="Connections">Connections</div>
+                  </a>
+                </li>
+                <li class="menu-item {% if request.path == '/clientdeactivate' %}active{% endif %}">
+                  <a href="clientdeactivate" class="menu-link">
+                    <div data-i18n="Deactivate">Deactivate</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- <li class="menu-item {% if request.path == '/clientdetails' %}active{% endif %}">
               <a href="clientdetails" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Add Self's Details</div>
               </a> 
-            </li>
+            </li> -->
             <li class="menu-item {% if request.path == '/projectsoftdetails' %}active{% endif %}">
               <a href="projectsoftdetails" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
@@ -271,7 +312,7 @@
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
                   <center >
-                    <b style="color: #ffd60d;">Shivam Shukla</b><br><b style="color: #848484;">Client</b>
+                    <b style="color: #ffd60d; font-size: 18px;">Shivam Shukla</b><br><b style="color: #848484;">Client</b>
                     <!-- <b style="color: red">Shivam Shukla</b><br><b style="color: green;">Developer</b> -->
                 </center>
                 </li>
@@ -279,7 +320,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="/_static/otherapps/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="/_static/otherapps/img/avatars/@theshivashu07.jpg" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">

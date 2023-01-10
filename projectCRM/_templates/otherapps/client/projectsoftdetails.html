@@ -9,12 +9,135 @@ CRM - Client - Home
 
 {% block childcontent %}
 
+      <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
+              <div class="row">
+                <!-- Basic -->
 
+                <div class="col-md-12">
+                  <div class="card mb-4">
+                    <h5 class="card-header"><b>Profile Details</b></h5>
+                    <!-- Account -->
+                    <hr class="my-0">
+                    <div class="card-body">
+                      <form id="formAccountSettings" method="POST" onsubmit="return false">
+                        <div class="row">
+                          <div class="mb-3 col-md-7">
+                            <label for="firstName" class="form-label">New Project Name</label>
+                            <input class="form-control" type="text" id="firstName" name="firstName" value="" placeholder="Project CRM" autofocus="">
+                          </div>
+                          <div class="mb-3 col-md-5">
+                            <label for="language" class="form-label">Programming Language</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="c">C</option>
+                              <option value="cpp">C++</option>
+                              <option value="java">Java</option>
+                              <option value="py">Python</option>
+                              <option value="c#">C#</option>
+                              <option value="go">Go</option>
+                              <option value="swift">Swift</option>
+                              <option value="kotlin">Kotlin</option>
+                              <option value="php">PHP</option>
+                              <option value="js">JavaScript</option>
+                              <option value="other">Other</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-4">
+                            <label for="language" class="form-label">Front-End</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="basic">Simple</option>
+                              <option value="reactjs">ReactJs</option>
+                              <option value="angular">Angular</option>
+                              <option value="jquery">JQuery</option>
+                              <option value="other">Other</option>
+                            </select>
+                          	<div id="defaultFormControlHelp" class="form-text">
+                          	  Here <b>'simple'</b> means <b>'html, css and js'</b> programming languages.
+                          	</div>
+                          </div>
+                          <div class="mb-3 col-md-4">
+                            <label for="language" class="form-label">Back-End</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="django">Django</option>
+                              <option value="expressjs">Express JS</option>
+                              <option value="springboot">Spring Boot</option>
+                              <option value="flask">Flask</option>
+                              <option value="PHP">PHP</option>
+                              <option value="asp.net">ASP.Net</option>
+                              <option value="other">Other</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-4">
+                            <label for="language" class="form-label">Database</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="mongodb"><b>MongoDB:</b> No-SQL Database</option>
+                              <option value="mysql"><b>MySQL:</b> SQL Database</option>
+                              <option value="oracle"><b>Oracle:</b> SQL Database</option>
+                              <option value="sqlite"><b>SQLite:</b> SQL Database</option>
+                              <option value="other"><b>Other:</b> SQL Database</option>
+                              <option value="other"><b>Other:</b> No-SQL Database</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-7">
+                            <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" style="height:120px" rows="4"></textarea>
+                            <div id="defaultFormControlHelp" class="form-text">
+                              Here is you briefly describe exactly what features you want on your project. And <b>describe everything.....</b>
+                            </div>
+                          </div>
+                          <div class="mb-3 col-md-5">
+                            <div class="row">
+                              <!-- first three places -->
+                              <div class="mb-3 col-md-5">
+                                <label for="state" class="form-label">Beginning Date</label>
+                                <input class="form-control" type="date"id="html5-date-input">
+                              </div>
+                              <div class="mb-3 col-md-2">
+                                <br><br>
+                                <center><i class='bx bx-transfer bx-spin bx-sm' ></i></center>
+                              </div>
+                              <div class="mb-3 col-md-5">
+                                <label for="state" class="form-label">Ending Date</label>
+                                <input class="form-control" type="date"id="html5-date-input">
+                              </div>
+                              <!-- first three places -->
+                            </div>
+                            <div class="mb-3">
+                              <label for="firstName" class="form-label">Assign your budget, at max!!</label>
+                              <div class="input-group">
+                                <span class="input-group-text">In Rupees.</span>
+                                <input type="text" class="form-control" placeholder="Starting Amount">
+                                <span class="input-group-text" style="color:#ffffff">to</span>
+                                <input type="text" class="form-control" placeholder="Ending Amount">
+                                <!-- <span class="input-group-text">.00</span> -->
+                              </div>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="mt-2">
+                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /Account -->
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
 
-<br>
 
 
 {% endblock %}
+
 
 
 

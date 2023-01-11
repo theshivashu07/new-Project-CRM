@@ -8,9 +8,14 @@ urlpatterns=[
 		path('clientconnections',views.clientconnections,name='clientconnections'),
 		path('clientdeactivate',views.clientdeactivate,name='clientdeactivate'),
 		path('clientnotification',views.clientnotification,name='clientnotification'),
+		path('allprojectsrequests',views.allprojectsrequests,name='allprojectsrequests'),
+		path('activeprojects',views.activeprojects,name='activeprojects'),
+		path('completedprojects',views.completedprojects,name='completedprojects'),
 		#path('/',views.,name=''),
 		
 ]
+
+
 
 
 

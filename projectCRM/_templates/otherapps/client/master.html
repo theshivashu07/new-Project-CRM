@@ -155,12 +155,12 @@
             </li>
             <li class="menu-item {% if request.path == '/' %}active{% endif %}">
               <a href="/" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
             <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Pages</span>
+              <span class="menu-header-text">Account</span>
             </li>
             {% if request.path == "/clientdetails" or request.path == "/clientnotification" or request.path == "/clientconnections" or request.path == "/clientdeactivate" %}
               <li class="menu-item active open" style="">
@@ -169,7 +169,7 @@
             {% endif %}
             <!-- <li class="menu-item active open" style=""> -->
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <i class="menu-icon tf-icons bx bxs-user-account"></i>
                 <div data-i18n="Account Settings">Account Settings</div>
               </a>
               <ul class="menu-sub">
@@ -195,80 +195,34 @@
                 </li>
               </ul>
             </li>
-            <!-- <li class="menu-item {% if request.path == '/clientdetails' %}active{% endif %}">
-              <a href="clientdetails" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Add Self's Details</div>
-              </a> 
-            </li> -->
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Project's</span>
+            </li>
+            <!-- <li class="menu-item {% if request.path == '/projectsoftdetails' %}active{% endif %} disabled"> -->
             <li class="menu-item {% if request.path == '/projectsoftdetails' %}active{% endif %}">
               <a href="projectsoftdetails" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-send "></i>
                 <div data-i18n="Analytics">Sent Project's Details</div>
               </a> 
             </li>
-            <!--
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings"></div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div data-i18n="Suggestions">Send Status</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div data-i18n="Discussions">Send Reports</div>
-                  </a>
-                </li>
-              </ul>
+            <li class="menu-item {% if request.path == '/allprojectsrequests' %}active{% endif %}">
+              <a href="allprojectsrequests" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book-add"></i>
+                <div data-i18n="Analytics">Request for Projects</div>
+              </a> 
             </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Talks</div>
-              </a>
-              <ul class="menu-sub">
-                <li class= "menu-item">
-                  <a href="#" class="menu-link">
-                    <div data-i18n="Suggestions">Suggestions</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div data-i18n="Discussions">Discussions</div>
-                  </a>
-                </li>
-              </ul>
+            <li class="menu-item {% if request.path == '/activeprojects' %}active{% endif %}">
+              <a href="activeprojects" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-run"></i>
+                <div data-i18n="Analytics">Active Projects</div>
+              </a> 
             </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">View Projects</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="allprojects" class="menu-link">
-                    <div data-i18n="Suggestions">New Projects</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="allprojects" class="menu-link">
-                    <div data-i18n="Suggestions">Running Projects</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="allprojects" class="menu-link">
-                    <div data-i18n="Suggestions">Completed Projects</div>
-                  </a>
-                </li>
-              </ul>
+            <li class="menu-item {% if request.path == '/completedprojects' %}active{% endif %}">
+              <a href="completedprojects" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-briefcase-alt-2"></i>
+                <div data-i18n="Analytics">Completed Projects</div>
+              </a> 
             </li>
-          -->
-
           </ul>
         </aside>
         <!-- / Menu -->
@@ -331,10 +285,6 @@
                             <div class="avatar avatar-online">
                               <img src="/_static/otherapps/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
                           </div>
                         </div>
                       </a>

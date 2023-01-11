@@ -25,6 +25,15 @@ def clientdeactivate(request):
 def clientnotification(request):
 	return render(request,"otherapps/client/clientnotification.html");
 
+def allprojectsrequests(request):
+	return render(request,"otherapps/client/allprojectsrequests.html");
+
+# currently we refer both urls to a duplicate page
+def activeprojects(request):
+	return render(request,"otherapps/client/allprojects.html");
+def completedprojects(request):
+	return render(request,"otherapps/client/allprojects.html");
+
 
 
 

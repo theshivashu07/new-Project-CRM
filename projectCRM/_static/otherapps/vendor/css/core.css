@@ -653,7 +653,7 @@ progress {
 }
 .row {
   --bs-gutter-x: 1.625rem;
-  --bs-gutter-y: 0;
+  --bs-gutter-y: 15px;
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
@@ -2364,7 +2364,7 @@ textarea.form-control-lg {
   font-size: 0.9375rem;
   font-weight: 400;
   line-height: 1.53;
-  color: #ffffff;
+  color: #bebebe;
   background-color: #2c3c4c;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%2867, 89, 113, 0.6%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -3869,6 +3869,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: 1.5rem 1.5rem;
+  padding-top: 30px;
 }
 
 .card-title {
@@ -8354,7 +8355,7 @@ button.list-group-item-gray.active {
 }
 .card .card-header + .card-body,
 .card .card-header + .card-content > .card-body:first-of-type {
-  padding-top: 0;
+  padding-top: 20px;
 }
 
 .card-action.card-fullscreen {

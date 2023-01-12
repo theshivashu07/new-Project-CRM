@@ -2184,7 +2184,7 @@ progress {
   font-weight: 400;
   line-height: 1.53;
   color: #ffffff;
-  background-color: #2c3c4c;
+  background-color: #212b36;
   background-clip: padding-box;
   border: 1px solid #3b4b5b;
   -webkit-appearance: none;
@@ -2205,8 +2205,8 @@ progress {
   cursor: pointer;
 }
 .form-control:focus {
-  color: #697a8d;
-  background-color: #fff;
+  color: #ffffff;
+  background-color: #283848;
   border-color: rgba(249, 249, 255, 0.54);
   outline: 0;
   box-shadow: 0 0 0.25rem 0.05rem rgba(105, 108, 255, 0.1);
@@ -4657,7 +4657,7 @@ textarea.form-control-lg {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  background-color: #212b36;
   background-clip: padding-box;
   border: 0px solid rgba(67, 89, 113, 0.2);
   border-radius: 0.5rem;
@@ -6334,9 +6334,9 @@ label.btn {
 }
 
 .btn-outline-secondary {
-  color: #8592a3;
-  border-color: #8592a3;
-  background: transparent;
+  color: #000000;
+  border-color: #a4a4a4;
+  background: #cacaca; /*transparent*/
 }
 .btn-outline-secondary:hover {
   color: #fff;

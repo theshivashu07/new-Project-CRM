@@ -207,14 +207,14 @@ button.list-group-item-primary.active {
 
 .btn-primary {
   color: #c0c0c0;
-  background-color: #ffffff1f;
+  background-color: #435360;
   border-color: #3b4b5b;
   box-shadow: 0 0.125rem 0.25rem 0 #0000002b;
 }
 .btn-primary:hover {
   color: #fff;
-  background-color: #5f61e6;
-  border-color: #5f61e6;
+  background-color: #e09100;
+  border-color: #3b4b5b;
   transform: translateY(-1px);
 }
 .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary.focus {
@@ -725,7 +725,7 @@ a:hover {
 }
 .bg-menu-theme .ps__thumb-y,
 .bg-menu-theme .ps__rail-y.ps--clicking > .ps__thumb-y {
-  background: rgba(86, 106, 127, 0.2) !important;
+  background: #4c5b76 !important;
 }
 
 .bg-menu-theme .menu-header {

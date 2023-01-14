@@ -32,16 +32,15 @@ def completedprojects(request):
 	return render(request,"otherapps/hr/allprojects.html");
 
 # new 
-def recruitadmin(request):
-	return render(request,"otherapps/hr/recruitadmin.html");
-def recruitprojectmanager(request):
-	return render(request,"otherapps/hr/recruitprojectmanager.html");
-def recruitdeveloper(request):
-	return render(request,"otherapps/hr/recruitdeveloper.html");
-def promotedeveloper(request):
-	return render(request,"otherapps/hr/promotedeveloper.html");
-def promoteprojectmanager(request):
-	return render(request,"otherapps/hr/promoteprojectmanager.html");
+def recruitments(request):
+	dataset=["Admin","Project Manager","Developer"]
+	return render(request,"otherapps/hr/recruitments.html");
+def promotions(request):
+	dataset=["Project Manager","Developer"]
+	return render(request,"otherapps/hr/promotions.html");
+def increments(request):
+	dataset=["Admin","Project Manager","Developer"]
+	return render(request,"otherapps/hr/increments.html");
 
 def alldiscussions(request):
 	return render(request,"otherapps/hr/alldiscussions.html");
@@ -49,6 +48,8 @@ def allsuggestions(request):
 	return render(request,"otherapps/hr/allsuggestions.html");
 def allmessages(request):
 	return render(request,"otherapps/hr/allmessages.html");
+
+
 
 
 

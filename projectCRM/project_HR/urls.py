@@ -18,11 +18,9 @@ urlpatterns=[
 		path('completedprojects',views.completedprojects,name='completedprojects'),
 
 		# new
-		path('recruitadmin',views.recruitadmin,name='recruitadmin'),
-		path('recruitdeveloper',views.recruitdeveloper,name='recruitdeveloper'),
-		path('recruitprojectmanager',views.recruitprojectmanager,name='recruitprojectmanager'),
-		path('promotedeveloper',views.promotedeveloper,name='promotedeveloper'),
-		path('promoteprojectmanager',views.promoteprojectmanager,name='promoteprojectmanager'),
+		path('recruitments',views.recruitments,name='recruitments'),
+		path('promotions',views.promotions,name='promotions'),
+		path('increments',views.increments,name='increments'),
 
 		path('alldiscussions',views.alldiscussions,name='alldiscussions'),
 		path('allsuggestions',views.allsuggestions,name='allsuggestions'),
@@ -31,7 +29,11 @@ urlpatterns=[
 ]
 
 
-
+'''
+letsrecruit
+letspromote
+letsincrement
+'''
 
 
 

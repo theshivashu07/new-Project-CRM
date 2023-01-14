@@ -216,60 +216,26 @@
                 <div data-i18n="Analytics">Completed Projects</div>
               </a> 
             </li>
-
             <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Recruitment's & Promotion's</span>
+              <span class="menu-header-text">Task's to do!!</span>
             </li>
-            {% if request.path == "/recruitadmin" or request.path == "/recruitprojectmanager" or request.path == "/recruitdeveloper" %}
-              <li class="menu-item active open" style="">
-            {% else %}
-              <li class="menu-item" style="">
-            {% endif %}
-            <!-- <li class="menu-item active open" style=""> -->
-              <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-folder-plus"></i>
-                <div data-i18n="Account Settings">Recruitment's</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item {% if request.path == '/recruitadmin' %}active{% endif %}">
-                  <a href="recruitadmin" class="menu-link">
-                    <div data-i18n="Account">Recruit Admin</div>
-                  </a>
-                </li>
-                <li class="menu-item {% if request.path == '/recruitprojectmanager' %}active{% endif %}">
-                  <a href="recruitprojectmanager" class="menu-link">
-                    <div data-i18n="Notifications">Recruit Project Manager</div>
-                  </a>
-                </li>
-                <li class="menu-item {% if request.path == '/recruitdeveloper' %}active{% endif %}">
-                  <a href="recruitdeveloper" class="menu-link">
-                    <div data-i18n="Connections">Recruit Developers</div>
-                  </a>
-                </li>
-              </ul>
+            <li class="menu-item {% if request.path == '/recruitments' %}active{% endif %}">
+              <a href="recruitments" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-folder-plus"></i>
+                <div data-i18n="Analytics">Recruitment's</div>
+              </a> 
             </li>
-            {% if request.path == "/promoteprojectmanager" or request.path == "/promotedeveloper" %}
-              <li class="menu-item active open" style="">
-            {% else %}
-              <li class="menu-item" style="">
-            {% endif %}
-            <!-- <li class="menu-item active open" style=""> -->
-              <a href="#" class="menu-link menu-toggle">
+            <li class="menu-item {% if request.path == '/promotions' %}active{% endif %}">
+              <a href="promotions" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-bolt-circle'></i>
+                <div data-i18n="Analytics">Promotion's</div>
+              </a> 
+            </li>
+            <li class="menu-item {% if request.path == '/increments' %}active{% endif %}">
+              <a href="increments" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-trending-up"></i>
-                <div data-i18n="Promotion's">Promotion's</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item {% if request.path == '/promoteprojectmanager' %}active{% endif %}">
-                  <a href="promoteprojectmanager" class="menu-link">
-                    <div data-i18n="Notifications">Promote Project Manager</div>
-                  </a>
-                </li>
-                <li class="menu-item {% if request.path == '/promotedeveloper' %}active{% endif %}">
-                  <a href="promotedeveloper" class="menu-link">
-                    <div data-i18n="Connections">Promote Developers</div>
-                  </a>
-                </li>
-              </ul>
+                <div data-i18n="Analytics">Increment's</div>
+              </a> 
             </li>
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Others</span>
@@ -303,8 +269,6 @@
               </ul>
             </li>
             <br>
-            <div class="ps__rail-x" style="left: 0px; bottom: -85px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div>
-            <div class="ps__rail-y" style="top: 85px; height: 696px; right: 4px;"><div class="ps__thumb-y" tabindex="0" style="top: 76px; height: 620px;"></div></div>
           </ul>
         </aside>
         <!-- / Menu -->

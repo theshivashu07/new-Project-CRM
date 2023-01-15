@@ -41,6 +41,9 @@ def promotions(request):
 def increments(request):
 	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/hr/increments.html");
+def decrements(request):
+	dataset=["Admin","Project Manager","Developer"]
+	return render(request,"otherapps/hr/decrements.html");
 
 def alldiscussions(request):
 	return render(request,"otherapps/hr/alldiscussions.html");

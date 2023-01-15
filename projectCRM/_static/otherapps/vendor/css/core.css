@@ -653,7 +653,7 @@ progress {
 }
 .row {
   --bs-gutter-x: 1.625rem;
-  --bs-gutter-y: 15px;
+  --bs-gutter-y: 0px;
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
@@ -7611,6 +7611,7 @@ button:focus {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: inherit;
+  font-weight: bold;
 }
 
 .form-label-lg {

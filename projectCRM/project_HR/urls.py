@@ -21,6 +21,7 @@ urlpatterns=[
 		path('recruitments',views.recruitments,name='recruitments'),
 		path('promotions',views.promotions,name='promotions'),
 		path('increments',views.increments,name='increments'),
+		path('decrements',views.decrements,name='decrements'),
 
 		path('alldiscussions',views.alldiscussions,name='alldiscussions'),
 		path('allsuggestions',views.allsuggestions,name='allsuggestions'),

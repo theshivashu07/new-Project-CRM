@@ -200,7 +200,9 @@
             </li>
             <li class="menu-item {% if request.path == '/allprojectsrequests' %}active{% endif %}">
               <a href="allprojectsrequests" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book-add"></i>
+                <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
+                <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->
+                <i class='menu-icon tf-icons bx bx-message-square-add'></i>
                 <div data-i18n="Analytics">New Project Requests</div>
               </a> 
             </li>
@@ -212,7 +214,9 @@
             </li>
             <li class="menu-item {% if request.path == '/completedprojects' %}active{% endif %}">
               <a href="completedprojects" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i>
+                <!-- <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i> -->
+                <!-- <i class='menu-icon tf-icons bx bxs-layout'></i> -->
+                <i class='menu-icon tf-icons bx bxs-data'></i>
                 <div data-i18n="Analytics">Completed Projects</div>
               </a> 
             </li>
@@ -235,6 +239,12 @@
               <a href="increments" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-trending-up"></i>
                 <div data-i18n="Analytics">Increment's</div>
+              </a> 
+            </li>
+            <li class="menu-item {% if request.path == '/decrements' %}active{% endif %}">
+              <a href="decrements" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-trending-down"></i>
+                <div data-i18n="Analytics">Decrement's</div>
               </a> 
             </li>
             <li class="menu-header small text-uppercase">

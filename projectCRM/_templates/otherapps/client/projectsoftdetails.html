@@ -55,9 +55,9 @@ CRM - Client - Project Details
                               <option value="jquery">JQuery</option>
                               <option value="other">Other</option>
                             </select>
-                          	<div id="defaultFormControlHelp" class="form-text">
-                          	  Here <b>'simple'</b> means <b>'html, css and js'</b> programming languages.
-                          	</div>
+                            <div id="defaultFormControlHelp" class="form-text">
+                              Here <b>'simple'</b> means <b>'html, css and js'</b> programming languages.
+                            </div>
                           </div>
                           <div class="mb-3 col-md-4">
                             <label for="language" class="form-label">Back-End</label>
@@ -109,7 +109,7 @@ CRM - Client - Project Details
                               <!-- first three places -->
                             </div>
                             <div class="mb-3">
-                              <label for="firstName" class="form-label">Assign your budget, at max!!</label>
+                              <label for="firstName" class="form-label">Assign your budget ammount, at max!!</label>
                               <div class="input-group">
                                 <span class="input-group-text">In Rupees.</span>
                                 <input type="text" class="form-control" placeholder="Starting Amount">
@@ -120,10 +120,61 @@ CRM - Client - Project Details
                             </div>
                           </div>
                           <br>
-                          <div class="mt-2">
-                            <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                            <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                      <div class="mt-3">
+                        <!-- Button trigger modal -->
+                        <label for="firstName" class="form-label"><b>Generate Username and Password:</b></label> <br>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">
+                          Generate 
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
+                          <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header" style="background-color: white;">
+                                <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <label for="nameWithTitle" class="form-label">Enter Username</label>
+                                    <span class="badge badge-center rounded-pill" style="float: right; background-color: #099099;"><i class='tf-icons bx bxs-check-shield'></i></span>
+                                    <span class="badge badge-center rounded-pill" style="float: right; background-color: green;"><i class='tf-icons bx bxs-check-shield'></i></span>
+                                    <span class="badge badge-center rounded-pill" style="float: right; background-color: red;"><i class='tf-icons bx bxs-shield-x'></i></span>
+                                    <!-- <span class="badge bg-secondary" style="float: right; background-color:darkgray;"><small>Enter Username</small></span> -->
+                                    <!-- <span class="badge bg-secondary" style="float: right; background-color:green;"><small>It's allocated for no one!!</small></span> -->
+                                    <!-- <span class="badge bg-secondary" style="float: right; background-color:red;"><small>It's allocated for else one!!</small></span> -->
+                                    <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Username" width="40px">
+                                    <div id="defaultFormControlHelp" class="form-text">
+                                      If this username allocated for else one, then no one able to get this!!
+                                      <!-- <b style="color:red">This username allocated for No-One</b> -->
+                                      <!-- <b style="color:green">This username allocated for No-One</b> -->
+                                    </div>
+                                    <div id="defaultFormControlHelp" class="form-text">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row g-2">
+                                  <div class="col mb-0">
+                                    <label for="emailWithTitle" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="basic-default-password32" placeholder="Enter Password">
+                                  </div>
+                                  <div class="col mb-0">
+                                    <label for="dobWithTitle" class="form-label">Password Again</label>
+                                    <input type="password" class="form-control" id="basic-default-password32" placeholder="Again Enter Password">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Close
+                                </button>
+                                <button type="button" class="btn btn-primary">Save All Data</button>
+                              </div>
+                            </div>
                           </div>
+                        </div>
+                      </div>
                         </div>
                       </form>
                     </div>
@@ -137,6 +188,12 @@ CRM - Client - Project Details
 
 
 {% endblock %}
+
+
+
+
+
+
 
 
 

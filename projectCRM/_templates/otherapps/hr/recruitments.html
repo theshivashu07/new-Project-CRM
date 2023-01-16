@@ -93,24 +93,30 @@ CRM - HR - Project Details
                           			<div class="mb-3 col-md-4">
                                 		<label class="form-label" for="country">Role</label>
                                 		<select id="country" class="select2 form-select">
-                                    		<!-- <option value="">Select</option> -->
+                                    		<option value="">Select Role</option>
+
+                                            <option value="admin">@admin</option>
+                                            <option value="pm">@projectmanager</option>
+
                                     		<option value="sde">Software Development Engineer</option>
+                                            <option value="fswd">Full Stack Web Developer</option>
+                                            <option value="da">Data Analyst</option>
+
                                     		<option value="se">Software Engineer</option>
-                                    		<option value="se">Software Engineer</option>
-                                    		<option value="se">Software Engineer</option>
+                                            <option value="fd">Frontend Engineer</option>
+                                            <option value="bd">Backend Engineer</option>
                                     		<option value="de">Database Engineer</option>
-                                    		<option value="wd">Web Developer</option>
+
                                     		<option value="sd">Software Developer</option>
-                                    		<option value="da">Data Analyst</option>
                                     		<option value="fd">Frontend Developer</option>
                                     		<option value="bd">Backend Developer</option>
                                     		<option value="dd">Database Developer</option>
-                                    		<option value="fswd">Full Stack Web Developer</option>
+
                                 		</select>
                             		</div>
                             		<div class="mb-3 col-md-1">
                                 		<label class="form-label" for="level">Level</label>
-                                    	<input type="number" id="level" name="level" class="form-control" placeholder="" value="1" style="padding-left: 10px;">
+                                    	<input type="number" id="level" name="level" class="form-control" placeholder="" value="1">
                             		</div>
                             		<div class="mb-3 col-md-7">
                                 		<label for="state" class="form-label">Your Exect Sitting Area in your office!!</label>
@@ -133,14 +139,21 @@ CRM - HR - Project Details
                                 			</div>
                                 			<!-- first three places -->
                             			</div>
-                          				<div class="mb-3">
-                            				<label class="form-label" for="salary">Salary (in LPA)</label>
-                          					<div class="input-group">
-                          						<span class="input-group-text">In Rupees</span>
-                          						<input type="text" class="form-control" placeholder="Amount" value="4,500,000" ">
-                          						<span class="input-group-text">.00</span>
-                      						</div>
-                      					</div>
+                                        <div class="row">
+                                            <!-- first three places -->
+                                            <div class="mb-3 col-md-7">
+                                                <label class="form-label" for="salary">Salary (in LPA)</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">In Rupees</span>
+                                                    <input type="text" class="form-control" placeholder="Amount" value="4,500,000">
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label" for="contract">Contract (in years)</label>
+                                                <input type="text" id="contract" name="contract" class="form-control" placeholder="" value="2 Years">
+                                            </div>
+                                        </div>
                           			</div>
                           			<div class="mb-3 col-md-7">
                               			<label for="exampleFormControlTextarea1" class="form-label">CTC (brief Discription)</label>
@@ -169,14 +182,19 @@ CRM - HR - Project Details
                                           			<div class="row">
                                             			<div class="col mb-3">
                                               				<label for="nameWithTitle" class="form-label">Enter Username</label>
-                                              				<span class="badge badge-center rounded-pill" style="float: right; background-color: #099099;"><i class='tf-icons bx bxs-check-shield'></i></span>
+                                              				<span class="badge badge-center rounded-pill" style="float: right; background-color: #099099;">
+                                                                <i class='tf-icons bx bxs-shield'></i>
+                                                                <!-- <i class='bx bx-shield-plus'></i> -->
+                                                            </span>
                                               				<span class="badge badge-center rounded-pill" style="float: right; background-color: green;"><i class='tf-icons bx bxs-check-shield'></i></span>
                                               				<span class="badge badge-center rounded-pill" style="float: right; background-color: red;"><i class='tf-icons bx bxs-shield-x'></i></span>
                                               				<div class="input-group">
                                                 				<span class="input-group-text" id="basic-addon11">@</span>
                                                 				<input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon11">
                                                 				<span class="input-group-text" id="basic-addon11" style="background-color:white;">
-                                                					<span class="badge badge-center rounded-pill" style="background-color: #099099;"><i class='tf-icons bx bxs-check-shield' ></i></span>
+                                                					<span class="badge badge-center rounded-pill" style="background-color: #099099;">
+                                                                        <i class='tf-icons bx bxs-check-shield' ></i>
+                                                                    </span>
                                                 					<!-- <span class="badge badge-center rounded-pill" style="background-color: green;"><i class='tf-icons bx bxs-check-shield' ></i></span> -->
                                                 					<!-- <span class="badge badge-center rounded-pill" style="background-color: red;"><i class='tf-icons bx bxs-shield-x' ></i></span> -->
                                                 				</span>

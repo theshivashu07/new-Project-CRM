@@ -545,7 +545,7 @@ progress {
 }
 
 .list-unstyled {
-  padding-left: 0;
+  padding-left: 10px;
   list-style: none;
 }
 
@@ -2223,7 +2223,7 @@ progress {
   opacity: 1;
 }
 .form-control:disabled, .form-control[readonly] {
-  background-color: #eceef1;
+  background-color: #1e2f3g;
   opacity: 1;
 }
 .form-control::file-selector-button {

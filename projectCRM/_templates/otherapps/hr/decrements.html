@@ -1,7 +1,7 @@
 {% extends 'otherapps/hr/master.html' %}
 
 {% block tcontent %}
-CRM - HR - All Project Requests
+CRM - HR - Project Details
 {% endblock %}
 
 
@@ -10,10 +10,167 @@ CRM - HR - All Project Requests
 {% block childcontent %}
 
 
-<br>
+
+
+    <div class="content-wrapper">
+        <!-- Content -->
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
+            <div class="row">
+              <!-- Basic -->
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                      <h5 class="card-header"><b>Profile Details</b></h5>
+                      <!-- Account -->
+                      <hr class="my-0">
+                      <div class="card-body">
+                          <form id="formAccountSettings" method="POST" onsubmit="return false">
+                            <div class="row">
+
+
+                              <h4 class="fw-bold" style="margin-top:25px; margin-bottom:20px;"><span class="text-muted fw-light">Details about /</span> New Joiner </h4>
+
+                              <div class="mb-3 col-md-2">
+                                <div class="card-body"  style="padding-top: 10px;">
+                                  <!-- <div class="d-flex align-items-start align-items-sm-center gap-4"> -->
+                                    <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="user-avatar" class="d-block rounded" height="135" width="135" id="uploadedAvatar">
+                                  <!-- </div> -->
+                                </div>
+                              </div>
+
+                              <div class="mb-3 col-md-10">
+                                <div class="row">
+                                  <div class="mb-3 col-md-3">
+                                        <label for="firstName" class="form-label">First Name </label>
+                                        <input class="form-control" type="text" id="firstName" name="firstName" value="Shivam" placeholder="" autofocus="" readonly>
+                                  </div>
+                                  <div class="mb-3 col-md-3">
+                                      <label for="firstName" class="form-label">Last Name</label>
+                                      <input class="form-control" type="text" id="lastName" name="lastName" value="Shukla" placeholder="" autofocus="" readonly>
+                                  </div>
+                                  <div class="mb-3 col-md-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input class="form-control" type="text" id="email" name="email" value="theshivashu07@google.com" placeholder="" readonly>
+                                  </div>
+                            		<div class="mb-3 col-md-3">
+                                		<label class="form-label" for="phoneNumber">Phone Number</label>
+                                		<div class="input-group input-group-merge">
+                                			<span class="input-group-text"><small>IND (+91)</small></span>
+                                			<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="7898565074" style="padding-left: 10px;" readonly>
+                              			</div>
+                          			</div>
+                          			<div class="mb-3 col-md-6">
+                              			<label for="address" class="form-label">Address</label>
+                              			<input type="text" class="form-control" id="address" name="address" placeholder="" value="Teori, Katni, Madhya Pradesh, India." readonly>
+                          			</div>
+                          			<div class="mb-3 col-md-3">
+                              			<label for="state" class="form-label">State</label>
+                              			<input class="form-control" type="text" id="state" name="state" placeholder="" value="Madhya Pradesh" readonly>
+                          			</div>
+                              	  <div class="mb-3 col-md-3">
+                                	  <label class="form-label" for="country">Country</label>
+                                	  <input class="form-control" type="text" id="country" name="country" placeholder="" value="India" readonly>
+                              	  </div>        
+                                </div>
+                              </div>
+
+
+                              <hr class="my-0"> <br>
+            				  <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4> -->
+                    	  			<h4 class="fw-bold  py-3 mb-4" style="margin-top:25px; margin-bottom:20px;"><span class="text-muted fw-light">Internal Detail's Dataset -</span> Update/Change</h4>
+                                <div class="mb-3 col-md-3">
+                                  <label class="form-label" for="level">Companey</label>
+                                    <input type="text" id="level" name="level" class="form-control" placeholder="" value="Google" readonly>
+                                </div>
+                                <div class="mb-3 col-md-2">
+                                    <label for="state" class="form-label">Employment ID</label>
+                                    <input class="form-control" type="text" id="state" name="state" placeholder="" value="softeng1011" readonly>
+                                </div>
+                                <div class="mb-3 col-md-7">
+                                    <label for="state" class="form-label">Joining Office Location</label>
+                                    <input class="form-control" type="text" id="state" name="state" placeholder="" value="No. 3, Old Madras Rd, Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560016" readonly>
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <label for="country" class="form-label">Role</label>
+                                    <input class="form-control" type="text" id="country" name="country" placeholder="" value="Software Development Engineer" readonly>
+                                </div>
+                                <div class="mb-3 col-md-1">
+                                    <label class="form-label" for="level">Level</label>
+                                      <input type="number" id="level" name="level" class="form-control" placeholder="" value="1" style="padding-left: 10px;" readonly>
+                                </div>
+                                <div class="mb-3 col-md-7">
+                                    <label for="state" class="form-label">Your Exect Sitting Area in your office!!</label>
+                                    <input class="form-control" type="text" id="state" name="state" placeholder="" value="Building No. 03, Floor No. 07, Room No. 05, Table No. 15, Seet No. 03." readonly>
+                                    <div id="defaultFormControlHelp" class="form-text">
+                                        <b>Well, you are free to sit anywhere in the office.</b> Else there is not anotherone siting place!!
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-5">
+                            	  <div class="row">
+                                	  <div class="mb-3 col-md-5">
+                                    	  <label for="state" class="form-label">Joining (Beginning Date)</label>
+                                    	  <input class="form-control" type="date" value="2023-02-17" id="html5-date-input" readonly>
+                                	  </div>
+                                	  <div class="mb-3 col-md-2">
+                                    	  <br><br>
+                                    	  <center><i class='bx bx-transfer bx-spin bx-sm' ></i></center>
+                                	  </div>
+                                	  <div class="mb-3 col-md-5">
+                                    	  <label for="state" class="form-label">Joining (Ending Date)</label>
+                                    	  <input class="form-control" type="date" value="2023-02-17" id="html5-date-input" readonly>
+                                	  </div>
+                            	  </div>
+                                  <div class="row">
+                                      <!-- first three places -->
+                                      <div class="mb-3 col-md-7">
+                                          <label class="form-label" for="salary" style="color: #5bb5bb">Salary (in LPA)</label>
+                                          <div class="input-group">
+                                              <span class="input-group-text">In Rupees</span>
+                                              <input type="text" class="form-control" placeholder="Amount" value="4,500,000" >
+                                              <span class="input-group-text">.00</span>
+                                          </div>
+                                    	  <div id="defaultFormControlHelp" class="form-text">
+                                        	  <b>Note:</b> Only decrease your salary.
+                                    	  </div>
+                                      </div>
+                                      <div class="mb-3 col-md-5">
+                                          <label class="form-label" for="contract">Contract (in years)</label>
+                                          <input type="text" id="contract" name="contract" class="form-control" placeholder="" value="2 Years" readonly>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="mb-3 col-md-7">
+                                    <label for="exampleFormControlTextarea1" class="form-label" style="color: #5bb5bb">CTC (brief Discription)</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" style="height:120px" rows="4"></textarea>
+                                    <div id="defaultFormControlHelp" class="form-text">
+                                        Here is you briefly describe exactly how many components we adding in employee's package. <b>All descriptions are here.....</b>
+                                    </div>
+                                </div>
+                            </div> 
+                      		<div class="mt-3">
+                                 <label for="exampleFormControlTextarea1" class="form-label">Save all changes!!</label> <br>
+                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Done</button>
+                            </div>
+                            <br><br>
+
+                            </form>
+                        </div>
+                        <!-- /Account -->
+                    </div>
+                </div>
+              <!-- /Basic -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
 
 {% endblock %}
+
 
 
 

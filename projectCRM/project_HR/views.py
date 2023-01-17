@@ -11,7 +11,7 @@ def index(request):
 	return render(request,"otherapps/hr/index.html");
 
 def myaccount(request):
-	return render(request,"otherapps/hr/myaccount.html");
+	return render(request,"otherapps/hr/myaccount_forjoiners.html");
 def myconnections(request):
 	return render(request,"otherapps/hr/myconnections.html");
 def mydeactivate(request):
@@ -44,6 +44,11 @@ def increments(request):
 def decrements(request):
 	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/hr/decrements.html");
+def pick(request,target):
+	print(request.path,target)
+	dataset=["Admin","Project Manager","Developer"]
+	pickfromtarget={'promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
+	return render(request,"otherapps/hr/searching4pid.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target]});
 
 def alldiscussions(request):
 	return render(request,"otherapps/hr/alldiscussions.html");
@@ -51,8 +56,6 @@ def allsuggestions(request):
 	return render(request,"otherapps/hr/allsuggestions.html");
 def allmessages(request):
 	return render(request,"otherapps/hr/allmessages.html");
-
-
 
 
 

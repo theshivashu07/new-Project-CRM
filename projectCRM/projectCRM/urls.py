@@ -18,10 +18,11 @@ from django.urls import path,include
 
 urlpatterns = [  
     path('defaultadmin/', admin.site.urls),  
-    #path('',include('project_Guest.urls')),  
+    # path('',include('project_Guest.urls')),  
     path('guest/',include('project_Guest.urls')),  # Done  
-    path('',include('project_HR.urls')),  
-    path('hr/',include('project_HR.urls')),  
+    # path('',include('project_HR.urls')),  
+    path('hr/',include('project_HR.urls')),  # Done  
+    path('',include('project_Admin.urls')),  
     path('admin/',include('project_Admin.urls')),  
     path('projectmanager/',include('project_ProjectManager.urls')),  
     path('developer/',include('project_Developer.urls')),  

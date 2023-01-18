@@ -11,7 +11,7 @@ def index(request):
 	return render(request,"otherapps/hr/index.html");
 
 def myaccount(request):
-	return render(request,"otherapps/hr/myaccount_forjoiners.html");
+	return render(request,"otherapps/hr/myaccount.html");
 def myconnections(request):
 	return render(request,"otherapps/hr/myconnections.html");
 def mydeactivate(request):
@@ -27,9 +27,9 @@ def allprojectsrequests(request):
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):
-	return render(request,"otherapps/hr/allprojects.html");
+	return render(request,"otherapps/hr/activeprojects.html");
 def completedprojects(request):
-	return render(request,"otherapps/hr/allprojects.html");
+	return render(request,"otherapps/hr/completedprojects.html");
 
 # new 
 def recruitments(request):

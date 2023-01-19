@@ -3995,9 +3995,9 @@ textarea.form-control-lg {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 0.79rem 1.125rem;
-  font-size: 0.9375rem;
-  color: #566a7f;
+  padding: 5px 20px;
+  font-size: 18px;
+  color: #666666;
   text-align: left;
   background-color: #fff;
   border: 0;

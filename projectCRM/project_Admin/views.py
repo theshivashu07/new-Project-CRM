@@ -57,5 +57,9 @@ def allsuggestions(request):
 def allmessages(request):
 	return render(request,"otherapps/admin/allmessages.html");
 
+def reportscollection(request):
+	return render(request,"otherapps/admin/reportscollection.html");
+def wantreports(request):
+	return render(request,"otherapps/admin/wantreports.html");
 
 

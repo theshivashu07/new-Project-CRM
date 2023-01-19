@@ -21,7 +21,9 @@ urlpatterns=[
 		path('allsuggestions/',views.allsuggestions,name='allsuggestions'),
 		path('allmessages/',views.allmessages,name='allmessages'),
 
-		# path('createteam/',views.createteam,name='createteam'),
+		path('reportscollection/',views.reportscollection,name='reportscollection'),
+		path('wantreports/',views.wantreports,name='wantreports'),
+		# path('reportscollection/',views.reportscollection,name='reportscollection'),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),

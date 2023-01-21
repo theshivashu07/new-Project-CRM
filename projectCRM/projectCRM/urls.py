@@ -22,8 +22,9 @@ urlpatterns = [
     path('guest/',include('project_Guest.urls')),  # Done  
     # path('',include('project_HR.urls')),  
     path('hr/',include('project_HR.urls')),  # Done  
-    path('',include('project_Admin.urls')),  
-    path('admin/',include('project_Admin.urls')),  
+    # path('',include('project_Admin.urls')),  
+    path('admin/',include('project_Admin.urls')),   # Done  
+    path('',include('project_ProjectManager.urls')),  
     path('projectmanager/',include('project_ProjectManager.urls')),  
     path('developer/',include('project_Developer.urls')),  
     # path('',include('project_Client.urls')),  

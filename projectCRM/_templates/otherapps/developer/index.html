@@ -1,7 +1,7 @@
 {% extends 'otherapps/developer/master.html' %}
 
 {% block tcontent %}
-CRM - Admin - Home
+CRM - Developer
 {% endblock %}
 
 
@@ -9,162 +9,98 @@ CRM - Admin - Home
 
 {% block childcontent %}
 
-
+<div class="content-wrapper">
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                <div class="col-lg-8 mb-4 order-0">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary"><b>Congratulations John! 🎉</b></h5>
-                          <p class="mb-4">
-                            You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                            your profile.
-                          </p>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">UI elements /</span> List groups</h4>
 
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+              <div class="card mb-4">
+                <h5 class="card-header"><b>List groups</b></h5>
+                 <div class="card-body">
+                  <div class="row">
+                    <!-- Basic List group -->
+                    <div class="col-lg-6 mb-4 mb-xl-0">
+                      <small class="text-light fw-semibold">Basic</small>
+                      <div class="demo-inline-spacing mt-3">
+                        <div class="list-group align-items-center">
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center active">
+                            <i class="bx bx-user me-2"></i>Accounts!!
+                            <span class="badge bg-secondary" style="float: right;">2</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                            <i class='bx bx-show-alt me-2'></i>Views!!
+                            <span class="badge bg-primary" style="float: right;">102</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                          	<i class="bx bx-bell me-2"></i>Notifications!!
+                          	<span class="badge bg-primary" style="float: right;">15</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center disabled">
+                            <i class='bx bx-world me-2'></i>Website!!
+                            <span class="badge bg-info" style="float: right; --bs-bg-opacity: 0.02; text-transform: lowercase; color: #5a6a7a8a">.../shivashu07/</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                            <i class='bx bx-link me-2'></i>Social Links!!
+                            <span class="badge bg-info" style="float: right;">7</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                            <i class="bx bx-purchase-tag-alt me-2"></i>Bookmarks!!
+                            <span class="badge bg-gray" style="float: right;">14</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                            <i class='bx bx-bookmarks me-2'></i>Save Notes!!
+                            <span class="badge bg-gray" style="float: right; background-color: #fff;">18</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                            <i class='bx bxs-key me-2'></i>Passwords!!
+                            <span class="badge bg-info" style="float: right;">27</span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                            <i class="bx bx-support me-2"></i>YouTube Music!!
+                            <span class="badge bg-primary disabled" style="float: right;"></span>
+                          </a>
+                          <a href="javascript:void(0);" class="list-group-item list-group-item-action align-items-center">
+                          	<i class="bx bx-tv me-2"></i>YouTube & Show's!!
+                          	<span class="badge bg-primary" style="float: right;"></span>
+                          </a>
                         </div>
                       </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="/_static/otherapps/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
+                    </div>
+                    <!--/ List group Flush (Without main border) -->
+
+                    <!-- Custom content with heading -->
+                    <div class="col-lg-6">
+                      <small class="text-light fw-semibold">Important Quote's</small>
+                      <div class="demo-inline-spacing mt-3">
+
+                <div>
+                  <div class="card">
+                    <h5 class="card-header"style="margin-bottom: 0;"><b>Quote</b></h5>
+                    <div class="card-body"  style="background-color: #29323e;">
+                      <blockquote class="blockquote mb-0">
+                        <p>
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.Lorem
+                          ipsum dolor sit amet, consectetur.
+                        </p>
+                        <footer class="blockquote-footer">
+                          Someone famous in
+                          <cite title="Source Title">Source Title</cite>
+                        </footer>
+                      </blockquote>
                     </div>
                   </div>
                 </div>
-                <!-- Transactions -->
-                <div class="col-md-6 col-lg-4 order-2 mb-4">
-                  <div class="card h-100">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="card-title m-0 me-2"><b>Transactions</b></h5>
-                      <div class="dropdown">
-                        <button
-                          class="btn p-0"
-                          type="button"
-                          id="transactionID"
-                          data-bs-toggle="dropdown"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                        >
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                          <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-                          <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-                        </div>
                       </div>
                     </div>
-                    <div class="card-body" style="padding-top: 20px;">
-                      <ul class="p-0 m-0">
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="/_static/otherapps/img/icons/unicons/paypal.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Paypal</small>
-                              <h6 class="mb-0">Send money</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+82.6</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="/_static/otherapps/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Wallet</small>
-                              <h6 class="mb-0">Mac'D</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+270.69</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="/_static/otherapps/img/icons/unicons/chart.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Transfer</small>
-                              <h6 class="mb-0">Refund</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+637.91</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="/_static/otherapps/img/icons/unicons/cc-success.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Credit Card</small>
-                              <h6 class="mb-0">Ordered Food</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">-838.71</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex mb-4 pb-1">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="/_static/otherapps/img/icons/unicons/wallet.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Wallet</small>
-                              <h6 class="mb-0">Starbucks</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">+203.33</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="d-flex">
-                          <div class="avatar flex-shrink-0 me-3">
-                            <img src="/_static/otherapps/img/icons/unicons/cc-warning.png" alt="User" class="rounded" />
-                          </div>
-                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                            <div class="me-2">
-                              <small class="text-muted d-block mb-1">Mastercard</small>
-                              <h6 class="mb-0">Ordered Food</h6>
-                            </div>
-                            <div class="user-progress d-flex align-items-center gap-1">
-                              <h6 class="mb-0">-92.45</h6>
-                              <span class="text-muted">USD</span>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
+                    <!--/ Custom content with heading -->
                   </div>
                 </div>
-                <!--/ Transactions -->
               </div>
             </div>
             <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+          </div>
 
 
 {% endblock %}

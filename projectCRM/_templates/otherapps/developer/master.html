@@ -136,87 +136,149 @@
                   </g>
                 </svg>
               </span>
-              <center>
-                  <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color:lightyellow;">||  @theshivashu07  ||</span>
-              </center>
+              
+                  <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color:lightyellow;">
+                    <center>
+                      ||  @theshivashu07  ||
+                    </center>
+                  </span>
             </a>
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
           <div class="menu-inner-shadow"></div>
-          <ul class="menu-inner py-1">
+          <ul class="menu-inner py-1 ps ps--active-y">
             <!-- Dashboard -->
-            <li class="menu-item active">
-              <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Home</span>
+            </li>
+            <li class="menu-item {% if request.path == '/' %}active{% endif %}">
+              <a href="/" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item ">
-              <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Given Tasks</div>
-              </a>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Status/Report</div>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Account</span>
+            </li>
+            {% if request.path == "/myaccount/" or request.path == "/mynotification/" or request.path == "/myconnections/" or request.path == "/mydeactivate/" %}
+              <li class="menu-item active open" style="">
+            {% else %}
+              <li class="menu-item" style="">
+            {% endif %}
+            <!-- <li class="menu-item active open" style=""> -->
+              <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-user-account"></i>
+                <div data-i18n="Account Settings">Account Settings</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div data-i18n="Suggestions">Send Status</div>
+                <li class="menu-item {% if request.path == '/myaccount/' %}active{% endif %}">
+                  <a href="/myaccount/" class="menu-link">
+                    <div data-i18n="Account">Account</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
-                    <div data-i18n="Discussions">Send Reports</div>
+                <li class="menu-item {% if request.path == '/mynotification/' %}active{% endif %}">
+                  <a href="/mynotification/" class="menu-link">
+                    <div data-i18n="Notifications">Notifications</div>
+                  </a>
+                </li>
+                <li class="menu-item {% if request.path == '/myconnections/' %}active{% endif %}">
+                  <a href="/myconnections/" class="menu-link">
+                    <div data-i18n="Connections">Connections</div>
+                  </a>
+                </li>
+                <li class="menu-item {% if request.path == '/mydeactivate/' %}active{% endif %}">
+                  <a href="/mydeactivate/" class="menu-link">
+                    <div data-i18n="Deactivate">Deactivate</div>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Talks</div>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Project's</span>
+            </li>
+            <li class="menu-item {% if request.path == '/allprojectsrequests/' or request.path == '/projectsoftdetails/' %}active{% endif %}">
+              <a href="/allprojectsrequests" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
+                <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->
+                <i class='menu-icon tf-icons bx bx-message-square-add'></i>
+                <div data-i18n="Analytics">New Project Requests</div>
+              </a> 
+            </li>
+            <li class="menu-item {% if request.path == '/activeprojects/' %}active{% endif %}">
+              <a href="/activeprojects" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-run"></i>
+                <div data-i18n="Analytics">Active Projects</div>
+              </a> 
+            </li>
+            <li class="menu-item {% if request.path == '/completedprojects/' %}active{% endif %}">
+              <a href="/completedprojects" class="menu-link">
+                <!-- <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i> -->
+                <!-- <i class='menu-icon tf-icons bx bxs-layout'></i> -->
+                <i class='menu-icon tf-icons bx bxs-data'></i>
+                <div data-i18n="Analytics">Completed Projects</div>
+              </a> 
+            </li>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Task's to do!!</span>
+            </li>
+            <li class="menu-item {% if request.path == '/creativeteam/' %}active{% endif %}">
+              <a href="/creativeteam" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-bolt-circle"></i>
+                <div data-i18n="Analytics">Trial's Place</div>
+              </a> 
+            </li>
+            <li class="menu-item {% if request.path == '/reportscollection/' %}active{% endif %}">
+              <a href="/reportscollection" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-file-blank'></i>
+                <div data-i18n="Analytics">Reports Collections</div>
+              </a> 
+            </li>
+            <!-- <li class="menu-item {% if request.path == '/wantreports/' %}active{% endif %}">
+              <a href="/wantreports" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-file-import'></i>
+                <div data-i18n="Analytics">Want Report's</div>
+              </a> 
+            </li> -->
+            <li class="menu-item {% if request.path == '/sendreports/' %}active{% endif %}">
+              <a href="/sendreports" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-file-export' ></i>
+                <div data-i18n="Analytics">Sent Report's</div>
+              </a> 
+            </li>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Others</span>
+            </li>
+            {% if request.path == "/alldiscussions/" or request.path == "/allsuggestions/" or request.path == "/allmessages/" %}
+              <li class="menu-item active open" style="">
+            {% else %}
+              <li class="menu-item" style="">
+            {% endif %}
+            <!-- <li class="menu-item active open" style=""> -->
+              <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-conversation"></i>
+                <div data-i18n="Conversations">Conversations</div>
               </a>
               <ul class="menu-sub">
-                <li class= "menu-item">
-                  <a href="#" class="menu-link">
-                    <div data-i18n="Suggestions">Suggestions</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="#" class="menu-link">
+                <li class="menu-item {% if request.path == '/alldiscussions/' %}active{% endif %}">
+                  <a href="/alldiscussions" class="menu-link">
                     <div data-i18n="Discussions">Discussions</div>
                   </a>
                 </li>
-              </ul>
-            </li>
-            <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">View Projects</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="allprojects" class="menu-link">
-                    <div data-i18n="Suggestions">New Projects</div>
+                <li class="menu-item {% if request.path == '/allsuggestions/' %}active{% endif %}">
+                  <a href="/allsuggestions" class="menu-link">
+                    <div data-i18n="Suggestions">Suggestions</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="allprojects" class="menu-link">
-                    <div data-i18n="Suggestions">Running Projects</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="allprojects" class="menu-link">
-                    <div data-i18n="Suggestions">Completed Projects</div>
+                <li class="menu-item {% if request.path == '/allmessages/' %}active{% endif %}">
+                  <a href="/allmessages" class="menu-link">
+                    <div data-i18n="Messages">Messages</div>
                   </a>
                 </li>
               </ul>
             </li>
+            <br>
           </ul>
         </aside>
         <!-- / Menu -->
@@ -268,7 +330,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="/_static/otherapps/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="/_static/otherapps/img/avatars/@theshivashu07.jpg" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -279,10 +341,6 @@
                             <div class="avatar avatar-online">
                               <img src="/_static/otherapps/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
                           </div>
                         </div>
                       </a>

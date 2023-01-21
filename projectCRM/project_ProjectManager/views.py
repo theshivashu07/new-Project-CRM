@@ -63,6 +63,8 @@ def sendreports(request):
 	return render(request,"otherapps/projectmanager/sendreports.html");
 def sendreportsopen(request,username):
 	return render(request,"otherapps/projectmanager/sendreportsopen.html");
+def creativeteam(request):
+	return render(request,"otherapps/projectmanager/creativeteam.html");
 
 
 

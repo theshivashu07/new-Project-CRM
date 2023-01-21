@@ -1,0 +1,269 @@
+{% extends 'otherapps/developer/master.html' %}
+
+{% block tcontent %}
+CRM - Developer
+{% endblock %}
+
+
+
+
+{% block childcontent %}
+
+          <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
+              <div class="row">
+                <!-- Basic -->
+                <div class="col-md-12">
+                  <div class="card mb-4">
+                    <h5 class="card-header"><b>Profile Details</b></h5>
+                    <!-- Account -->
+                    <hr class="my-0">
+                    <div class="card-body">
+                      <form id="formAccountSettings" method="POST" onsubmit="return false">
+                        <div class="row">
+                          <div class="mb-3 col-md-7">
+                            <label for="firstName" class="form-label">New Project Name</label>
+                            <input class="form-control" type="text" id="firstName" name="firstName" value="Project CRM" placeholder="" autofocus="">
+                          </div>
+                          <div class="mb-3 col-md-5">
+                            <label for="language" class="form-label">Assign project to <b>ADMIN</b> </label>
+                            <select id="language" class="select2 form-select">
+                              <!-- <option value="">Select Admin</option> -->
+                              <!-- <option value="01">Shivam Shukla</option> -->
+                              <option value="01">Shivam Shukla</option>
+                              <option value="02" selected>Shri Shukla</option>
+                              <option value="03">Angle Viston</option>
+                              <option value="04">Merry Cluster</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Programming Language</label>
+                            <select id="language" class="select2 form-select">
+                              <!-- <option value="">Select Language</option> -->
+                              <option value="c">C</option>
+                              <option value="cpp">C++</option>
+                              <option value="java">Java</option>
+                              <!-- <option value="py">Python</option> -->
+                              <option value="py" selected>Python</option>
+                              <option value="c#">C#</option>
+                              <option value="go">Go</option>
+                              <option value="swift">Swift</option>
+                              <option value="kotlin">Kotlin</option>
+                              <option value="php">PHP</option>
+                              <option value="js">JavaScript</option>
+                              <option value="other">Other</option>
+                            </select>
+                            <div id="defaultFormControlHelp" class="form-text">
+                              Here put the main <b>'programming language'</b>.
+                            </div>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Front-End</label>
+                            <select id="language" class="select2 form-select">
+                              <!-- <option value="">Select Language</option> -->
+                              <option value="basic" selected>Simple</option>
+                              <option value="reactjs">ReactJs</option>
+                              <option value="angular">Angular</option>
+                              <option value="jquery">JQuery</option>
+                              <option value="other">Other</option>
+                            </select>
+                          	<div id="defaultFormControlHelp" class="form-text">
+                          	  Here <b>'simple'</b> means <b>'html, css and js'</b> language.
+                          	</div>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Back-End</label>
+                            <select id="language" class="select2 form-select">
+                              <!-- <option value="">Select Language</option> -->
+                              <option value="django" selected>Django</option>
+                              <option value="expressjs">Express JS</option>
+                              <option value="springboot">Spring Boot</option>
+                              <option value="flask">Flask</option>
+                              <option value="PHP">PHP</option>
+                              <option value="asp.net">ASP.Net</option>
+                              <option value="other">Other</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Database</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="mongodb"><b>MongoDB:</b> No-SQL Database</option>
+                              <option value="mysql"><b>MySQL:</b> SQL Database</option>
+                              <option value="oracle"><b>Oracle:</b> SQL Database</option>
+                              <!-- <option value="sqlite"><b>SQLite:</b> SQL Database</option> -->
+                              <option value="sqlite" selected><b>SQLite:</b> SQL Database</option>
+                              <option value="other"><b>Other:</b> SQL Database</option>
+                              <option value="other"><b>Other:</b> No-SQL Database</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-7">
+                            <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" style="height:120px" rows="4"></textarea>
+                            <div id="defaultFormControlHelp" class="form-text">
+                              Here is you briefly describe exactly what features you want on your project. And <b>describe everything.....</b>
+                            </div>
+                          </div>
+                          <div class="mb-3 col-md-5">
+                            <div class="row">
+                              <!-- first three places -->
+                              <div class="mb-3 col-md-5">
+                                <label for="state" class="form-label">Beginning Date</label>
+                                <input class="form-control" type="date"id="html5-date-input" value="2023-01-15">
+                              </div>
+                              <div class="mb-3 col-md-2">
+                                <br><br>
+                                <center><i class='bx bx-transfer bx-spin bx-sm' ></i></center>
+                              </div>
+                              <div class="mb-3 col-md-5">
+                                <label for="state" class="form-label">Ending Date</label>
+                                <input class="form-control" type="date"id="html5-date-input" value="2023-01-15">
+                              </div>
+                              <!-- first three places -->
+                            </div>
+                            <div class="mb-3">
+                              <label for="firstName" class="form-label">Assign your budget ammount, at max!!</label>
+                              <div class="input-group">
+                                <span class="input-group-text">In Rupees.</span>
+                                <input type="text" class="form-control" placeholder="" value="40,000">
+                                <span class="input-group-text" style="color:#ffffff">to</span>
+                                <input type="text" class="form-control" placeholder="" value="50,000">
+                                <!-- <span class="input-group-text">.00</span> -->
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <br><br>
+                        <hr class="my-0">
+                        <br><br>
+
+                        <div class="card-body">
+                          <div class="row gx-3 gy-3 align-items-center">
+                            <div class="col-md-12">
+                              <label class="form-label" for="selectTypeOpt">Choose Project Manager</label>
+                              <select id="selectTypeOpt" class="form-select color-dropdown">
+                                <option value="" selected="">Select Project Manager</option>
+                                <option value="01">Shivam Shukla</option>
+                                <option value="02">Shri Shukla</option>
+                                <option value="03">Angle Viston</option>
+                                <option value="04">Merry Cluster</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="card">
+                          <h5 class="card-header" style="background-color:#222c3c;"><b>Select Developer's...</b></h5>
+                          <div class="table-responsive text-nowrap" style="background-color:#1d242e">
+                            <table class="table table-sm">
+                              <thead>
+                                <tr>
+                                  <th></th>
+                                  <th>Developer's Name</th>
+                                  <th>Role (with Level)</th>
+                                  <th>Running</th>
+                                  <th>Completed</th>
+                                  <th>Skill's<br></th> 
+                                </tr>
+                              </thead>
+                              <tbody class="table-border-bottom-0">
+                                <tr>
+                                  <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" style="margin-left: 20%;"></td>
+                                  <td> 
+                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left: 0;">
+                                      <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla" style="margin-right:5px;">
+                                        <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar" class="rounded-circle">
+                                      </li>
+                                      <strong>Shivashu Shukla</strong>
+                                    </ul>
+                                  </td>
+                                  <td>Data Analyst - II</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                  <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
+                                </tr>
+                                <tr>
+                                  <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" style="margin-left: 20%;"></td>
+                                  <td>
+                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left: 0;">
+                                      <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla" style="margin-right:5px;">
+                                        <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar" class="rounded-circle">
+                                      </li>
+                                      <strong>Shri Shukla</strong>
+                                    </ul>
+                                  </td>
+                                  <td>Data Engineer - II</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                  <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
+                                </tr>
+                                <tr>
+                                  <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" style="margin-left: 20%;"></td>
+                                  <td>
+                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left: 0;">
+                                      <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla" style="margin-right:5px;">
+                                        <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar" class="rounded-circle">
+                                      </li>
+                                    <strong>Angle Viston</strong>
+                                    </ul>
+                                  </td>
+                                  <td>Software Engineer - I</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                  <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
+                                </tr>
+                                <tr>
+                                  <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" style="margin-left: 20%;"></td>
+                                  <td>
+                                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left: 0;">
+                                      <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla" style="margin-right:5px;">
+                                        <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar" class="rounded-circle">
+                                      </li>
+                                     <strong> Merry Cluster</strong>
+                                    </ul>
+                                  </td>
+                                  <td>Software Developer - I</td>
+                                  <td>2</td>
+                                  <td>4</td>
+                                  <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
+                                </tr>
+                                <tr></tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div id="defaultFormControlHelp" class="form-text">
+                            <b>Only such employees are in the componey according to your searches!!</b>
+                          </div>
+                        </div>    
+
+                        <br><br>
+
+                        <div class="col-md-5">
+                          <label class="form-label" for="showToastPlacement">Click below after make a Team!!</label>
+                          <a href="#"><button id="showToastPlacement" class="btn btn-primary d-block" style="background-color:#1d242e">Save All Changes</button></a>
+                        </div>
+
+                        <br><br>
+                        <br><br>
+                        
+                      </form>
+                    </div>
+                    <!-- /Account -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+{% endblock %}
+
+
+
+
+
+

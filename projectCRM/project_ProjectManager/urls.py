@@ -24,6 +24,7 @@ urlpatterns=[
 		path('reportscollection/',views.reportscollection,name='reportscollection'),
 		# path('wantreports/',views.wantreports,name='wantreports'),
 		path('sendreports/',views.sendreports,name='sendreports'),
+		path('creativeteam/',views.creativeteam,name='creativeteam'),
 		path('sendreports/@<str:username>',views.sendreportsopen,name='sendreportsopen'),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),

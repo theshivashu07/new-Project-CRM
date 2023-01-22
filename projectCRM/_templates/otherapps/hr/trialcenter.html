@@ -1,0 +1,232 @@
+{% extends 'otherapps/hr/master.html' %}
+
+{% block tcontent %}
+CRM - HR - Project Details
+{% endblock %}
+
+
+
+
+{% block childcontent %}
+
+      <div class="content-wrapper">
+            <!-- Content -->
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
+              <div class="row">
+                <!-- Basic -->
+                <div class="col-md-12">
+                  <div class="card mb-4">
+                    <h5 class="card-header"><b>Profile Details</b></h5>
+                    <!-- Account -->
+                    <hr class="my-0">
+                    <div class="card-body">
+                      <form id="formAccountSettings" method="POST" onsubmit="return false">
+                        <div class="row">
+                          <div class="mb-3 col-md-7">
+                            <label for="firstName" class="form-label">New Project Name</label>
+                            <input class="form-control" type="text" id="firstName" name="firstName" value="" placeholder="Project CRM" autofocus="">
+                          </div>
+                          <div class="mb-3 col-md-5">
+                            <label for="language" class="form-label">Assign project to <b>ADMIN</b> </label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Admin</option>
+                              <option value="01">Shivam Shukla</option>
+                              <option value="02">Shri Shukla</option>
+                              <option value="03">Angle Viston</option>
+                              <option value="04">Merry Cluster</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Programming Language</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="c">C</option>
+                              <option value="cpp">C++</option>
+                              <option value="java">Java</option>
+                              <option value="py">Python</option>
+                              <option value="c#">C#</option>
+                              <option value="go">Go</option>
+                              <option value="swift">Swift</option>
+                              <option value="kotlin">Kotlin</option>
+                              <option value="php">PHP</option>
+                              <option value="js">JavaScript</option>
+                              <option value="other">Other</option>
+                            </select>
+                            <div id="defaultFormControlHelp" class="form-text">
+                              Here put the main <b>'programming language'</b>.
+                            </div>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Front-End</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="basic">Simple</option>
+                              <option value="reactjs">ReactJs</option>
+                              <option value="angular">Angular</option>
+                              <option value="jquery">JQuery</option>
+                              <option value="other">Other</option>
+                            </select>
+                            <div id="defaultFormControlHelp" class="form-text">
+                              Here <b>'simple'</b> means <b>'html, css and js'</b> language.
+                            </div>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Back-End</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="django">Django</option>
+                              <option value="expressjs">Express JS</option>
+                              <option value="springboot">Spring Boot</option>
+                              <option value="flask">Flask</option>
+                              <option value="PHP">PHP</option>
+                              <option value="asp.net">ASP.Net</option>
+                              <option value="other">Other</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-3">
+                            <label for="language" class="form-label">Database</label>
+                            <select id="language" class="select2 form-select">
+                              <option value="">Select Language</option>
+                              <option value="mongodb"><b>MongoDB:</b> No-SQL Database</option>
+                              <option value="mysql"><b>MySQL:</b> SQL Database</option>
+                              <option value="oracle"><b>Oracle:</b> SQL Database</option>
+                              <option value="sqlite"><b>SQLite:</b> SQL Database</option>
+                              <option value="other"><b>Other:</b> SQL Database</option>
+                              <option value="other"><b>Other:</b> No-SQL Database</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-md-7">
+                            <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" style="height:120px" rows="4"></textarea>
+                            <div id="defaultFormControlHelp" class="form-text">
+                              Here is you briefly describe exactly what features you want on your project. And <b>describe everything.....</b>
+                            </div>
+                          </div>
+                          <div class="mb-3 col-md-5">
+                            <div class="row">
+                              <!-- first three places -->
+                              <div class="mb-3 col-md-5">
+                                <label for="state" class="form-label">Beginning Date</label>
+                                <input class="form-control" type="date"id="html5-date-input">
+                              </div>
+                              <div class="mb-3 col-md-2">
+                                <br><br>
+                                <center><i class='bx bx-transfer bx-spin bx-sm' ></i></center>
+                              </div>
+                              <div class="mb-3 col-md-5">
+                                <label for="state" class="form-label">Ending Date</label>
+                                <input class="form-control" type="date"id="html5-date-input">
+                              </div>
+                              <!-- first three places -->
+                            </div>
+                            <div class="mb-3">
+                              <label for="firstName" class="form-label">Assign your budget ammount, at max!!</label>
+                              <div class="input-group">
+                                <span class="input-group-text">In Rupees.</span>
+                                <input type="text" class="form-control" placeholder="Starting Amount">
+                                <span class="input-group-text" style="color:#ffffff">to</span>
+                                <input type="text" class="form-control" placeholder="Ending Amount">
+                                <!-- <span class="input-group-text">.00</span> -->
+                              </div>
+                            </div>
+                          </div>
+                          <br>
+
+
+                            <div class="mt-3">
+                                <!-- Button trigger modal -->
+                                <label for="firstName" class="form-label"><b>Generate Username and Password:</b></label> <br>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">
+                                  Generate 
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header" style="background-color: white;">
+                                              <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                          </div>
+                                          <div class="modal-body">
+                                          <div class="row">
+                                            <div class="col mb-3">
+                                              <label for="nameWithTitle" class="form-label">Enter Username</label>
+                                              <span class="badge badge-center rounded-pill" style="float: right; background-color: #099099;"><i class='tf-icons bx bxs-check-shield'></i></span>
+                                              <span class="badge badge-center rounded-pill" style="float: right; background-color: green;"><i class='tf-icons bx bxs-check-shield'></i></span>
+                                              <span class="badge badge-center rounded-pill" style="float: right; background-color: red;"><i class='tf-icons bx bxs-shield-x'></i></span>
+                                              <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon11">@</span>
+                                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon11">
+                                                <span class="input-group-text" id="basic-addon11" style="background-color:white;">
+                                                <span class="badge badge-center rounded-pill" style="background-color: #099099;"><i class='tf-icons bx bxs-check-shield' ></i></span>
+                                                <!-- <span class="badge badge-center rounded-pill" style="background-color: green;"><i class='tf-icons bx bxs-check-shield' ></i></span> -->
+                                                <!-- <span class="badge badge-center rounded-pill" style="background-color: red;"><i class='tf-icons bx bxs-shield-x' ></i></span> -->
+                                                </span>
+                                              </div>
+                                              <div id="defaultFormControlHelp" class="form-text">
+                                                If this username allocated for else one, then no one able to get this!!
+                                                <!-- <b style="color:red">This username allocated for No-One</b> -->
+                                                <!-- <b style="color:green">This username allocated for No-One</b> -->
+                                              </div>
+                                              <div id="defaultFormControlHelp" class="form-text">
+                                              </div>
+                                            </div>
+                                          </div>              
+                                          <div class="row g-2">
+                                            <div class="form-password-toggle col mb-0">
+                                          <label class="form-label" for="basic-default-password12">Password</label>
+                                          <div class="input-group">
+                                              <input type="password" class="form-control" id="basic-default-password12" placeholder="Enter Password" aria-describedby="basic-default-password2">
+                                              <span id="basic-default-password2" class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                          </div>
+                                        </div>  
+                                            <div class="form-password-toggle col mb-0">
+                                          <label class="form-label" for="basic-default-password12">Password Again</label>
+                                          <div class="input-group">
+                                              <input type="password" class="form-control" id="basic-default-password12" placeholder="Again Enter Password" aria-describedby="basic-default-password2">
+                                              <span id="basic-default-password2" class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                                          </div>
+                                        </div>
+                                            </div>
+                                          <!-- <div class="row g-2">
+                                                <div class="col mb-0">
+                                                    <label for="emailWithTitle" class="form-label">Password</label>
+                                                    <input type="password" class="form-control" id="basic-default-password32" placeholder="Enter Password">
+                                                </div>
+                                                <div class="col mb-0">
+                                                    <label for="dobWithTitle" class="form-label">Password Again</label>
+                                                    <input type="password" class="form-control" id="basic-default-password32" placeholder="Again Enter Password">
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                              Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary">Save All Data</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+
+                        </div>
+                      </form>
+                    </div>
+                    <!-- /Account -->
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+
+
+
+{% endblock %}
+
+
+
+
+
+

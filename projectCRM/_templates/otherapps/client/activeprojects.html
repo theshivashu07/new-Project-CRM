@@ -1,7 +1,7 @@
-{% extends 'otherapps/projectmanager/master.html' %}
+{% extends 'otherapps/client/master.html' %}
 
 {% block tcontent %}
-CRM - Project Manager
+CRM - Client - All Projects
 {% endblock %}
 
 
@@ -15,7 +15,7 @@ CRM - Project Manager
           <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Project's /</span> Active</h4>
+              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
 
 			<div class="card">
                 <h5 class="card-header">All Completed Projects</h5>
@@ -33,7 +33,7 @@ CRM - Project Manager
                         <th>Admin</th>
                         <th>Project Manager</th>
                         <th>Developers</th>
-                        <th>Want Report</th>
+                        <th>Current Report</th>
                       </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -79,7 +79,7 @@ CRM - Project Manager
                         </td>
                         <td>
                           <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                          <a href="/{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click</a>
+                          <a href="/activeprojects/@a{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click to Open</a>
                           <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                         </td>
                       </tr>
@@ -125,7 +125,7 @@ CRM - Project Manager
                         </td>
                         <td>
                           <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                          <a href="/{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click</a>
+                          <a href="/activeprojects/@a{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click to Open</a>
                           <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                         </td>
                       </tr>
@@ -171,7 +171,7 @@ CRM - Project Manager
                         </td>
                         <td>
                           <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                          <a href="/{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click</a>
+                          <a href="/activeprojects/@a{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click to Open</a>
                           <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                         </td>
                       </tr>
@@ -219,7 +219,7 @@ CRM - Project Manager
                         </td>
                         <td>
                           <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                          <a href="/{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click</a>
+                          <a href="/activeprojects/@a{{targetedpath}}" class="btn btn-info" style="line-height: 15px">Click to Open</a>
                           <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                         </td>
                       </tr>

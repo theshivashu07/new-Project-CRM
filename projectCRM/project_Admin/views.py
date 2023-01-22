@@ -59,7 +59,11 @@ def allmessages(request):
 
 def reportscollection(request):
 	return render(request,"otherapps/admin/reportscollection.html");
-def wantreports(request):
-	return render(request,"otherapps/admin/wantreports.html");
+def sendreports(request):
+	return render(request,"otherapps/admin/sendreports.html");
+def sendreportsopen(request,username):
+	return render(request,"otherapps/admin/sendreportsopen.html");
+def creativeteam(request):
+	return render(request,"otherapps/admin/creativeteam.html");
 
 

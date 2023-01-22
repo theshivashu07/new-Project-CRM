@@ -28,8 +28,12 @@ def allprojectsrequests(request):
 # currently we refer both urls to a duplicate page
 def activeprojects(request):
 	return render(request,"otherapps/hr/activeprojects.html");
+def reportsopen(request,username):
+	return render(request,"otherapps/hr/reportsopen.html");
 def completedprojects(request):
 	return render(request,"otherapps/hr/completedprojects.html");
+def projectdetails(request,username):
+	return render(request,"otherapps/hr/projectdetails.html");
 
 # new 
 def recruitments(request):
@@ -56,6 +60,11 @@ def allsuggestions(request):
 	return render(request,"otherapps/hr/allsuggestions.html");
 def allmessages(request):
 	return render(request,"otherapps/hr/allmessages.html");
+
+
+
+# def trialcenter(request):
+# 	return render(request,"otherapps/hr/trialcenter.html");
 
 
 

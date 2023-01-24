@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from .models import ClientInfo
 
 
 '''
@@ -10,6 +11,23 @@ def index(request):
 def index(request):
 	return render(request,"otherapps/client/index.html");
 def clientdetails(request):
+	if request.method=="POST":
+		values=ClientInfo(
+						FirstName=request.POST["firstname"],
+						LastName=request.POST["lastname"],
+						FullName=request.POST["firstname"]+' '+request.POST["lastname"],
+						EmailId=request.POST["email"],
+						MobileNo=request.POST["mobileno"],
+						Organization=request.POST["organization"],
+						Language=request.POST["language"],
+						Address=request.POST["address"],
+						ZipCode=request.POST["zipcode"],
+						State=request.POST["state"],
+						Country=request.POST["country"],
+						# JoiningDate=request.POST["joiningdate"],
+						# ProfilePick=request.POST["profilepick"], )
+						ProfilePick=request.POST["upload"], )
+		values.save()
 	return render(request,"otherapps/client/clientdetails.html");
 def projectsoftdetails(request):
 	return render(request,"otherapps/client/projectsoftdetails.html");

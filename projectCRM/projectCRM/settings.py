@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -113,20 +114,26 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+USE_I18N = True 
 
-USE_TZ = True
+USE_TZ = True 
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_URL = '_static/'
+# Static files (CSS, JavaScript, Images) 
+# https://docs.djangoproject.com/en/4.0/howto/static-files/ 
+STATIC_URL = '_static/' 
 
 # Addituinal Adding, So that static files are accessable, 
-STATICFILES_DIRS = [
-    BASE_DIR,"_static"
-    # BASE_DIR/"_static"
+STATICFILES_DIRS = [ 
+    BASE_DIR,"_static" 
+    # BASE_DIR/"_static" 
 ] 
+
+
+
+# Because of uploading media files, follow below!! 
+MEDIA_ROOT =  os.path.join(BASE_DIR, '') 
+MEDIA_URL = '' 
 
 
 

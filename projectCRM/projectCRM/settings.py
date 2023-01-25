@@ -132,8 +132,9 @@ STATICFILES_DIRS = [
 
 
 # Because of uploading media files, follow below!! 
-MEDIA_ROOT =  os.path.join(BASE_DIR, '') 
-MEDIA_URL = '' 
+# MEDIA_ROOT =  os.path.join(BASE_DIR, '_uploads') 
+MEDIA_ROOT =  BASE_DIR / '_uploads' 
+MEDIA_URL = '/_uploads/' 
 
 
 

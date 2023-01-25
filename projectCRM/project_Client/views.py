@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import ClientInfo
+from .forms import ClientImageInfo
 
 
 '''
@@ -12,6 +13,8 @@ def index(request):
 	return render(request,"otherapps/client/index.html");
 def clientdetails(request):
 	if request.method=="POST":
+		print(request)
+		print(request.POST["upload"])
 		values=ClientInfo(
 						FirstName=request.POST["firstname"],
 						LastName=request.POST["lastname"],
@@ -28,7 +31,8 @@ def clientdetails(request):
 						# ProfilePick=request.POST["profilepick"], )
 						ProfilePick=request.POST["upload"], )
 		values.save()
-	return render(request,"otherapps/client/clientdetails.html");
+	form = ClientImageInfo()
+	return render(request,"otherapps/client/clientdetails.html",{'form':form});
 def projectsoftdetails(request):
 	return render(request,"otherapps/client/projectsoftdetails.html");
 def clientconnections(request):

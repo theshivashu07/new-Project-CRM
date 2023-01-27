@@ -16,7 +16,7 @@ class ClientInfo(models.Model):
 	Country = models.CharField(max_length=25);
 	# JoiningDate = models.DateTimeField(auto_now_add=True, default=timezone.now())
 	JoiningDate = models.DateTimeField(auto_now_add=True)
-	ProfilePick = models.ImageField(upload_to ='client/')
+	ProfilePick = models.ImageField(upload_to ='client/',max_length=75,default=None)
 	def __str__(self):
 		return self.FullName+" create's a new account.";
 

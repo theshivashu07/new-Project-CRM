@@ -32,11 +32,12 @@ CRM - HR - Details
                     </li>
                   </ul>
                   <div class="card mb-4">
+                    <form id="formAccountSettings" method="POST" onsubmit="return false">
                     <h5 class="card-header"><b>Profile Details</b></h5>
                     <!-- Account -->
                     <div class="card-body"  style="padding-top: 30px;">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+                        <img src="/_static/otherapps/img/avatars/user.png" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
                         <div class="button-wrapper">
                           <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                             <span class="d-none d-sm-block">Upload new photo</span>
@@ -54,7 +55,6 @@ CRM - HR - Details
                     </div>
                     <hr class="my-0">
                     <div class="card-body">
-                      <form id="formAccountSettings" method="POST" onsubmit="return false">
                         <div class="row">
                           <div class="mb-3 col-md-6">
                             <label for="firstName" class="form-label">First Name</label>
@@ -130,6 +130,7 @@ CRM - HR - Details
                           <button type="submit" class="btn btn-primary me-2">Save changes</button>
                           <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                         </div>
+                      </div>
                       </form>
                     </div>
                     <!-- /Account -->

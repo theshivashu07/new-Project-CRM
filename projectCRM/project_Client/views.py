@@ -17,7 +17,6 @@ def reput():
 	'''I'm created this function for dual the ProjectInfo's data.'''
 	# values=ProjectInfo.objects.values_list('Client','ProjectName','ProgrammingLanguage','FrontEnd','BackEnd','DataBase','BeginningDate','EndingDate','StartingAmount','EndingAmount','SoftDiscription','ReportStatus', )
 	values=ProjectInfo.objects.all().values('Client','ProjectName','ProgrammingLanguage','FrontEnd','BackEnd','DataBase','BeginningDate','EndingDate','StartingAmount','EndingAmount','SoftDiscription','ReportStatus', )
-	# values=ProjectInfo.objects.all().values('-id')
 	# print('>>>>>',values)
 	for value in values:
 		lock=ProjectInfo(
@@ -62,7 +61,7 @@ def clientdetails(request):
 		values.save()
 	return render(request,"otherapps/client/clientdetails.html");
 
-def projectdetails(request):
+def projectdetails(request,projectslug=None):
 	print("Radhy-Radhy...")
 	if request.method=="POST":
 		values=ProjectInfo(

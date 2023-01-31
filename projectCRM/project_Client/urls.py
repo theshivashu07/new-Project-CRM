@@ -5,6 +5,7 @@ urlpatterns=[
 		path('',views.index,name='index'),
 		path('clientdetails/',views.clientdetails,name='clientdetails'),
 		path('projectdetails/',views.projectdetails,name='projectdetails'),
+		path('projectdetails/<slug:projectslug>',views.projectdetails,name='projectdetails'),
 		path('clientconnections/',views.clientconnections,name='clientconnections'),
 		path('clientdeactivate/',views.clientdeactivate,name='clientdeactivate'),
 		path('clientnotification/',views.clientnotification,name='clientnotification'),

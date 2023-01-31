@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import ClientInfo,ProjectInfo
 # from django.utils import timezone
+from django.db.models import Q
 
 
 
@@ -11,7 +12,35 @@ def index(request):
 	return HttpResponse("This is <b>client</b> page!!!");
 '''
 
+
+def reput():
+	'''I'm created this function for dual the ProjectInfo's data.'''
+	# values=ProjectInfo.objects.values_list('Client','ProjectName','ProgrammingLanguage','FrontEnd','BackEnd','DataBase','BeginningDate','EndingDate','StartingAmount','EndingAmount','SoftDiscription','ReportStatus', )
+	values=ProjectInfo.objects.all().values('Client','ProjectName','ProgrammingLanguage','FrontEnd','BackEnd','DataBase','BeginningDate','EndingDate','StartingAmount','EndingAmount','SoftDiscription','ReportStatus', )
+	# values=ProjectInfo.objects.all().values('-id')
+	# print('>>>>>',values)
+	for value in values:
+		lock=ProjectInfo(
+						Client=value['Client'],
+						ProjectName=value['ProjectName'],
+						ProgrammingLanguage=value['ProgrammingLanguage'],
+						FrontEnd=value['FrontEnd'],
+						BackEnd=value['BackEnd'],
+						DataBase=value['DataBase'],
+						BeginningDate=value['BeginningDate'],
+						EndingDate=value['EndingDate'],
+						StartingAmount=value['StartingAmount'],
+						EndingAmount=value['EndingAmount'],
+						SoftDiscription=value['SoftDiscription'],
+						ReportStatus=value['ReportStatus'], )
+		lock.save()
+	return None
+
+
+
+
 def index(request):
+	# reput()  
 	return render(request,"otherapps/client/index.html");
 def clientdetails(request):
 	if request.method=="POST":
@@ -48,7 +77,7 @@ def projectdetails(request):
 						StartingAmount=request.POST["startingamount"],
 						EndingAmount=request.POST["endingamount"],
 						SoftDiscription=request.POST["softdiscription"], 
-						ReportStatus="Not Received!!", )
+						ReportStatus="Not Received", )
 		values.save()
 		# hold=ProjectInfo.objects.filter(Client=request.POST["clientID"])
 		# return redirect('request,"otherapps/client/projectdetails.html"');
@@ -62,7 +91,9 @@ def clientdeactivate(request):
 def clientnotification(request):
 	return render(request,"otherapps/client/clientnotification.html");
 def allprojectsrequests(request):
-	return render(request,"otherapps/client/allprojectsrequests.html");
+	# values=ProjectInfo.objects.all().values('id')
+	values=reversed(ProjectInfo.objects.filter(~Q(ReportStatus="Completed")))
+	return render(request,"otherapps/client/allprojectsrequests.html",{'values':values});
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):

@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import ClientInfo,ProjectInfo
+from project_HR.models import Employee
 # from django.utils import timezone
 from django.db.models import Q
 

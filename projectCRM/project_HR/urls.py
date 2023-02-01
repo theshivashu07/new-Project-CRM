@@ -33,7 +33,7 @@ urlpatterns=[
 		path('allsuggestions/',views.allsuggestions,name='allsuggestions'),
 		path('allmessages/',views.allmessages,name='allmessages'),
 
-		# path('trialcenter/',views.trialcenter,name='trialcenter'),
+		path('trialcenter/<str:key>',views.trialcenter,name='trialcenter'),
 		#path('/',views.,name=''),
 ]
 

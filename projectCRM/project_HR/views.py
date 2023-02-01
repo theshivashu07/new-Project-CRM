@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from .models import Employee
 from project_Client.models import ClientInfo,ProjectInfo
 # from django.utils import timezone
 from django.db.models import Q
@@ -112,9 +113,40 @@ def projectdetailsedit(request,projectslug):
 	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'prevPATH':orignalURL});
 
 
+
+
 # new 
 def recruitments(request):
-	dataset=["Admin","Project Manager","Developer"]
+	if request.method=="POST":
+		values=Employee(
+			Username = request.POST["username"],
+			Password = request.POST["password"],
+			FirstName = request.POST["firstname"],
+			LastName = request.POST["lastname"],
+			FullName = request.POST["firstname"]+' '+request.POST["lastname"],
+			EmailId = request.POST["emailid"],
+			MobileNo = request.POST["mobileno"],  # str(int(request.POST["mobileno"])+1),
+			Language = 'Hindi',
+			Address = request.POST["address"],
+			ZipCode = 489827,
+			State = request.POST["state"],
+			Country = request.POST["country"],
+			Company = request.POST["company"],
+			EmploymentID = request.POST["employmentid"],
+			As = request.POST["as"],
+			Role =request.POST["role"],
+			Level = request.POST["level"],
+			OfficeLocation = request.POST["officelocation"],
+			SittingArea = request.POST["sittingarea"],
+			JoiningBeginningDate = request.POST["joiningbeginningdate"],
+			JoiningEndingDate = request.POST["joiningendingdate"],
+			Salary = request.POST["salary"],
+			Contract = request.POST["contract"],
+			CTC = request.POST["ctc"], );
+		values.save()
+		# return redirect('/trialcenter/'+str(values.id))
+		# values=Employee.objects.get(pk=values.id)
+		return render(request,"otherapps/hr/recruitments.html",{'values':values});
 	return render(request,"otherapps/hr/recruitments.html");
 def promotions(request):
 	dataset=["Project Manager","Developer"]
@@ -140,8 +172,11 @@ def allmessages(request):
 
 
 
-# def trialcenter(request):
-# 	return render(request,"otherapps/hr/trialcenter.html");
+def trialcenter(request,key):
+	print(key)
+	values=Employee.objects.get(pk=int(key))
+	# return render(request,"otherapps/hr/recruitments.html",{'values':values});
+	return render(request,"otherapps/hr/trialcenter.html",{'values':values});
 
 
 

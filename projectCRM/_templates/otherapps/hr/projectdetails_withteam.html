@@ -23,39 +23,47 @@ CRM - HR - Project Details
                     <div class="card-body">
                       <form id="formAccountSettings" method="POST" onsubmit="return false">
                         <div class="row">
-                          <div class="mb-3 col-md-7">
-                            <label for="firstName" class="form-label">New Project Name</label>
-                            <input class="form-control" type="text" id="firstName" name="firstName" value="" placeholder="Project CRM" autofocus="" readonly>
+                          <!-- <div class="mb-3 col-md-1">
+                            <label for="projectname" class="form-label">Client ID</label>
+                            <input class="form-control" type="number" id="clientID" name="clientID"  value="00{{values.Client}}"  autofocus="" readonly>
                           </div>
+                          <div class="mb-3 col-md-7">
+                            <label for="projectname" class="form-label">New Project Name</label>
+                            <input class="form-control" type="text" id="projectname" name="projectname" value="{{values.ProjectName}}" placeholder="Project CRM" autofocus=""  >
+                          </div>  -->
+                          <div class="mb-3 col-md-7">
+                            <label for="projectname" class="form-label">New Project Name</label>
+                            <input class="form-control" type="text" id="projectname" name="projectname" value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="" readonly>
+                          </div> 
                           <div class="mb-3 col-md-5">
                             <label for="assignto" class="form-label">Assign project to ADMIN </label>
-                            <input class="form-control" type="text" id="assignto" name="assignto" value="Shivam Shukla" placeholder="Project CRM" autofocus="" readonly>
+                            <input class="form-control" type="text" id="assignto" name="assignto" value="{{values.AdminsName}}" placeholder="None" autofocus="" readonly>
                           </div>
                           <div class="mb-3 col-md-3">
                             <label for="language" class="form-label">Programming Language</label>
-                            <input class="form-control" type="text" id="language" name="language" value="Python" placeholder="Project CRM" autofocus="" readonly>
+                            <input class="form-control" type="text" id="language" name="language" value="{{values.ProgrammingLanguage}}" placeholder="None" autofocus="" readonly>
                             <div id="defaultFormControlHelp" class="form-text">
                               Here put the main <b>'programming language'</b>.
                             </div>
                           </div>
                           <div class="mb-3 col-md-3">
                             <label for="frontend" class="form-label">Front-End</label>
-                            <input class="form-control" type="text" id="frontend" name="frontend" value="Simple" placeholder="Project CRM" autofocus="" readonly>
+                            <input class="form-control" type="text" id="frontend" name="frontend" value="{{values.FrontEnd}}" placeholder="None" autofocus="" readonly>
                             <div id="defaultFormControlHelp" class="form-text">
                               Here <b>'simple'</b> means <b>'html, css and js'</b> language.
                             </div>
                           </div>
                           <div class="mb-3 col-md-3">
                             <label for="backend" class="form-label">Back-End</label>
-                            <input class="form-control" type="text" id="backend" name="backend" value="Django" placeholder="Project CRM" autofocus="" readonly>
+                            <input class="form-control" type="text" id="backend" name="backend" value="{{values.BackEnd}}" placeholder="None" autofocus="" readonly>
                           </div>
                           <div class="mb-3 col-md-3">
                             <label for="database" class="form-label">Database</label>
-                            <input class="form-control" type="text" id="database" name="database" value="SQLite: SQL Database" placeholder="Project CRM" autofocus="" readonly>
+                            <input class="form-control" type="text" id="database" name="database" value="{{values.DataBase}}" placeholder="None" autofocus="" readonly>
                           </div>
                           <div class="mb-3 col-md-7">
                             <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" style="height:120px" rows="4" readonly></textarea>
+                            <textarea class="form-control" id="softdiscription" name="softdiscription" style="height:120px" rows="4" value="" readonly>{{values.SoftDiscription}}</textarea>
                             <div id="defaultFormControlHelp" class="form-text">
                               Here is you briefly describe exactly what features you want on your project. And <b>describe everything.....</b>
                             </div>
@@ -64,16 +72,18 @@ CRM - HR - Project Details
                             <div class="row">
                               <!-- first three places -->
                               <div class="mb-3 col-md-5">
-                                <label for="biginningdate" class="form-label">Beginning Date</label>
-                                <input class="form-control" type="text" id="biginningdate" name="biginningdate" value="01-01-2023" placeholder="" autofocus="" readonly>
+                                <label for="state" class="form-label">Beginning Date</label>
+                                <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.BeginningDate |date:'M d, Y'}}"  name="beginningdate" readonly> -->
+                                <input class="form-control" type="date" id="html5-date-input"  value="{{values.BeginningDate |date:'Y-m-d'}}"  name="beginningdate" readonly>
                               </div>
                               <div class="mb-3 col-md-2">
                                 <br><br>
                                 <center><i class='bx bx-transfer bx-spin bx-sm' ></i></center>
                               </div>
                               <div class="mb-3 col-md-5">
-                                <label for="endingdate" class="form-label">Ending Date</label>
-                                <input class="form-control" type="text" id="endingdate" name="endingdate" value="31-01-2023" placeholder="" autofocus="" readonly>
+                                <label for="state" class="form-label">Ending Date</label>
+                                <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.EndingDate |date:'M d, Y'}}"  name="beginningdate" readonly> -->
+                                <input class="form-control" type="date"id="html5-date-input"  value="{{values.EndingDate |date:'Y-m-d'}}"  name="endingdate" readonly>
                               </div>
                               <!-- first three places -->
                             </div>
@@ -81,22 +91,24 @@ CRM - HR - Project Details
                               <label for="firstName" class="form-label">Assign your budget ammount, at max!!</label>
                               <div class="input-group">
                                 <span class="input-group-text">In Rupees.</span>
-                                <input type="text" class="form-control" value="40,000" placeholder="Starting Amount" readonly>
+                                <input type="number" class="form-control" placeholder="Starting Amount" value="{{values.StartingAmount}}" name="startingamount" readonly>
                                 <span class="input-group-text" style="color:#ffffff">to</span>
-                                <input type="text" class="form-control" value="50,000" placeholder="Ending Amount" readonly>
+                                <input type="number" class="form-control" placeholder="Ending Amount" value="{{values.EndingAmount}}" name="endingamount" readonly>
                                 <!-- <span class="input-group-text">.00</span> -->
                               </div>
                             </div>
                           </div>
-
                         </div>
 
 
+                        <br>
+                        <hr class="my-0">
+                        <br>
+                        <br>
 
-                        <br>
-                        <br>
+                        
                         <div class="card">
-                          <h5 class="card-header" style="background-color:#222c3c;"><b>Project's TEAM...</b></h5>
+                          <h5 class="card-header"><b>Project's TEAM...</b></h5>
                           <div class="table-responsive text-nowrap" style="background-color:#1d242e">
                             <table class="table table-sm">
                               <thead>

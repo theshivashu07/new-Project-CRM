@@ -10,14 +10,17 @@ urlpatterns=[
 		path('mydeactivate/',views.mydeactivate,name='mydeactivate'),
 		path('mynotification/',views.mynotification,name='mynotification'),
 
-		path('projectsoftdetails/',views.projectsoftdetails,name='projectsoftdetails'),
+		path('projectdetails/',views.projectdetails,name='projectdetails'),
+		path('projectdetails/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
+		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
+
 
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
 
 		path('activeprojects/',views.activeprojects,name='activeprojects'),
 		path('activeprojects/@<str:username>',views.reportsopen,name='reportsopen'),
 		path('completedprojects/',views.completedprojects,name='completedprojects'),
-		path('completedprojects/@<str:username>',views.projectdetails,name='projectdetails'),
+		path('completedprojects/@<str:username>',views.completedprojects,name='completedprojects'),
 
 		# new
 		path('recruitments/',views.recruitments,name='recruitments'),

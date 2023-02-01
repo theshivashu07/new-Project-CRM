@@ -26,6 +26,7 @@ class ClientInfo(models.Model):
 class ProjectInfo(models.Model):
 	Client = models.IntegerField();
 	HR = models.IntegerField(default=None, null=True);
+	Admin = models.IntegerField(default=None, null=True);
 	ProjectManager = models.IntegerField(default=None, null=True);
 	Developer = models.IntegerField(default=None, null=True);
 	ProjectName = models.CharField(max_length=50);
@@ -40,7 +41,7 @@ class ProjectInfo(models.Model):
 	EndingAmount = models.CharField(max_length=10, default=None);
 	SoftDiscription = models.CharField(max_length=350);
 	HardDiscription = models.CharField(max_length=500, default=None, null=True);
-	JoiningDate = models.DateTimeField(auto_now_add=True)
+	JoiningDate = models.DateTimeField(auto_now_add=True);
 	UpdationDate = models.DateTimeField(auto_now=True);
 	ReportStatus = models.CharField(max_length=50, default=None, null=True);
 	# JoiningDate = models.DateTimeField(False, True, editable=False);  #created_at
@@ -48,7 +49,7 @@ class ProjectInfo(models.Model):
 	def __str__(self):
 		# target = ClientInfo.objects.get(pk=self.Client)
 		# target = ClientInfo.objects.get(1)
-		return "Added a new project "+self.ProjectName+".";
+		return "Added a new project "+self.ProjectName+"("+str(self.id)+").";
 		# return target.FullName+" added a new project "+self.ProjectName+".";
 
 

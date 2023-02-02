@@ -1,0 +1,115 @@
+{% extends 'otherapps/hr/master.html' %}
+
+{% block tcontent %}
+CRM - HR - All Project Requests
+{% endblock %}
+
+
+
+
+{% block childcontent %}
+
+
+<div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-semibold py-3 mb-4"><span class="text-muted fw-light">UI elements /</span> Toasts</h4>
+
+              <!-- Toast with Placements -->
+              <div class="bs-toast toast toast-placement-ex m-2 fade bg-primary top-0 start-0 hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                  <i class="bx bx-bell me-2"></i>
+                  <div class="me-auto fw-semibold">Bootstrap</div>
+                  <small>11 mins ago</small>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">Fruitcake chocolate bar tootsie roll gummies gummies jelly beans cake.</div>
+              </div>
+              <!-- Toast with Placements -->
+
+              <!-- Bootstrap Toasts with Placement -->
+              <div class="card mb-4">
+                <h4 class="card-header"><b>Searching...</b></h4>
+                <div class="card-body">
+                  <div class="row gx-3 gy-2 align-items-center" style="margin:20px">
+                    <!-- <div class="col-md-12"> -->
+                      <label class="form-label" for="phoneNumber">Search with Name</label>
+                      <div class="input-group" style="margin-top: 0;">
+                        <span class="input-group-text" id="basic-addon11"><i class='bx bx-search-alt-2'></i></span>
+                        <input type="text" class="form-control" placeholder="search..." aria-describedby="basic-addon11">
+                      </div>
+                    <!-- </div> -->
+                  </div>
+
+
+
+
+
+
+              <div class="card" style="padding-top:50px">
+                <h5 class="card-header"><b>All Selected Employees are below...</b></h5>
+                <div class="table-responsive text-nowrap" style="background-color:#1d242e">
+                  <table class="table table-sm">
+                    <thead>
+                      <tr>
+                        <th>
+                          <i class="fab fa-angular fa-lg text-danger me-3"></i>
+                          Name
+                        </th>
+                        <th>Role (with Level)</th>
+                        <th>Joining Date</th>
+                        <th>Ending Date</th> 
+                        <th>Salary</th>
+                        <th>Contract (spending-more)</th>
+                        <th>Task to do!!</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                    {% for value in values %}
+                      <tr>
+                        <td> 
+                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{value.FullName}}" style="margin-right:5px;">
+                              <img src="/_static/otherapps/img/avatars/user.png" alt="Avatar" class="rounded-circle">
+                            </li>
+                            <strong>{{value.FullName}}</strong>
+                          </ul>
+                        </td>
+                        <td>{{value.Role}} - {{value.Level}}</td>
+                        <td>{{value.JoiningBeginningDate}}</td>
+                        <td>{{value.JoiningEndingDate}}</td>
+                        <td>4,500,000</td>
+                        <!-- <td>4'Years ( 2'years, 2'months - 1'year, 10'months )</td> -->
+                        <!-- <td>{{value.Contract}}'Years (<small><u>2Y2M</u>-<u>1Y10M</u></small>)</td> -->
+                        <td>{{value.Contract}}'Years (<small><u>2Y2M</u>-<u>1Y10M</u></small>)</td>
+                        <td>
+                          <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
+                          <a href="/{{targetedpath}}" class="btn btn-info" style="line-height: 15px">{{targetedfrom}}</a>
+                          <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
+                        </td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+                  <div id="defaultFormControlHelp" class="form-text">
+                      <b>Only such employees are in the componey according to your searches!!</b>
+                  </div>
+              </div>
+              <br><br><br><br>
+                </div>
+              </div>
+              <!--/ Bootstrap Toasts with Placement -->
+            </div>
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+          </div>
+
+
+{% endblock %}
+
+
+
+
+

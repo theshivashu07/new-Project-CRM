@@ -229,26 +229,32 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Task's to do!!</span>
             </li>
+            <li class="menu-item {% if request.path == '/listof/newjoinees/' or request.path == '/newjoinees/' %}active{% endif %}">
+              <a href="/listof/newjoinees" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-hot'></i>
+                <div data-i18n="Analytics">New Joinee's</div>
+              </a> 
+            </li>
             <li class="menu-item {% if request.path == '/recruitments/' %}active{% endif %}">
               <a href="/recruitments" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-folder-plus"></i>
                 <div data-i18n="Analytics">Recruitment's</div>
-              </a> 
+              </a>
             </li>
-            <li class="menu-item {% if request.path == '/pick/promotions/' or request.path == '/promotions/' %}active{% endif %}">
-              <a href="/pick/promotions" class="menu-link">
+            <li class="menu-item {% if request.path == '/listof/promotions/' or request.path == '/promotions/' %}active{% endif %}">
+              <a href="/listof/promotions" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-bolt-circle'></i>
                 <div data-i18n="Analytics">Promotion's</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/pick/increments/' or request.path == '/increments/' %}active{% endif %}">
-              <a href="/pick/increments" class="menu-link">
+            <li class="menu-item {% if request.path == '/listof/increments/' or request.path == '/increments/' %}active{% endif %}">
+              <a href="/listof/increments" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-trending-up"></i>
                 <div data-i18n="Analytics">Increment's</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/pick/decrements/' or request.path == '/decrements/' %}active{% endif %}">
-              <a href="/pick/decrements" class="menu-link">
+            <li class="menu-item {% if request.path == '/listof/decrements/' or request.path == '/decrements/' %}active{% endif %}">
+              <a href="/listof/decrements" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-trending-down"></i>
                 <div data-i18n="Analytics">Decrement's</div>
               </a> 

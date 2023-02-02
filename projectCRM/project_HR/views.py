@@ -116,6 +116,8 @@ def projectdetailsedit(request,projectslug):
 
 
 # new 
+def newjoinees(request):
+	return render(request,"otherapps/hr/newjoinees.html");
 def recruitments(request):
 	if request.method=="POST":
 		values=Employee(
@@ -126,9 +128,7 @@ def recruitments(request):
 			FullName = request.POST["firstname"]+' '+request.POST["lastname"],
 			EmailId = request.POST["emailid"],
 			MobileNo = request.POST["mobileno"],  # str(int(request.POST["mobileno"])+1),
-			Language = 'Hindi',
 			Address = request.POST["address"],
-			ZipCode = 489827,
 			State = request.POST["state"],
 			Country = request.POST["country"],
 			Company = request.POST["company"],
@@ -149,19 +149,17 @@ def recruitments(request):
 		return render(request,"otherapps/hr/recruitments.html",{'values':values});
 	return render(request,"otherapps/hr/recruitments.html");
 def promotions(request):
-	dataset=["Project Manager","Developer"]
 	return render(request,"otherapps/hr/promotions.html");
 def increments(request):
-	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/hr/increments.html");
 def decrements(request):
-	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/hr/decrements.html");
-def pick(request,target):
+def listof(request,target):
 	print(request.path,target)
-	dataset=["Admin","Project Manager","Developer"]
-	pickfromtarget={'promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
-	return render(request,"otherapps/hr/searching4pid.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target]});
+	pickfromtarget={'newjoinees':'Join Now','promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
+	values=Employee.objects.filter(CompanyJoiningDate=None)
+	return render(request,"otherapps/hr/filtered.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
+
 
 def alldiscussions(request):
 	return render(request,"otherapps/hr/alldiscussions.html");

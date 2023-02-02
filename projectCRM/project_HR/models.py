@@ -29,8 +29,11 @@ class Employee(models.Model):
 	JoiningBeginningDate = models.DateField(default=None, null=True);
 	JoiningEndingDate = models.DateField(default=None, null=True);
 	Salary = models.IntegerField();
-	Contract = models.CharField(max_length=20);  # in years
+	Contract = models.IntegerField(default=None, null=True);  # in years
 	CTC = models.CharField(max_length=250);
+
+	CompanyJoiningDate = models.DateField(default=None, null=True);
+	CompanyLeavingDate = models.DateField(default=None, null=True);
 
 	JoiningDate = models.DateTimeField(auto_now_add=True);
 	UpdationDate = models.DateTimeField(auto_now=True);

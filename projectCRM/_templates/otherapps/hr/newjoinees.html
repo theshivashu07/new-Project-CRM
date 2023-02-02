@@ -74,13 +74,30 @@ CRM - HR - Project Details
                                     <hr class="my-0">
                     	  			<!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Details about /</span> New Joiner</h4> --> 
                     	  			<h4 class="fw-bold" style="margin-top:25px; margin-bottom:20px;"><span class="text-muted fw-light">Details about new joiner /</span> At Company</h4>
-                                    <!-- <div class="mb-3 col-md-5"> -->
-                                        <!-- <div class="row"> -->
-                                  			<div class="mb-3 col-md-3">
-                                    			<label class="form-label" for="company">Company</label>
-                                      			<input type="text" id="company" name="company" class="form-control" placeholder="" value="Google" readonly>
-                                  			</div>
-                                            <div class="mb-3 col-md-2">
+                                    <div class="mb-3 col-md-5">
+                                        <div class="row">
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label" for="company">Company</label>
+                                                <input type="text" id="company" name="company" class="form-control" placeholder="" value="Google" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label for="employmentid" class="form-label">Employment ID</label>
+                                                <input class="form-control" type="text" id="employmentid" name="employmentid" placeholder="" value="googleswe1011" readonly>
+                                                <!-- <input class="form-control" type="text" id="employmentid" name="employmentid" placeholder="Generating..." value="{{values.EmploymentID}}" readonly> -->
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label class="form-label" for="level">Level</label>
+                                                <input type="number" id="level" name="level" class="form-control" placeholder="1" value="{{values.Level}}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                          			<div class="mb-3 col-md-7">
+                              			<label for="officelocation" class="form-label">Joining Office Location</label>
+                              			<input class="form-control" type="text" id="officelocation" name="officelocation" placeholder="No. 3, Old Madras Rd, Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560016" value="{{values.OfficeLocation}}" required>
+                          			</div>
+                                    <div class="mb-3 col-md-5">
+                                        <div class="row">
+                                            <div class="mb-3 col-md-5">
                                                 <label class="form-label" for="role">Role</label>
                                                 <select name="role" class="select2 form-select" required>
                                                     <!-- <option value="">Select Option</option> -->
@@ -89,37 +106,25 @@ CRM - HR - Project Details
                                                     <option value="Admin" {%if values.As == 'Admin' %}  selected {%endif%}>@admin</option>
                                                 </select>
                                             </div>
-                                        <!-- </div> -->
-                                    <!-- </div> -->
-                          			<div class="mb-3 col-md-7">
-                              			<label for="officelocation" class="form-label">Joining Office Location</label>
-                              			<input class="form-control" type="text" id="officelocation" name="officelocation" placeholder="No. 3, Old Madras Rd, Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560016" value="{{values.OfficeLocation}}" required>
-                          			</div>
-                                    <!-- <div class="mb-3 col-md-5"> -->
-                                        <!-- <div class="row"> -->
-                                  			<div class="mb-3 col-md-3">
-                                        		<label class="form-label" for="as">As</label>
-                                        		<select name="as" class="select2 form-select" required>
+                                            <div class="mb-3 col-md-7">
+                                                <label class="form-label" for="as">As</label>
+                                                <select name="as" class="select2 form-select" required>
                                                     <!-- <option value="">Select Option</option> -->
-                                            		<option value="Software Development Engineer" {%if values.As == 'Software Development Engineer' %}  selected {%endif%}>Software Development Engineer</option>
+                                                    <option value="Software Development Engineer" {%if values.As == 'Software Development Engineer' %}  selected {%endif%}>Software Development Engineer</option>
                                                     <option value="Full Stack Web Developer"{%if values.As == 'Full Stack Web Developer' %}  selected {%endif%}>Full Stack Web Developer</option>
                                                     <option value="Data Analyst"{%if values.As == 'Data Analyst' %} selected {%endif%}>Data Analyst</option>
-                                            		<option value="Software Engineer"{%if values.As == 'Software Engineer' %} selected {%endif%}>Software Engineer</option>
+                                                    <option value="Software Engineer"{%if values.As == 'Software Engineer' %} selected {%endif%}>Software Engineer</option>
                                                     <option value="Frontend Engineer"{%if values.As == 'Frontend Engineer' %} selected {%endif%}>Frontend Engineer</option>
                                                     <option value="Backend Engineer"{%if values.As == 'Backend Engineer' %} selected {%endif%}>Backend Engineer</option>
-                                            		<option value="Database Engineer"{%if values.As == 'Database Engineer' %} selected {%endif%}>Database Engineer</option>
-                                            		<option value="Software Developer"{%if values.As == 'Software Developer' %} selected {%endif%}>Software Developer</option>
-                                            		<option value="Frontend Developer"{%if values.As == 'Frontend Developer' %} selected {%endif%}>Frontend Developer</option>
-                                            		<option value="Backend Developer"{%if values.As == 'Backend Developer' %} selected {%endif%}>Backend Developer</option>
-                                            		<option value="Database Developer"{%if values.As == 'Database Developer' %} selected {%endif%}>Database Developer</option>
-                                        		</select>
-                                    		</div>
-                                            <div class="mb-3 col-md-2">
-                                                <label class="form-label" for="level">Level</label>
-                                                <input type="number" id="level" name="level" class="form-control" placeholder="1" value="{{values.Level}}" required>
+                                                    <option value="Database Engineer"{%if values.As == 'Database Engineer' %} selected {%endif%}>Database Engineer</option>
+                                                    <option value="Software Developer"{%if values.As == 'Software Developer' %} selected {%endif%}>Software Developer</option>
+                                                    <option value="Frontend Developer"{%if values.As == 'Frontend Developer' %} selected {%endif%}>Frontend Developer</option>
+                                                    <option value="Backend Developer"{%if values.As == 'Backend Developer' %} selected {%endif%}>Backend Developer</option>
+                                                    <option value="Database Developer"{%if values.As == 'Database Developer' %} selected {%endif%}>Database Developer</option>
+                                                </select>
                                             </div>
-                                        <!-- </div> -->
-                                    <!-- </div> -->
+                                        </div>
+                                    </div>
                             		<div class="mb-3 col-md-7">
                                 		<label for="sittingarea" class="form-label">Your Exect Sitting Area in your office!!</label>
                                 		<input class="form-control" type="text" id="sittingarea" name="sittingarea" placeholder="Building No. 03, Floor No. 07, Room No. 05, Table No. 15, Seet No. 03." value="{{values.SittingArea}}" required>
@@ -151,13 +156,13 @@ CRM - HR - Project Details
                                                 <label class="form-label" for="salary">Salary (in LPA)</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text">In Rupees</span>
-                                                    <input type="number" class="form-control" id="salary" name="salary" placeholder="4,500,000" value="{{values.Salary}}" required>
+                                                    <input type="text" class="form-control" id="salary" name="salary" placeholder="4,500,000" value="{{values.Salary}}" required>
                                                     <span class="input-group-text">.00</span>
                                                 </div>
                                             </div>
                                             <div class="mb-3 col-md-5">
                                                 <label class="form-label" for="contract">Contract (in years)</label>
-                                                <input type="number" id="contract" name="contract" class="form-control" placeholder="2" value="{{values.Contract}}" required>
+                                                <input type="text" id="contract" name="contract" class="form-control" placeholder="2 years" value="{{values.Contract}}" required>
                                             </div>
                                         </div>
                           			</div>

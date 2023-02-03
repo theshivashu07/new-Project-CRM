@@ -4,6 +4,7 @@ from .models import Employee
 from project_Client.models import ClientInfo,ProjectInfo
 # from django.utils import timezone
 from django.db.models import Q
+import datetime
 
 
 '''
@@ -52,7 +53,6 @@ def completedprojects(request,username=None):
 
 
 def projectdetails(request):
-	print("Radhy-Radhy...")
 	if request.method=="POST":
 		values=ProjectInfo(
 						Client=request.POST["clientID"],
@@ -116,48 +116,74 @@ def projectdetailsedit(request,projectslug):
 
 
 # new 
-def newjoinees(request):
-	return render(request,"otherapps/hr/newjoinees.html");
+def newjoinees(request,username):
+	if request.method=="POST":
+		values=Employee.objects.get(pk=request.POST["employeeID"])
+		values.EmailId = request.POST["emailid"]
+		values.MobileNo = request.POST["mobileno"]
+		values.As = request.POST["as"]
+		values.Role =request.POST["role"]
+		values.Level = request.POST["level"]
+		values.OfficeLocation = request.POST["officelocation"]
+		values.SittingArea = request.POST["sittingarea"]
+		values.Salary = request.POST["salary"]
+		values.Contract = request.POST["contract"]
+		values.CTC = request.POST["ctc"]		
+		# generate the componey joining and living dates...
+		mydate = datetime.date.today()
+		values.CompanyJoiningDate = mydate
+		mydate = mydate.replace(year=mydate.year+2,day=mydate.day-1)
+		values.CompanyLeavingDate = mydate
+		values.save()
+		return redirect('/listof/newjoinees/')
+	values = Employee.objects.get(Username=username)
+	return render(request,"otherapps/hr/newjoinees.html",{'values':values});
 def recruitments(request):
 	if request.method=="POST":
-		values=Employee(
-			Username = request.POST["username"],
-			Password = request.POST["password"],
-			FirstName = request.POST["firstname"],
-			LastName = request.POST["lastname"],
-			FullName = request.POST["firstname"]+' '+request.POST["lastname"],
-			EmailId = request.POST["emailid"],
-			MobileNo = request.POST["mobileno"],  # str(int(request.POST["mobileno"])+1),
-			Address = request.POST["address"],
-			State = request.POST["state"],
-			Country = request.POST["country"],
-			Company = request.POST["company"],
-			EmploymentID = request.POST["employmentid"],
-			As = request.POST["as"],
-			Role =request.POST["role"],
-			Level = request.POST["level"],
-			OfficeLocation = request.POST["officelocation"],
-			SittingArea = request.POST["sittingarea"],
-			JoiningBeginningDate = request.POST["joiningbeginningdate"],
-			JoiningEndingDate = request.POST["joiningendingdate"],
-			Salary = request.POST["salary"],
-			Contract = request.POST["contract"],
-			CTC = request.POST["ctc"], );
+		def generateID():
+			n=str(Employee.objects.count()+1)
+			temp='0'*(4-len(n))+n
+			temp='googler'+'emp'+temp
+			return temp
+		values=Employee()
+		values.Username = request.POST["username"]
+		values.Password = request.POST["password"]
+		values.FirstName = request.POST["firstname"]
+		values.LastName = request.POST["lastname"]
+		values.FullName = request.POST["firstname"]+' '+request.POST["lastname"]
+		values.EmailId = request.POST["emailid"]
+		values.MobileNo = request.POST["mobileno"]  # str(int(request.POST["mobileno"])+1),
+		values.Address = request.POST["address"]
+		values.State = request.POST["state"]
+		values.Country = request.POST["country"]
+		values.Company = request.POST["company"]
+		values.EmploymentID = generateID(),
+		values.As = request.POST["as"]
+		values.Role =request.POST["role"]
+		values.Level = request.POST["level"]
+		values.OfficeLocation = request.POST["officelocation"]
+		values.SittingArea = request.POST["sittingarea"]
+		values.JoiningBeginningDate = request.POST["joiningbeginningdate"]
+		values.JoiningEndingDate = request.POST["joiningendingdate"]
+		values.Salary = request.POST["salary"]
+		values.Contract = request.POST["contract"]
+		values.CTC = request.POST["ctc"]
+		if("upload" in request.FILES):
+			values.ProfilePick = request.FILES["upload"]
 		values.save()
 		# return redirect('/trialcenter/'+str(values.id))
 		# values=Employee.objects.get(pk=values.id)
 		return render(request,"otherapps/hr/recruitments.html",{'values':values});
 	return render(request,"otherapps/hr/recruitments.html");
-def promotions(request):
+def promotions(request,username):
 	return render(request,"otherapps/hr/promotions.html");
-def increments(request):
+def increments(request,username):
 	return render(request,"otherapps/hr/increments.html");
-def decrements(request):
+def decrements(request,username):
 	return render(request,"otherapps/hr/decrements.html");
 def listof(request,target):
-	print(request.path,target)
 	pickfromtarget={'newjoinees':'Join Now','promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
-	values=Employee.objects.filter(CompanyJoiningDate=None)
+	values=Employee.objects.filter(CompanyJoiningDate=None)  #or,CompanyLeavingDate
 	return render(request,"otherapps/hr/filtered.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
 
 
@@ -171,7 +197,6 @@ def allmessages(request):
 
 
 def trialcenter(request,key):
-	print(key)
 	values=Employee.objects.get(pk=int(key))
 	# return render(request,"otherapps/hr/recruitments.html",{'values':values});
 	return render(request,"otherapps/hr/trialcenter.html",{'values':values});

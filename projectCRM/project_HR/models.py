@@ -16,7 +16,7 @@ class Employee(models.Model):
 	ZipCode = models.IntegerField(default=None, null=True)
 	State = models.CharField(max_length=25);
 	Country = models.CharField(max_length=25);
-	ProfilePick = models.ImageField(upload_to ='client/',max_length=75,default=None)
+	ProfilePick = models.ImageField(upload_to ='employee/',max_length=75,default=None)
 
 	Company = models.CharField(max_length=100)
 	EmploymentID = models.CharField(max_length=100)

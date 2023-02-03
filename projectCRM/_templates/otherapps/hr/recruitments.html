@@ -28,6 +28,24 @@ CRM - HR - Project Details
                             {% csrf_token %}
                         		<div class="row">
                     	    		<h4 class="fw-bold" style="margin-top:25px; margin-bottom:20px;"><span class="text-muted fw-light">Details about /</span> New Joiner </h4>
+                                    <div class="card-body" style="padding-top: 30px;">
+                                      <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                        <img src="/_static/otherapps/img/avatars/user.png" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+                                        <div class="button-wrapper">
+                                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                            <span class="d-none d-sm-block">Upload new photo</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                            <input type="file" id="upload" name="upload" class="account-file-input" hidden="" accept="image/png, image/jpeg">
+                                            <!-- <input type="file" id="upload" name="upload" class="account-file-input" value="" hidden="" accept="image/png, image/jpeg"> -->
+                                          </label>
+                                          <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                            <i class="bx bx-reset d-block d-sm-none"></i>
+                                            <span class="d-none d-sm-block">Reset</span>
+                                          </button>
+                                         <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                                        </div>
+                                      </div>
+                                    </div>
                             		<div class="mb-3 col-md-3">
                                 		<label for="firstname" class="form-label">First Name</label>
                                 		<input class="form-control" type="text" id="firstname" name="firstname" value="{{values.FirstName}}" placeholder="Shivam" autofocus="" required>
@@ -72,8 +90,9 @@ CRM - HR - Project Details
                                     <br>
                           			</div>
                                     <hr class="my-0">
+                                    <br>
                     	  			<!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Details about /</span> New Joiner</h4> --> 
-                    	  			<h4 class="fw-bold" style="margin-top:25px; margin-bottom:20px;"><span class="text-muted fw-light">Details about new joiner /</span> At Company</h4>
+                    	  			<h4 class="fw-bold" style="margin-top:25px; margin-bottom:40px;"><span class="text-muted fw-light">Details about new joiner /</span> At Company</h4> 
                                     <!-- <div class="mb-3 col-md-5"> -->
                                         <!-- <div class="row"> -->
                                   			<div class="mb-3 col-md-3">

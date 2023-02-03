@@ -23,11 +23,12 @@ urlpatterns=[
 		path('completedprojects/@<str:username>',views.completedprojects,name='completedprojects'),
 
 		# new
-		path('newjoinees/',views.newjoinees,name='newjoinees'),
+		path('newjoinees/@<str:username>',views.newjoinees,name='newjoinees'),
+		# path('newjoinees/',views.newjoinees,name='newjoinees'),
 		path('recruitments/',views.recruitments,name='recruitments'),
-		path('promotions/',views.promotions,name='promotions'),
-		path('increments/',views.increments,name='increments'),
-		path('decrements/',views.decrements,name='decrements'),
+		path('promotions/@<str:username>',views.promotions,name='promotions'),
+		path('increments/@<str:username>',views.increments,name='increments'),
+		path('decrements/@<str:username>',views.decrements,name='decrements'),
 		path('listof/<str:target>/',views.listof,name='listof'),
 
 		path('alldiscussions/',views.alldiscussions,name='alldiscussions'),

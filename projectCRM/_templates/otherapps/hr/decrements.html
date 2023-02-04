@@ -24,145 +24,224 @@ CRM - HR - Project Details
                       <!-- Account -->
                       <hr class="my-0">
                       <div class="card-body">
-                          <form id="formAccountSettings" method="POST" onsubmit="return false">
+                            <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                                <input type="hidden" id="employeeID" name="employeeID" value="{{values.id}}">
                             <div class="row">
-
-
                               <h4 class="fw-bold" style="margin-top:25px; margin-bottom:20px;"><span class="text-muted fw-light">Details about /</span> New Joiner </h4>
-
-                              <div class="mb-3 col-md-2">
-                                <div class="card-body"  style="padding-top: 10px;">
-                                  <!-- <div class="d-flex align-items-start align-items-sm-center gap-4"> -->
-                                    <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="user-avatar" class="d-block rounded" height="135" width="135" id="uploadedAvatar">
-                                  <!-- </div> -->
-                                </div>
-                              </div>
-
-                              <div class="mb-3 col-md-10">
-                                <div class="row">
-                                  <div class="mb-3 col-md-3">
-                                        <label for="firstName" class="form-label">First Name </label>
-                                        <input class="form-control" type="text" id="firstName" name="firstName" value="Shivam" placeholder="" autofocus="" readonly>
-                                  </div>
-                                  <div class="mb-3 col-md-3">
-                                      <label for="firstName" class="form-label">Last Name</label>
-                                      <input class="form-control" type="text" id="lastName" name="lastName" value="Shukla" placeholder="" autofocus="" readonly>
-                                  </div>
-                                  <div class="mb-3 col-md-3">
-                                    <label for="email" class="form-label">E-mail</label>
-                                    <input class="form-control" type="text" id="email" name="email" value="theshivashu07@google.com" placeholder="" readonly>
-                                  </div>
-                            		<div class="mb-3 col-md-3">
-                                		<label class="form-label" for="phoneNumber">Phone Number</label>
-                                		<div class="input-group input-group-merge">
-                                			<span class="input-group-text"><small>IND (+91)</small></span>
-                                			<input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="" value="7898565074" style="padding-left: 10px;" readonly>
-                              			</div>
-                          			</div>
-                          			<div class="mb-3 col-md-6">
-                              			<label for="address" class="form-label">Address</label>
-                              			<input type="text" class="form-control" id="address" name="address" placeholder="" value="Teori, Katni, Madhya Pradesh, India." readonly>
-                          			</div>
-                          			<div class="mb-3 col-md-3">
-                              			<label for="state" class="form-label">State</label>
-                              			<input class="form-control" type="text" id="state" name="state" placeholder="" value="Madhya Pradesh" readonly>
-                          			</div>
-                              	  <div class="mb-3 col-md-3">
-                                	  <label class="form-label" for="country">Country</label>
-                                	  <input class="form-control" type="text" id="country" name="country" placeholder="" value="India" readonly>
-                              	  </div>        
-                                </div>
-                              </div>
-
-
-                              <hr class="my-0"> <br>
-            				  <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4> -->
-                    	  			<h4 class="fw-bold  py-3 mb-4" style="margin-top:25px; margin-bottom:20px;"><span class="text-muted fw-light">Internal Detail's Dataset -</span> Update/Change</h4>
-                                <div class="mb-3 col-md-3">
-                                  <label class="form-label" for="level">Companey</label>
-                                    <input type="text" id="level" name="level" class="form-control" placeholder="" value="Google" readonly>
-                                </div>
-                                <div class="mb-3 col-md-2">
-                                    <label for="state" class="form-label">Employment ID</label>
-                                    <input class="form-control" type="text" id="state" name="state" placeholder="" value="softeng1011" readonly>
-                                </div>
-                                <div class="mb-3 col-md-7">
-                                    <label for="state" class="form-label">Joining Office Location</label>
-                                    <input class="form-control" type="text" id="state" name="state" placeholder="" value="No. 3, Old Madras Rd, Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560016" readonly>
-                                </div>
-                                <div class="mb-3 col-md-4">
-                                    <label for="country" class="form-label">Role</label>
-                                    <input class="form-control" type="text" id="country" name="country" placeholder="" value="Software Development Engineer" readonly>
-                                </div>
-                                <div class="mb-3 col-md-1">
-                                    <label class="form-label" for="level">Level</label>
-                                      <input type="number" id="level" name="level" class="form-control" placeholder="" value="1" style="padding-left: 10px;" readonly>
-                                </div>
-                                <div class="mb-3 col-md-7">
-                                    <label for="state" class="form-label">Your Exect Sitting Area in your office!!</label>
-                                    <input class="form-control" type="text" id="state" name="state" placeholder="" value="Building No. 03, Floor No. 07, Room No. 05, Table No. 15, Seet No. 03." readonly>
-                                    <div id="defaultFormControlHelp" class="form-text">
-                                        <b>Well, you are free to sit anywhere in the office.</b> Else there is not anotherone siting place!!
+                                    <div class="mb-3 col-md-2">
+                                        <div class="card-body" style="padding-top: 10px;">
+                                        <!-- <div class="d-flex align-items-start align-items-sm-center gap-4"> -->
+                                            <img src="/_static/otherapps/img/avatars/user.png" alt="user-avatar" class="d-block rounded" height="135" width="135" id="uploadedAvatar">
+                                        <!-- </div> -->
+                                        </div>
                                     </div>
+                                    <div class="mb-3 col-md-10">
+                                        <div class="row">
+                                            <div class="mb-3 col-md-3">
+                                                <label for="username" class="form-label">Username</label>
+                                                <input class="form-control" type="text" id="username" name="username" value="{{values.Username}}" placeholder="Shukla" autofocus="" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label for="firstname" class="form-label">Full Name</label>
+                                                <input class="form-control" type="text" id="firstname" name="firstname" value="{{values.FullName}}" placeholder="Shivam" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label for="emailid" class="form-label">E-mail (official address)</label>
+                                                <input class="form-control" type="email" id="emailid" name="emailid" value="{{values.EmailId}}" placeholder="theshivashu07@google.com" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label class="form-label" for="mobileno">Phone Number</label>
+                                                <div class="input-group input-group-merge">
+                                                    <span class="input-group-text">IND (+91)</span>
+                                                    <input type="number" id="mobileno" name="mobileno" class="form-control" placeholder="789856xxxx" value="{{values.MobileNo}}" style="padding-left: 10px;" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-6">
+                                                <label for="address" class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="address" name="address" placeholder="Teori, Katni, Madhya Pradesh, India." value="{{values.Address}}" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label for="state" class="form-label">State</label>
+                                                <input class="form-control" type="text" id="state" name="state" placeholder="Madhya Pradesh" value="{{values.State}}" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label for="country" class="form-label">Country</label>
+                                                <input class="form-control" type="text" id="country" name="country" placeholder="" value="{{values.Country}}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-0">
+                                    <br>
+                                    <h4 class="fw-bold" style="margin-top:25px; margin-bottom:40px;"><span class="text-muted fw-light">Details about new joiner /</span> At Company</h4>
+                              <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Details about /</span> New Joiner</h4> --> 
+                                    <!-- <div class="mb-3 col-md-5"> -->
+                                    <div class="col-md-5">
+                                        <div class="row">
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label" for="company">Company</label>
+                                                <input type="text" id="company" name="company" class="form-control" placeholder="" value="Google" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-4">
+                                                <label for="employmentid" class="form-label">Employment ID</label>
+                                                <input class="form-control" type="text" id="employmentid" name="employmentid" placeholder="" value="googleswe1011" readonly>
+                                                <!-- <input class="form-control" type="text" id="employmentid" name="employmentid" placeholder="Generating..." value="{{values.EmploymentID}}" readonly> -->
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label class="form-label" for="level"> Level</label>
+                                                <input type="number" id="level" name="level" class="form-control" placeholder="1" value="{{values.Level}}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="mb-3 col-md-7">
+                                    <label for="officelocation" class="form-label">Joining Office Location</label>
+                                    <input class="form-control" type="text" id="officelocation" name="officelocation" placeholder="No. 3, Old Madras Rd, Sadanandanagar, Bennigana Halli, Bengaluru, Karnataka 560016" value="{{values.OfficeLocation}}" readonly>
+                                </div>
+                                    <!-- <div class="mb-3 col-md-5"> -->
+                                    <div class="col-md-5">
+                                        <div class="row">
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label" for="role"> Role</label>
+                                                <input class="form-control" type="text" id="role" name="role" placeholder="@developer" value="{{values.Role}}" readonly>
+                                            </div>
+                                            <div class="mb-3 col-md-7">
+                                                <label class="form-label" for="as"> As</label>
+                                                <input class="form-control" type="text" id="as" name="as" placeholder="Software Development Engineer" value="{{values.As}}" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="mb-3 col-md-7">
+                                    <label for="sittingarea" class="form-label"> Your Exect Sitting Area in your office!!</label>
+                                    <input class="form-control" type="text" id="sittingarea" name="sittingarea" placeholder="Building No. 03, Floor No. 07, Room No. 05, Table No. 15, Seet No. 03." value="{{values.SittingArea}}" readonly>
+                                        <div id="defaultFormControlHelp" class="form-text">
+                                            <b>Well, you are free to sit anywhere in the office.</b> Else there is not anotherone siting place!!
+                                        </div>
                                 </div>
                                 <div class="mb-3 col-md-5">
-                            	  <div class="row">
-                                	  <div class="mb-3 col-md-5">
-                                    	  <label for="state" class="form-label">Joining (Beginning Date)</label>
-                                    	  <input class="form-control" type="date" value="2023-02-17" id="html5-date-input" readonly>
-                                	  </div>
-                                	  <div class="mb-3 col-md-2">
-                                    	  <br><br>
-                                    	  <center><i class='bx bx-transfer bx-spin bx-sm' ></i></center>
-                                	  </div>
-                                	  <div class="mb-3 col-md-5">
-                                    	  <label for="state" class="form-label">Joining (Ending Date)</label>
-                                    	  <input class="form-control" type="date" value="2023-02-17" id="html5-date-input" readonly>
-                                	  </div>
-                            	  </div>
-                                  <div class="row">
-                                      <!-- first three places -->
-                                      <div class="mb-3 col-md-7">
-                                          <label class="form-label" for="salary" style="color: #5bb5bb">Salary (in LPA)</label>
-                                          <div class="input-group">
-                                              <span class="input-group-text">In Rupees</span>
-                                              <input type="text" class="form-control" placeholder="Amount" value="4,500,000" >
-                                              <span class="input-group-text">.00</span>
+                                        <div class="row">
+                                          <!-- first three places -->
+                                          <div class="mb-3 col-md-5">
+                                            <label for="joiningbeginningdate" class="form-label">Joining (Beginning Date)</label>
+                                            <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.BeginningDate |date:'M d, Y'}}"  name="joiningbeginningdate"  > -->
+                                            <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.JoiningBeginningDate|date:'Y-m-d'}}" name="joiningbeginningdate" readonly> -->
+                                            <input class="form-control" type="date" id="html5-date-input"  value="{{values.JoiningBeginningDate|date:'Y-m-d'}}" name="joiningbeginningdate" readonly>
                                           </div>
-                                    	  <div id="defaultFormControlHelp" class="form-text">
-                                        	  <b>Note:</b> Only decrease your salary.
-                                    	  </div>
-                                      </div>
-                                      <div class="mb-3 col-md-5">
-                                          <label class="form-label" for="contract">Contract (in years)</label>
-                                          <input type="text" id="contract" name="contract" class="form-control" placeholder="" value="2 Years" readonly>
-                                      </div>
-                                  </div>
+                                          <div class="mb-3 col-md-2">
+                                            <br><br>
+                                            <center><i class='bx bx-transfer bx-spin bx-sm' ></i></center>
+                                          </div>
+                                          <div class="mb-3 col-md-5">
+                                            <label for="joiningendingdate" class="form-label">Joining (Ending Date)</label>
+                                            <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.EndingDate |date:'M d, Y'}}"  name="joiningendingdate"  > -->
+                                            <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.JoiningEndingDate|date:'Y-m-d'}}" name="joiningendingdate" readonly> -->
+                                            <input class="form-control" type="date" id="html5-date-input"  value="{{values.JoiningEndingDate|date:'Y-m-d'}}" name="joiningendingdate" readonly>
+                                          </div>
+                                          <!-- first three places -->
+                                        </div>
+                                        <div class="row">
+                                            <!-- first three places -->
+                                            <div class="mb-3 col-md-7">
+                                                <label class="form-label" for="salary"> Salary (in LPA)</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">In Rupees</span>
+                                                    <input type="number" class="form-control" id="salary" name="salary" placeholder="4,500,000" value="{{values.Salary}}" readonly>
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label" for="contract"> Contract (in years)</label>
+                                                <input type="number" id="contract" name="contract" class="form-control" placeholder="2 years" value="{{values.Contract}}" readonly>
+                                            </div>
+                                        </div>
                                 </div>
                                 <div class="mb-3 col-md-7">
-                                    <label for="exampleFormControlTextarea1" class="form-label" style="color: #5bb5bb">CTC (brief Discription)</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" style="height:120px" rows="4"></textarea>
+                                    <label for="ctc" class="form-label"> CTC (brief Discription)</label>
+                                    <textarea class="form-control" name="ctc" style="height:120px" rows="4" readonly>{{values.CTC}}</textarea>
                                     <div id="defaultFormControlHelp" class="form-text">
                                         Here is you briefly describe exactly how many components we adding in employee's package. <b>All descriptions are here.....</b>
                                     </div>
                                 </div>
-                            </div> 
-                      		<div class="mt-3">
-                                 <label for="exampleFormControlTextarea1" class="form-label">Save all changes!!</label> <br>
-                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Done</button>
-                            </div>
-                            <br><br>
 
-                            </form>
-                        </div>
-                        <!-- /Account -->
+                          <hr class="my-0"> <br> <br>
+                          
+                                <div class="mb-3 col-md-5">
+                                        <div class="row">
+                                            <!-- first three places -->
+                                            <div class="mb-3 col-md-5">
+                                                <label class="form-label" for="newrole"><b style="color:#fff000">*</b> Role</label>
+                                                <select name="newrole" class="select2 form-select">
+                                                    <option value="">Select Option</option>
+                                                    <option value="Developer">@developer</option>
+                                                    <option value="Project Manager">@projectmanager</option>
+                                                    <option value="Admin">@admin</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3 col-md-7">
+                                                <label class="form-label" for="newas"><b style="color:#fff000">*</b> As</label>
+                                                <select name="newas" class="select2 form-select">
+                                                    <option value="">Select Option</option>
+                                                    <option value="Software Development Engineer">Software Development Engineer</option>
+                                                    <option value="Full Stack Web Developer">Full Stack Web Developer</option>
+                                                    <option value="Data Analyst">Data Analyst</option>
+                                                    <option value="Software Engineer">Software Engineer</option>
+                                                    <option value="Frontend Engineer">Frontend Engineer</option>
+                                                    <option value="Backend Engineer">Backend Engineer</option>
+                                                    <option value="Database Engineer">Database Engineer</option>
+                                                    <option value="Software Developer">Software Developer</option>
+                                                    <option value="Frontend Developer">Frontend Developer</option>
+                                                    <option value="Backend Developer">Backend Developer</option>
+                                                    <option value="Database Developer">Database Developer</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3 col-md-3">
+                                                <label class="form-label" for="newlevel"><b style="color:#fff000">*</b> Level</label>
+                                                <input type="number" id="newlevel" name="newlevel" class="form-control" min="1" max="{{values.Level}}" step="1" placeholder="" value="{{values.Level}}">
+                                              <div id="defaultFormControlHelp" class="form-text">
+                                                  Level change.
+                                              </div>
+                                            </div>
+                                            <div class="mb-3 col-md-9">
+                                                <label class="form-label" for="newsalary"><b style="color:#fff000">*</b> Salary (in LPA)</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text">In Rupees</span>
+                                                    <input type="number" class="form-control" id="salary" name="salary" placeholder="" value="{{values.Salary}}" readonly>
+                                                    <span class="input-group-text">+</span>
+                                                    <input type="number" class="form-control" id="newsalary" name="newsalary" placeholder="48,000" min="-300000" max="0" step="60000" value="" >
+                                                    <span class="input-group-text">.00</span>
+                                                </div>
+                                              <div id="defaultFormControlHelp" class="form-text">
+                                                  <!-- Giving exectly increased salary. -->
+                                                  We can't able to decrease salary more than <b>3'lakhs</b>.
+                                              </div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <div class="col-md-7">
+                                  <div class="row">
+                                    <div class="mb-3 col-md-12">
+                                      <label for="newctc" class="form-label"><b style="color:#fff000">*</b> CTC (brief Discription)</label>
+                                      <textarea class="form-control" name="newctc" style="height:120px" rows="4" placeholder="{{values.CTC}}"></textarea>
+                                      <div id="defaultFormControlHelp" class="form-text">
+                                          Here is you briefly describe exactly how many components we adding in employee's package. <b>Descriptions are here...</b>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> 
+                          <div class="mt-2">
+                            <label for="none" class="form-label">Official Extend Data</label> <br>
+                            <button type="submit" class="btn btn-primary me-2">Submit</button>
+                          </div>
+                          <br><br>
+                        </form>
+                      </div>
+                      <!-- /Account -->
                     </div>
                 </div>
               <!-- /Basic -->
             </div>
         </div>
     </div>
-
 
 
 

@@ -138,6 +138,7 @@ def newjoinees(request,username):
 		return redirect('/listof/newjoinees/')
 	values = Employee.objects.get(Username=username)
 	return render(request,"otherapps/hr/newjoinees.html",{'values':values});
+
 def recruitments(request):
 	if request.method=="POST":
 		def generateID():
@@ -175,15 +176,63 @@ def recruitments(request):
 		# values=Employee.objects.get(pk=values.id)
 		return render(request,"otherapps/hr/recruitments.html",{'values':values});
 	return render(request,"otherapps/hr/recruitments.html");
+
+def PIDsSubmission(request):
+	values=Employee.objects.get(pk=request.POST["employeeID"])
+	if("newofficelocation" in request.POST and request.POST["newofficelocation"]):
+		values.OfficeLocation=request.POST["newofficelocation"]
+	if("newsittingarea" in request.POST and request.POST["newsittingarea"]):
+		values.SittingArea=request.POST["newsittingarea"]
+	if(request.POST["newas"]):
+		values.As=request.POST["newas"]
+	if(request.POST["newrole"]):
+		values.Role=request.POST["newrole"]
+	if(request.POST["newlevel"]):
+		values.Level=request.POST["newlevel"]
+	if(request.POST["newsalary"]):
+		values.Salary+=int(request.POST["newsalary"])
+	if("newcontract" in request.POST and request.POST["newcontract"]):
+		# below we control two things, because if contract extend, then CompanyLeavingDate is also extend!!!
+		temp = int(request.POST["newcontract"])
+		mydate = values.CompanyLeavingDate
+		values.CompanyLeavingDate = mydate.replace(year=mydate.year+temp)
+		values.Contract+=int(request.POST["newcontract"])
+	if(request.POST["newctc"]):
+		values.CTC=request.POST["newctc"]
+	values.save()
+	return None
+
 def promotions(request,username):
-	return render(request,"otherapps/hr/promotions.html");
+	if request.method=="POST":
+		PIDsSubmission(request)
+		return redirect('/listof/promotions/')
+	values = Employee.objects.get(Username=username)
+	return render(request,"otherapps/hr/promotions.html",{'values':values});
+
 def increments(request,username):
-	return render(request,"otherapps/hr/increments.html");
+	if request.method=="POST":
+		PIDsSubmission(request)
+		return redirect('/listof/increments/')
+	values = Employee.objects.get(Username=username)
+	return render(request,"otherapps/hr/increments.html",{'values':values});
+
 def decrements(request,username):
-	return render(request,"otherapps/hr/decrements.html");
+	if request.method=="POST":
+		PIDsSubmission(request)
+		return redirect('/listof/decrements/')
+	values = Employee.objects.get(Username=username)
+	return render(request,"otherapps/hr/decrements.html",{'values':values});
+
 def listof(request,target):
 	pickfromtarget={'newjoinees':'Join Now','promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
-	values=Employee.objects.filter(CompanyJoiningDate=None)  #or,CompanyLeavingDate
+	if(target=='newjoinees'):
+		values=Employee.objects.filter(CompanyJoiningDate=None)
+	elif(target=='promotions'):
+		values=Employee.objects.filter(~Q(CompanyJoiningDate=None, ))
+	elif(target=='increments'):
+		values=Employee.objects.filter(~Q(CompanyJoiningDate=None, ))
+	elif(target=='decrements'):
+		values=Employee.objects.filter(~Q(CompanyJoiningDate=None))		
 	return render(request,"otherapps/hr/filtered.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
 
 
@@ -200,6 +249,38 @@ def trialcenter(request,key):
 	values=Employee.objects.get(pk=int(key))
 	# return render(request,"otherapps/hr/recruitments.html",{'values':values});
 	return render(request,"otherapps/hr/trialcenter.html",{'values':values});
+
+
+
+
+
+
+
+# def promotions(request,username):
+# 	if request.method=="POST":
+# 		values=Employee.objects.get(pk=request.POST["employeeID"])
+# 		newDict = {'OfficeLocation':'newofficelocation', 'SittingArea':'newsittingarea', 'As':'newas', 'Role':'newrole', 'Level':'newlevel', 'Salary':'newsalary', 'Contract':'newcontract', 'CTC':'newctc'} 
+# 		for key in newDict:
+# 			# print(key)
+# 			if(request.POST[newDict[key]]):
+# 				print(key, newDict[key], request.POST[newDict[key]])
+# 				if(key=='Salary' or key=='Contract'):
+# 					print('under-------------------------------',end=' ')
+# 					print(values.key, request.POST[newDict[key]],end=' ')
+# 					values.key += int(request.POST[newDict[key]])
+# 					print(values.key)
+# 				else:
+# 					values.key = int(request.POST[newDict[key]])
+# 		values.save()
+# 		print(values)
+# 		return redirect('/listof/promotions/')
+# 	values = Employee.objects.get(Username=username)
+# 	return render(request,"otherapps/hr/promotions.html",{'values':values});
+
+
+
+
+
 
 
 

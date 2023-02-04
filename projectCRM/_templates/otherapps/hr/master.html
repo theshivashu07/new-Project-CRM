@@ -220,16 +220,10 @@
                 <div data-i18n="Analytics">Completed Projects</div>
               </a> 
             </li>
-            <!-- <li class="menu-item {% if request.path == '/trialcenter/' %}active{% endif %}">
-              <a href="/trialcenter" class="menu-link">
-                <i class='menu-icon tf-icons bx bxs-file-blank'></i>
-                <div data-i18n="Analytics">Reports Collections</div>
-              </a> 
-            </li> -->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Task's to do!!</span>
             </li>
-            <li class="menu-item {% if request.path == '/listof/newjoinees/' or request.path == '/newjoinees/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/listof/newjoinees/' or request.path == '/newjoinees/@'|add:values.Username %}active{% endif %}">
               <a href="/listof/newjoinees" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-hot'></i>
                 <div data-i18n="Analytics">New Joinee's</div>
@@ -241,19 +235,19 @@
                 <div data-i18n="Analytics">Recruitment's</div>
               </a>
             </li>
-            <li class="menu-item {% if request.path == '/listof/promotions/' or request.path == '/promotions/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/listof/promotions/' or request.path == '/promotions/@'|add:values.Username %}active{% endif %}">
               <a href="/listof/promotions" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-bolt-circle'></i>
                 <div data-i18n="Analytics">Promotion's</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/listof/increments/' or request.path == '/increments/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/listof/increments/' or request.path == '/increments/@'|add:values.Username %}active{% endif %}">
               <a href="/listof/increments" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-trending-up"></i>
                 <div data-i18n="Analytics">Increment's</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/listof/decrements/' or request.path == '/decrements/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/listof/decrements/' or request.path == '/decrements/@'|add:values.Username %}active{% endif %}">
               <a href="/listof/decrements" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-trending-down"></i>
                 <div data-i18n="Analytics">Decrement's</div>

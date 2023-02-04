@@ -72,18 +72,24 @@ def projectdetails(request):
 		# return redirect('request,"otherapps/hr/projectdetails.html"');
 		return render(request,"otherapps/hr/projectdetails_editorassignnew.html");
 	clientID=1
-	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'clientID':clientID});
+	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'clientID':clientID}); 
 	# return render(request,"otherapps/hr/projectdetails_foractive.html");
 
 def projectdetailsslug(request,projectslug):
-	AdminsFullName=None
+	AdminsID=None
 	if request.method=="POST":
-		AdminsFullName=request.POST["admin"];
+		values=ProjectInfo.objects.get(pk=request.POST["employeeID"])
+		if(request.POST["admin"]):
+			values.Admin=AdminsID=request.POST["admin"];
+			values.ReportStatus="Active"
+		values.save()
+		return redirect('/allprojectsrequests/')
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
 	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
-	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'ClientFullName':ClientFullName, 'AdminsFullName':AdminsFullName});
+	adminslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
+	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'ClientFullName':ClientFullName, 'AdminsID':AdminsID, 'adminslist':adminslist});
 
 def projectdetailsedit(request,projectslug):
 	if request.method=="POST":
@@ -101,7 +107,6 @@ def projectdetailsedit(request,projectslug):
 		lock.SoftDiscription=request.POST["softdiscription"]
 		lock.save()
 		return redirect('/'+prevPATH)
-		# return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':lock});
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
@@ -234,6 +239,7 @@ def listof(request,target):
 	elif(target=='decrements'):
 		values=Employee.objects.filter(~Q(CompanyJoiningDate=None))		
 	return render(request,"otherapps/hr/filtered.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
+	# return render(request,"otherapps/hr/filtered.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
 
 
 def alldiscussions(request):

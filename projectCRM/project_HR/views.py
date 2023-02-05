@@ -142,6 +142,7 @@ def newjoinees(request,username):
 		values.save()
 		return redirect('/listof/newjoinees/')
 	values = Employee.objects.get(Username=username)
+	print(values)
 	return render(request,"otherapps/hr/newjoinees.html",{'values':values});
 
 def recruitments(request):

@@ -9,223 +9,206 @@ CRM - Project Manager
 
 {% block childcontent %}
 
-          <div class="content-wrapper">
-            <!-- Content -->
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
-              <div class="row">
-                <!-- Basic -->
-                <div class="col-md-12">
-                  <div class="card mb-4">
-                    <h5 class="card-header"><b>Profile Details</b></h5>
-                    <!-- Account -->
-                    <hr class="my-0">
-                    <div class="card-body" style="background-color: #1d242e;">
-                      <div class="row">
+<div class="content-wrapper">
+  <!-- Content -->
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
+    <div class="row">
+      <!-- Basic -->
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <h5 class="card-header"><b>Profile Details</b></h5>
+          <!-- Account -->
+          <hr class="my-0">
+          <div class="card-body" style="background-color: #1d242e;">
+            <div class="row">
+              <div class="col-md">
+                <!-- <small class="text-light fw-semibold"></small> -->
+                <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
+                  <!-- <label for="firstName" class="form-label" style="font-size:18px;">Date's:</label> -->
+                  <div class="accordion-item card">
+                    <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
+                      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1" aria-expanded="false">
+                        <b style="font-size:20px; color: black;">18-01-2023</b>
+                      </button>
+                    </h2>
+
+                    <div id="accordionIcon-1" class="accordion-collapse collapse" data-bs-parent="#accordionIcon"
+                      style="background-color:#1d242e">
+                      <div class="accordion-body">
                         <div class="col-md">
-                          <!-- <small class="text-light fw-semibold"></small> -->
-                          <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
-                          <!-- <label for="firstName" class="form-label" style="font-size:18px;">Date's:</label> -->
+                          <br><br>
+                          <small class="text-light fw-semibold">All Project's in below</small>
+                          <!-- <small class="text-light fw-semibold">Accordion Without Arrow</small> -->
+                          <div id="accordionIcons" class="accordion mt-3 accordion-without-arrow">
                             <div class="accordion-item card">
-                              <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1" aria-expanded="false">
-                                  <b style="font-size:20px; color: black;">18-01-2023</b>
+                              <h2 class="accordion-header text-body d-flex justify-content-between"
+                                id="accordionIconOne">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                  data-bs-target="#accordionIcons-1" aria-controls="accordionIcons-1"
+                                  aria-expanded="false">
+                                  <b>Project CRM</b>
                                 </button>
-                              </h2> 
-        
-                              <div id="accordionIcon-1" class="accordion-collapse collapse" data-bs-parent="#accordionIcon" style="background-color:#1d242e">
+                              </h2>
+                              <div id="accordionIcons-1" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionIcons" style="background-color:#1d242e">
                                 <div class="accordion-body">
                                   <div class="col-md">
-                                  <br><br>
-                                    <small class="text-light fw-semibold">All Project's in below</small>
-                                    <!-- <small class="text-light fw-semibold">Accordion Without Arrow</small> -->
-                                    <div id="accordionIcons" class="accordion mt-3 accordion-without-arrow">
+                                    <br><br>
+                                    <small class="text-light fw-semibold">All Developer's Reports</small>
+                                    <div id="accordionIconss" class="accordion mt-3 accordion-without-arrow">
                                       <div class="accordion-item card">
-                                        <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
-                                          <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIcons-1" aria-controls="accordionIcons-1" aria-expanded="false">
-                                            <b>Project CRM</b>
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconOne">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-1"
+                                            aria-controls="accordionIconss-1" aria-expanded="false">
+                                            Shivam Shukla
                                           </button>
                                         </h2>
-                                        <div id="accordionIcons-1" class="accordion-collapse collapse" data-bs-parent="#accordionIcons" style="background-color:#1d242e">
+                                        <div id="accordionIconss-1" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
                                           <div class="accordion-body">
-                                            <div class="col-md">
-                                            <br><br>
-                                              <small class="text-light fw-semibold">All Developer's Reports</small>
-                                              <div id="accordionIconss" class="accordion mt-3 accordion-without-arrow">
-                                                <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-1" aria-controls="accordionIconss-1" aria-expanded="false">
-                                                      Shivam Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-1" class="accordion-collapse collapse" data-bs-parent="#accordionIconss" style="">
-                                                    <div class="accordion-body">
-                                                      Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                                                      dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                                      Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                            
-                                              <div class="accordion-item card">
-                                                <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-2" aria-controls="accordionIconss-2" aria-expanded="false">
-                                                      Shri Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-2" class="accordion-collapse collapse" data-bs-parent="#accordionIconss">
-                                                    <div class="accordion-body">
-                                                      Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                                                      dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                                      Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                            
-                                               <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconThree">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-3" aria-expanded="false" aria-controls="accordionIconss-3">
-                                                      Vashu Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-3" class="accordion-collapse collapse" data-bs-parent="#accordionIconss" style="">
-                                                    <div class="accordion-body">
-                                                      Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops cheesecake. Bonbon
-                                                      gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy canes oat cake
-                                                      dragée caramels. Ice cream wafer danish cookie caramels muffin.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="modal-footer" style="background-color: #1d242e; padding:0px; margin-top:20px;">
-                                              <div class="input-group">
-                                                <textarea class="form-control" aria-label="With textarea" placeholder="Message" style="height: 30px;"></textarea>
-                                                <button type="button" class="btn btn-primary" style="background-color: #2c3c4c;">
-                                                  <i class="bx bx-send"></i>
-                                                </button>
-                                              </div>
-                                            </div>
-                                            <br>
+                                            Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear
+                                            claw dragée oat cake
+                                            dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart
+                                            donut gummies.
+                                            Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="accordion-item card">
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconTwo">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-2"
+                                            aria-controls="accordionIconss-2" aria-expanded="false">
+                                            Shri Shukla
+                                          </button>
+                                        </h2>
+                                        <div id="accordionIconss-2" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
+                                          <div class="accordion-body">
+                                            Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear
+                                            claw dragée oat cake
+                                            dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart
+                                            donut gummies.
+                                            Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="accordion-item card">
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconThree">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-3"
+                                            aria-expanded="false" aria-controls="accordionIconss-3">
+                                            Vashu Shukla
+                                          </button>
+                                        </h2>
+                                        <div id="accordionIconss-3" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
+                                          <div class="accordion-body">
+                                            Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops
+                                            cheesecake. Bonbon
+                                            gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy
+                                            canes oat cake
+                                            dragée caramels. Ice cream wafer danish cookie caramels muffin.
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer"
+                                    style="background-color: #1d242e; padding:0px; margin-top:20px;">
+                                    <div class="input-group">
+                                      <textarea class="form-control" aria-label="With textarea" placeholder="Message"
+                                        style="height: 30px;"></textarea>
+                                      <button type="button" class="btn btn-primary" style="background-color: #2c3c4c;">
+                                        <i class="bx bx-send"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <br>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="accordion-item card">
+                              <h2 class="accordion-header text-body d-flex justify-content-between"
+                                id="accordionIconTwo">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                  data-bs-target="#accordionIcons-2" aria-controls="accordionIcons-2"
+                                  aria-expanded="false">
+                                  <b>Shopping Site</b>
+                                </button>
+                              </h2>
+                              <div id="accordionIcons-2" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionIcons" style="background-color: #1d242e;">
+                                <div class="accordion-body">
+                                  <div class="col-md">
+                                    <br><br>
+                                    <small class="text-light fw-semibold">Accordion Without Arrow</small>
+                                    <div id="accordionIconss" class="accordion mt-3 accordion-without-arrow">
+                                      <div class="accordion-item card">
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconOne">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-1"
+                                            aria-controls="accordionIconss-1" aria-expanded="false">
+                                            Shivam Shukla
+                                          </button>
+                                        </h2>
+                                        <div id="accordionIconss-1" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
+                                          <div class="accordion-body">
+                                            Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear
+                                            claw dragée oat cake
+                                            dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart
+                                            donut gummies.
+                                            Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
                                           </div>
                                         </div>
                                       </div>
                                       <div class="accordion-item card">
-                                        <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
-                                          <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIcons-2" aria-controls="accordionIcons-2" aria-expanded="false">
-                                            <b>Shopping Site</b>
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconTwo">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-2"
+                                            aria-controls="accordionIconss-2" aria-expanded="false">
+                                            Shri Shukla
                                           </button>
                                         </h2>
-                                        <div id="accordionIcons-2" class="accordion-collapse collapse" data-bs-parent="#accordionIcons" style="background-color: #1d242e;">
+                                        <div id="accordionIconss-2" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
                                           <div class="accordion-body">
-                                            <div class="col-md">
-                                            <br><br>
-                                              <small class="text-light fw-semibold">Accordion Without Arrow</small>
-                                              <div id="accordionIconss" class="accordion mt-3 accordion-without-arrow">
-                                                <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-1" aria-controls="accordionIconss-1" aria-expanded="false">
-                                                      Shivam Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-1" class="accordion-collapse collapse" data-bs-parent="#accordionIconss" style="">
-                                                    <div class="accordion-body">
-                                                      Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                                                      dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                                      Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
-                                                    </div>
-                                                  </div>
-                                                </div>                              
-                                                <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-2" aria-controls="accordionIconss-2" aria-expanded="false">
-                                                      Shri Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-2" class="accordion-collapse collapse" data-bs-parent="#accordionIconss">
-                                                    <div class="accordion-body">
-                                                      Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                                                      dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                                      Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconThree">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-3" aria-expanded="false" aria-controls="accordionIconss-3">
-                                                      Vashu Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-3" class="accordion-collapse collapse" data-bs-parent="#accordionIconss" style="">
-                                                    <div class="accordion-body">
-                                                      Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops cheesecake. Bonbon
-                                                      gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy canes oat cake
-                                                      dragée caramels. Ice cream wafer danish cookie caramels muffin.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
+                                            Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear
+                                            claw dragée oat cake
+                                            dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart
+                                            donut gummies.
+                                            Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
                                           </div>
-                                          <br>
                                         </div>
                                       </div>
                                       <div class="accordion-item card">
-                                        <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconThree">
-                                          <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIcons-3" aria-expanded="false" aria-controls="accordionIcons-3">
-                                          <b>Shopping Site</b>
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconThree">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-3"
+                                            aria-expanded="false" aria-controls="accordionIconss-3">
+                                            Vashu Shukla
                                           </button>
                                         </h2>
-                                        <div id="accordionIcons-3" class="accordion-collapse collapse" data-bs-parent="#accordionIcons" style="background-color: #1d242e;">
+                                        <div id="accordionIconss-3" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
                                           <div class="accordion-body">
-                                            <div class="col-md">7<br><br>
-                                              <small class="text-light fw-semibold">Accordion Without Arrow</small>
-                                              <div id="accordionIconss" class="accordion mt-3 accordion-without-arrow">
-                                                <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-1" aria-controls="accordionIconss-1" aria-expanded="false">
-                                                      Shivam Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-1" class="accordion-collapse collapse" data-bs-parent="#accordionIconss" style="">
-                                                    <div class="accordion-body">
-                                                      Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                                                      dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                                      Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-2" aria-controls="accordionIconss-2" aria-expanded="false">
-                                                      Shri Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-2" class="accordion-collapse collapse" data-bs-parent="#accordionIconss">
-                                                    <div class="accordion-body">
-                                                      Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                                                      dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                                      Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="accordion-item card">
-                                                  <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconThree">
-                                                    <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIconss-3" aria-expanded="false" aria-controls="accordionIconss-3">
-                                                      Vashu Shukla
-                                                    </button>
-                                                  </h2>
-                                                  <div id="accordionIconss-3" class="accordion-collapse collapse" data-bs-parent="#accordionIconss" style="">
-                                                    <div class="accordion-body">
-                                                      Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops cheesecake. Bonbon
-                                                      gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy canes oat cake
-                                                      dragée caramels. Ice cream wafer danish cookie caramels muffin.
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <br>
+                                            Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops
+                                            cheesecake. Bonbon
+                                            gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy
+                                            canes oat cake
+                                            dragée caramels. Ice cream wafer danish cookie caramels muffin.
                                           </div>
                                         </div>
                                       </div>
@@ -236,44 +219,133 @@ CRM - Project Manager
                               </div>
                             </div>
                             <div class="accordion-item card">
-                              <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIcon-2" aria-controls="accordionIcon-2" aria-expanded="false">
-                                  Accordion Item 2
+                              <h2 class="accordion-header text-body d-flex justify-content-between"
+                                id="accordionIconThree">
+                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                                  data-bs-target="#accordionIcons-3" aria-expanded="false"
+                                  aria-controls="accordionIcons-3">
+                                  <b>Shopping Site</b>
                                 </button>
                               </h2>
-                              <div id="accordionIcon-2" class="accordion-collapse collapse" data-bs-parent="#accordionIcon">
+                              <div id="accordionIcons-3" class="accordion-collapse collapse"
+                                data-bs-parent="#accordionIcons" style="background-color: #1d242e;">
                                 <div class="accordion-body">
-                                  Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
-                                  dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
-                                  Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
-                                </div>
-                              </div>
-                            </div>
-          
-                            <div class="accordion-item card">
-                              <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconThree">
-                                <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#accordionIcon-3" aria-expanded="false" aria-controls="accordionIcon-3">
-                                  Accordion Item 3
-                                </button>
-                              </h2>
-                              <div id="accordionIcon-3" class="accordion-collapse collapse" data-bs-parent="#accordionIcon" style="">
-                                <div class="accordion-body">
-                                  Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops cheesecake. Bonbon
-                                  gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy canes oat cake
-                                  dragée caramels. Ice cream wafer danish cookie caramels muffin.
+                                  <div class="col-md">7<br><br>
+                                    <small class="text-light fw-semibold">Accordion Without Arrow</small>
+                                    <div id="accordionIconss" class="accordion mt-3 accordion-without-arrow">
+                                      <div class="accordion-item card">
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconOne">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-1"
+                                            aria-controls="accordionIconss-1" aria-expanded="false">
+                                            Shivam Shukla
+                                          </button>
+                                        </h2>
+                                        <div id="accordionIconss-1" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
+                                          <div class="accordion-body">
+                                            Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear
+                                            claw dragée oat cake
+                                            dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart
+                                            donut gummies.
+                                            Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="accordion-item card">
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconTwo">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-2"
+                                            aria-controls="accordionIconss-2" aria-expanded="false">
+                                            Shri Shukla
+                                          </button>
+                                        </h2>
+                                        <div id="accordionIconss-2" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
+                                          <div class="accordion-body">
+                                            Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear
+                                            claw dragée oat cake
+                                            dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart
+                                            donut gummies.
+                                            Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="accordion-item card">
+                                        <h2 class="accordion-header text-body d-flex justify-content-between"
+                                          id="accordionIconThree">
+                                          <button type="button" class="accordion-button collapsed"
+                                            data-bs-toggle="collapse" data-bs-target="#accordionIconss-3"
+                                            aria-expanded="false" aria-controls="accordionIconss-3">
+                                            Vashu Shukla
+                                          </button>
+                                        </h2>
+                                        <div id="accordionIconss-3" class="accordion-collapse collapse"
+                                          data-bs-parent="#accordionIconss">
+                                          <div class="accordion-body">
+                                            Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops
+                                            cheesecake. Bonbon
+                                            gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy
+                                            canes oat cake
+                                            dragée caramels. Ice cream wafer danish cookie caramels muffin.
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <br>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <!-- /Account -->
+                      <br>
+                    </div>
+                  </div>
+                  <div class="accordion-item card">
+                    <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
+                      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#accordionIcon-2" aria-controls="accordionIcon-2" aria-expanded="false">
+                        Accordion Item 2
+                      </button>
+                    </h2>
+                    <div id="accordionIcon-2" class="accordion-collapse collapse" data-bs-parent="#accordionIcon">
+                      <div class="accordion-body">
+                        Dessert ice cream donut oat cake jelly-o pie sugar plum cheesecake. Bear claw dragée oat cake
+                        dragée ice cream halvah tootsie roll. Danish cake oat cake pie macaroon tart donut gummies.
+                        Jelly beans candy canes carrot cake. Fruitcake chocolate chupa chups.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item card">
+                    <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconThree">
+                      <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#accordionIcon-3" aria-expanded="false" aria-controls="accordionIcon-3">
+                        Accordion Item 3
+                      </button>
+                    </h2>
+                    <div id="accordionIcon-3" class="accordion-collapse collapse" data-bs-parent="#accordionIcon">
+                      <div class="accordion-body">
+                        Oat cake toffee chocolate bar jujubes. Marshmallow brownie lemon drops cheesecake. Bonbon
+                        gingerbread marshmallow sweet jelly beans muffin. Sweet roll bear claw candy canes oat cake
+                        dragée caramels. Ice cream wafer danish cookie caramels muffin.
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- /Account -->
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
@@ -284,7 +356,3 @@ CRM - Project Manager
 
 
 {% endblock %}
-
-
-
-

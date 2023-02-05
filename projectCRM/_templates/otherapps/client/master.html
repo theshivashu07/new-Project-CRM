@@ -73,10 +73,6 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
 
-
-
-
-
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme" style="width:300px">
           <div class="app-brand demo">
@@ -163,9 +159,9 @@
               <span class="menu-header-text">Account</span>
             </li>
             {% if request.path == "/clientdetails/" or request.path == "/clientnotification/" or request.path == "/clientconnections/" or request.path == "/clientdeactivate/" %}
-              <li class="menu-item active open" style="">
+              <li class="menu-item active open">
             {% else %}
-              <li class="menu-item" style="">
+              <li class="menu-item">
             {% endif %}
             <!-- <li class="menu-item active open" style=""> -->
               <a href="#" class="menu-link menu-toggle">
@@ -419,6 +415,3 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
-
-
-

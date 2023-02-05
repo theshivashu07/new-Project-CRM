@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
+<head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,13 +12,13 @@
 
 
 
- <title>
+    <title>
 
-{% block tcontent %}
+        {% block tcontent %}
 
-{% endblock %}
+        {% endblock %}
 
-</title>
+    </title>
 
 
 
@@ -31,11 +31,11 @@
 
     <link rel="stylesheet" href="/_static/guest/css/templatemo-softy-pinko.css">
 
-    </head>
-    
-    <body style="background-color:#364c61;">
+</head>
 
-    
+<body style="background-color:#364c61;">
+
+
 
     <!-- ***** Header Area Start ***** -->
     <header class="header-area header-sticky">
@@ -45,20 +45,28 @@
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="/defaultadmin/" class="logo">
-                            <img src="/_static/guest/images/logo.png" style="height: 42px; width: 230px;" alt="Softy Pinko"/>
+                            <img src="/_static/guest/images/logo.png" style="height: 42px; width: 230px;"
+                                alt="Softy Pinko" />
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/index/" {% if request.path == '/' %} class="active"{% endif %}>Home</a></li>
-                            <li><a href="/workprocess/" {% if request.path == '/workprocess/' %} class="active"{% endif %}>Work Process</a></li>
-                            <li><a href="/aboutus/" {% if request.path == '/aboutus/' %} class="active"{% endif %}>About Us</a></li>
-                            <li><a href="/contactus/" {% if request.path == '/contactus/' %} class="active"{% endif %}>Contact Us</a></li>
-                            <li><a href="/admin/login/" {% if request.path == '/admin/login/' %} class="active"{% endif %}>Admin</a></li>
-                            <li><a href="/projectmanager/login/" {% if request.path == '/projectmanager/login/' %} class="active"{% endif %}>Project Manager</a></li>
-                            <li><a href="/developer/login/" {% if request.path == '/developer/login/' %} class="active"{% endif %}>Developer</a></li>
-                            <li><a href="/developer/" {% if request.path == '/visit/' %} class="active"{% endif %}>Visits</a></li>
-                        </ul>                         
+                            <li><a href="/index/" {% if request.path=='/' %} class="active" {% endif %}>Home</a></li>
+                            <li><a href="/workprocess/" {% if request.path=='/workprocess/' %} class="active" {% endif
+                                    %}>Work Process</a></li>
+                            <li><a href="/aboutus/" {% if request.path=='/aboutus/' %} class="active" {% endif %}>About
+                                    Us</a></li>
+                            <li><a href="/contactus/" {% if request.path=='/contactus/' %} class="active" {% endif
+                                    %}>Contact Us</a></li>
+                            <li><a href="/admin/login/" {% if request.path=='/admin/login/' %} class="active" {% endif
+                                    %}>Admin</a></li>
+                            <li><a href="/projectmanager/login/" {% if request.path=='/projectmanager/login/' %}
+                                    class="active" {% endif %}>Project Manager</a></li>
+                            <li><a href="/developer/login/" {% if request.path=='/developer/login/' %} class="active" {%
+                                    endif %}>Developer</a></li>
+                            <li><a href="/developer/" {% if request.path=='/visit/' %} class="active" {% endif
+                                    %}>Visits</a></li>
+                        </ul>
                         <!-- ***** Menu End ***** -->
                     </nav>
                 </div>
@@ -78,18 +86,18 @@
 
 
 
-{% block childcontent %}
+    {% block childcontent %}
 
-{% endblock %}
-
-
+    {% endblock %}
 
 
 
- 
 
 
-    
+
+
+
+
     <!-- ***** Footer Start ***** -->
     <footer>
         <div class="container">
@@ -106,12 +114,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="copyright">Copyright &copy; 2021 ShriVashu Company. <b style="text-transform: lowercase; color: red;">@theshivashu07</b></p>
+                    <p class="copyright">Copyright &copy; 2021 ShriVashu Company. <b
+                            style="text-transform: lowercase; color: red;">@theshivashu07</b></p>
                 </div>
             </div>
         </div>
     </footer>
-    
+
     <!-- jQuery -->
     <script src="/_static/guest/js/jquery-2.1.0.min.js"></script>
 
@@ -123,10 +132,11 @@
     <script src="/_static/guest/js/scrollreveal.min.js"></script>
     <script src="/_static/guest/js/waypoints.min.js"></script>
     <script src="/_static/guest/js/jquery.counterup.min.js"></script>
-    <script src="/_static/guest/js/imgfix.min.js"></script> 
-    
+    <script src="/_static/guest/js/imgfix.min.js"></script>
+
     <!-- Global Init -->
     <script src="/_static/guest/js/custom.js"></script>
 
-  </body>
+</body>
+
 </html>

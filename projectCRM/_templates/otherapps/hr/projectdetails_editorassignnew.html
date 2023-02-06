@@ -45,68 +45,71 @@ CRM - HR - Project Details
                 <div class="mb-3 col-md-4">
                   <label for="programminglanguage" class="form-label">Programming Language</label>
                   <select name="programminglanguage" class="select2 form-select">
-                    <option value="None" {%if values.ProgrammingLanguage=='None' %} selected {%endif%}>Select Language
+                    <option value="None" {%if values.ProgrammingLanguage == 'None' %} selected {%endif%}>Select Language
                     </option>
-                    <option value="C" {%if values.ProgrammingLanguage=='C' %} selected {%endif%}>C</option>
-                    <option value="C++" {%if values.ProgrammingLanguage=='C++' %} selected {%endif%}>C++</option>
-                    <option value="Java" {%if values.ProgrammingLanguage=='Java' %} selected {%endif%}>Java</option>
-                    <option value="Python" {%if values.ProgrammingLanguage=='Python' %} selected {%endif%}>Python
+                    <option value="C" {%if values.ProgrammingLanguage == 'C' %} selected {%endif%}>C</option>
+                    <option value="C++" {%if values.ProgrammingLanguage == 'C++' %} selected {%endif%}>C++</option>
+                    <option value="Java" {%if values.ProgrammingLanguage == 'Java' %} selected {%endif%}>Java</option>
+                    <option value="Python" {%if values.ProgrammingLanguage == 'Python' %} selected {%endif%}>Python
                     </option>
-                    <option value="C#" {%if values.ProgrammingLanguage=='C#' %} selected {%endif%}>C#</option>
-                    <option value="Go" {%if values.ProgrammingLanguage=='Go' %} selected {%endif%}>Go</option>
-                    <option value="Swift" {%if values.ProgrammingLanguage=='Swift' %} selected {%endif%}>Swift</option>
-                    <option value="Kotlin" {%if values.ProgrammingLanguage=='Kotlin' %} selected {%endif%}>Kotlin
+                    <option value="C#" {%if values.ProgrammingLanguage == 'C#' %} selected {%endif%}>C#</option>
+                    <option value="Go" {%if values.ProgrammingLanguage == 'Go' %} selected {%endif%}>Go</option>
+                    <option value="Swift" {%if values.ProgrammingLanguage == 'Swift' %} selected {%endif%}>Swift</option>
+                    <option value="Kotlin" {%if values.ProgrammingLanguage == 'Kotlin' %} selected {%endif%}>Kotlin
                     </option>
-                    <option value="PHP" {%if values.ProgrammingLanguage=='PHP' %} selected {%endif%}>PHP</option>
-                    <option value="JavaScript" {%if values.ProgrammingLanguage=='JavaScript' %} selected {%endif%}>
+                    <option value="PHP" {%if values.ProgrammingLanguage == 'PHP' %} selected {%endif%}>PHP</option>
+                    <option value="JavaScript" {%if values.ProgrammingLanguage == 'JavaScript' %} selected {%endif%}>
                       JavaScript</option>
-                    <option value="Other" {%if values.ProgrammingLanguage=='Other' %} selected {%endif%}>Other</option>
+                    <option value="Other" {%if values.ProgrammingLanguage == 'Other' %} selected {%endif%}>Other</option>
                   </select>
+                  <div id="defaultFormControlHelp" class="form-text">
+                    Here put the main <b>'programming language'</b>.
+                  </div>
                 </div>
                 <div class="mb-3 col-md-4">
                   <label for="frontend" class="form-label">Front-End</label>
                   <select name="frontend" class="select2 form-select">
-                    <option value="None" {%if values.FrontEnd=='None' %} selected {%endif%}>Select Language</option>
-                    <option value="Basic" {%if values.FrontEnd=='Basic' %} selected {%endif%}>Simple</option>
-                    <option value="ReactJS" {%if values.FrontEnd=='ReactJS' %} selected {%endif%}>ReactJs</option>
-                    <option value="Angular" {%if values.FrontEnd=='Angular' %} selected {%endif%}>Angular</option>
-                    <option value="JQuery" {%if values.FrontEnd=='JQuery' %} selected {%endif%}>JQuery</option>
-                    <option value="Other" {%if values.FrontEnd=='Other' %} selected {%endif%}>Other</option>
+                    <option value="None" {%if values.FrontEnd  == 'None' %} selected {%endif%}>Select Language</option>
+                    <option value="Basic" {%if values.FrontEnd == 'Basic' %} selected {%endif%}>Simple</option>
+                    <option value="ReactJS" {%if values.FrontEnd == 'ReactJS' %} selected {%endif%}>ReactJs</option>
+                    <option value="Angular" {%if values.FrontEnd == 'Angular' %} selected {%endif%}>Angular</option>
+                    <option value="JQuery" {%if values.FrontEnd == 'JQuery' %} selected {%endif%}>JQuery</option>
+                    <option value="Other" {%if values.FrontEnd == 'Other' %} selected {%endif%}>Other</option>
                   </select>
                   <div id="defaultFormControlHelp" class="form-text">
-                    Here <b>'simple'</b> means <b>'html, css and js'</b> programming languages.
+                    Here <b>'simple'</b> means <b>'html, css and js'</b> languages.
                   </div>
                 </div>
                 <div class="mb-3 col-md-4">
                   <label for="backend" class="form-label">Back-End</label>
                   <select name="backend" class="select2 form-select">
-                    <option value="None" {%if values.BackEnd=='None' %} selected {%endif%}>Select Language</option>
-                    <option value="Django" {%if values.BackEnd=='Django' %} selected {%endif%}>Django</option>
-                    <option value="ExpressJS" {%if values.BackEnd=='ExpressJS' %} selected {%endif%}>Express JS</option>
-                    <option value="SpringBoot" {%if values.BackEnd=='SpringBoot' %} selected {%endif%}>Spring Boot
+                    <option value="None" {%if values.BackEnd == 'None' %} selected {%endif%}>Select Language</option>
+                    <option value="Django" {%if values.BackEnd == 'Django' %} selected {%endif%}>Django</option>
+                    <option value="ExpressJS" {%if values.BackEnd == 'ExpressJS' %} selected {%endif%}>Express JS</option>
+                    <option value="SpringBoot" {%if values.BackEnd == 'SpringBoot' %} selected {%endif%}>Spring Boot
                     </option>
-                    <option value="Flask" {%if values.BackEnd=='Flask' %} selected {%endif%}>Flask</option>
-                    <option value="PHP" {%if values.BackEnd=='PHP' %} selected {%endif%}>PHP</option>
-                    <option value="ASP.Net" {%if values.BackEnd=='ASP.Net' %} selected {%endif%}>ASP.Net</option>
-                    <option value="Other" {%if values.BackEnd=='Other' %} selected {%endif%}>Other</option>
+                    <option value="Flask" {%if values.BackEnd == 'Flask' %} selected {%endif%}>Flask</option>
+                    <option value="PHP" {%if values.BackEnd == 'PHP' %} selected {%endif%}>PHP</option>
+                    <option value="ASP.Net" {%if values.BackEnd == 'ASP.Net' %} selected {%endif%}>ASP.Net</option>
+                    <option value="Other" {%if values.BackEnd == 'Other' %} selected {%endif%}>Other</option>
                   </select>
                 </div>
                 <div class="mb-3 col-md-4">
                   <label for="database" class="form-label">Database</label>
                   <select name="database" class="select2 form-select">
                     <!-- <option value="{{location_.id}}" {% if emp.location_id == location_.id %} selected {% endif %}>{{location_.name}}</option> -->
-                    <option value="None" {%if values.DataBase=='None' %} selected {%endif%}>Select Language</option>
-                    <option value="MongoDB" {%if values.DataBase=='MongoDB' %} selected {%endif%}><b>MongoDB:</b> No-SQL
+                    <option value="None" {%if values.DataBase == 'None' %} selected {%endif%}>Select Language</option>
+                    <option value="MongoDB" {%if values.DataBase == 'MongoDB' %} selected {%endif%}><b>MongoDB:</b> No-SQL
                       Database</option>
-                    <option value="MySQL" {%if values.DataBase=='MySQL' %} selected {%endif%}><b>MySQL:</b> SQL Database
+                    <option value="MySQL" {%if values.DataBase == 'MySQL' %} selected {%endif%}><b>MySQL:</b> SQL Database
                     </option>
-                    <option value="Oracle" {%if values.DataBase=='Oracle' %} selected {%endif%}><b>Oracle:</b> SQL
+                    <option value="Oracle" {%if values.DataBase == 'Oracle' %} selected {%endif%}><b>Oracle:</b> SQL
                       Database</option>
-                    <option value="SQLite" {%if values.DataBase=='SQLite' %} selected {%endif%}><b>SQLite:</b> SQL
+                    <option value="SQLite" {%if values.DataBase == 'SQLite' %} selected {%endif%}><b>SQLite:</b> SQL
                       Database</option>
-                    <option value="Other_SQL" {%if values.DataBase=='Other_SQL' %} selected {%endif%}><b>Other:</b> SQL
+                    <option value="Other_SQL" {%if values.DataBase == 'Other_SQL' %} selected {%endif%}><b>Other:</b> SQL
                       Database</option>
-                    <option value="Other_NoSQL" {%if values.DataBase=='Other_NoSQL' %} selected {%endif%}><b>Other:</b>
+                    <option value="Other_NoSQL" {%if values.DataBase == 'Other_NoSQL' %} selected {%endif%}><b>Other:</b>
                       No-SQL Database</option>
                   </select>
                 </div>

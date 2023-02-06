@@ -10,7 +10,9 @@ urlpatterns=[
 		path('mydeactivate/',views.mydeactivate,name='mydeactivate'),
 		path('mynotification/',views.mynotification,name='mynotification'),
 
-		path('projectsoftdetails/',views.projectsoftdetails,name='projectsoftdetails'),
+		path('projectdetails/',views.projectdetails,name='projectdetails'),
+		path('projectdetails/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
+		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
 
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
 

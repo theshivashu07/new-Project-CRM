@@ -198,7 +198,11 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <li class="menu-item {% if request.path == '/allprojectsrequests/' or request.path == path or request.path == prevPATH %}active{% endif %}">
+            /projectdetails/{{values.ProjectSlug}}-{{values.id}}
+            {% with keyz=values.id URLs='/projectdetails/'|add:values.ProjectSlug|add:'-'|add:values.id %}
+            {{URLs}}-{{keyz}}
+            <li class="menu-item {% if request.path == '/allprojectsrequests/' or request.path == URLs|add:keyz %}active{% endif %}">
+            {% endwith %}
               <a href="/allprojectsrequests" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->

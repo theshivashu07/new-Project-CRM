@@ -81,6 +81,7 @@ def projectdetailsslug(request,projectslug):
 		values=ProjectInfo.objects.get(pk=request.POST["employeeID"])
 		if(request.POST["admin"]):
 			values.Admin=AdminsID=request.POST["admin"];
+			print(values.Admin,AdminsID)
 			values.ReportStatus="Active"
 		values.save()
 		return redirect('/allprojectsrequests/')

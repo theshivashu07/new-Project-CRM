@@ -191,11 +191,7 @@ CRM - Admin
                               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
                                 class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{selectedprojectmanager.FullName}}"
                                 style="margin-right:5px;">
-                                {% if selectedprojectmanager.ProfilePick %}
-                                <img src="{{selectedprojectmanager.ProfilePick}}" alt="Avatar" class="rounded-circle">
-                                {% else %}
-                                <img src="/_static/otherapps/img/avatars/user.png" alt="Avatar" class="rounded-circle">
-                                {% endif %}
+                                <img src="/_uploads/{{ selectedprojectmanager.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
                               </li>
                               <strong>@{{selectedprojectmanager.Username}}</strong>
                             </ul>
@@ -216,8 +212,7 @@ CRM - Admin
                                 <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
                                   class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{developer.FullName}}"
                                   style="margin-right:5px;">
-                                  <img src="/_static/otherapps/img/avatars/user.png" alt="Avatar"
-                                    class="rounded-circle">
+                                <img src="/_uploads/{{ developer.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
                                 </li>
                                 <strong>@{{developer.Username}}</strong>
                               </ul>

@@ -264,26 +264,6 @@ def trialcenter(request,key):
 
 
 
-# def promotions(request,username):
-# 	if request.method=="POST":
-# 		values=Employee.objects.get(pk=request.POST["employeeID"])
-# 		newDict = {'OfficeLocation':'newofficelocation', 'SittingArea':'newsittingarea', 'As':'newas', 'Role':'newrole', 'Level':'newlevel', 'Salary':'newsalary', 'Contract':'newcontract', 'CTC':'newctc'} 
-# 		for key in newDict:
-# 			# print(key)
-# 			if(request.POST[newDict[key]]):
-# 				print(key, newDict[key], request.POST[newDict[key]])
-# 				if(key=='Salary' or key=='Contract'):
-# 					print('under-------------------------------',end=' ')
-# 					print(values.key, request.POST[newDict[key]],end=' ')
-# 					values.key += int(request.POST[newDict[key]])
-# 					print(values.key)
-# 				else:
-# 					values.key = int(request.POST[newDict[key]])
-# 		values.save()
-# 		print(values)
-# 		return redirect('/listof/promotions/')
-# 	values = Employee.objects.get(Username=username)
-# 	return render(request,"otherapps/hr/promotions.html",{'values':values});
 
 
 

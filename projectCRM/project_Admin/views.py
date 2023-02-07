@@ -80,7 +80,6 @@ def projectdetailsslug(request,projectslug):
 				selecteddeveloperslist.append(devdataset)
 			else:
 				developerslist.append(devdataset)
-	print(values)
 	return render(request,"otherapps/admin/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName, 'path':request.path,
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
 
@@ -114,14 +113,13 @@ def projectdetailsedit(request,projectslug):
 def activeprojects(request):
 	# values=ProjectInfo.objects.get(pk=AdminMain)
 	values=ProjectInfo.objects.filter(ReportStatus="Active", Admin=AdminMain)
-	print(values)
 	for value in values:
 		if(value.Client):
-			value.Client=ClientInfo.objects.get(pk=value.Client).FullName
+			value.Client=ClientInfo.objects.get(pk=value.Client)
 		if(value.Admin):
-			value.Admin=Employee.objects.get(pk=value.Admin).FullName
+			value.Admin=Employee.objects.get(pk=value.Admin)
 		if(value.ProjectManager):
-			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager).FullName
+			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
@@ -130,8 +128,26 @@ def activeprojects(request):
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks
 	return render(request,"otherapps/admin/activeprojects.html", {'values':values});
+
 def completedprojects(request):
-	return render(request,"otherapps/admin/completedprojects.html");
+	# values=ProjectInfo.objects.get(pk=AdminMain)
+	values=ProjectInfo.objects.filter(ReportStatus="Completed", Admin=AdminMain) \
+				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Admin=AdminMain)
+	for value in values:
+		if(value.Client):
+			value.Client=ClientInfo.objects.get(pk=value.Client)
+		if(value.Admin):
+			value.Admin=Employee.objects.get(pk=value.Admin)
+		if(value.ProjectManager):
+			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
+		if(value.Developer):
+			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+			for lock in locks:
+				temp=Employee.objects.get(pk=lock.id)
+				lock.FullName=temp.FullName
+				lock.ProfilePick=temp.ProfilePick
+			value.Developer=locks
+	return render(request,"otherapps/admin/completedprojects.html", {'values':values});
 
 # new 
 def recruitments(request):
@@ -147,7 +163,6 @@ def decrements(request):
 	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/admin/decrements.html");
 def pick(request,target):
-	print(request.path,target)
 	dataset=["Admin","Project Manager","Developer"]
 	pickfromtarget={'promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
 	return render(request,"otherapps/admin/searching4pid.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target]});

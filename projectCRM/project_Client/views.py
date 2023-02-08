@@ -6,6 +6,8 @@ from project_HR.models import Employee
 from django.db.models import Q
 
 
+ClienMain=1
+
 
 
 '''
@@ -42,7 +44,7 @@ def reput():
 def index(request):
 	# reput()  
 	return render(request,"otherapps/client/index.html");
-def clientdetails(request):
+def myaccount(request):
 	if request.method=="POST":
 		values=ClientInfo(
 						Username=request.POST["username"],
@@ -60,10 +62,22 @@ def clientdetails(request):
 						Country=request.POST["country"],
 						ProfilePick=request.FILES["upload"], )
 		values.save()
-	return render(request,"otherapps/client/clientdetails.html");
+	return render(request,"otherapps/client/myaccount.html");
+
+def myconnections(request):
+	return render(request,"otherapps/client/myconnections.html");
+def mydeactivate(request):
+	return render(request,"otherapps/client/mydeactivate.html");
+def mynotification(request):
+	return render(request,"otherapps/client/mynotification.html");
+
 
 def projectdetails(request,projectslug=None):
-	print("Radhy-Radhy...")
+	values=ClientInfo.objects.get(pk=ClienMain)
+	return render(request,"otherapps/client/projectdetails.html",{'values':values, 'clientID':ClienMain});
+
+
+def projectdetailsslug(request,projectslug):
 	if request.method=="POST":
 		values=ProjectInfo(
 						Client=request.POST["clientID"],
@@ -79,17 +93,14 @@ def projectdetails(request,projectslug=None):
 						SoftDiscription=request.POST["softdiscription"], 
 						ReportStatus="Not Received", )
 		values.save()
-		# hold=ProjectInfo.objects.filter(Client=request.POST["clientID"])
-		# return redirect('request,"otherapps/client/projectdetails.html"');
-		return render(request,"otherapps/client/projectdetails.html");
-	clientID=1
-	return render(request,"otherapps/client/projectdetails.html",{'clientID':clientID});
-def clientconnections(request):
-	return render(request,"otherapps/client/clientconnections.html");
-def clientdeactivate(request):
-	return render(request,"otherapps/client/clientdeactivate.html");
-def clientnotification(request):
-	return render(request,"otherapps/client/clientnotification.html");
+		# return render(request,"otherapps/client/projectdetails.html");
+		return redirect('/projectdetails/')
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
+	values=ProjectInfo.objects.get(pk=key)
+	return render(request,"otherapps/client/projectdetails.html",{'values':values, 'path':request.path});
+
+
 def allprojectsrequests(request):
 	# values=ProjectInfo.objects.all().values('id')
 	values=reversed(ProjectInfo.objects.filter(~Q(ReportStatus="Completed")))
@@ -103,27 +114,11 @@ def reportsopen(request,username):
 def completedprojects(request):
 	return render(request,"otherapps/client/completedprojects.html");
 def projectdetailsopen(request,username):
+	print(username)
 	return render(request,"otherapps/client/projectdetails.html");
 
 
 # def trial(request):
-# 	print("Radhy-Radhy...")
-# 	if request.method=="POST":
-# 		values=ProjectInfo.objects.get(pk=3);
-# 		values.Client=request.POST["clientID"];
-# 		values.ProjectName=request.POST["projectname"];
-# 		values.ProgrammingLanguage=request.POST["programminglanguage"];
-# 		values.FrontEnd=request.POST["frontend"];
-# 		values.BackEnd=request.POST["backend"];
-# 		values.DataBase=request.POST["database"];
-# 		values.BeginningDate=request.POST["beginningdate"];
-# 		values.EndingDate=request.POST["endingdate"];
-# 		values.StartingAmount=request.POST["startingamount"];
-# 		values.EndingAmount=request.POST["endingamount"];
-# 		values.SoftDiscription=request.POST["softdiscription"];
-# 		values.save()
-# 		return render(request,"otherapps/client/trial.html");
-# 	values=ProjectInfo.objects.get(pk=3) 
 # 	return render(request,"otherapps/client/trial.html",{'values':values});
 
 

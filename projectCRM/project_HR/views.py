@@ -17,12 +17,12 @@ def index(request):
 
 def myaccount(request):
 	return render(request,"otherapps/hr/myaccount.html");
+def mynotification(request):
+	return render(request,"otherapps/hr/mynotification.html");
 def myconnections(request):
 	return render(request,"otherapps/hr/myconnections.html");
 def mydeactivate(request):
 	return render(request,"otherapps/hr/mydeactivate.html");
-def mynotification(request):
-	return render(request,"otherapps/hr/mynotification.html");
 
 
 def allprojectsrequests(request):
@@ -40,17 +40,17 @@ def allprojectsrequests(request):
 	return render(request,"otherapps/hr/allprojectsrequests.html",{'values':values});
 
 # currently we refer both urls to a duplicate page
-def activeprojects(request):
+def activeprojects(request,username):
+	if(username!=None):
+		# default assignment 
+		return render(request,"otherapps/hr/reportsopen.html");
 	return render(request,"otherapps/hr/activeprojects.html");
-def reportsopen(request,username):
-	return render(request,"otherapps/hr/reportsopen.html");
 def completedprojects(request,username=None):
 	if(username!=None):
 		# default assignment 
 		values=ProjectInfo.objects.get(pk=5)
 		return render(request,"otherapps/hr/projectdetails_withteam.html",{'values':values});
 	return render(request,"otherapps/hr/completedprojects.html");
-
 
 def projectdetails(request):
 	if request.method=="POST":
@@ -90,7 +90,7 @@ def projectdetailsslug(request,projectslug):
 	values=ProjectInfo.objects.get(pk=key)
 	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
 	adminslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
-	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'ClientFullName':ClientFullName, 'AdminsID':AdminsID, 'adminslist':adminslist});
+	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'path':request.path, 'ClientFullName':ClientFullName, 'AdminsID':AdminsID, 'adminslist':adminslist});
 
 def projectdetailsedit(request,projectslug):
 	if request.method=="POST":
@@ -107,7 +107,7 @@ def projectdetailsedit(request,projectslug):
 		lock.EndingAmount=request.POST["endingamount"]
 		lock.SoftDiscription=request.POST["softdiscription"]
 		lock.save()
-		return redirect('/'+prevPATH)
+		return redirect(prevPATH)
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
@@ -115,10 +115,9 @@ def projectdetailsedit(request,projectslug):
 	# NOTE : below we are getting our previous url...
 	# print(request.META.get('HTTP_REFERER'))
 	overallURL=request.META['HTTP_REFERER']
-	orignalURL=overallURL[22:]  #''.join(overallURL.split('/')[3:])
-	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'prevPATH':orignalURL});
-
-
+	prevPATH=overallURL[21:]  #''.join(overallURL.split('/')[3:])
+	print(prevPATH,prevPATH)
+	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'path':request.path, 'prevPATH':prevPATH});
 
 
 # new 
@@ -240,14 +239,14 @@ def listof(request,target):
 		values=Employee.objects.filter(~Q(CompanyJoiningDate=None, ))
 	elif(target=='decrements'):
 		values=Employee.objects.filter(~Q(CompanyJoiningDate=None))		
-	return render(request,"otherapps/hr/filtered.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
-	# return render(request,"otherapps/hr/filtered.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
+	return render(request,"otherapps/hr/listof.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
+	# return render(request,"otherapps/hr/listof.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target], "values":values});
 
 
 def alldiscussions(request):
 	return render(request,"otherapps/hr/alldiscussions.html");
-def allsuggestions(request):
-	return render(request,"otherapps/hr/allsuggestions.html");
+# def allsuggestions(request):
+# 	return render(request,"otherapps/hr/allsuggestions.html");
 def allmessages(request):
 	return render(request,"otherapps/hr/allmessages.html");
 

@@ -19,8 +19,8 @@ def mydeactivate(request):
 def mynotification(request):
 	return render(request,"otherapps/developer/mynotification.html");
 
-def projectsoftdetails(request):
-	return render(request,"otherapps/developer/projectsoftdetails.html");
+def projectdetails(request):
+	return render(request,"otherapps/developer/projectdetails.html");
 
 def allprojectsrequests(request):
 	return render(request,"otherapps/developer/allprojectsrequests.html");
@@ -61,8 +61,8 @@ def reportscollection(request):
 	return render(request,"otherapps/developer/reportscollection.html");
 def sendreports(request):
 	return render(request,"otherapps/developer/sendreports.html");
-def creativeteam(request):
-	return render(request,"otherapps/developer/creativeteam.html");
+# def creativeteam(request):
+# 	return render(request,"otherapps/developer/creativeteam.html");
 
 
 

@@ -19,8 +19,8 @@ def mydeactivate(request):
 def mynotification(request):
 	return render(request,"otherapps/projectmanager/mynotification.html");
 
-def projectsoftdetails(request):
-	return render(request,"otherapps/projectmanager/projectsoftdetails.html");
+def projectdetails(request):
+	return render(request,"otherapps/projectmanager/projectdetails.html");
 
 def allprojectsrequests(request):
 	return render(request,"otherapps/projectmanager/allprojectsrequests.html");
@@ -52,8 +52,8 @@ def pick(request,target):
 
 def alldiscussions(request):
 	return render(request,"otherapps/projectmanager/alldiscussions.html");
-def allsuggestions(request):
-	return render(request,"otherapps/projectmanager/allsuggestions.html");
+# def allsuggestions(request):
+# 	return render(request,"otherapps/projectmanager/allsuggestions.html");
 def allmessages(request):
 	return render(request,"otherapps/projectmanager/allmessages.html");
 

@@ -169,8 +169,8 @@ def pick(request,target):
 
 def alldiscussions(request):
 	return render(request,"otherapps/admin/alldiscussions.html");
-def allsuggestions(request):
-	return render(request,"otherapps/admin/allsuggestions.html");
+# def allsuggestions(request):
+# 	return render(request,"otherapps/admin/allsuggestions.html");
 def allmessages(request):
 	return render(request,"otherapps/admin/allmessages.html");
 

@@ -13,7 +13,7 @@ CRM - Client - All Project Requests
   <!-- Content -->
   <div class="container-xxl flex-grow-1 container-p-y">
     <span class="badge" style="float: right; font-size: 15px; color: white;">
-      <a href="/projectdetails/" class="btn" style="color: white;">
+      <a href="/client/projectdetails/" class="btn" style="color: white;">
         <i class='bx bx-message-square-add bx-md'></i>
         Assign New
       </a>
@@ -44,7 +44,7 @@ CRM - Client - All Project Requests
               {{value.SoftDiscription}}
             </p>
             <div>
-              <a href="/projectdetails/{{value.id}}-{{value.ProjectSlug}}" class="btn btn-primary">Edit / Add More</a>
+              <a href="/client/projectdetails/{{value.ProjectSlug}}-{{value.id}}" class="btn btn-primary">Edit / Add More</a>
               <!-- <small class="text-muted">Last updated 3 mins ago.</small> -->
               <span class="primary" style="float: right; top:50%;"><br>{{value.JoiningDate}}</span>
             </div>

@@ -149,8 +149,8 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Home</span>
             </li>
-            <li class="menu-item {% if request.path == '/' %}active{% endif %}">
-              <a href="/" class="menu-link">
+            <li class="menu-item {% if request.path == '/client/' %}active{% endif %}">
+              <a href="/client/" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-dashboard"></i>
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
@@ -158,7 +158,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Account</span>
             </li>
-            {% if request.path == "/clientdetails/" or request.path == "/clientnotification/" or request.path == "/clientconnections/" or request.path == "/clientdeactivate/" %}
+            {% if request.path == "/client/myaccount/" or request.path == "/client/mynotification/" or request.path == "/client/myconnections/" or request.path == "/client/mydeactivate/" %}
               <li class="menu-item active open">
             {% else %}
               <li class="menu-item">
@@ -169,23 +169,23 @@
                 <div data-i18n="Account Settings">Account Settings</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item {% if request.path == '/clientdetails/' %}active{% endif %}">
-                  <a href="/clientdetails/" class="menu-link">
+                <li class="menu-item {% if request.path == '/client/myaccount/' %}active{% endif %}">
+                  <a href="/client/myaccount/" class="menu-link">
                     <div data-i18n="Account">Account</div>
                   </a>
                 </li>
-                <li class="menu-item {% if request.path == '/clientnotification/' %}active{% endif %}">
-                  <a href="/clientnotification/" class="menu-link">
+                <li class="menu-item {% if request.path == '/client/mynotification/' %}active{% endif %}">
+                  <a href="/client/mynotification/" class="menu-link">
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
                 </li>
-                <li class="menu-item {% if request.path == '/clientconnections/' %}active{% endif %}">
-                  <a href="/clientconnections/" class="menu-link">
+                <li class="menu-item {% if request.path == '/client/myconnections/' %}active{% endif %}">
+                  <a href="/client/myconnections/" class="menu-link">
                     <div data-i18n="Connections">Connections</div>
                   </a>
                 </li>
-                <li class="menu-item {% if request.path == '/clientdeactivate/' %}active{% endif %}">
-                  <a href="/clientdeactivate/" class="menu-link">
+                <li class="menu-item {% if request.path == '/client/mydeactivate/' %}active{% endif %}">
+                  <a href="/client/mydeactivate/" class="menu-link">
                     <div data-i18n="Deactivate">Deactivate</div>
                   </a>
                 </li>
@@ -194,27 +194,27 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <!-- <li class="menu-item {% if request.path == '/projectdetails/' %}active{% endif %} disabled"> -->
-            <li class="menu-item {% if request.path == '/projectdetails/' %}active{% endif %}">
-              <a href="/projectdetails/" class="menu-link">
+            <!-- <li class="menu-item {% if request.path == '/client/projectdetails/' %}active{% endif %} disabled"> -->
+            <li class="menu-item {% if request.path == '/client/projectdetails/' %}active{% endif %}">
+              <a href="/client/projectdetails/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-send "></i>
                 <div data-i18n="Analytics">Sent Project's Details</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/allprojectsrequests/' %}active{% endif %}">
-              <a href="/allprojectsrequests/" class="menu-link">
+            <li class="menu-item {% if request.path == '/client/allprojectsrequests/' or request.path == path %}active{% endif %}">
+              <a href="/client/allprojectsrequests/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book-add"></i>
                 <div data-i18n="Analytics">Request for Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/activeprojects/' %}active{% endif %}">
-              <a href="/activeprojects/" class="menu-link">
+            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/@a' %}active{% endif %}">
+              <a href="/client/activeprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/completedprojects/' %}active{% endif %}">
-              <a href="/completedprojects/" class="menu-link">
+            <li class="menu-item {% if request.path == '/client/completedprojects/' %}active{% endif %}">
+              <a href="/client/completedprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-data"></i>
                 <div data-i18n="Analytics">Completed Projects</div>
               </a> 

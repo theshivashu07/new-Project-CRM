@@ -10,7 +10,7 @@ urlpatterns=[
 		path('mydeactivate/',views.mydeactivate,name='mydeactivate'),
 		path('mynotification/',views.mynotification,name='mynotification'),
 
-		path('projectsoftdetails/',views.projectsoftdetails,name='projectsoftdetails'),
+		path('projectdetails/',views.projectdetails,name='projectdetails'),
 
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
 
@@ -18,7 +18,7 @@ urlpatterns=[
 		path('completedprojects/',views.completedprojects,name='completedprojects'),
 
 		path('alldiscussions/',views.alldiscussions,name='alldiscussions'),
-		path('allsuggestions/',views.allsuggestions,name='allsuggestions'),
+		# path('allsuggestions/',views.allsuggestions,name='allsuggestions'),
 		path('allmessages/',views.allmessages,name='allmessages'),
 
 		path('reportscollection/',views.reportscollection,name='reportscollection'),

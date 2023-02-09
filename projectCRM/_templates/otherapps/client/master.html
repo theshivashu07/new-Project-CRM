@@ -207,17 +207,43 @@
                 <div data-i18n="Analytics">Request for Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/@a' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/latestreport/'|add:projectslug %}active{% endif %}">
               <a href="/client/activeprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/client/completedprojects/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/client/completedprojects/' or request.path == '/client/projectdetails/completed/'|add:projectslug %}active{% endif %}">
               <a href="/client/completedprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-data"></i>
                 <div data-i18n="Analytics">Completed Projects</div>
               </a> 
+            </li>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Others</span>
+            </li>
+            {% if request.path == "/client/alldiscussions/" or request.path == "/client/allmessages/" %}
+              <li class="menu-item active open">
+            {% else %}
+              <li class="menu-item">
+            {% endif %}
+            <!-- <li class="menu-item active open" style=""> -->
+              <a href="#" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bxs-conversation"></i>
+                <div data-i18n="Conversations">Conversations</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item {% if request.path == '/client/alldiscussions/' %}active{% endif %}">
+                  <a href="/client/alldiscussions" class="menu-link">
+                    <div data-i18n="Discussions">Discussions</div>
+                  </a>
+                </li>
+                <li class="menu-item {% if request.path == '/client/allmessages/' %}active{% endif %}">
+                  <a href="/client/allmessages" class="menu-link">
+                    <div data-i18n="Messages">Messages</div>
+                  </a>
+                </li>
+              </ul>
             </li>
           </ul>
         </aside>

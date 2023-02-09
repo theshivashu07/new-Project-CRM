@@ -32,8 +32,7 @@ CRM - HR - Project Details
                                         class="text-muted fw-light">Details about /</span> New Joiner </h4>
                                 <div class="mb-3 col-md-2">
                                     <div class="card-body" style="padding-top: 10px;">
-                                        <!-- <div class="d-flex align-items-start align-items-sm-center gap-4"> -->
-                                        <img src="/_static/otherapps/img/avatars/user.png" alt="user-avatar"
+                                        <img src="/_uploads/{{values.ProfilePick|default:'employee/user.png'}}" alt="user-avatar"
                                             class="d-block rounded" height="135" width="135" id="uploadedAvatar">
                                         <!-- </div> -->
                                     </div>
@@ -43,12 +42,12 @@ CRM - HR - Project Details
                                         <div class="mb-3 col-md-3">
                                             <label for="username" class="form-label">Username</label>
                                             <input class="form-control" type="text" id="username" name="username"
-                                                value="{{values.Username}}" placeholder="Shukla" readonly>
+                                                value="{{values.Username}}" placeholder="theshivashu07" autofocus="" readonly>
                                         </div>
                                         <div class="mb-3 col-md-3">
-                                            <label for="firstname" class="form-label">Full Name</label>
-                                            <input class="form-control" type="text" id="firstname" name="firstname"
-                                                value="{{values.FullName}}" placeholder="Shivam" autofocus="" readonly>
+                                            <label for="fullname" class="form-label">Full Name</label>
+                                            <input class="form-control" type="text" id="fullname" name="fullname"
+                                                value="{{values.FullName}}" placeholder="Shivam" readonly>
                                         </div>
                                         <div class="mb-3 col-md-3">
                                             <label for="emailid" class="form-label"><b style="color:#fff000">*</b>

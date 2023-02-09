@@ -26,6 +26,7 @@ CRM - Admin
                   <table class="table table-sm">
                     <thead>
                       <tr style="background-color: black;">
+                        <th style="padding-left:16px;">ID</th>
                         <th>
                           <i class="fab fa-angular fa-lg text-danger me-3"></i>
                           Projects
@@ -43,6 +44,7 @@ CRM - Admin
                     {% for value in values %}
                     <tbody class="table-border-bottom-0">
                         <tr {% if value.Developer and value.ProjectManager %} style="background-color: white;" {% endif %} >
+                          <td><span class="badge btn btn-info">0{{forloop.counter}}</span></td>
                           <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong  style="font-size:17px; color: #199999;">{{value.ProjectName}}</strong></td>
                           <td>{{value.ProgrammingLanguage}}</td>
                           <td>{{value.FrontEnd}}</td>
@@ -93,7 +95,7 @@ CRM - Admin
                           </td>
                           <td>
                             <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                            <a href="#" class="btn btn-info" style="line-height: 15px">Click</a>
+                            <a href="/admin/latestreport/{{value.ProjectSlug}}-{{value.id}}" class="btn btn-info" style="line-height: 15px">Click</a>
                             <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                           </td>
                         </tr>

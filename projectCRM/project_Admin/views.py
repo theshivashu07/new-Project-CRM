@@ -32,6 +32,18 @@ def mynotification(request):
 def projectdetails(request):
 	return render(request,"otherapps/admin/projectdetails.html");
 
+def latestreport(request,projectslug):
+	return render(request, "otherapps/admin/reportsopen.html", {'projectslug':projectslug}) 
+
+def completedprojectdetails(request,projectslug):
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
+	values=ProjectInfo.objects.get(pk=key)
+	print(values,values.Client,values.Admin)
+	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
+	AdminFullName=Employee.objects.get(id=values.Admin).FullName
+	return render(request, "otherapps/admin/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
+
 def allprojectsrequests(request):
 	# Below we use developer because it is the last thing wheich we insert... otherwise also use ProjectManager=None...
 	# datasets=ProjectInfo.objects.filter(Developer=None, ReportStatus="Active", Admin='1')
@@ -151,19 +163,14 @@ def completedprojects(request):
 
 # new 
 def recruitments(request):
-	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/admin/recruitments.html");
 def promotions(request):
-	dataset=["Project Manager","Developer"]
 	return render(request,"otherapps/admin/promotions.html");
 def increments(request):
-	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/admin/increments.html");
 def decrements(request):
-	dataset=["Admin","Project Manager","Developer"]
 	return render(request,"otherapps/admin/decrements.html");
 def pick(request,target):
-	dataset=["Admin","Project Manager","Developer"]
 	pickfromtarget={'promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
 	return render(request,"otherapps/admin/searching4pid.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target]});
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import ClientInfo,ProjectInfo
+from .models import ClientInfo,ProjectInfo,DeveloperBox
 from project_HR.models import Employee
 # from django.utils import timezone
 from django.db.models import Q
@@ -103,19 +103,65 @@ def projectdetailsslug(request,projectslug):
 
 def allprojectsrequests(request):
 	# values=ProjectInfo.objects.all().values('id')
-	values=reversed(ProjectInfo.objects.filter(~Q(ReportStatus="Completed")))
+	values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClienMain)\
+					| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClienMain))
 	return render(request,"otherapps/client/allprojectsrequests.html",{'values':values});
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):
-	return render(request,"otherapps/client/activeprojects.html");
-def reportsopen(request,username):
-	return render(request,"otherapps/client/reportsopen.html");
+	# values=ProjectInfo.objects.get(pk=AdminMain)
+	values=ProjectInfo.objects.filter(ReportStatus="Active", Client=ClienMain)
+	for value in values:
+		if(value.Client):
+			value.Client=ClientInfo.objects.get(pk=value.Client)
+		if(value.Admin):
+			value.Admin=Employee.objects.get(pk=value.Admin)
+		if(value.ProjectManager):
+			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
+		if(value.Developer):
+			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+			for lock in locks:
+				temp=Employee.objects.get(pk=lock.id)
+				lock.FullName=temp.FullName
+				lock.ProfilePick=temp.ProfilePick
+			value.Developer=locks
+	return render(request,"otherapps/client/activeprojects.html", {'values':values});
+
 def completedprojects(request):
-	return render(request,"otherapps/client/completedprojects.html");
-def projectdetailsopen(request,username):
-	print(username)
-	return render(request,"otherapps/client/projectdetails.html");
+	# values=ProjectInfo.objects.get(pk=AdminMain)
+	values=ProjectInfo.objects.filter(ReportStatus="Completed", Client=ClienMain) \
+				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClienMain)
+	for value in values:
+		if(value.Client):
+			value.Client=ClientInfo.objects.get(pk=value.Client)
+		if(value.Admin):
+			value.Admin=Employee.objects.get(pk=value.Admin)
+		if(value.ProjectManager):
+			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
+		if(value.Developer):
+			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+			for lock in locks:
+				temp=Employee.objects.get(pk=lock.id)
+				lock.FullName=temp.FullName
+				lock.ProfilePick=temp.ProfilePick
+			value.Developer=locks
+	return render(request,"otherapps/client/completedprojects.html", {'values':values});
+
+def reportsopen(request,projectslug):
+	return render(request,"otherapps/client/reportsopen.html",{'projectslug':projectslug});
+def completedprojectdetails(request,projectslug):
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
+	values=ProjectInfo.objects.get(pk=key)
+	AdminFullName=Employee.objects.get(pk=values.Admin).FullName
+	return render(request,"otherapps/client/completedprojectdetails.html",{'values':values, 'projectslug':projectslug, 'AdminFullName':AdminFullName});
+
+def alldiscussions(request):
+	return render(request,"otherapps/client/alldiscussions.html");
+# def allsuggestions(request):
+# 	return render(request,"otherapps/client/allsuggestions.html");
+def allmessages(request):
+	return render(request,"otherapps/client/allmessages.html");
 
 
 # def trial(request):

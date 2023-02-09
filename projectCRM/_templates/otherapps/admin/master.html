@@ -198,7 +198,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <li class="menu-item {% if request.path == '/admin/allprojectsrequests/' or request.path == path or request.path == prevPATH %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/admin/allprojectsrequests/' or request.path == '/admin/projectdetails/' or request.path == path or request.path == prevPATH %}active{% endif %}">
               <a href="/admin/allprojectsrequests" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->
@@ -206,13 +206,13 @@
                 <div data-i18n="Analytics">New Project Requests</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/admin/activeprojects/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/admin/activeprojects/' or request.path == '/admin/latestreport/'|add:projectslug %}active{% endif %}">
               <a href="/admin/activeprojects" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/admin/completedprojects/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/admin/completedprojects/' or request.path == '/admin/projectdetails/completed/'|add:projectslug %}active{% endif %}">
               <a href="/admin/completedprojects" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-layout'></i> -->

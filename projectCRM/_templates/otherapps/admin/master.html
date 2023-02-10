@@ -206,7 +206,7 @@
                 <div data-i18n="Analytics">New Project Requests</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/admin/activeprojects/' or request.path == '/admin/latestreport/'|add:projectslug %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/admin/activeprojects/' or request.path == '/admin/latestreport/'|add:projectslug or request.path == '/admin/projectdetails/active/'|add:projectslug %}active{% endif %}">
               <a href="/admin/activeprojects" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
@@ -241,7 +241,7 @@
                 <div data-i18n="Analytics">Want Report's</div>
               </a> 
             </li> -->
-            <li class="menu-item {% if request.path == '/admin/sendreports/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/admin/sendreports/' or request.path == '/admin/sendreports/@a' %}active{% endif %}">
               <a href="/admin/sendreports" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-file-export' ></i>
                 <div data-i18n="Analytics">Sent Report's</div>

@@ -32,10 +32,10 @@ CRM - Client - All Projects
                           Projects
                         </th>
                         <th>FrontEnd–BackEnd</th>
-                        <th>Client</th>
+                        <th>Admin</th>
                         <th>Project Manager</th>
                         <th>Developers</th>
-                        <th>Want Report</th>
+                        <th>Project Details</th>
                       </tr>
                     </thead>
                   {% if values %}
@@ -48,11 +48,11 @@ CRM - Client - All Projects
                           <td>
                             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" {% if value.ReportStatus == 'Completed' %} data-bs-original-title="{{value.Client.FullName}} {% endif %}" style="margin-right:5px;">
-                                <!-- <img src="/_uploads/{{data.Client.ProfilePick|default_if_none:'employee/user.png'}} " alt="Avatar" class="rounded-circle"> -->
-                                <img src="/_uploads/{{ value.Client.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
+                                class="avatar avatar-xs pull-up" title="" {% if value.ReportStatus == 'Completed' %} data-bs-original-title="{{value.Admin.FullName}} {% endif %}" style="margin-right:5px;">
+                                <!-- <img src="/_uploads/{{data.Admin.ProfilePick|default_if_none:'employee/user.png'}} " alt="Avatar" class="rounded-circle"> -->
+                                <img src="/_uploads/{{ value.Admin.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
                               </li>
-                              {{value.Client.FullName}}
+                              {{value.Admin.FullName}}
                             </ul>
                           </td>
                           <td>
@@ -90,7 +90,7 @@ CRM - Client - All Projects
                           </td>
                           <td>
                             <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                            <a href="/client/projectdetails/completed/{{value.ProjectSlug}}-{{value.id}}" class="btn btn-info {% if value.ReportStatus != 'Completed' %} disabled {% endif %}" style="line-height: 15px">Click</a>
+                            <a href="/client/projectdetails/completed/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info {% if value.ReportStatus != 'Completed' %} disabled {% endif %}" style="line-height: 15px">Click to Open</a>
                             <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                           </td>
                         </tr>

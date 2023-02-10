@@ -23,19 +23,19 @@ CRM - Project Manager
           <!-- Account -->
           <hr class="my-0">
           <div class="card-body" style="background-color: #1d242e;">
-            <form id="formAccountSettings" method="" onsubmit="return false">
+            <form id="formAccountSettings" method="POST" onsubmit="return false">
               <div class="row">
                 <div class="col-md">
                   <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
-                    <!-- <div class="card-body" style="padding-top:0"> -->
+                    <div class="card-body" style="padding-top:0">
                       <div class="row gx-3 gy-2 align-items-center">
                         <div class="col-md-5">
                           <label class="form-label" for="selectTypeOpt">Date:</label>
-                          <input class="form-control" type="date" id="html5-date-input" value="" required>
+                          <input class="form-control" type="date" id="html5-date-input" value="2023-01-20">
                         </div>
                         <div class="col-md-5">
                           <label class="form-label" for="selectPlacement">Project's</label>
-                          <select id="language" class="select2 form-select" required>
+                          <select id="language" class="select2 form-select">
                             <!-- <option value="">Select Language</option> -->
                             <option value="" selected="">Select Project</option>
                             <option value="projectcrm">Project CRM</option>
@@ -49,19 +49,16 @@ CRM - Project Manager
                           <button id="showToastPlacement" class="btn btn-primary d-block">Done</button>
                         </div>
                       </div>
-                    <!-- </div> -->
-                    <h4 class="fw-bold py-3 mb-4">
-                      <span class="badge bg-label-dark">20-01-2023</span>  
-                      <span class="badge bg-label-danger">None</span> 
-                    </h4>
-
-                    <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> 20-01-2023 / </span> None </h4> -->
+                    </div>
+                    <br><br>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> 20-01-2023 / </span> None </h4>
                     <div class="accordion-item card" style="padding: 5px;">
                       <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
                           data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1" aria-expanded="false">
                           <!-- <b>Shivam Shukla</b> -->
-                          <b style="color: dimgray; font-size:20px;">20-02-2023 / <u style="color:#ff7700;">@projectcrm</u></b>
+                          <b style="color: dimgray; font-size:20px;">20-02-2023 / <u
+                              style="color:#ff7700;">@projectcrm</u></b>
                         </button>
                       </h2>
                       <div id="accordionIcon-1" class="accordion-collapse collapse" data-bs-parent="#accordionIcon"
@@ -71,9 +68,8 @@ CRM - Project Manager
                           <span class="badge" style="float: right; font-size: 15px; color: white;">
                             <div class="col-md-5">
                               <select id="language" class="select2 form-select"
-                                style="background-color:#11191c; width:150px; border-color: #283848;">
+                                style="background-color:#11191c; width:100px; border-color: #283848;">
                                 <!-- <option value="">Select Project</option> -->
-                                <option value="pm">Project Manager</option>
                                 <option value="report" selected="">All</option>
                                 <option value="report">Reports</option>
                                 <option value="message">Message</option>
@@ -184,9 +180,8 @@ CRM - Project Manager
                           <span class="badge" style="float: right; font-size: 15px; color: white;">
                             <div class="col-md-5">
                               <select id="language" class="select2 form-select"
-                                style="background-color:#11191c; width:150px; border-color: #283848;">
+                                style="background-color:#11191c; width:100px; border-color: #283848;">
                                 <!-- <option value="">Select Project</option> -->
-                                <option value="pm">Project Manager</option>
                                 <option value="report" selected="">All</option>
                                 <option value="report">Reports</option>
                                 <option value="message">Message</option>
@@ -297,9 +292,8 @@ CRM - Project Manager
                           <span class="badge" style="float: right; font-size: 15px; color: white;">
                             <div class="col-md-5">
                               <select id="language" class="select2 form-select"
-                                style="background-color:#11191c; width:150px; border-color: #283848;">
+                                style="background-color:#11191c; width:100px; border-color: #283848;">
                                 <!-- <option value="">Select Project</option> -->
-                                <option value="pm">Project Manager</option>
                                 <option value="report" selected="">All</option>
                                 <option value="report">Reports</option>
                                 <option value="message">Message</option>
@@ -411,9 +405,8 @@ CRM - Project Manager
                             <span class="badge" style="float: right; font-size: 15px; color: white;">
                               <div class="col-md-5">
                                 <select id="language" class="select2 form-select"
-                                  style="background-color:#11191c; width:150px; border-color: #283848;">
+                                  style="background-color:#11191c; width:100px; border-color: #283848;">
                                   <!-- <option value="">Select Project</option> -->
-                                  <option value="pm">Project Manager</option>
                                   <option value="report" selected="">All</option>
                                   <option value="report">Reports</option>
                                   <option value="message">Message</option>
@@ -511,8 +504,6 @@ CRM - Project Manager
                     </div>
 
                   </div>
-                  <br>
-                  <br>
                   <br>
                   <br>
                 </div>

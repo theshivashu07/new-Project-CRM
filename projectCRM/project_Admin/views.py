@@ -46,17 +46,11 @@ def completedprojectdetails(request,projectslug):
 
 def allprojectsrequests(request):
 	# Below we use developer because it is the last thing wheich we insert... otherwise also use ProjectManager=None...
-	# datasets=ProjectInfo.objects.filter(Developer=None, ReportStatus="Active", Admin='1')
-	datasets=ProjectInfo.objects.filter(ReportStatus="Active", Admin=AdminMain)
+	querysets=ProjectInfo.objects.filter(ReportStatus="Active", Admin=AdminMain)
 	values=list()
-	for dataset in datasets:
-		newdict=dict()
-		# put all original data's...
-		newdict['original']=dataset;
-		# get-n-put all duplicate data's...
-		temp=ClientInfo.objects.get(pk=dataset.Client).FullName
-		newdict['duplicate']={'ClientsFullName':temp};
-		values.append(newdict)
+	for queryset in querysets:
+		queryset.Client=ClientInfo.objects.get(pk=queryset.Client).FullName
+		values.append(queryset)
 	return render(request,"otherapps/admin/allprojectsrequests.html",{'values':values});
 
 def projectdetailsslug(request,projectslug):

@@ -14,7 +14,18 @@ CRM - Project Manager
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
+  <br><br>
   <div class="container-xxl flex-grow-1 container-p-y">
+    <span class="badge" style="float: right; font-size: 15px; color: white;">
+      <div class="col-md-5">
+        <a href="#">
+          <button id="showToastPlacement" class="btn btn-primary" style="background-color:red;">
+            <i class='bx bxs-notification bx-md'></i>
+            Sent Notification's!!
+          </button>
+        </a>
+      </div>
+    </span>
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4>
 
     <div class="card">
@@ -87,7 +98,8 @@ CRM - Project Manager
                 </ul>
               </td>
               <td>
-                <a href="/projectmanager/sendreports/@a{{projectslug}}" class="btn btn-info" style="line-height: 15px">Proceed</a>
+                <a href="/projectmanager/sendreports/@a{{projectslug}}" class="btn btn-info" style="line-height: 15px"
+                  disabled>Proceed</a>
               </td>
             </tr>
             <tr>
@@ -248,7 +260,8 @@ CRM - Project Manager
                 </ul>
               </td>
               <td>
-                <a href="/projectmanager/sendreports/@a{{projectslug}}" class="btn btn-info" style="line-height: 15px">Proceed</a>
+                <!-- <a href="/projectmanager/sendreports/@a{{projectslug}}" class="btn btn-info" style="line-height: 15px">Proceed</a> -->
+                <a href="#" class="btn btn-dark" style="line-height: 15px"> NothIng </a>
               </td>
             </tr>
           </tbody>

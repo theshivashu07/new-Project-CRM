@@ -198,7 +198,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <li class="menu-item {% if request.path == '/projectmanager/allprojectsrequests/' or request.path == '/projectmanager/projectdetails/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/allprojectsrequests/' or request.path == '/projectmanager/projectdetails/' or request.path == path or request.path == prevPATH %}active{% endif %}">
               <a href="/projectmanager/allprojectsrequests" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->
@@ -206,13 +206,13 @@
                 <div data-i18n="Analytics">New Project Requests</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/projectmanager/activeprojects/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/activeprojects/' or request.path == '/projectmanager/latestreport/'|add:projectslug or request.path == '/projectmanager/projectdetails/active/'|add:projectslug %}active{% endif %}">
               <a href="/projectmanager/activeprojects" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/projectmanager/completedprojects/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/completedprojects/' or request.path == '/projectmanager/projectdetails/completed/'|add:projectslug %}active{% endif %}">
               <a href="/projectmanager/completedprojects" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-layout'></i> -->
@@ -241,7 +241,7 @@
                 <div data-i18n="Analytics">Want Report's</div>
               </a> 
             </li> -->
-            <li class="menu-item {% if request.path == '/projectmanager/sendreports/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/sendreports/' or request.path == '/projectmanager/sendreports/@a' %}active{% endif %}">
               <a href="/projectmanager/sendreports" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-file-export' ></i>
                 <div data-i18n="Analytics">Sent Report's</div>

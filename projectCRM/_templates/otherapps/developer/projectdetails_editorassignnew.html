@@ -1,0 +1,590 @@
+{% extends 'otherapps/developer/master.html' %}
+
+{% block tcontent %}
+CRM - Developer
+{% endblock %}
+
+
+
+
+{% block childcontent %}
+
+<div class="content-wrapper">
+  <!-- Content -->
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
+    <div class="row">
+      <!-- Basic -->
+
+      <div class="col-md-12">
+        <div class="card mb-4">
+          <h5 class="card-header"><b>Profile Details</b></h5>
+          <!-- Account -->
+          <hr class="my-0">
+          <div class="card-body">
+            <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <!-- <form method="post" action="projectsoftdetails" onsubmit="return false" enctype="multipart/form-data"> -->
+              <input type="hidden" id="clientID" name="clientID" value="{{clientID}}">
+              <input type="hidden" id="projectID" name="projectID" value="{{values.id}}">
+              <input type="hidden" id="prevPATH" name="prevPATH" value="{{prevPATH}}">
+              <div class="row">
+                <!-- <div class="mb-3 col-md-1">
+                            <label for="projectname" class="form-label">Client ID</label>
+                            <input class="form-control" type="number" id="clientID" name="clientID"  value="00{{values.Client}}"  autofocus="" readonly>
+                          </div>
+                          <div class="mb-3 col-md-7">
+                            <label for="projectname" class="form-label">New Project Name</label>
+                            <input class="form-control" type="text" id="projectname" name="projectname" value="{{values.ProjectName}}" placeholder="Project CRM" autofocus=""  >
+                          </div>  -->
+                <div class="mb-3 col-md-7">
+                  <label for="projectname" class="form-label">New Project Name</label>
+                  <input class="form-control" type="text" id="projectname" name="projectname"
+                    value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="">
+                </div>
+                <div class="mb-3 col-md-5">
+                  <label for="clientfullname" class="form-label">Client Name</label>
+                  <input class="form-control" type="text" id="clientfullname" name="clientfullname" value="{{ClientFullName}}" placeholder="None" autofocus="" readonly="">
+                </div>
+                <div class="mb-3 col-md-3">
+                  <label for="programminglanguage" class="form-label">Programming Language</label>
+                  <select name="programminglanguage" class="select2 form-select">
+                    <option value="None" {%if values.ProgrammingLanguage == 'None' %} selected {%endif%}>Select Language
+                    </option>
+                    <option value="C" {%if values.ProgrammingLanguage == 'C' %} selected {%endif%}>C</option>
+                    <option value="C++" {%if values.ProgrammingLanguage == 'C++' %} selected {%endif%}>C++</option>
+                    <option value="Java" {%if values.ProgrammingLanguage == 'Java' %} selected {%endif%}>Java</option>
+                    <option value="Python" {%if values.ProgrammingLanguage == 'Python' %} selected {%endif%}>Python
+                    </option>
+                    <option value="C#" {%if values.ProgrammingLanguage == 'C#' %} selected {%endif%}>C#</option>
+                    <option value="Go" {%if values.ProgrammingLanguage == 'Go' %} selected {%endif%}>Go</option>
+                    <option value="Swift" {%if values.ProgrammingLanguage == 'Swift' %} selected {%endif%}>Swift</option>
+                    <option value="Kotlin" {%if values.ProgrammingLanguage == 'Kotlin' %} selected {%endif%}>Kotlin
+                    </option>
+                    <option value="PHP" {%if values.ProgrammingLanguage == 'PHP' %} selected {%endif%}>PHP</option>
+                    <option value="JavaScript" {%if values.ProgrammingLanguage == 'JavaScript' %} selected {%endif%}>
+                      JavaScript</option>
+                    <option value="Other" {%if values.ProgrammingLanguage == 'Other' %} selected {%endif%}>Other</option>
+                  </select>
+                  <div id="defaultFormControlHelp" class="form-text">
+                    Here put the main <b>'programming language'</b>.
+                  </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                  <label for="frontend" class="form-label">Front-End</label>
+                  <select name="frontend" class="select2 form-select">
+                    <option value="None" {%if values.FrontEnd  == 'None' %} selected {%endif%}>Select Language</option>
+                    <option value="Basic" {%if values.FrontEnd == 'Basic' %} selected {%endif%}>Simple</option>
+                    <option value="ReactJS" {%if values.FrontEnd == 'ReactJS' %} selected {%endif%}>ReactJs</option>
+                    <option value="Angular" {%if values.FrontEnd == 'Angular' %} selected {%endif%}>Angular</option>
+                    <option value="JQuery" {%if values.FrontEnd == 'JQuery' %} selected {%endif%}>JQuery</option>
+                    <option value="Other" {%if values.FrontEnd == 'Other' %} selected {%endif%}>Other</option>
+                  </select>
+                  <div id="defaultFormControlHelp" class="form-text">
+                    Here <b>'simple'</b> means <b>'html, css and js'</b> languages.
+                  </div>
+                </div>
+                <div class="mb-3 col-md-3">
+                  <label for="backend" class="form-label">Back-End</label>
+                  <select name="backend" class="select2 form-select">
+                    <option value="None" {%if values.BackEnd == 'None' %} selected {%endif%}>Select Language</option>
+                    <option value="Django" {%if values.BackEnd == 'Django' %} selected {%endif%}>Django</option>
+                    <option value="ExpressJS" {%if values.BackEnd == 'ExpressJS' %} selected {%endif%}>Express JS</option>
+                    <option value="SpringBoot" {%if values.BackEnd == 'SpringBoot' %} selected {%endif%}>Spring Boot
+                    </option>
+                    <option value="Flask" {%if values.BackEnd == 'Flask' %} selected {%endif%}>Flask</option>
+                    <option value="PHP" {%if values.BackEnd == 'PHP' %} selected {%endif%}>PHP</option>
+                    <option value="ASP.Net" {%if values.BackEnd == 'ASP.Net' %} selected {%endif%}>ASP.Net</option>
+                    <option value="Other" {%if values.BackEnd == 'Other' %} selected {%endif%}>Other</option>
+                  </select>
+                </div>
+                <div class="mb-3 col-md-3">
+                  <label for="database" class="form-label">Database</label>
+                  <select name="database" class="select2 form-select">
+                    <!-- <option value="{{location_.id}}" {% if emp.location_id == location_.id %} selected {% endif %}>{{location_.name}}</option> -->
+                    <option value="None" {%if values.DataBase == 'None' %} selected {%endif%}>Select Language</option>
+                    <option value="MongoDB" {%if values.DataBase == 'MongoDB' %} selected {%endif%}><b>MongoDB:</b> No-SQL
+                      Database</option>
+                    <option value="MySQL" {%if values.DataBase == 'MySQL' %} selected {%endif%}><b>MySQL:</b> SQL Database
+                    </option>
+                    <option value="Oracle" {%if values.DataBase == 'Oracle' %} selected {%endif%}><b>Oracle:</b> SQL
+                      Database</option>
+                    <option value="SQLite" {%if values.DataBase == 'SQLite' %} selected {%endif%}><b>SQLite:</b> SQL
+                      Database</option>
+                    <option value="Other_SQL" {%if values.DataBase == 'Other_SQL' %} selected {%endif%}><b>Other:</b> SQL
+                      Database</option>
+                    <option value="Other_NoSQL" {%if values.DataBase == 'Other_NoSQL' %} selected {%endif%}><b>Other:</b>
+                      No-SQL Database</option>
+                  </select>
+                </div>
+                <div class="mb-3 col-md-7">
+                  <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
+                  <textarea class="form-control" id="softdiscription" name="softdiscription" style="height:120px"
+                    rows="4" value="" readonly>{{values.SoftDiscription}}</textarea>
+                  <div id="defaultFormControlHelp" class="form-text">
+                    Here is you briefly describe exactly what features you want on your project. And <b>describe
+                      everything.....</b>
+                  </div>
+                </div>
+                <div class="mb-3 col-md-5">
+                  <div class="row">
+                    <!-- first three places -->
+                    <div class="mb-3 col-md-5">
+                      <label for="state" class="form-label">Beginning Date</label>
+                      <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.BeginningDate |date:'M d, Y'}}"  name="beginningdate"  > -->
+                      <input class="form-control" type="date" id="html5-date-input"
+                        value="{{values.BeginningDate |date:'Y-m-d'}}" name="beginningdate">
+                    </div>
+                    <div class="mb-3 col-md-2">
+                      <br><br>
+                      <center><i class='bx bx-transfer bx-spin bx-sm'></i></center>
+                    </div>
+                    <div class="mb-3 col-md-5">
+                      <label for="state" class="form-label">Ending Date</label>
+                      <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.EndingDate |date:'M d, Y'}}"  name="beginningdate"  > -->
+                      <input class="form-control" type="date" id="html5-date-input"
+                        value="{{values.EndingDate |date:'Y-m-d'}}" name="endingdate">
+                    </div>
+                    <!-- first three places -->
+                  </div>
+                  <div class="mb-3">
+                    <label for="firstName" class="form-label">Assign your budget ammount, at max!!</label>
+                    <div class="input-group">
+                      <span class="input-group-text">In Rupees.</span>
+                      <input type="number" class="form-control" placeholder="Starting Amount"
+                        value="{{values.StartingAmount}}" name="startingamount">
+                      <span class="input-group-text" style="color:#ffffff">to</span>
+                      <input type="number" class="form-control" placeholder="Ending Amount"
+                        value="{{values.EndingAmount}}" name="endingamount">
+                      <!-- <span class="input-group-text">.00</span> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br><br>
+              <hr class="my-0">
+              <br><br>
+              <br><br>
+
+              <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="exampleFormControlTextarea1" class="form-label">Hard Discription</label>
+                    <textarea class="form-control" id="harddiscription" name="harddiscription"
+                        style="" rows="20" value="" >{{values.SoftDiscription}}</textarea>
+                    <div id="defaultFormControlHelp" class="form-text">
+                        This is the final Discription, who we see at the end. So <b>describe everything.....</b>
+                    </div>
+                </div>
+          <!--/ Custom content with heading -->
+          <div class="col-sm-8" style="height:520px; padding:0;">
+            <div class="modal-content" style="height: 100%; margin: 0 0 0 0;">
+              <h5 class="card-header" style="background-color:#0099ff; padding: 15px;">
+                <span class="primary" style="float: right; color: white; ">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="bx bx-dots-vertical-rounded"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                      <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                      <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                      <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                      <li>
+                        <hr class="dropdown-divider">
+                      </li>
+                      <li><a class="dropdown-item" href="javascript:void(0);">Separated link</a></li>
+                    </ul>
+                  </div>
+                </span>
+                <b style="color: white;">{{values.ProjectName}}</b>
+                <br>
+                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                    class="avatar avatar-xs pull-up" title="" data-bs-original-title="Lilian Fuller">
+                    <img src="/_static/otherapps/img/avatars/5.png" alt="Avatar" class="rounded-circle">
+                  </li>
+                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                    class="avatar avatar-xs pull-up" title="" data-bs-original-title="Sophia Wilkerson">
+                    <img src="/_static/otherapps/img/avatars/6.png" alt="Avatar" class="rounded-circle">
+                  </li>
+                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                    class="avatar avatar-xs pull-up" title="" data-bs-original-title="Christina Parker">
+                    <img src="/_static/otherapps/img/avatars/7.png" alt="Avatar" class="rounded-circle">
+                  </li>
+                </ul>
+              </h5>
+              <div class="modal-body" style="overflow: auto;">
+                <!-- whatsapp special massage -->
+                <div class="col-sm-10" style="padding: 2px; margin-right:8.33%; margin-left: 8.33%;">
+                  <div class="card"
+                    style="background-color:#07807559; color:black; padding: 5px; margin-top: -18px; margin-bottom: 15px;">
+                    <!-- <small class="text-muted" style="float: right; top:50%;">Last updated 3 mins ago</small> -->
+                    <!-- <h5 class="card-title">Card title</h5> -->
+                    <div class="col-sm-12">
+                      <i class='bx bxs-lock-alt bx-xs' heigh></i>
+                      <small style="font-size:10px;">
+                        WhatsApp uses end-to-end encryption, which means nobody except the sender and recipient can read
+                        messages. Other chat apps like Facebook Messenger and Telegram don't use end-to-end encryption
+                        by default. Is WhatsApp encrypted? Yes, all chats on the platform are encrypted by default.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <!-- chatting -->
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color:#ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:23 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:23 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:24 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:25 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:34 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:35 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:35 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:58 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:58 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:59 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:00 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:02 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:04 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:05 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:06 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:08 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:08 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:10 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:10 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:11 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:11 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:12 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
+                  <div class="card" style="background-color: #ffffff; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 12:12 AM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <p class="card-text">
+                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
+                        This is another card with title and supporting text below. This card has some additional content
+                        to make it slightly taller overall.
+                      <span class="primary" style="float: right;color: gray;">— 11:12 PM.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- last button -->
+              <div class="modal-footer" style="background-color: #1d242e; padding:5px;">
+                <div class="input-group">
+                  <textarea class="form-control" aria-label="With textarea" placeholder="Message" style="height: 20px;"></textarea>
+                  <button type="button" class="btn btn-primary" style="background-color: #2c3c4c;">
+                    <i class='bx bx-send'></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                <div class="mt-2">
+                  <!-- <button href="/clientdetails/" type="submit" class="btn btn-primary me-2">Save changes</button> -->
+                  <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                  <button type="reset" class="btn btn-outline-secondary">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <!-- /Account -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -33,9 +33,10 @@ CRM - HR - Home
                         </th>
                         <th>FrontEnd–BackEnd</th>
                         <th>Client</th>
+                        <th>Admin</th>
                         <th>Project Manager</th>
                         <th>Developers</th>
-                        <th>Want Report</th>
+                        <th>Project Details</th>
                       </tr>
                     </thead>
                   {% if values %}
@@ -53,6 +54,21 @@ CRM - HR - Home
                                 <img src="/_uploads/{{ value.Client.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
                               </li>
                               {{value.Client.FullName}}
+                            </ul>
+                          </td>
+                          <td>
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            {% if value.Admin %}
+                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{value.Admin.FullName}}"
+                                style="margin-right:5px;">
+                                <!-- <img src="/_uploads/{{data.Admin.ProfilePick|default_if_none:'employee/user.png'}} " alt="Avatar" class="rounded-circle"> -->
+                                <img src="/_uploads/{{value.Admin.ProfilePick|default:'employee/user.png'}} " alt="Avatar" class="rounded-circle">
+                              </li>
+                              {{value.Admin.FullName}}
+                            {% else %}
+                              Not Assigned!!!
+                            {% endif %}
                             </ul>
                           </td>
                           <td>
@@ -90,7 +106,7 @@ CRM - HR - Home
                           </td>
                           <td>
                             <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                            <a href="/hr/projectdetails/completed/{{value.ProjectSlug}}-{{value.id}}" class="btn btn-info {% if value.ReportStatus != 'Completed' %} disabled {% endif %}" style="line-height: 15px">Click</a>
+                            <a href="/hr/projectdetails/completed/{{value.ProjectSlug}}-{{value.id}}" class="btn btn-info {% if value.ReportStatus != 'Completed' %} disabled {% endif %}" style="line-height: 15px">Click to Open</a>
                             <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                           </td>
                         </tr>

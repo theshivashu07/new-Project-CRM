@@ -35,7 +35,7 @@ CRM - Admin
                         <th>Client</th>
                         <th>Project Manager</th>
                         <th>Developers</th>
-                        <th>Want Report</th>
+                        <th>Project Details</th>
                       </tr>
                     </thead>
                   {% if values %}
@@ -90,7 +90,7 @@ CRM - Admin
                           </td>
                           <td>
                             <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                            <a href="/admin/projectdetails/completed/{{value.ProjectSlug}}-{{value.id}}" class="btn btn-info {% if value.ReportStatus != 'Completed' %} disabled {% endif %}" style="line-height: 15px">Click</a>
+                            <a href="/admin/projectdetails/completed/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info {% if value.ReportStatus != 'Completed' %} disabled {% endif %}" style="line-height: 15px">Click to Open</a>
                             <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
                           </td>
                         </tr>

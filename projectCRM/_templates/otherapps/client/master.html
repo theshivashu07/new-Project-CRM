@@ -207,7 +207,7 @@
                 <div data-i18n="Analytics">Request for Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/latestreport/'|add:projectslug %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/latestreport/'|add:projectslug or request.path == '/client/projectdetails/active/'|add:projectslug %}active{% endif %}">
               <a href="/client/activeprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>

@@ -11,8 +11,14 @@ urlpatterns=[
 		path('mynotification/',views.mynotification,name='mynotification'),
 
 		path('projectdetails/',views.projectdetails,name='projectdetails'),
+		path('projectdetails/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
+		# path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
 
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
+
+		path('latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),
+		path('projectdetails/active/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
+		path('projectdetails/completed/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
 
 		path('activeprojects/',views.activeprojects,name='activeprojects'),
 		path('completedprojects/',views.completedprojects,name='completedprojects'),
@@ -39,8 +45,6 @@ letsrecruit
 letspromote
 letsincrement
 '''
-
-
 
 
 

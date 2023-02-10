@@ -17,6 +17,7 @@ urlpatterns=[
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
 
 		path('latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),
+		path('projectdetails/active/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
 		path('projectdetails/completed/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
 
 		path('activeprojects/',views.activeprojects,name='activeprojects'),
@@ -44,8 +45,6 @@ letsrecruit
 letspromote
 letsincrement
 '''
-
-
 
 
 

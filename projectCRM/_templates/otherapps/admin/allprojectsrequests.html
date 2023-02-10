@@ -12,12 +12,12 @@ CRM - Admin
 <div class="content-wrapper">
   <!-- Content -->
   <div class="container-xxl flex-grow-1 container-p-y">
-    <span class="badge" style="float: right; font-size: 15px; color: white;">
+    <!-- <span class="badge" style="float: right; font-size: 15px; color: white;">
       <a href="/admin/projectdetails/" class="btn" style="color: white;">
         <i class='bx bx-message-square-add bx-md'></i>
         Assign New
       </a>
-    </span>
+    </span> -->
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">UI Elements /</span> Cards Basic</h4>
     <!-- <h6 class="pb-1 mb-4 text-muted">Header and footer</h6> -->
     <br>
@@ -33,21 +33,21 @@ CRM - Admin
         <div class="card">
           <div class="card-header">
             <!-- <span class="primary" style="float: right; top:50%;">2 days ago.</span> -->
-            <h5 style="margin-bottom: 0;"><b>by {{value.duplicate.ClientsFullName}}.</b></h5>
+            <h5 style="margin-bottom: 0;"><b>by {{value.Client}}.</b></h5>
           </div>
           <div class="card-body">
             <div>
               <!-- <span class="primary" style="float: right; top:50%;">2 days ago.</span> -->
-              <h5 class="card-title" style="color:white">{{value.original.ProjectName}}</h5>
+              <h5 class="card-title" style="color:white">{{value.ProjectName}}</h5>
             </div>
             <p class="card-text">
-              {{value.original.SoftDiscription}}
+              {{value.SoftDiscription}}
             </p>
             <div>
-              <a href="/admin/projectdetails/{{value.original.ProjectSlug}}-{{value.original.id}}"
+              <a href="/admin/projectdetails/{{value.ProjectSlug}}-{{value.id}}"
                 class="btn btn-primary">Edit / Add More</a>
               <!-- <small class="text-muted">Last updated 3 mins ago.</small> -->
-              <span class="primary" style="float: right; top:50%;"><br>— {{value.original.JoiningDate}}</span>
+              <span class="primary" style="float: right; top:50%;"><br>— {{value.JoiningDate}}</span>
             </div>
           </div>
         </div>

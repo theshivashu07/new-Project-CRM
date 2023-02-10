@@ -12,6 +12,12 @@ CRM - Developer
 <div class="content-wrapper">
   <!-- Content -->
   <div class="container-xxl flex-grow-1 container-p-y">
+        <!-- <span class="badge" style="float: right; font-size: 15px; color: white;">
+            <a href="/developer/projectdetails/edits/{{values.ProjectSlug}}-{{values.id}}" class="btn" style="color: white;">
+                <i class="bx bx-message-square-edit bx-md"></i>
+                EDIT this PROJECT
+            </a>
+        </span> -->
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
     <div class="row">
       <!-- Basic -->
@@ -21,253 +27,217 @@ CRM - Developer
           <!-- Account -->
           <hr class="my-0">
           <div class="card-body">
-            <form id="formAccountSettings" method="POST" onsubmit="return false">
-              <div class="row">
-                <div class="mb-3 col-md-7">
-                  <label for="firstName" class="form-label">New Project Name</label>
-                  <input class="form-control" type="text" id="firstName" name="firstName" value="Project CRM"
-                    placeholder="" autofocus="">
-                </div>
-                <div class="mb-3 col-md-5">
-                  <label for="language" class="form-label">Assign project to <b>ADMIN</b> </label>
-                  <select id="language" class="select2 form-select">
-                    <!-- <option value="">Select Admin</option> -->
-                    <!-- <option value="01">Shivam Shukla</option> -->
-                    <option value="01">Shivam Shukla</option>
-                    <option value="02" selected>Shri Shukla</option>
-                    <option value="03">Angle Viston</option>
-                    <option value="04">Merry Cluster</option>
-                  </select>
-                </div>
-                <div class="mb-3 col-md-3">
-                  <label for="language" class="form-label">Programming Language</label>
-                  <select id="language" class="select2 form-select">
-                    <!-- <option value="">Select Language</option> -->
-                    <option value="c">C</option>
-                    <option value="cpp">C++</option>
-                    <option value="java">Java</option>
-                    <!-- <option value="py">Python</option> -->
-                    <option value="py" selected>Python</option>
-                    <option value="c#">C#</option>
-                    <option value="go">Go</option>
-                    <option value="swift">Swift</option>
-                    <option value="kotlin">Kotlin</option>
-                    <option value="php">PHP</option>
-                    <option value="js">JavaScript</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <div id="defaultFormControlHelp" class="form-text">
-                    Here put the main <b>'programming language'</b>.
-                  </div>
-                </div>
-                <div class="mb-3 col-md-3">
-                  <label for="language" class="form-label">Front-End</label>
-                  <select id="language" class="select2 form-select">
-                    <!-- <option value="">Select Language</option> -->
-                    <option value="basic" selected>Simple</option>
-                    <option value="reactjs">ReactJs</option>
-                    <option value="angular">Angular</option>
-                    <option value="jquery">JQuery</option>
-                    <option value="other">Other</option>
-                  </select>
-                  <div id="defaultFormControlHelp" class="form-text">
-                    Here <b>'simple'</b> means <b>'html, css and js'</b> language.
-                  </div>
-                </div>
-                <div class="mb-3 col-md-3">
-                  <label for="language" class="form-label">Back-End</label>
-                  <select id="language" class="select2 form-select">
-                    <!-- <option value="">Select Language</option> -->
-                    <option value="django" selected>Django</option>
-                    <option value="expressjs">Express JS</option>
-                    <option value="springboot">Spring Boot</option>
-                    <option value="flask">Flask</option>
-                    <option value="PHP">PHP</option>
-                    <option value="asp.net">ASP.Net</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div class="mb-3 col-md-3">
-                  <label for="language" class="form-label">Database</label>
-                  <select id="language" class="select2 form-select">
-                    <option value="">Select Language</option>
-                    <option value="mongodb"><b>MongoDB:</b> No-SQL Database</option>
-                    <option value="mysql"><b>MySQL:</b> SQL Database</option>
-                    <option value="oracle"><b>Oracle:</b> SQL Database</option>
-                    <!-- <option value="sqlite"><b>SQLite:</b> SQL Database</option> -->
-                    <option value="sqlite" selected><b>SQLite:</b> SQL Database</option>
-                    <option value="other"><b>Other:</b> SQL Database</option>
-                    <option value="other"><b>Other:</b> No-SQL Database</option>
-                  </select>
-                </div>
-                <div class="mb-3 col-md-7">
-                  <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" style="height:120px"
-                    rows="4"></textarea>
-                  <div id="defaultFormControlHelp" class="form-text">
-                    Here is you briefly describe exactly what features you want on your project. And <b>describe
-                      everything.....</b>
-                  </div>
-                </div>
-                <div class="mb-3 col-md-5">
-                  <div class="row">
-                    <!-- first three places -->
-                    <div class="mb-3 col-md-5">
-                      <label for="state" class="form-label">Beginning Date</label>
-                      <input class="form-control" type="date" id="html5-date-input" value="2023-01-15">
-                    </div>
-                    <div class="mb-3 col-md-2">
-                      <br><br>
-                      <center><i class='bx bx-transfer bx-spin bx-sm'></i></center>
-                    </div>
-                    <div class="mb-3 col-md-5">
-                      <label for="state" class="form-label">Ending Date</label>
-                      <input class="form-control" type="date" id="html5-date-input" value="2023-01-15">
-                    </div>
-                    <!-- first three places -->
-                  </div>
-                  <div class="mb-3">
-                    <label for="firstName" class="form-label">Assign your budget ammount, at max!!</label>
-                    <div class="input-group">
-                      <span class="input-group-text">In Rupees.</span>
-                      <input type="text" class="form-control" placeholder="" value="40,000">
-                      <span class="input-group-text" style="color:#ffffff">to</span>
-                      <input type="text" class="form-control" placeholder="" value="50,000">
-                      <!-- <span class="input-group-text">.00</span> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+
+                            <div class="row">
+                                <input type="hidden" id="projectID" name="projectID" value="{{values.id}}">
+                                <div class="mb-3 col-md-7">
+                                    <label for="projectname" class="form-label">New Project Name</label>
+                                    <input class="form-control" type="text" id="projectname" name="projectname"
+                                        value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="" readonly>
+                                </div>
+                                <div class="mb-3 col-md-5">
+                                    <label for="clientfullname" class="form-label">Client Name</label>
+                                    <input class="form-control" type="text" id="clientfullname" name="clientfullname"
+                                        value="{{ClientFullName}}" placeholder="None" autofocus="" readonly>
+                                </div>
+                                <div class="mb-3 col-md-3">
+                                    <label for="language" class="form-label">Programming Language</label>
+                                    <input class="form-control" type="text" id="language" name="language"
+                                        value="{{values.ProgrammingLanguage}}" placeholder="None" autofocus="" readonly>
+                                    <div id="defaultFormControlHelp" class="form-text">
+                                        Here put the main <b>'programming language'</b>.
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-3">
+                                    <label for="frontend" class="form-label">Front-End</label>
+                                    <input class="form-control" type="text" id="frontend" name="frontend"
+                                        value="{{values.FrontEnd}}" placeholder="None" autofocus="" readonly>
+                                    <div id="defaultFormControlHelp" class="form-text">
+                                        Here <b>'simple'</b> means <b>'html, css and js'</b> language.
+                                    </div>
+                                </div>
+                                <div class="mb-3 col-md-3">
+                                    <label for="backend" class="form-label">Back-End</label>
+                                    <input class="form-control" type="text" id="backend" name="backend"
+                                        value="{{values.BackEnd}}" placeholder="None" autofocus="" readonly>
+                                </div>
+                                <div class="mb-3 col-md-3">
+                                    <label for="database" class="form-label">Database</label>
+                                    <input class="form-control" type="text" id="database" name="database"
+                                        value="{{values.DataBase}}" placeholder="None" autofocus="" readonly>
+                                </div>
+                                {% if values.HardDiscription %}
+                                    <div class="mb-3 col-md-7">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Hard Discription</label>
+                                        <textarea class="form-control" id="harddiscription" name="harddiscription"
+                                            style="height:120px" rows="4" value=""
+                                            readonly>{{values.HardDiscription}}</textarea>
+                                        <div id="defaultFormControlHelp" class="form-text">
+                                            Here is you briefly describe exactly what features you want on your project. And
+                                            <b>describe everything.....</b>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                   <div class="mb-3 col-md-7">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
+                                        <textarea class="form-control" id="softdiscription" name="softdiscription"
+                                            style="height:120px" rows="4" value=""
+                                            readonly>{{values.SoftDiscription}}</textarea>
+                                        <div id="defaultFormControlHelp" class="form-text">
+                                            Here is you briefly describe exactly what features you want on your project. And
+                                            <b>describe everything.....</b>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="mb-3 col-md-5">
+                                    <div class="row">
+                                        <!-- first three places -->
+                                        <div class="mb-3 col-md-5">
+                                            <label for="state" class="form-label">Beginning Date</label>
+                                            <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.BeginningDate |date:'M d, Y'}}"  name="beginningdate" readonly> -->
+                                            <input class="form-control" type="date" id="html5-date-input"
+                                                value="{{values.BeginningDate |date:'Y-m-d'}}" name="beginningdate"
+                                                readonly>
+                                        </div>
+                                        <div class="mb-3 col-md-2">
+                                            <br><br>
+                                            <center><i class='bx bx-transfer bx-spin bx-sm'></i></center>
+                                        </div>
+                                        <div class="mb-3 col-md-5">
+                                            <label for="state" class="form-label">Ending Date</label>
+                                            <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.EndingDate |date:'M d, Y'}}"  name="beginningdate" readonly> -->
+                                            <input class="form-control" type="date" id="html5-date-input"
+                                                value="{{values.EndingDate |date:'Y-m-d'}}" name="endingdate" readonly>
+                                        </div>
+                                        <!-- first three places -->
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="firstName" class="form-label">Assign your budget ammount, at
+                                            max!!</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">In Rupees.</span>
+                                            <input type="number" class="form-control" placeholder="Starting Amount"
+                                                value="{{values.StartingAmount}}" name="startingamount" readonly>
+                                            <span class="input-group-text" style="color:#ffffff">to</span>
+                                            <input type="number" class="form-control" placeholder="Ending Amount"
+                                                value="{{values.EndingAmount}}" name="endingamount" readonly>
+                                            <!-- <span class="input-group-text">.00</span> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
               <br><br>
               <hr class="my-0">
               <br><br>
+              <br><br>
 
-              <div class="card-body">
-                <div class="row gx-3 gy-3 align-items-center">
-                  <div class="col-md-12">
-                    <label class="form-label" for="selectTypeOpt">Choose Project Manager</label>
-                    <select id="selectTypeOpt" class="form-select color-dropdown">
-                      <option value="" selected="">Select Project Manager</option>
-                      <option value="01">Shivam Shukla</option>
-                      <option value="02">Shri Shukla</option>
-                      <option value="03">Angle Viston</option>
-                      <option value="04">Merry Cluster</option>
+              <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label for="projectmanager" class="form-label">Assign Project to Project Manager</label>
+                    <select name="projectmanager" class="select2 form-select">
+                        <option value="None">Select Project Manager</option>     
+                        {% for projectmanager in projectmanagerslist %}   
+                          <option value="{{projectmanager.id}}" {%if values.ProjectManager == projectmanager.id %} selected {%endif%}>{{projectmanager.FullName}}</option>   
+                        {% endfor %}
                     </select>
-                  </div>
                 </div>
+                <div class="mb-3 col-md-5">
+                    <label for="developer" class="form-label">Assign Project to Developer</label>
+                    <select name="developer" class="select2 form-select">
+                        <option value="">Select Admin</option>
+                        {% for developer in developerslist %}
+                        <option value="{{developer.id}}">{{developer.FullName}}</option>   
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label" for="showToastPlacement">Click below after make a Team!!</label>
+                  <!-- <a href="#"><button id="showToastPlacement" class="btn btn-primary d-block" style="background-color:#1d242e">Save All Changes</button></a> -->
+                  <button type="submit" class="btn btn-primary me-2" style="background-color:#1d242e">Save changes</button>
+                </div>
+                                <!-- <div class="mt-2">
+                                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
+                                </div> -->
               </div>
+  
+              <br>
 
               <div class="card">
-                <h5 class="card-header" style="background-color:#222c3c;"><b>Select Developer's...</b></h5>
+                <h5 class="card-header"><b>Project's TEAM...</b></h5>
                 <div class="table-responsive text-nowrap" style="background-color:#1d242e">
                   <table class="table table-sm">
                     <thead>
-                      <tr>
+                      <tr style="background-color: black;">
                         <th></th>
+                        <th>Profile Username</th>
                         <th>Developer's Name</th>
-                        <th>Role (with Level)</th>
-                        <th>Running</th>
-                        <th>Completed</th>
-                        <th>Skill's<br></th>
+                        <th>Role</th>
+                        <th>As (with Level)</th>
+                        <th>Completed Task's</th>
                       </tr>
                     </thead>
+                {% if selectedprojectmanager or selecteddeveloperslist %}
                     <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
-                            style="margin-left: 20%;"></td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                            style="padding-left: 0;">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>Shivashu Shukla</strong>
-                          </ul>
-                        </td>
-                        <td>Data Analyst - II</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
-                      </tr>
-                      <tr>
-                        <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
-                            style="margin-left: 20%;"></td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                            style="padding-left: 0;">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>Shri Shukla</strong>
-                          </ul>
-                        </td>
-                        <td>Data Engineer - II</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
-                      </tr>
-                      <tr>
-                        <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
-                            style="margin-left: 20%;"></td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                            style="padding-left: 0;">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>Angle Viston</strong>
-                          </ul>
-                        </td>
-                        <td>Software Engineer - I</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
-                      </tr>
-                      <tr>
-                        <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"
-                            style="margin-left: 20%;"></td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                            style="padding-left: 0;">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong> Merry Cluster</strong>
-                          </ul>
-                        </td>
-                        <td>Software Developer - I</td>
-                        <td>2</td>
-                        <td>4</td>
-                        <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td>
-                      </tr>
-                      <tr></tr>
+                      {% if selectedprojectmanager %}
+                        <tr style="background-color: white;">
+                          <!-- <td><span class="badge badge-center rounded-pill" style="float: right; background-color: #30dd30;">1</span></td> -->
+                          <td><span class="badge btn btn-danger">01</span></td>
+                          <td style="padding-left: 0px;">
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{selectedprojectmanager.FullName}}"
+                                style="margin-right:5px;">
+                                <img src="/_uploads/{{ selectedprojectmanager.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
+                              </li>
+                              <strong>@{{selectedprojectmanager.Username}}</strong>
+                            </ul>
+                          </td>
+                          <td>{{selectedprojectmanager.FullName}}</td>
+                          <td>{{selectedprojectmanager.Role}}</td>
+                          <td>{{selectedprojectmanager.As}} – {{selectedprojectmanager.Level}}</td>
+                          <td>__</td>
+                        </tr>
+                      {% endif%}
+                      {% if selecteddeveloperslist %}
+                        {% for developer in selecteddeveloperslist %}
+                          <tr>
+                            <!-- <td><span class="badge badge-center rounded-pill" style="float: right; background-color: #30dd30;">1</span></td> -->
+                            <td><span class="badge btn btn-info">0{{forloop.counter}}</span></td>
+                            <td style="padding-left: 0px;">
+                              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
+                                  class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{developer.FullName}}"
+                                  style="margin-right:5px;">
+                                <img src="/_uploads/{{ developer.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
+                                </li>
+                                <strong>@{{developer.Username}}</strong>
+                              </ul>
+                            </td>
+                            <td>{{developer.FullName}}</td>
+                            <td>{{developer.Role}}</td>
+                            <td>{{developer.As}} – {{developer.Level}}</td>
+                            <td>None</td>
+                          </tr>
+                        {% endfor %}
+                      {% endif %}
+                    <!-- <td> -->
+                    <!-- </td> -->
                     </tbody>
                   </table>
+                {% else %}
+                    <tbody></tbody>
+                  </table>
+                  <div style="margin:40px; margin-top:10px;">
+                      <b style="color:red;"><u> ALERT:</u> There no Project Manager and Developer's you selected for that project!!!</b>
+                  </div>
+                {% endif %}
                 </div>
                 <div id="defaultFormControlHelp" class="form-text">
                   <b>Only such employees are in the componey according to your searches!!</b>
                 </div>
-              </div>
-
-              <br><br>
-
-              <div class="col-md-5">
-                <label class="form-label" for="showToastPlacement">Click below after make a Team!!</label>
-                <a href="#"><button id="showToastPlacement" class="btn btn-primary d-block"
-                    style="background-color:#1d242e">Save All Changes</button></a>
               </div>
 
               <br><br>

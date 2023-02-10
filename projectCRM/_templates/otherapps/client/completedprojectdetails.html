@@ -64,15 +64,29 @@ CRM - Client - Project Details
                   <input class="form-control" type="text" id="database" name="database" value="{{values.DataBase}}"
                     placeholder="None" autofocus="" readonly>
                 </div>
-                <div class="mb-3 col-md-7">
-                  <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
-                  <textarea class="form-control" id="softdiscription" name="softdiscription" style="height:120px"
-                    rows="4" value="" readonly>{{values.SoftDiscription}}</textarea>
-                  <div id="defaultFormControlHelp" class="form-text">
-                    Here is you briefly describe exactly what features you want on your project. And <b>describe
-                      everything.....</b>
-                  </div>
-                </div>
+                                {% if values.HardDiscription %}
+                                    <div class="mb-3 col-md-7">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Hard Discription</label>
+                                        <textarea class="form-control" id="harddiscription" name="harddiscription"
+                                            style="height:120px" rows="4" value=""
+                                            readonly>{{values.HardDiscription}}</textarea>
+                                        <div id="defaultFormControlHelp" class="form-text">
+                                            Here is you briefly describe exactly what features you want on your project. And
+                                            <b>describe everything.....</b>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                   <div class="mb-3 col-md-7">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
+                                        <textarea class="form-control" id="softdiscription" name="softdiscription"
+                                            style="height:120px" rows="4" value=""
+                                            readonly>{{values.SoftDiscription}}</textarea>
+                                        <div id="defaultFormControlHelp" class="form-text">
+                                            Here is you briefly describe exactly what features you want on your project. And
+                                            <b>describe everything.....</b>
+                                        </div>
+                                    </div>
+                                {% endif %}
                 <div class="mb-3 col-md-5">
                   <div class="row">
                     <!-- first three places -->

@@ -7,6 +7,8 @@ from django.db.models import Q
 import datetime
 
 
+
+
 '''
 def index(request):
 	return HttpResponse("This is <b>HR</b> page!!!");
@@ -26,17 +28,12 @@ def mydeactivate(request):
 
 
 def allprojectsrequests(request):
-	# values=ProjectInfo.objects.all().values('id')
-	datasets=ProjectInfo.objects.filter(ReportStatus="Not Received")
+	# Below we use developer because it is the last thing wheich we insert... otherwise also use ProjectManager=None...
+	querysets=ProjectInfo.objects.filter(ReportStatus="Not Received")
 	values=list()
-	for dataset in datasets:
-		newdict=dict()
-		# put all original data's...
-		newdict['original']=dataset;
-		# get-n-put all duplicate data's...
-		temp=ClientInfo.objects.get(pk=dataset.Client).FullName
-		newdict['duplicate']={'ClientsFullName':temp};
-		values.append(newdict)
+	for queryset in querysets:
+		queryset.Client=ClientInfo.objects.get(pk=queryset.Client).FullName
+		values.append(queryset)
 	return render(request,"otherapps/hr/allprojectsrequests.html",{'values':values});
 
 # currently we refer both urls to a duplicate page
@@ -88,7 +85,7 @@ def completedprojectdetails(request,projectslug):
 	print(values,values.Client,values.Admin)
 	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
 	AdminFullName=Employee.objects.get(id=values.Admin).FullName
-	return render(request, "otherapps/hr/projectdetails_withteam.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
+	return render(request, "otherapps/hr/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
 
 def projectdetails(request):
 	if request.method=="POST":

@@ -201,13 +201,13 @@
                 <div data-i18n="Analytics">Sent Project's Details</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/client/allprojectsrequests/' or request.path == path %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/client/allprojectsrequests/' or request.path == '/client/projectdetails/'|add:projectslug %}active{% endif %}">
               <a href="/client/allprojectsrequests/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book-add"></i>
                 <div data-i18n="Analytics">Request for Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/latestreport/'|add:projectslug or request.path == '/client/projectdetails/active/'|add:projectslug %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/latestreport/'|add:projectslug or request.path == '/client/projectdetails/active/'|add:projectslug or request.path == '/client/projectdetails/edits/'|add:projectslug %}active{% endif %}">
               <a href="/client/activeprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>

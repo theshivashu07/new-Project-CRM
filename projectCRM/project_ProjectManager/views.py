@@ -129,7 +129,7 @@ def activeprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks
@@ -149,7 +149,7 @@ def completedprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks

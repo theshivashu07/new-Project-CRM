@@ -7,8 +7,7 @@ from django.db.models import Q
 import datetime
 
 
-ProjectManagerMain=15   # temporary
-DeveloperMain=15
+DeveloperMain=5
 
 
 '''
@@ -116,12 +115,13 @@ def projectdetailsslug(request,projectslug):
 
 
 
-
-
-# currently we refer both urls to a duplicate page
 def activeprojects(request):
-	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
-	values=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
+	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
+	values=list()
+	for queryset in querysets:
+		queryset=ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(queryset.ReportStatus=="Active"):
+			values.append(queryset)
 	for value in values:
 		if(value.Client):
 			value.Client=ClientInfo.objects.get(pk=value.Client)
@@ -132,7 +132,7 @@ def activeprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks
@@ -140,8 +140,14 @@ def activeprojects(request):
 
 def completedprojects(request):
 	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
-	values=ProjectInfo.objects.filter(ReportStatus="Completed", ProjectManager=ProjectManagerMain) \
-				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", ProjectManager=ProjectManagerMain)
+	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
+	print(querysets)
+	values=list()
+	for queryset in querysets:
+		queryset=ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(queryset.ReportStatus in ["Completed","Withdrawal"]):
+			values.append(queryset)
+	print(values)
 	for value in values:
 		if(value.Client):
 			value.Client=ClientInfo.objects.get(pk=value.Client)
@@ -152,7 +158,7 @@ def completedprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks

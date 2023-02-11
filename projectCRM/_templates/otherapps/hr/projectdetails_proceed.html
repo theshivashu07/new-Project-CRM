@@ -31,7 +31,7 @@ CRM - HR - Project Details
                         <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row">
-                                <input type="hidden" id="employeeID" name="employeeID" value="{{values.id}}">
+                                <input type="hidden" id="projectID" name="projectID" value="{{values.id}}">
                                 <div class="mb-3 col-md-7">
                                     <label for="projectname" class="form-label">New Project Name</label>
                                     <input class="form-control" type="text" id="projectname" name="projectname"
@@ -40,7 +40,7 @@ CRM - HR - Project Details
                                 <div class="mb-3 col-md-5">
                                     <label for="clientfullname" class="form-label">Client Name</label>
                                     <input class="form-control" type="text" id="clientfullname" name="clientfullname"
-                                        value="{{ClientFullName}}" placeholder="None" readonly>
+                                        value="{{values.Client}}" placeholder="None" readonly>
                                 </div>
                                 <div class="mb-3 col-md-3">
                                     <label for="language" class="form-label">Programming Language</label>

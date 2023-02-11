@@ -198,7 +198,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <li class="menu-item {% if request.path == '/developer/allprojectsrequests/' or request.path == '/developer/projectdetails/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/developer/allprojectsrequests/' or request.path == '/developer/projectdetails/' or request.path == path or request.path == prevPATH %}active{% endif %}">
               <a href="/developer/allprojectsrequests" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->
@@ -206,13 +206,13 @@
                 <div data-i18n="Analytics">New Project Requests</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/developer/activeprojects/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/developer/activeprojects/' or request.path == '/developer/latestreport/'|add:projectslug or request.path == '/developer/projectdetails/active/'|add:projectslug %}active{% endif %}">
               <a href="/developer/activeprojects" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/developer/completedprojects/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/developer/completedprojects/' or request.path == '/developer/projectdetails/completed/'|add:projectslug %}active{% endif %}">
               <a href="/developer/completedprojects" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-layout'></i> -->
@@ -229,7 +229,7 @@
                 <div data-i18n="Analytics">Reports Collections</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/developer/sendreports/' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/developer/sendreports/' or request.path == '/developer/sendreports/@a' %}active{% endif %}">
               <a href="/developer/sendreports" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-file-export' ></i>
                 <div data-i18n="Analytics">Sent Report's</div>

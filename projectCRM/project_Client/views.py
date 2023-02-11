@@ -15,35 +15,10 @@ def index(request):
 	return HttpResponse("This is <b>client</b> page!!!");
 '''
 
-
-def reput():
-	'''I'm created this function for dual the ProjectInfo's data.'''
-	# values=ProjectInfo.objects.values_list('Client','ProjectName','ProgrammingLanguage','FrontEnd','BackEnd','DataBase','BeginningDate','EndingDate','StartingAmount','EndingAmount','SoftDiscription','ReportStatus', )
-	values=ProjectInfo.objects.all().values('Client','ProjectName','ProgrammingLanguage','FrontEnd','BackEnd','DataBase','BeginningDate','EndingDate','StartingAmount','EndingAmount','SoftDiscription','ReportStatus', )
-	# print('>>>>>',values)
-	for value in values:
-		lock=ProjectInfo(
-						Client=value['Client'],
-						ProjectName=value['ProjectName'],
-						ProgrammingLanguage=value['ProgrammingLanguage'],
-						FrontEnd=value['FrontEnd'],
-						BackEnd=value['BackEnd'],
-						DataBase=value['DataBase'],
-						BeginningDate=value['BeginningDate'],
-						EndingDate=value['EndingDate'],
-						StartingAmount=value['StartingAmount'],
-						EndingAmount=value['EndingAmount'],
-						SoftDiscription=value['SoftDiscription'],
-						ReportStatus=value['ReportStatus'], )
-		lock.save()
-	return None
-
-
-
-
 def index(request):
 	# reput()  
 	return render(request,"otherapps/client/index.html");
+
 def myaccount(request):
 	if request.method=="POST":
 		values=ClientInfo(
@@ -72,12 +47,9 @@ def mynotification(request):
 	return render(request,"otherapps/client/mynotification.html");
 
 
-def projectdetails(request,projectslug=None):
-	values=ClientInfo.objects.get(pk=ClienMain)
-	return render(request,"otherapps/client/projectdetails.html",{'values':values, 'clientID':ClienMain});
-
-
-def projectdetailsslug(request,projectslug):
+def projectdetails(request):
+	print("We are here to RUN!!!")
+	values=list()
 	if request.method=="POST":
 		values=ProjectInfo(
 						Client=request.POST["clientID"],
@@ -93,12 +65,55 @@ def projectdetailsslug(request,projectslug):
 						SoftDiscription=request.POST["softdiscription"], 
 						ReportStatus="Not Received", )
 		values.save()
+		slug="{}-{}".format(values.ProjectSlug,values.id)  #slug_creation
+		return redirect("/client/projectdetails/"+slug)
+		# return render(request,"otherapps/client/projectdetails.html", {'value':values});
+	return render(request,"otherapps/client/projectdetails.html", {'value':values, 'clientID':ClienMain});
+
+
+def projectdetailsslug(request,projectslug):
+	if request.method=="POST":
+		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
+		lock.ProjectName=request.POST["projectname"]
+		lock.ProgrammingLanguage=request.POST["programminglanguage"]
+		lock.FrontEnd=request.POST["frontend"]
+		lock.BackEnd=request.POST["backend"]
+		lock.DataBase=request.POST["database"]
+		lock.BeginningDate=request.POST["beginningdate"]
+		lock.EndingDate=request.POST["endingdate"]
+		lock.StartingAmount=request.POST["startingamount"]
+		lock.EndingAmount=request.POST["endingamount"]
+		lock.SoftDiscription=request.POST["softdiscription"]
+		lock.ReportStatus="Not Received"
+		lock.save()
 		# return render(request,"otherapps/client/projectdetails.html");
-		return redirect('/projectdetails/')
+		return redirect('/client/allprojectsrequests/')
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
-	return render(request,"otherapps/client/projectdetails.html",{'values':values, 'path':request.path});
+	return render(request,"otherapps/client/projectdetails.html",{'values':values, 'projectslug':projectslug, 'path':request.path});
+
+def projectdetailsedit(request,projectslug):
+	if request.method=="POST":
+		prevPATH=request.POST["prevPATH"];
+		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
+		lock.ProjectName=request.POST["projectname"]
+		lock.ProgrammingLanguage=request.POST["programminglanguage"]
+		lock.FrontEnd=request.POST["frontend"]
+		lock.BackEnd=request.POST["backend"]
+		lock.DataBase=request.POST["database"]
+		lock.BeginningDate=request.POST["beginningdate"]
+		lock.EndingDate=request.POST["endingdate"]
+		lock.StartingAmount=request.POST["startingamount"]
+		lock.EndingAmount=request.POST["endingamount"]
+		lock.HardDiscription=request.POST["harddiscription"]
+		lock.save()
+		return redirect('/'+prevPATH)
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
+	values=ProjectInfo.objects.get(pk=key)
+	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
+	return render(request,"otherapps/client/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug, 'path':request.path,'ClientFullName':ClientFullName});
 
 
 def allprojectsrequests(request):
@@ -121,7 +136,7 @@ def activeprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks
@@ -141,7 +156,7 @@ def completedprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks

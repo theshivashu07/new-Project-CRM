@@ -26,6 +26,7 @@ CRM - Client - Project Details
               {% csrf_token %}
               <!-- <form method="post" action="projectsoftdetails" onsubmit="return false" enctype="multipart/form-data"> -->
               <input type="hidden" id="clientID" name="clientID" value="{{clientID}}">
+              <input type="hidden" id="projectID" name="projectID" value="{{values.id}}">
               <div class="row">
                 <!-- <div class="mb-3 col-md-1">
                             <label for="projectname" class="form-label">Client ID</label>
@@ -38,12 +39,12 @@ CRM - Client - Project Details
                 <div class="mb-3 col-md-8">
                   <label for="projectname" class="form-label">New Project Name</label>
                   <input class="form-control" type="text" id="projectname" name="projectname"
-                    value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="">
+                    value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="" required>
                 </div>
                 <div class="mb-3 col-md-4">
                   <label for="programminglanguage" class="form-label">Programming Language</label>
-                  <select name="programminglanguage" class="select2 form-select">
-                    <option value="None" {%if values.ProgrammingLanguage == 'None' %} selected {%endif%}>Select Language
+                  <select name="programminglanguage" class="select2 form-select" required>
+                    <option value="" {%if values.ProgrammingLanguage == '' %} selected {%endif%}>Select Language
                     </option>
                     <option value="C" {%if values.ProgrammingLanguage == 'C' %} selected {%endif%}>C</option>
                     <option value="C++" {%if values.ProgrammingLanguage == 'C++' %} selected {%endif%}>C++</option>
@@ -63,8 +64,8 @@ CRM - Client - Project Details
                 </div>
                 <div class="mb-3 col-md-4">
                   <label for="frontend" class="form-label">Front-End</label>
-                  <select name="frontend" class="select2 form-select">
-                    <option value="None" {%if values.FrontEnd == 'None' %} selected {%endif%}>Select Language</option>
+                  <select name="frontend" class="select2 form-select" required>
+                    <option value="" {%if values.FrontEnd == '' %} selected {%endif%}>Select Language</option>
                     <option value="Basic" {%if values.FrontEnd == 'Basic' %} selected {%endif%}>Simple</option>
                     <option value="ReactJS" {%if values.FrontEnd == 'ReactJS' %} selected {%endif%}>ReactJs</option>
                     <option value="Angular" {%if values.FrontEnd == 'Angular' %} selected {%endif%}>Angular</option>
@@ -77,8 +78,8 @@ CRM - Client - Project Details
                 </div>
                 <div class="mb-3 col-md-4">
                   <label for="backend" class="form-label">Back-End</label>
-                  <select name="backend" class="select2 form-select">
-                    <option value="None" {%if values.BackEnd == 'None' %} selected {%endif%}>Select Language</option>
+                  <select name="backend" class="select2 form-select" required>
+                    <option value="" {%if values.BackEnd == '' %} selected {%endif%}>Select Language</option>
                     <option value="Django" {%if values.BackEnd == 'Django' %} selected {%endif%}>Django</option>
                     <option value="ExpressJS" {%if values.BackEnd == 'ExpressJS' %} selected {%endif%}>Express JS</option>
                     <option value="SpringBoot" {%if values.BackEnd == 'SpringBoot' %} selected {%endif%}>Spring Boot
@@ -91,9 +92,9 @@ CRM - Client - Project Details
                 </div>
                 <div class="mb-3 col-md-4">
                   <label for="database" class="form-label">Database</label>
-                  <select name="database" class="select2 form-select">
+                  <select name="database" class="select2 form-select" required>
                     <!-- <option value="{{location_.id}}" {% if emp.location_id == location_.id %} selected {% endif %}>{{location_.name}}</option> -->
-                    <option value="None" {%if values.DataBase == 'None' %} selected {%endif%}>Select Language</option>
+                    <option value="" {%if values.DataBase == '' %} selected {%endif%}>Select Language</option>
                     <option value="MongoDB" {%if values.DataBase == 'MongoDB' %} selected {%endif%}><b>MongoDB:</b> No-SQL
                       Database</option>
                     <option value="MySQL" {%if values.DataBase == 'MySQL' %} selected {%endif%}><b>MySQL:</b> SQL Database
@@ -111,7 +112,7 @@ CRM - Client - Project Details
                 <div class="mb-3 col-md-7">
                   <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
                   <textarea class="form-control" id="softdiscription" name="softdiscription" style="height:120px"
-                    rows="4" value="">{{values.SoftDiscription}}</textarea>
+                    rows="4" value="" required>{{values.SoftDiscription}}</textarea>
                   <div id="defaultFormControlHelp" class="form-text">
                     Here is you briefly describe exactly what features you want on your project. And <b>describe
                       everything.....</b>
@@ -124,7 +125,7 @@ CRM - Client - Project Details
                       <label for="state" class="form-label">Beginning Date</label>
                       <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.BeginningDate |date:'M d, Y'}}"  name="beginningdate"  > -->
                       <input class="form-control" type="date" id="html5-date-input"
-                        value="{{values.BeginningDate |date:'Y-m-d'}}" name="beginningdate">
+                        value="{{values.BeginningDate |date:'Y-m-d'}}" name="beginningdate" required>
                     </div>
                     <div class="mb-3 col-md-2">
                       <br><br>
@@ -134,7 +135,7 @@ CRM - Client - Project Details
                       <label for="state" class="form-label">Ending Date</label>
                       <!-- <input class="form-control" type="date" id="html5-date-input"  value="{{values.EndingDate |date:'M d, Y'}}"  name="beginningdate"  > -->
                       <input class="form-control" type="date" id="html5-date-input"
-                        value="{{values.EndingDate |date:'Y-m-d'}}" name="endingdate">
+                        value="{{values.EndingDate |date:'Y-m-d'}}" name="endingdate" required>
                     </div>
                     <!-- first three places -->
                   </div>
@@ -143,17 +144,17 @@ CRM - Client - Project Details
                     <div class="input-group">
                       <span class="input-group-text">In Rupees.</span>
                       <input type="number" class="form-control" placeholder="Starting Amount"
-                        value="{{values.StartingAmount}}" name="startingamount">
+                        value="{{values.StartingAmount}}" name="startingamount" required>
                       <span class="input-group-text" style="color:#ffffff">to</span>
                       <input type="number" class="form-control" placeholder="Ending Amount"
-                        value="{{values.EndingAmount}}" name="endingamount">
+                        value="{{values.EndingAmount}}" name="endingamount" required>
                       <!-- <span class="input-group-text">.00</span> -->
                     </div>
                   </div>
                 </div>
                 <div class="mt-2">
                   <!-- <button href="/client/myaccount/" type="submit" class="btn btn-primary me-2">Save changes</button> -->
-                  <button href="/client/projectsoftdetails/" type="submit" class="btn btn-primary me-2">Save changes</button>
+                  <button type="submit" class="btn btn-primary me-2">Save changes</button>
                   <button type="reset" class="btn btn-outline-secondary">Cancel</button>
                 </div>
               </div>

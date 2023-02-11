@@ -12,6 +12,15 @@ CRM - Client - Project Details
 <div class="content-wrapper">
   <!-- Content -->
   <div class="container-xxl flex-grow-1 container-p-y">
+    {% if request.path == '/client/projectdetails/active/'|add:projectslug %}
+    <span class="badge" style="float: right; font-size: 15px; color: white;">
+            <a href="/client/projectdetails/edits/school-management-6" class="btn" style="color: white;">
+                <i class="bx bx-message-square-edit bx-md"></i>
+                <!-- bx bx-message-square-edit bx-md -->
+                EDIT this PROJECT
+            </a>
+      </span>
+      {% endif %}
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
     <div class="row">
       <!-- Basic -->

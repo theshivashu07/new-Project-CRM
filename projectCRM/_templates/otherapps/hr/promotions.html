@@ -225,10 +225,10 @@ CRM - HR - Project Details
                                             <label class="form-label" for="newrole"><b style="color:#fff000">*</b>
                                                 Role</label>
                                             <select name="newrole" class="select2 form-select">
-                                                <option value="">Select Option</option>
-                                                <option value="Developer">@developer</option>
-                                                <option value="Project Manager">@projectmanager</option>
-                                                <option value="Admin">@admin</option>
+                                                <option value="" {%if values.Role == '' %} selected {%endif%}>Select Option</option>
+                                                <option value="Developer" {%if values.Role == 'Developer' %} selected {%endif%}>@developer</option>
+                                                <option value="Project Manager" {%if values.Role == 'Project Manager' %} selected {%endif%}>@projectmanager</option>
+                                                <option value="Admin" {%if values.Role == 'Admin' %} selected {%endif%}>@admin</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-2">
@@ -241,20 +241,20 @@ CRM - HR - Project Details
                                             <label class="form-label" for="newas"><b style="color:#fff000">*</b>
                                                 As</label>
                                             <select name="newas" class="select2 form-select">
-                                                <option value="">Select Option</option>
-                                                <option value="Software Development Engineer">Software Development
+                                                <option value="" {%if values.As == '' %} selected {%endif%}>Select Option</option>
+                                                <option value="Software Development Engineer" {%if values.As == 'Software Development Engineer' %} selected {%endif%}>Software Development
                                                     Engineer</option>
-                                                <option value="Full Stack Web Developer">Full Stack Web Developer
+                                                <option value="Full Stack Web Developer" {%if values.As == 'Full Stack Web Developer' %} selected {%endif%}>Full Stack Web Developer
                                                 </option>
-                                                <option value="Data Analyst">Data Analyst</option>
-                                                <option value="Software Engineer">Software Engineer</option>
-                                                <option value="Frontend Engineer">Frontend Engineer</option>
-                                                <option value="Backend Engineer">Backend Engineer</option>
-                                                <option value="Database Engineer">Database Engineer</option>
-                                                <option value="Software Developer">Software Developer</option>
-                                                <option value="Frontend Developer">Frontend Developer</option>
-                                                <option value="Backend Developer">Backend Developer</option>
-                                                <option value="Database Developer">Database Developer</option>
+                                                <option value="Data Analyst" {%if values.As == 'Data Analyst' %} selected {%endif%}>Data Analyst</option>
+                                                <option value="Software Engineer" {%if values.As == 'Software Engineer' %} selected {%endif%}>Software Engineer</option>
+                                                <option value="Frontend Engineer" {%if values.As == 'Frontend Engineer' %} selected {%endif%}>Frontend Engineer</option>
+                                                <option value="Backend Engineer" {%if values.As == 'Backend Engineer' %} selected {%endif%}>Backend Engineer</option>
+                                                <option value="Database Engineer" {%if values.As == 'Database Engineer' %} selected {%endif%}>Database Engineer</option>
+                                                <option value="Software Developer" {%if values.As == 'Software Developer' %} selected {%endif%}>Software Developer</option>
+                                                <option value="Frontend Developer" {%if values.As == 'Frontend Developer' %} selected {%endif%}>Frontend Developer</option>
+                                                <option value="Backend Developer" {%if values.As == 'Backend Developer' %} selected {%endif%}>Backend Developer</option>
+                                                <option value="Database Developer" {%if values.As == 'Database Developer' %} selected {%endif%}>Database Developer</option>
                                             </select>
                                         </div>
                                         <div class="mb-3 col-md-4">
@@ -265,7 +265,7 @@ CRM - HR - Project Details
                                                 <span class="input-group-text">{{values.Contract}} +</span>
                                                 <input type="number" class="form-control" id="newcontract"
                                                     name="newcontract" min="1" max="5" placeholder="1" value="">
-                                                <span class="input-group-text">year's.</span>
+                                                <span class="input-group-text">Years</span>
                                                 <!-- <span class="input-group-text">.00</span> -->
                                             </div>
                                             <div id="defaultFormControlHelp" class="form-text">
@@ -283,7 +283,7 @@ CRM - HR - Project Details
                                                 <input type="number" class="form-control" id="newsalary"
                                                     name="newsalary" placeholder="60,000" min=0 max="300000"
                                                     step="60000" value="">
-                                                <span class="input-group-text">.00</span>{{values.Level}}
+                                                <span class="input-group-text">.00</span>
                                             </div>
                                             <div id="defaultFormControlHelp" class="form-text">
                                                 <!-- Giving exectly increased salary. -->

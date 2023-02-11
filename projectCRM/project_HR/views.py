@@ -49,7 +49,7 @@ def activeprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks
@@ -69,7 +69,7 @@ def completedprojects(request):
 		if(value.Developer):
 			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
 			for lock in locks:
-				temp=Employee.objects.get(pk=lock.id)
+				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks
@@ -111,21 +111,19 @@ def projectdetails(request):
 	# return render(request,"otherapps/hr/projectdetails_foractive.html");
 
 def projectdetailsslug(request,projectslug):
-	AdminsID=None
 	if request.method=="POST":
-		values=ProjectInfo.objects.get(pk=request.POST["employeeID"])
+		values=ProjectInfo.objects.get(pk=request.POST["projectID"])
 		if(request.POST["admin"]):
 			values.Admin=AdminsID=request.POST["admin"];
 			print(values.Admin,AdminsID)
 			values.ReportStatus="Active"
 		values.save()
-		return redirect('/allprojectsrequests/')
+		return redirect('/hr/allprojectsrequests/')
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	key=int(projectslug.split('-')[-1])
-	values=ProjectInfo.objects.get(pk=key)
-	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
+	values=ProjectInfo.objects.get(pk=projectslug.split('-')[-1])   
+	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
 	adminslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
-	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'path':request.path, 'ClientFullName':ClientFullName, 'AdminsID':AdminsID, 'adminslist':adminslist});
+	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'projectslug':projectslug, 'adminslist':adminslist});
 
 def projectdetailsedit(request,projectslug):
 	if request.method=="POST":
@@ -175,7 +173,7 @@ def newjoinees(request,username):
 		mydate = mydate.replace(year=mydate.year+2,day=mydate.day-1)
 		values.CompanyLeavingDate = mydate
 		values.save()
-		return redirect('/listof/newjoinees/')
+		return redirect('/hr/listof/newjoinees/')
 	values = Employee.objects.get(Username=username)
 	print(values)
 	return render(request,"otherapps/hr/newjoinees.html",{'values':values});
@@ -186,6 +184,7 @@ def recruitments(request):
 			n=str(Employee.objects.count()+1)
 			temp='0'*(4-len(n))+n
 			temp='googler'+'emp'+temp
+			print(temp)
 			return temp
 		values=Employee()
 		values.Username = request.POST["username"]
@@ -199,7 +198,7 @@ def recruitments(request):
 		values.State = request.POST["state"]
 		values.Country = request.POST["country"]
 		values.Company = request.POST["company"]
-		values.EmploymentID = generateID(),
+		values.EmploymentID = generateID()   # because it return under tuple
 		values.As = request.POST["as"]
 		values.Role =request.POST["role"]
 		values.Level = request.POST["level"]
@@ -213,10 +212,11 @@ def recruitments(request):
 		if("upload" in request.FILES):
 			values.ProfilePick = request.FILES["upload"]
 		values.save()
-		# return redirect('/trialcenter/'+str(values.id))
+		# return redirect('/hr/trialcenter/'+str(values.id))
 		# values=Employee.objects.get(pk=values.id)
 		return render(request,"otherapps/hr/recruitments.html",{'values':values});
-	return render(request,"otherapps/hr/recruitments.html");
+	values=Employee.objects.get(pk=1)
+	return render(request,"otherapps/hr/recruitments.html",{'values':values});
 
 def PIDsSubmission(request):
 	values=Employee.objects.get(pk=request.POST["employeeID"])
@@ -246,21 +246,21 @@ def PIDsSubmission(request):
 def promotions(request,username):
 	if request.method=="POST":
 		PIDsSubmission(request)
-		return redirect('/listof/promotions/')
+		return redirect('/hr/listof/promotions/')
 	values = Employee.objects.get(Username=username)
 	return render(request,"otherapps/hr/promotions.html",{'values':values});
 
 def increments(request,username):
 	if request.method=="POST":
 		PIDsSubmission(request)
-		return redirect('/listof/increments/')
+		return redirect('/hr/listof/increments/')
 	values = Employee.objects.get(Username=username)
 	return render(request,"otherapps/hr/increments.html",{'values':values});
 
 def decrements(request,username):
 	if request.method=="POST":
 		PIDsSubmission(request)
-		return redirect('/listof/decrements/')
+		return redirect('/hr/listof/decrements/')
 	values = Employee.objects.get(Username=username)
 	return render(request,"otherapps/hr/decrements.html",{'values':values});
 

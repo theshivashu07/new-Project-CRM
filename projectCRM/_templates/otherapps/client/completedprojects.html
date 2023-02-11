@@ -47,12 +47,17 @@ CRM - Client - All Projects
                           <td>{{value.FrontEnd}} – {{value.BackEnd}}</td>
                           <td>
                             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                            {% if value.Admin %}
                               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" {% if value.ReportStatus == 'Completed' %} data-bs-original-title="{{value.Admin.FullName}} {% endif %}" style="margin-right:5px;">
+                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{value.Admin.FullName}}"
+                                style="margin-right:5px;">
                                 <!-- <img src="/_uploads/{{data.Admin.ProfilePick|default_if_none:'employee/user.png'}} " alt="Avatar" class="rounded-circle"> -->
-                                <img src="/_uploads/{{ value.Admin.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
+                                <img src="/_uploads/{{value.Admin.ProfilePick|default:'employee/user.png'}} " alt="Avatar" class="rounded-circle">
                               </li>
                               {{value.Admin.FullName}}
+                            {% else %}
+                              Not Assigned!!!
+                            {% endif %}
                             </ul>
                           </td>
                           <td>

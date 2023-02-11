@@ -27,6 +27,7 @@ CRM - HR - Project Details
             <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="row">
+                <input type="hidden" id="employeeID" name="employeeID" value="{{employeeID}}">
                 <h4 class="fw-bold" style="margin-top:25px; margin-bottom:20px;"><span
                     class="text-muted fw-light">Details about /</span> New Joiner </h4>
                 <div class="card-body" style="padding-top: 30px;">

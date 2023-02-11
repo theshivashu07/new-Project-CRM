@@ -43,7 +43,7 @@ CRM - Developer
                     <tbody class="table-border-bottom-0" {% if value.ReportStatus != 'Completed' %} style="opacity:0.5;" {% endif %}>
                         <tr {% if value.ReportStatus == 'Completed' %} style="background-color: white;" {% endif %} >
                           <td><span class="badge btn btn-info">0{{forloop.counter}}</span></td>
-                          <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong  style="font-size:17px; color: #199999;"> {{value.ProjectName}}</strong></td>
+                          <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong  style="font-size:17px; color: #199999;"> {{value.ProjectName}} </strong></td>
                           <td>{{value.FrontEnd}} – {{value.BackEnd}}</td>
                           <td>
                             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">

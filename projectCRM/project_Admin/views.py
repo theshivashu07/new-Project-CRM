@@ -45,8 +45,8 @@ def completedprojectdetails(request,projectslug):
 	return render(request, "otherapps/admin/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
 
 def allprojectsrequests(request):
-	# Below we use developer because it is the last thing wheich we insert... otherwise also use ProjectManager=None...
-	querysets=ProjectInfo.objects.filter(ReportStatus="Active", Admin=AdminMain)
+	# We only take it, when both are empty...
+	querysets=ProjectInfo.objects.filter(ReportStatus="Active", Admin=AdminMain, ProjectManager=None, Developer=None)
 	values=list()
 	for queryset in querysets:
 		queryset.Client=ClientInfo.objects.get(pk=queryset.Client).FullName
@@ -56,17 +56,19 @@ def allprojectsrequests(request):
 def projectdetailsslug(request,projectslug):
 	if request.method=="POST":
 		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
-		if(request.POST["projectmanager"]): 
+		if(request.POST["projectmanager"] not in ["","None"]): 
 			lock.ProjectManager=request.POST["projectmanager"];
 			lock.save()
 		if(request.POST["developer"]):
-			values=DeveloperBox()
-			lock.Developer+=1
+			# what if in initial we have no developer, None, so must to put 1 at that time...
+			lock.Developer = lock.Developer+1 if(lock.Developer) else 1
 			lock.save()
+			values=DeveloperBox()
 			values.ProjectInfosID=lock
 			values.DeveloperID=request.POST["developer"];
 			values.save()
-		return redirect('/projectdetails/'+projectslug)
+		print("ComingUPs...")
+		return redirect('/admin/projectdetails/'+projectslug)
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
@@ -85,13 +87,29 @@ def projectdetailsslug(request,projectslug):
 			if(temp):
 				selecteddeveloperslist.append(devdataset)
 			else:
-				developerslist.append(devdataset)
-	return render(request,"otherapps/admin/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName, 'path':request.path,
+				developerslist.append(devdataset) 
+	return render(request,"otherapps/admin/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName, 'projectslug':projectslug,
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
+
+def projectdetailsremoveteammember(request,projectslug):
+	temp=projectslug.split('-')
+	if(len(temp)==2):   # it's for developer
+		lock=ProjectInfo.objects.get(pk=temp[0])
+		# if the last developer you removed, so must that you set None there...
+		lock.Developer = lock.Developer-1 if(lock.Developer-1) else None
+		lock.save()
+		lock=DeveloperBox.objects.get(ProjectInfosID=temp[0],DeveloperID=temp[1])
+		lock.delete() 
+	else:   # it's for project manager
+		lock=ProjectInfo.objects.get(pk=temp[0])
+		lock.ProjectManager=None
+		lock.save()
+	overallURL=(request.META['HTTP_REFERER'])
+	orignalURL=overallURL[21:]
+	return redirect(orignalURL)
 
 def projectdetailsedit(request,projectslug):
 	if request.method=="POST":
-		prevPATH=request.POST["prevPATH"];
 		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
 		lock.ProjectName=request.POST["projectname"]
 		lock.ProgrammingLanguage=request.POST["programminglanguage"]
@@ -104,21 +122,18 @@ def projectdetailsedit(request,projectslug):
 		lock.EndingAmount=request.POST["endingamount"]
 		lock.HardDiscription=request.POST["harddiscription"]
 		lock.save()
-		return redirect('/'+prevPATH)
+		return redirect('/admin/projectdetails/'+projectslug)
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
 	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
-	return render(request,"otherapps/admin/projectdetails_editorassignnew.html",{'values':values, 'path':request.path,'ClientFullName':ClientFullName});
-
-
-
+	return render(request,"otherapps/admin/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug,'ClientFullName':ClientFullName});
 
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):
 	# values=ProjectInfo.objects.get(pk=AdminMain)
-	values=ProjectInfo.objects.filter(ReportStatus="Active", Admin=AdminMain)
+	values=ProjectInfo.objects.filter(~Q(ProjectManager=None) | ~Q(Developer=None),ReportStatus="Active", Admin=AdminMain)
 	for value in values:
 		if(value.Client):
 			value.Client=ClientInfo.objects.get(pk=value.Client)

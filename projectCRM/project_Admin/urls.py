@@ -12,12 +12,13 @@ urlpatterns=[
 
 		path('projectdetails/',views.projectdetails,name='projectdetails'),
 		path('projectdetails/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
+		path('projectdetails/removeteammember/<slug:projectslug>',views.projectdetailsremoveteammember,name='projectdetailsremoveteammember'),
 		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
-
+		
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
 
 		path('latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),
-		path('projectdetails/active/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
+		path('projectdetails/active/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
 		path('projectdetails/completed/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
 
 		path('activeprojects/',views.activeprojects,name='activeprojects'),

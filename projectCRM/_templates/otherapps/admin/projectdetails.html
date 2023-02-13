@@ -73,8 +73,7 @@ CRM - Admin
                                     <div class="mb-3 col-md-7">
                                         <label for="exampleFormControlTextarea1" class="form-label">Hard Discription</label>
                                         <textarea class="form-control" id="harddiscription" name="harddiscription"
-                                            style="height:120px" rows="4" value=""
-                                            readonly>{{values.HardDiscription}}</textarea>
+                                            style="height:120px" rows="4" value="" readonly>{{values.HardDiscription}}</textarea>
                                         <div id="defaultFormControlHelp" class="form-text">
                                             Here is you briefly describe exactly what features you want on your project. And
                                             <b>describe everything.....</b>
@@ -84,8 +83,7 @@ CRM - Admin
                                    <div class="mb-3 col-md-7">
                                         <label for="exampleFormControlTextarea1" class="form-label">Soft Discription</label>
                                         <textarea class="form-control" id="softdiscription" name="softdiscription"
-                                            style="height:120px" rows="4" value=""
-                                            readonly>{{values.SoftDiscription}}</textarea>
+                                            style="height:120px" rows="4" value="" readonly>{{values.SoftDiscription}}</textarea>
                                         <div id="defaultFormControlHelp" class="form-text">
                                             Here is you briefly describe exactly what features you want on your project. And
                                             <b>describe everything.....</b>
@@ -177,7 +175,7 @@ CRM - Admin
                         <th>Developer's Name</th>
                         <th>Role</th>
                         <th>As (with Level)</th>
-                        <th>Completed Task's</th>
+                        <th>All Task's</th>
                       </tr>
                     </thead>
                 {% if selectedprojectmanager or selecteddeveloperslist %}
@@ -200,6 +198,10 @@ CRM - Admin
                           <td>{{selectedprojectmanager.Role}}</td>
                           <td>{{selectedprojectmanager.As}} – {{selectedprojectmanager.Level}}</td>
                           <td>__</td>
+                          <td>
+                            <a href="/admin/projectdetails/removeteammember/{{values.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</a>
+                            <!-- <button href="projectdetails/removeteammember/{{selectedprojectmanager.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</button> -->
+                          </td>
                         </tr>
                       {% endif%}
                       {% if selecteddeveloperslist %}
@@ -219,8 +221,14 @@ CRM - Admin
                             </td>
                             <td>{{developer.FullName}}</td>
                             <td>{{developer.Role}}</td>
+
                             <td>{{developer.As}} – {{developer.Level}}</td>
                             <td>None</td>
+                            <td>
+                                <!-- {{values.id}}/{{developer.id}} -->
+                                <a href="/admin/projectdetails/removeteammember/{{values.id}}-{{developer.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</a>
+                                <!-- <button href="projectdetails/removeteammember/{{values.id}}-{{developer.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</button> -->
+                            </td>
                           </tr>
                         {% endfor %}
                       {% endif %}

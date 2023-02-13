@@ -27,7 +27,6 @@ CRM - Admin
               <!-- <form method="post" action="projectsoftdetails" onsubmit="return false" enctype="multipart/form-data"> -->
               <input type="hidden" id="clientID" name="clientID" value="{{clientID}}">
               <input type="hidden" id="projectID" name="projectID" value="{{values.id}}">
-              <input type="hidden" id="prevPATH" name="prevPATH" value="{{prevPATH}}">
               <div class="row">
                 <!-- <div class="mb-3 col-md-1">
                             <label for="projectname" class="form-label">Client ID</label>
@@ -171,7 +170,7 @@ CRM - Admin
                 <div class="mb-3 col-md-4">
                     <label for="exampleFormControlTextarea1" class="form-label">Hard Discription</label>
                     <textarea class="form-control" id="harddiscription" name="harddiscription"
-                        style="" rows="20" value="" >{{values.SoftDiscription}}</textarea>
+                        style="" rows="20" value="">{%if values.HardDiscription%}{{values.HardDiscription}}{%else%}{{values.SoftDiscription}}{%endif%}</textarea>
                     <div id="defaultFormControlHelp" class="form-text">
                         This is the final Discription, who we see at the end. So <b>describe everything.....</b>
                     </div>

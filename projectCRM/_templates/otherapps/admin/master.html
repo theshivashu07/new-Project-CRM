@@ -198,7 +198,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <li class="menu-item {% if request.path == '/admin/allprojectsrequests/' or request.path == '/admin/projectdetails/' or request.path == path or request.path == prevPATH %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/admin/allprojectsrequests/' or request.path == '/admin/projectdetails/'|add:projectslug or request.path == '/admin/projectdetails/edits/'|add:projectslug %}active{% endif %}">
               <a href="/admin/allprojectsrequests" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->

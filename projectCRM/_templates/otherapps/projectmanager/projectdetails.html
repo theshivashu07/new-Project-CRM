@@ -12,12 +12,14 @@ CRM - Project Manager
 <div class="content-wrapper">
   <!-- Content -->
   <div class="container-xxl flex-grow-1 container-p-y">
-        <!-- <span class="badge" style="float: right; font-size: 15px; color: white;">
+    {% if request.path != "/projectmanager/projectdetails/completed/"|add:projectslug %}
+        <span class="badge" style="float: right; font-size: 15px; color: white;">
             <a href="/projectmanager/projectdetails/edits/{{values.ProjectSlug}}-{{values.id}}" class="btn" style="color: white;">
                 <i class="bx bx-message-square-edit bx-md"></i>
-                EDIT this PROJECT
+                Discussion/Suggestions!!!
             </a>
-        </span> -->
+        </span>
+    {% endif %}
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
     <div class="row">
       <!-- Basic -->
@@ -29,7 +31,6 @@ CRM - Project Manager
           <div class="card-body">
             <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
               {% csrf_token %}
-
                             <div class="row">
                                 <input type="hidden" id="projectID" name="projectID" value="{{values.id}}">
                                 <div class="mb-3 col-md-7">
@@ -129,41 +130,9 @@ CRM - Project Manager
                                 </div>
                             </div>
 
-              <br><br>
+              <br>
               <hr class="my-0">
               <br><br>
-              <br><br>
-
-              <div class="row">
-                <div class="mb-3 col-md-4">
-                    <label for="projectmanager" class="form-label">Assign Project to Project Manager</label>
-                    <select name="projectmanager" class="select2 form-select">
-                        <option value="None">Select Project Manager</option>     
-                        {% for projectmanager in projectmanagerslist %}   
-                          <option value="{{projectmanager.id}}" {%if values.ProjectManager == projectmanager.id %} selected {%endif%}>{{projectmanager.FullName}}</option>   
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="mb-3 col-md-5">
-                    <label for="developer" class="form-label">Assign Project to Developer</label>
-                    <select name="developer" class="select2 form-select">
-                        <option value="">Select Admin</option>
-                        {% for developer in developerslist %}
-                        <option value="{{developer.id}}">{{developer.FullName}}</option>   
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="col-md-3">
-                  <label class="form-label" for="showToastPlacement">Click below after make a Team!!</label>
-                  <!-- <a href="#"><button id="showToastPlacement" class="btn btn-primary d-block" style="background-color:#1d242e">Save All Changes</button></a> -->
-                  <button type="submit" class="btn btn-primary me-2" style="background-color:#1d242e">Save changes</button>
-                </div>
-                                <!-- <div class="mt-2">
-                                    <button type="submit" class="btn btn-primary me-2">Save changes</button>
-                                </div> -->
-              </div>
-  
-              <br>
 
               <div class="card">
                 <h5 class="card-header"><b>Project's TEAM...</b></h5>
@@ -176,7 +145,7 @@ CRM - Project Manager
                         <th>Developer's Name</th>
                         <th>Role</th>
                         <th>As (with Level)</th>
-                        <th>Completed Task's</th>
+                        <th>All Task's</th>
                       </tr>
                     </thead>
                 {% if selectedprojectmanager or selecteddeveloperslist %}
@@ -199,6 +168,10 @@ CRM - Project Manager
                           <td>{{selectedprojectmanager.Role}}</td>
                           <td>{{selectedprojectmanager.As}} – {{selectedprojectmanager.Level}}</td>
                           <td>__</td>
+                          <td>
+                            <a href="/admin/projectdetails/removeteammember/{{values.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</a>
+                            <!-- <button href="projectdetails/removeteammember/{{selectedprojectmanager.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</button> -->
+                          </td>
                         </tr>
                       {% endif%}
                       {% if selecteddeveloperslist %}
@@ -218,6 +191,7 @@ CRM - Project Manager
                             </td>
                             <td>{{developer.FullName}}</td>
                             <td>{{developer.Role}}</td>
+
                             <td>{{developer.As}} – {{developer.Level}}</td>
                             <td>None</td>
                           </tr>
@@ -242,6 +216,7 @@ CRM - Project Manager
 
               <br><br>
               <br><br>
+
 
             </form>
           </div>

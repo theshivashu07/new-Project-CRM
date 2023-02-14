@@ -54,19 +54,6 @@ def allprojectsrequests(request):
 	return render(request,"otherapps/projectmanager/allprojectsrequests.html",{'values':values});
 
 def projectdetailsslug(request,projectslug):
-	if request.method=="POST":
-		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
-		if(request.POST["projectmanager"]): 
-			lock.ProjectManager=request.POST["projectmanager"];
-			lock.save()
-		if(request.POST["developer"]):
-			values=DeveloperBox()
-			lock.Developer+=1
-			lock.save()
-			values.ProjectInfosID=lock
-			values.DeveloperID=request.POST["developer"];
-			values.save()
-		return redirect('/projectdetails/'+projectslug)
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
@@ -86,30 +73,22 @@ def projectdetailsslug(request,projectslug):
 				selecteddeveloperslist.append(devdataset)
 			else:
 				developerslist.append(devdataset)
-	return render(request,"otherapps/projectmanager/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName, 'path':request.path,
+	return render(request,"otherapps/projectmanager/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName,  'projectslug':projectslug,
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
 
-# def projectdetailsedit(request,projectslug):
-# 	if request.method=="POST":
-# 		prevPATH=request.POST["prevPATH"];
-# 		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
-# 		lock.ProjectName=request.POST["projectname"]
-# 		lock.ProgrammingLanguage=request.POST["programminglanguage"]
-# 		lock.FrontEnd=request.POST["frontend"]
-# 		lock.BackEnd=request.POST["backend"]
-# 		lock.DataBase=request.POST["database"]
-# 		lock.BeginningDate=request.POST["beginningdate"]
-# 		lock.EndingDate=request.POST["endingdate"]
-# 		lock.StartingAmount=request.POST["startingamount"]
-# 		lock.EndingAmount=request.POST["endingamount"]
-# 		lock.HardDiscription=request.POST["harddiscription"]
-# 		lock.save()
-# 		return redirect('/'+prevPATH)
-# 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-# 	key=int(projectslug.split('-')[-1])
-# 	values=ProjectInfo.objects.get(pk=key)
-# 	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
-# 	return render(request,"otherapps/projectmanager/projectdetails_editorassignnew.html",{'values':values, 'path':request.path,'ClientFullName':ClientFullName});
+
+
+
+def projectdetailsedit(request,projectslug):
+	if request.method=="POST":
+		return redirect()
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
+	values=ProjectInfo.objects.get(pk=key)
+	# ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
+	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
+	AdminFullName=Employee.objects.get(id=values.Admin).FullName
+	return render(request,"otherapps/projectmanager/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug,'ClientFullName':ClientFullName});
 
 
 
@@ -168,19 +147,19 @@ def pick(request,target):
 	pickfromtarget={'promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
 	return render(request,"otherapps/projectmanager/searching4pid.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target]});
 
-def alldiscussions(request):
-	return render(request,"otherapps/projectmanager/alldiscussions.html");
+def alldiscussions(request,projectslug=None):
+	return render(request,"otherapps/projectmanager/alldiscussions.html", {'projectslug':projectslug});
 # def allsuggestions(request):
 # 	return render(request,"otherapps/projectmanager/allsuggestions.html");
-def allmessages(request):
-	return render(request,"otherapps/projectmanager/allmessages.html");
+def allmessages(request,projectslug=None):
+	return render(request,"otherapps/projectmanager/allmessages.html", {'projectslug':projectslug});
 
 def reportscollection(request):
 	return render(request,"otherapps/projectmanager/reportscollection.html");
 def sendreports(request):
 	return render(request,"otherapps/projectmanager/sendreports.html");
-def sendreportsopen(request,username):
-	return render(request,"otherapps/projectmanager/sendreportsopen.html");
+def sendreportsopen(request,projectslug=None):
+	return render(request,"otherapps/projectmanager/sendreportsopen.html", {'projectslug':projectslug});
 def creativeteam(request):
 	return render(request,"otherapps/projectmanager/creativeteam.html");
 

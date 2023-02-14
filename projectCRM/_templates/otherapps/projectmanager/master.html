@@ -198,7 +198,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <li class="menu-item {% if request.path == '/projectmanager/allprojectsrequests/' or request.path == '/projectmanager/projectdetails/' or request.path == path or request.path == prevPATH %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/allprojectsrequests/' or request.path == '/projectmanager/projectdetails/'|add:projectslug %}active{% endif %}">
               <a href="/projectmanager/allprojectsrequests" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->
@@ -241,7 +241,7 @@
                 <div data-i18n="Analytics">Want Report's</div>
               </a> 
             </li> -->
-            <li class="menu-item {% if request.path == '/projectmanager/sendreports/' or request.path == '/projectmanager/sendreports/@a' %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/sendreports/' or request.path == '/projectmanager/sendreports/'|add:projectslug %}active{% endif %}">
               <a href="/projectmanager/sendreports" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-file-export' ></i>
                 <div data-i18n="Analytics">Sent Report's</div>
@@ -250,7 +250,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Others</span>
             </li>
-            {% if request.path == "/projectmanager/alldiscussions/" or request.path == "/projectmanager/allmessages/" %}
+            {% if request.path == '/projectmanager/alldiscussions/' or request.path == '/projectmanager/alldiscussions/'|add:projectslug or request.path == '/projectmanager/allmessages/' or request.path == '/projectmanager/allmessages/'|add:projectslug %}
               <li class="menu-item active open">
             {% else %}
               <li class="menu-item">
@@ -261,12 +261,12 @@
                 <div data-i18n="Conversations">Conversations</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item {% if request.path == '/projectmanager/alldiscussions/' %}active{% endif %}">
+                <li class="menu-item {% if request.path == '/projectmanager/alldiscussions/' or request.path == '/projectmanager/alldiscussions/'|add:projectslug %}active{% endif %}">
                   <a href="/projectmanager/alldiscussions" class="menu-link">
                     <div data-i18n="Discussions">Discussions</div>
                   </a>
                 </li>
-                <li class="menu-item {% if request.path == '/projectmanager/allmessages/' %}active{% endif %}">
+                <li class="menu-item {% if request.path == '/projectmanager/allmessages/' or request.path == '/projectmanager/allmessages/'|add:projectslug %}active{% endif %}">
                   <a href="/projectmanager/allmessages" class="menu-link">
                     <div data-i18n="Messages">Messages</div>
                   </a>

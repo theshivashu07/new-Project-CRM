@@ -17,21 +17,24 @@ urlpatterns=[
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
 
 		path('latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),
-		path('projectdetails/active/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
-		path('projectdetails/completed/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
+		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
+		path('projectdetails/active/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
+		path('projectdetails/completed/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
 
 		path('activeprojects/',views.activeprojects,name='activeprojects'),
 		path('completedprojects/',views.completedprojects,name='completedprojects'),
 
+		path('alldiscussions/<slug:projectslug>',views.alldiscussions,name='alldiscussions'),
 		path('alldiscussions/',views.alldiscussions,name='alldiscussions'),
 		# path('allsuggestions/',views.allsuggestions,name='allsuggestions'),
+		path('allmessages/<slug:projectslug>',views.allmessages,name='allmessages'),
 		path('allmessages/',views.allmessages,name='allmessages'),
 
 		path('reportscollection/',views.reportscollection,name='reportscollection'),
 		# path('wantreports/',views.wantreports,name='wantreports'),
 		path('sendreports/',views.sendreports,name='sendreports'),
 		path('creativeteam/',views.creativeteam,name='creativeteam'),
-		path('sendreports/@<str:username>',views.sendreportsopen,name='sendreportsopen'),
+		path('sendreports/<slug:projectslug>',views.sendreportsopen,name='sendreportsopen'),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),

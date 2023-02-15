@@ -198,7 +198,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Project's</span>
             </li>
-            <li class="menu-item {% if request.path == '/projectmanager/allprojectsrequests/' or request.path == '/projectmanager/projectdetails/'|add:projectslug %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/allprojectsrequests/' or request.path == '/projectmanager/projectdetails/new/'|add:projectslug or comingFrom == 'New' %}active{% endif %}">
               <a href="/projectmanager/allprojectsrequests" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-book-add"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-cart-add'></i> -->
@@ -206,13 +206,13 @@
                 <div data-i18n="Analytics">New Project Requests</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/projectmanager/activeprojects/' or request.path == '/projectmanager/latestreport/'|add:projectslug or request.path == '/projectmanager/projectdetails/active/'|add:projectslug %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/activeprojects/' or request.path == '/projectmanager/latestreport/'|add:projectslug or request.path == '/projectmanager/projectdetails/active/'|add:projectslug or comingFrom == 'Active' %}active{% endif %}">
               <a href="/projectmanager/activeprojects" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/projectmanager/completedprojects/' or request.path == '/projectmanager/projectdetails/completed/'|add:projectslug %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/projectmanager/completedprojects/' or request.path == '/projectmanager/projectdetails/completed/'|add:projectslug or comingFrom == 'Complete' %}active{% endif %}">
               <a href="/projectmanager/completedprojects" class="menu-link">
                 <!-- <i class="menu-icon tf-icons bx bx-briefcase-alt-2"></i> -->
                 <!-- <i class='menu-icon tf-icons bx bxs-layout'></i> -->

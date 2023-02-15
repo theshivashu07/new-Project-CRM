@@ -32,7 +32,6 @@ CRM - Developer
                           Projects
                         </th>
                         <th>FrontEnd–BackEnd</th>
-                        <th>Client</th>
                         <th>Admin</th>
                         <th>Project Manager</th>
                         <th>Developers</th>
@@ -47,17 +46,6 @@ CRM - Developer
                           <td><span class="badge btn btn-info">0{{forloop.counter}}</span></td>
                           <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong  style="font-size:17px; color: #199999;">{{value.ProjectName}}</strong></td>
                           <td>{{value.FrontEnd}} – {{value.BackEnd}}</td>
-                          <td>
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{value.Client.FullName}}"
-                                style="margin-right:5px;">
-                                <!-- <img src="/_uploads/{{data.Client.ProfilePick|default_if_none:'employee/user.png'}} " alt="Avatar" class="rounded-circle"> -->
-                                <img src="/_uploads/{{ value.Client.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
-                              </li>
-                              {{value.Client.FullName}}
-                            </ul>
-                          </td>
                           <td>
                             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                             {% if value.Admin %}
@@ -80,7 +68,7 @@ CRM - Developer
                                 class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{value.ProjectManager.FullName}}"
                                 style="margin-right:5px;">
                                 <!-- <img src="/_uploads/{{data.ProjectManager.ProfilePick|default_if_none:'employee/user.png'}} " alt="Avatar" class="rounded-circle"> -->
-                                <img src="/_uploads/{{value.ProjectManager.ProfilePick|default:'employee/user.png'}} " alt="Avatar" class="rounded-circle">
+                                <img src="/_uploads/{{ value.ProjectManager.ProfilePick|default:'client/user.png'}} " alt="Avatar" class="rounded-circle">
                               </li>
                               {{value.ProjectManager.FullName}}
                             {% else %}

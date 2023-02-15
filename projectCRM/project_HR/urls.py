@@ -12,7 +12,7 @@ urlpatterns=[
 
 		path('allprojectsrequests/',views.allprojectsrequests,name='allprojectsrequests'),
 		path('projectdetails/',views.projectdetails,name='projectdetails'),
-		path('projectdetails/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
+		path('projectdetails/new/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
 		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
 
 		path('latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),

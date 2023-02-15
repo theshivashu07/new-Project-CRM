@@ -8,6 +8,7 @@ import datetime
 
 
 DeveloperMain=5
+ProjectManagerMain=15
 
 
 '''
@@ -27,48 +28,25 @@ def mydeactivate(request):
 def mynotification(request):
 	return render(request,"otherapps/developer/mynotification.html");
 
-def projectdetails(request):
-	return render(request,"otherapps/developer/projectdetails.html");
 
-def latestreport(request,projectslug):
+def latestreport(request,projectslug):  #✓
 	return render(request, "otherapps/developer/reportsopen.html", {'projectslug':projectslug}) 
 
-def completedprojectdetails(request,projectslug):
-	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	key=int(projectslug.split('-')[-1])
-	values=ProjectInfo.objects.get(pk=key)
-	print(values,values.Client,values.Admin)
-	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
-	AdminFullName=Employee.objects.get(id=values.Admin).FullName
-	return render(request, "otherapps/developer/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
 
-def allprojectsrequests(request):
-	# Below we use developer because it is the last thing wheich we insert... otherwise also use ProjectManager=None...
+def allprojectsrequests(request):  #✓
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	print(querysets)
 	values=list()
 	for queryset in querysets:
-		queryset=ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
-		if(queryset.ReportStatus=="Active"):
-			queryset.Client=ClientInfo.objects.get(pk=queryset.Client).FullName
-			values.append(queryset)
-	# values=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
+		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(getting.ReportStatus=="Active"):	
+			getting.Client=ClientInfo.objects.get(pk=getting.Client).FullName
+			values.append(getting)
+	print(values)
 	return render(request,"otherapps/developer/allprojectsrequests.html",{'values':values});
 
-def projectdetailsslug(request,projectslug):
-	if request.method=="POST":
-		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
-		if(request.POST["projectmanager"]): 
-			lock.ProjectManager=request.POST["projectmanager"];
-			lock.save()
-		if(request.POST["developer"]):
-			values=DeveloperBox()
-			lock.Developer+=1
-			lock.save()
-			values.ProjectInfosID=lock
-			values.DeveloperID=request.POST["developer"];
-			values.save()
-		return redirect('/projectdetails/'+projectslug)
+
+def projectdetailsslug(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
@@ -88,109 +66,96 @@ def projectdetailsslug(request,projectslug):
 				selecteddeveloperslist.append(devdataset)
 			else:
 				developerslist.append(devdataset)
-	return render(request,"otherapps/developer/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName, 'path':request.path,
+	return render(request,"otherapps/developer/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName,  'projectslug':projectslug,
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
 
-# def projectdetailsedit(request,projectslug):
-# 	if request.method=="POST":
-# 		prevPATH=request.POST["prevPATH"];
-# 		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
-# 		lock.ProjectName=request.POST["projectname"]
-# 		lock.ProgrammingLanguage=request.POST["programminglanguage"]
-# 		lock.FrontEnd=request.POST["frontend"]
-# 		lock.BackEnd=request.POST["backend"]
-# 		lock.DataBase=request.POST["database"]
-# 		lock.BeginningDate=request.POST["beginningdate"]
-# 		lock.EndingDate=request.POST["endingdate"]
-# 		lock.StartingAmount=request.POST["startingamount"]
-# 		lock.EndingAmount=request.POST["endingamount"]
-# 		lock.HardDiscription=request.POST["harddiscription"]
-# 		lock.save()
-# 		return redirect('/'+prevPATH)
-# 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-# 	key=int(projectslug.split('-')[-1])
-# 	values=ProjectInfo.objects.get(pk=key)
-# 	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
-# 	return render(request,"otherapps/developer/projectdetails_editorassignnew.html",{'values':values, 'path':request.path,'ClientFullName':ClientFullName});
+
+def projectdetailsedit(request,projectslug):  #✓
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
+	values=ProjectInfo.objects.get(pk=key)
+	# ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
+	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
+	values.Admin=Employee.objects.get(id=values.Admin).FullName
+	overallURL=(request.META['HTTP_REFERER'])
+	comingFrom = ('Active' if('active' in overallURL) else 'New')
+	return render(request,"otherapps/developer/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom});
 
 
-
-def activeprojects(request):
+# currently we refer both urls to a duplicate page
+def activeprojects(request):  #✓
+	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
+	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
-		queryset=ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
-		if(queryset.ReportStatus=="Active"):
-			values.append(queryset)
-	for value in values:
-		if(value.Client):
-			value.Client=ClientInfo.objects.get(pk=value.Client)
-		if(value.Admin):
-			value.Admin=Employee.objects.get(pk=value.Admin)
-		if(value.ProjectManager):
-			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
-		if(value.Developer):
-			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(getting.ReportStatus=="Active"):	
+			getting.Client=ClientInfo.objects.get(pk=getting.Client)
+			getting.Admin=Employee.objects.get(pk=getting.Admin)
+			if(getting.ProjectManager):
+				getting.ProjectManager=Employee.objects.get(pk=getting.ProjectManager)
+			locks=DeveloperBox.objects.filter(ProjectInfosID=getting.id)
 			for lock in locks:
 				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
-			value.Developer=locks
+			getting.Developer=locks
+			values.append(getting)
+	print(values)
 	return render(request,"otherapps/developer/activeprojects.html", {'values':values});
 
-def completedprojects(request):
-	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
+
+def completedprojects(request):  #✓
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	print(querysets)
 	values=list()
 	for queryset in querysets:
-		queryset=ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
-		if(queryset.ReportStatus in ["Completed","Withdrawal"]):
-			values.append(queryset)
-	print(values)
-	for value in values:
-		if(value.Client):
-			value.Client=ClientInfo.objects.get(pk=value.Client)
-		if(value.Admin):
-			value.Admin=Employee.objects.get(pk=value.Admin)
-		if(value.ProjectManager):
-			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
-		if(value.Developer):
-			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(getting.ReportStatus in ["Completed","Withdrawal"]):
+			getting.Client=ClientInfo.objects.get(pk=getting.Client)
+			getting.Admin=Employee.objects.get(pk=getting.Admin)
+			if(getting.ProjectManager):
+				getting.ProjectManager=Employee.objects.get(pk=getting.ProjectManager)
+			locks=DeveloperBox.objects.filter(ProjectInfosID=getting.id)
 			for lock in locks:
 				temp=Employee.objects.get(pk=lock.DeveloperID)
 				lock.FullName=temp.FullName
 				lock.ProfilePick=temp.ProfilePick
-			value.Developer=locks
+			getting.Developer=locks
+			values.append(getting)
+	print(values)
 	return render(request,"otherapps/developer/completedprojects.html", {'values':values});
 
-# new 
-def recruitments(request):
-	return render(request,"otherapps/developer/recruitments.html");
-def promotions(request):
-	return render(request,"otherapps/developer/promotions.html");
-def increments(request):
-	return render(request,"otherapps/developer/increments.html");
-def decrements(request):
-	return render(request,"otherapps/developer/decrements.html");
-def pick(request,target):
-	pickfromtarget={'promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
-	return render(request,"otherapps/developer/searching4pid.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target]});
 
-def alldiscussions(request):
-	return render(request,"otherapps/developer/alldiscussions.html");
-# def allsuggestions(request):
-# 	return render(request,"otherapps/developer/allsuggestions.html");
-def allmessages(request):
-	return render(request,"otherapps/developer/allmessages.html");
+def alldiscussions(request,projectslug=None):  #✓
+	return render(request,"otherapps/developer/alldiscussions.html", {'projectslug':projectslug});
+def allmessages(request,projectslug=None):  #✓
+	return render(request,"otherapps/developer/allmessages.html", {'projectslug':projectslug});
 
-def reportscollection(request):
+
+def reportscollection(request):  #✓
 	return render(request,"otherapps/developer/reportscollection.html");
-def sendreports(request):
-	return render(request,"otherapps/developer/sendreports.html");
-def sendreportsopen(request,username):
-	return render(request,"otherapps/developer/sendreportsopen.html");
-def creativeteam(request):
-	return render(request,"otherapps/developer/creativeteam.html");
+def sendreports(request):  #✓
+	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
+	values=list()
+	for queryset in querysets:
+		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(getting.ReportStatus=="Active" and getting.ProjectManager and getting.Developer):	
+			getting.Client=ClientInfo.objects.get(pk=getting.Client)
+			getting.Admin=Employee.objects.get(pk=getting.Admin)
+			getting.ProjectManager=Employee.objects.get(pk=getting.ProjectManager)
+			locks=DeveloperBox.objects.filter(ProjectInfosID=getting.id)
+			for lock in locks:
+				temp=Employee.objects.get(pk=lock.DeveloperID)
+				lock.FullName=temp.FullName
+				lock.ProfilePick=temp.ProfilePick
+			getting.Developer=locks
+			values.append(getting)
+	print(values)
+	return render(request,"otherapps/developer/sendreports.html", {'values':values});
+def sendreportsopen(request,projectslug=None):  #✓
+	return render(request,"otherapps/developer/sendreportsopen.html", {'projectslug':projectslug});
+
 
 

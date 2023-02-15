@@ -41,7 +41,7 @@ CRM - Admin
                                 <div class="mb-3 col-md-5">
                                     <label for="clientfullname" class="form-label">Client Name</label>
                                     <input class="form-control" type="text" id="clientfullname" name="clientfullname"
-                                        value="{{ClientFullName}}" placeholder="None" autofocus="" readonly>
+                                        value="{{values.Client}}" placeholder="None" autofocus="" readonly>
                                 </div>
                                 <div class="mb-3 col-md-3">
                                     <label for="language" class="form-label">Programming Language</label>
@@ -172,7 +172,7 @@ CRM - Admin
                       <tr style="background-color: black;">
                         <th></th>
                         <th>Profile Username</th>
-                        <th>Developer's Name</th>
+                        <th>Profile Name's</th>
                         <th>Role</th>
                         <th>As (with Level)</th>
                         <th>All Task's</th>
@@ -221,11 +221,9 @@ CRM - Admin
                             </td>
                             <td>{{developer.FullName}}</td>
                             <td>{{developer.Role}}</td>
-
                             <td>{{developer.As}} – {{developer.Level}}</td>
                             <td>None</td>
                             <td>
-                                <!-- {{values.id}}/{{developer.id}} -->
                                 <a href="/admin/projectdetails/removeteammember/{{values.id}}-{{developer.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</a>
                                 <!-- <button href="projectdetails/removeteammember/{{values.id}}-{{developer.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</button> -->
                             </td>

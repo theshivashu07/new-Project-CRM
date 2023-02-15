@@ -16,35 +16,25 @@ ProjectManagerMain=15
 def index(request):
 	return HttpResponse("This is <b>Project Manager</b> page!!!");
 '''
-
-def index(request):
+def index(request):  #✓
 	return render(request,"otherapps/projectmanager/index.html");
 
-def myaccount(request):
+
+def myaccount(request):  #✓
 	return render(request,"otherapps/projectmanager/myaccount.html");
-def myconnections(request):
+def myconnections(request):  #✓
 	return render(request,"otherapps/projectmanager/myconnections.html");
-def mydeactivate(request):
+def mydeactivate(request):  #✓
 	return render(request,"otherapps/projectmanager/mydeactivate.html");
-def mynotification(request):
+def mynotification(request):  #✓
 	return render(request,"otherapps/projectmanager/mynotification.html");
 
-def projectdetails(request):
-	return render(request,"otherapps/projectmanager/projectdetails.html");
 
-def latestreport(request,projectslug):
+def latestreport(request,projectslug):  #✓
 	return render(request, "otherapps/projectmanager/reportsopen.html", {'projectslug':projectslug}) 
 
-def completedprojectdetails(request,projectslug):
-	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	key=int(projectslug.split('-')[-1])
-	values=ProjectInfo.objects.get(pk=key)
-	print(values,values.Client,values.Admin)
-	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
-	AdminFullName=Employee.objects.get(id=values.Admin).FullName
-	return render(request, "otherapps/projectmanager/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
 
-def allprojectsrequests(request):
+def allprojectsrequests(request):  #✓
 	# Below we use developer because it is the last thing wheich we insert... otherwise also use ProjectManager=None...
 	querysets=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
 	values=list()
@@ -53,7 +43,8 @@ def allprojectsrequests(request):
 		values.append(queryset)
 	return render(request,"otherapps/projectmanager/allprojectsrequests.html",{'values':values});
 
-def projectdetailsslug(request,projectslug):
+
+def projectdetailsslug(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
@@ -77,25 +68,20 @@ def projectdetailsslug(request,projectslug):
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
 
 
-
-
-def projectdetailsedit(request,projectslug):
-	if request.method=="POST":
-		return redirect()
+def projectdetailsedit(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
 	# ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
-	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
-	AdminFullName=Employee.objects.get(id=values.Admin).FullName
-	return render(request,"otherapps/projectmanager/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug,'ClientFullName':ClientFullName});
-
-
-
+	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
+	values.Admin=Employee.objects.get(id=values.Admin).FullName
+	overallURL=(request.META['HTTP_REFERER'])
+	comingFrom = ('Active' if('active' in overallURL) else 'New')
+	return render(request,"otherapps/projectmanager/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom});
 
 
 # currently we refer both urls to a duplicate page
-def activeprojects(request):
+def activeprojects(request):  #✓
 	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
 	values=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
 	for value in values:
@@ -114,7 +100,8 @@ def activeprojects(request):
 			value.Developer=locks
 	return render(request,"otherapps/projectmanager/activeprojects.html", {'values':values});
 
-def completedprojects(request):
+
+def completedprojects(request):  #✓
 	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
 	values=ProjectInfo.objects.filter(ReportStatus="Completed", ProjectManager=ProjectManagerMain) \
 				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", ProjectManager=ProjectManagerMain)
@@ -134,33 +121,34 @@ def completedprojects(request):
 			value.Developer=locks
 	return render(request,"otherapps/projectmanager/completedprojects.html", {'values':values});
 
-# new 
-def recruitments(request):
-	return render(request,"otherapps/projectmanager/recruitments.html");
-def promotions(request):
-	return render(request,"otherapps/projectmanager/promotions.html");
-def increments(request):
-	return render(request,"otherapps/projectmanager/increments.html");
-def decrements(request):
-	return render(request,"otherapps/projectmanager/decrements.html");
-def pick(request,target):
-	pickfromtarget={'promotions':'Pramote','increments':'Increment','decrements':'Decrement'}
-	return render(request,"otherapps/projectmanager/searching4pid.html",{"targetedpath":target,"targetedfrom":pickfromtarget[target]});
 
-def alldiscussions(request,projectslug=None):
+def alldiscussions(request,projectslug=None):  #✓
 	return render(request,"otherapps/projectmanager/alldiscussions.html", {'projectslug':projectslug});
-# def allsuggestions(request):
-# 	return render(request,"otherapps/projectmanager/allsuggestions.html");
-def allmessages(request,projectslug=None):
+def allmessages(request,projectslug=None):  #✓
 	return render(request,"otherapps/projectmanager/allmessages.html", {'projectslug':projectslug});
 
-def reportscollection(request):
+
+def reportscollection(request):  #✓
 	return render(request,"otherapps/projectmanager/reportscollection.html");
-def sendreports(request):
-	return render(request,"otherapps/projectmanager/sendreports.html");
-def sendreportsopen(request,projectslug=None):
+def sendreports(request):  #✓
+	values=ProjectInfo.objects.filter(~Q(Developer=None), ProjectManager=ProjectManagerMain, ReportStatus="Active")
+	for value in values:
+		if(value.Client):
+			value.Client=ClientInfo.objects.get(pk=value.Client)
+		if(value.Admin):
+			value.Admin=Employee.objects.get(pk=value.Admin)
+		if(value.ProjectManager):
+			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
+		if(value.Developer):
+			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+			for lock in locks:
+				temp=Employee.objects.get(pk=lock.DeveloperID)
+				lock.FullName=temp.FullName
+				lock.ProfilePick=temp.ProfilePick
+			value.Developer=locks
+	return render(request,"otherapps/projectmanager/sendreports.html", {'values':values});
+def sendreportsopen(request,projectslug=None):  #✓
 	return render(request,"otherapps/projectmanager/sendreportsopen.html", {'projectslug':projectslug});
-def creativeteam(request):
-	return render(request,"otherapps/projectmanager/creativeteam.html");
+
 
 

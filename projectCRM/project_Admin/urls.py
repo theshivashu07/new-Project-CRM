@@ -11,7 +11,7 @@ urlpatterns=[
 		path('mynotification/',views.mynotification,name='mynotification'),
 
 		path('projectdetails/',views.projectdetails,name='projectdetails'),
-		path('projectdetails/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
+		path('projectdetails/new/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
 		path('projectdetails/removeteammember/<slug:projectslug>',views.projectdetailsremoveteammember,name='projectdetailsremoveteammember'),
 		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
 		
@@ -31,8 +31,8 @@ urlpatterns=[
 		path('reportscollection/',views.reportscollection,name='reportscollection'),
 		# path('wantreports/',views.wantreports,name='wantreports'),
 		path('sendreports/',views.sendreports,name='sendreports'),
-		path('creativeteam/',views.creativeteam,name='creativeteam'),
-		path('sendreports/@<str:username>',views.sendreportsopen,name='sendreportsopen'),
+		# path('creativeteam/',views.creativeteam,name='creativeteam'),
+		path('sendreports/<slug:projectslug>',views.sendreportsopen,name='sendreportsopen'),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),

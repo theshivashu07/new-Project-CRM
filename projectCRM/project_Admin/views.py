@@ -39,10 +39,19 @@ def completedprojectdetails(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
-	print(values,values.Client,values.Admin)
-	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
-	AdminFullName=Employee.objects.get(id=values.Admin).FullName
-	return render(request, "otherapps/admin/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
+	values.Client=ClientInfo.objects.get(id=values.Client).FullName
+	values.Admin=Employee.objects.get(id=values.Admin).FullName
+	developerslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Developer')
+	selectedprojectmanager=selecteddeveloperslist=0
+	if(values.ProjectManager):
+		selectedprojectmanager=Employee.objects.get(pk=values.ProjectManager)
+	if(values.Developer):
+		selecteddeveloperslist=list()
+		for developer in developerslist:
+			temp=DeveloperBox.objects.filter(ProjectInfosID=values,DeveloperID=developer.id)
+			if(temp):
+				selecteddeveloperslist.append(developer)
+	return render(request, "otherapps/admin/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'selectedprojectmanager':selectedprojectmanager, 'selecteddeveloperslist':selecteddeveloperslist})
 
 def allprojectsrequests(request):
 	# We only take it, when both are empty...
@@ -68,12 +77,14 @@ def projectdetailsslug(request,projectslug):
 			values.DeveloperID=request.POST["developer"];
 			values.save()
 		print("ComingUPs...")
-		return redirect('/admin/projectdetails/'+projectslug)
+		overallURL=(request.META['HTTP_REFERER'])
+		orignalURL=overallURL[21:]
+		return redirect(orignalURL)
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
 	temp=DeveloperBox.objects.filter(ProjectInfosID_id=key)
-	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
+	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
 	projectmanagerslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Project Manager')
 	developerslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Developer')
 	selectedprojectmanager=selecteddeveloperslist=0
@@ -88,7 +99,7 @@ def projectdetailsslug(request,projectslug):
 				selecteddeveloperslist.append(devdataset)
 			else:
 				developerslist.append(devdataset) 
-	return render(request,"otherapps/admin/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName, 'projectslug':projectslug,
+	return render(request,"otherapps/admin/projectdetails.html", {'values':values, 'projectslug':projectslug,
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
 
 def projectdetailsremoveteammember(request,projectslug):
@@ -126,8 +137,10 @@ def projectdetailsedit(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
-	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
-	return render(request,"otherapps/admin/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug,'ClientFullName':ClientFullName});
+	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
+	overallURL=(request.META['HTTP_REFERER'])
+	comingFrom = ('Active' if('active' in overallURL) else 'New')
+	return render(request,"otherapps/admin/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug, 'comingFrom':comingFrom});
 
 
 # currently we refer both urls to a duplicate page
@@ -193,10 +206,22 @@ def allmessages(request):
 def reportscollection(request):
 	return render(request,"otherapps/admin/reportscollection.html");
 def sendreports(request):
-	return render(request,"otherapps/admin/sendreports.html");
-def sendreportsopen(request,username):
-	return render(request,"otherapps/admin/sendreportsopen.html");
-def creativeteam(request):
-	return render(request,"otherapps/admin/creativeteam.html");
+	# values=ProjectInfo.objects.get(pk=AdminMain)
+	values=ProjectInfo.objects.filter(~Q(ProjectManager=None) & ~Q(Developer=None), ReportStatus="Active", Admin=AdminMain)
+	for value in values:
+		value.Client=ClientInfo.objects.get(pk=value.Client)
+		value.Admin=Employee.objects.get(pk=value.Admin)
+		value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
+		locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+		for lock in locks:
+			temp=Employee.objects.get(pk=lock.DeveloperID)
+			lock.FullName=temp.FullName
+			lock.ProfilePick=temp.ProfilePick
+		value.Developer=locks
+	return render(request,"otherapps/admin/sendreports.html", {'values':values});
+def sendreportsopen(request,projectslug=None):
+	return render(request,"otherapps/admin/sendreportsopen.html", {'projectslug':projectslug});
+# def creativeteam(request):
+# 	return render(request,"otherapps/admin/creativeteam.html");
 
 

@@ -15,8 +15,9 @@ CRM - Project Manager
     {% if request.path != "/projectmanager/projectdetails/completed/"|add:projectslug %}
         <span class="badge" style="float: right; font-size: 15px; color: white;">
             <a href="/projectmanager/projectdetails/edits/{{values.ProjectSlug}}-{{values.id}}" class="btn" style="color: white;">
-                <i class="bx bx-message-square-edit bx-md"></i>
-                Discussion/Suggestions!!!
+                <!-- <i class="bx bx-message-square-edit bx-md"></i> -->
+                <i class="menu-icon tf-icons bx bxs-conversation bx-sm"></i>
+                Discussion!!!
             </a>
         </span>
     {% endif %}
@@ -142,7 +143,7 @@ CRM - Project Manager
                       <tr style="background-color: black;">
                         <th></th>
                         <th>Profile Username</th>
-                        <th>Developer's Name</th>
+                        <th>Profile Name's</th>
                         <th>Role</th>
                         <th>As (with Level)</th>
                         <th>All Task's</th>
@@ -168,10 +169,6 @@ CRM - Project Manager
                           <td>{{selectedprojectmanager.Role}}</td>
                           <td>{{selectedprojectmanager.As}} – {{selectedprojectmanager.Level}}</td>
                           <td>__</td>
-                          <td>
-                            <a href="/admin/projectdetails/removeteammember/{{values.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</a>
-                            <!-- <button href="projectdetails/removeteammember/{{selectedprojectmanager.id}}" class="btn btn-sm rounded-pill btn-danger">Remove</button> -->
-                          </td>
                         </tr>
                       {% endif%}
                       {% if selecteddeveloperslist %}

@@ -82,10 +82,20 @@ def completedprojectdetails(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
-	print(values,values.Client,values.Admin)
-	ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
-	AdminFullName=Employee.objects.get(id=values.Admin).FullName
-	return render(request, "otherapps/hr/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ClientFullName':ClientFullName, 'AdminFullName':AdminFullName})
+	values.Client=ClientInfo.objects.get(id=values.Client).FullName
+	if(values.Admin):
+		values.Admin=Employee.objects.get(id=values.Admin).FullName
+	developerslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Developer')
+	selectedprojectmanager=selecteddeveloperslist=0
+	if(values.ProjectManager):
+		selectedprojectmanager=Employee.objects.get(pk=values.ProjectManager)
+	if(values.Developer):
+		selecteddeveloperslist=list()
+		for developer in developerslist:
+			temp=DeveloperBox.objects.filter(ProjectInfosID=values,DeveloperID=developer.id)
+			if(temp):
+				selecteddeveloperslist.append(developer)
+	return render(request, "otherapps/hr/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'selectedprojectmanager':selectedprojectmanager, 'selecteddeveloperslist':selecteddeveloperslist})
 
 def projectdetails(request):
 	if request.method=="POST":
@@ -149,8 +159,8 @@ def projectdetailsedit(request,projectslug):
 	# print(request.META.get('HTTP_REFERER'))
 	overallURL=request.META['HTTP_REFERER']
 	prevPATH=overallURL[21:]  #''.join(overallURL.split('/')[3:])
-	print(prevPATH,prevPATH)
-	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'path':request.path, 'prevPATH':prevPATH});
+	comingFrom = ('Active' if('active' in overallURL) else 'New')
+	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'path':request.path, 'prevPATH':prevPATH, 'comingFrom':comingFrom});
 
 
 # new 
@@ -280,17 +290,11 @@ def listof(request,target):
 
 def alldiscussions(request):
 	return render(request,"otherapps/hr/alldiscussions.html");
-# def allsuggestions(request):
-# 	return render(request,"otherapps/hr/allsuggestions.html");
 def allmessages(request):
 	return render(request,"otherapps/hr/allmessages.html");
 
 
 
-def trialcenter(request,key):
-	values=Employee.objects.get(pk=int(key))
-	# return render(request,"otherapps/hr/recruitments.html",{'values':values});
-	return render(request,"otherapps/hr/trialcenter.html",{'values':values});
 
 
 

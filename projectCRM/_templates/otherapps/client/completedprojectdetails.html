@@ -32,17 +32,17 @@ CRM - Client - Project Details
           <div class="card-body">
             <form id="formAccountSettings" method="POST" onsubmit="return false">
               <div class="row">
-                <div class="mb-3 col-md-6">
+                <div class="mb-3 col-md-7">
                   <label for="projectname" class="form-label">New Project Name</label>
                   <input class="form-control" type="text" id="projectname" name="projectname"
                     value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="" readonly>
                 </div>
-                <div class="mb-3 col-md-3">
+                <!-- <div class="mb-3 col-md-3">
                   <label for="assignto" class="form-label">CLIENT Name </label>
                   <input class="form-control" type="text" id="assignto" name="assignto" value="{{ClientFullName}}"
                     placeholder="None" autofocus="" readonly>
-                </div>
-                <div class="mb-3 col-md-3">
+                </div> -->
+                <div class="mb-3 col-md-5">
                   <label for="assignto" class="form-label">ADMIN Name</label>
                   <input class="form-control" type="text" id="assignto" name="assignto" value="{{AdminFullName}}"
                     placeholder="None" autofocus="" readonly>
@@ -139,133 +139,7 @@ CRM - Client - Project Details
               <br>
 
 
-              <div class="card">
-                <h5 class="card-header"><b>Project's TEAM...</b></h5>
-                <div class="table-responsive text-nowrap" style="background-color:#1d242e">
-                  <table class="table table-sm">
-                    <thead>
-                      <tr style="background-color: black;">
-                        <th></th>
-                        <th>Profile Username</th>
-                        <th>Developer's Name</th>
-                        <th>Role (with Level)</th>
-                        <th>Completed Task's</th>
-                        <!-- <th>Completed</th> -->
-                        <!-- <th>Skill's<br></th>  -->
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr style="background-color: white;">
-                        <!-- <td><span class="badge badge-center rounded-pill" style="float: right; background-color: #30dd30;">1</span></td> -->
-                        <td><span class="badge btn btn-danger">01</span></td>
-                        <td style="padding-left: 0px;">
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/@theshivashu07.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>@theshivashu07</strong>
-                          </ul>
-                        </td>
-                        <td>Shivashu Shukla</td>
-                        <td>Project Manager</td>
-                        <td>__</td>
-                        <!-- <td>4</td> -->
-                        <!-- <td> _____ </td> -->
-                      </tr>
-                      <tr>
-                        <!-- <td><span class="badge badge-center rounded-pill" style="float: right; background-color: #30dd30;">1</span></td> -->
-                        <td><span class="badge btn btn-info">01</span></td>
-                        <td style="padding-left: 0px;">
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>@shivamshukla12</strong>
-                          </ul>
-                        </td>
-                        <td>Shivam Shukla</td>
-                        <td>Software Developer - I</td>
-                        <td>82</td>
-                        <!-- <td>4</td> -->
-                        <!-- <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td> -->
-                      </tr>
-                      <tr>
-                        <!-- <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" style="margin-left: 20%;"></td> -->
-                        <td><span class="badge btn btn-info">02</span></td>
-                        <td style="padding-left: 0px;">
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>@shrishukla009</strong>
-                          </ul>
-                        </td>
-                        <td>Shri Shukla</td>
-                        <td>Software Engineer - I</td>
-                        <td>76</td>
-                        <!-- <td>4</td> -->
-                        <!-- <td>Python, Django, SQLite, MySQL, C, C++, DSA, Git and GitHub.</td> -->
-                      </tr>
-                      <tr>
-                        <!-- <td><input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1" style="margin-left: 20%;"></td> -->
-                        <td><span class="badge btn btn-info">03</span></td>
-                        <td style="padding-left: 0px;">
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>@angleviston10</strong>
-                          </ul>
-                        </td>
-                        <td>Angle Viston</td>
-                        <td>Data Engineer - II</td>
-                        <td>57</td>
-                      </tr>
-                      <tr>
-                        <td><span class="badge btn btn-info">04</span></td>
-                        <td style="padding-left: 0px;">
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                              class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla"
-                              style="margin-right:5px;">
-                              <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                                class="rounded-circle">
-                            </li>
-                            <strong>@merrycluster021</strong>
-                          </ul>
-                        </td>
-                        <td>Merry Cluster</td>
-                        <td>Data Analyst - II</td>
-                        <td>36</td>
-                      </tr>
-                      <tr></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div id="defaultFormControlHelp" class="form-text">
-                <b>Here is Project Manager and Developer's details!!s</b>
-              </div>
-              <br>
-              <br>
-              <br>
 
-
-
-
-              <!-- <br>
               <div class="card">
                 <h5 class="card-header"><b>Project's TEAM...</b></h5>
                 <div class="table-responsive text-nowrap" style="background-color:#1d242e">
@@ -338,8 +212,7 @@ CRM - Client - Project Details
               </div>
 
               <br><br>
-              <br><br> -->
-
+              <br><br>
 
 
             </form>

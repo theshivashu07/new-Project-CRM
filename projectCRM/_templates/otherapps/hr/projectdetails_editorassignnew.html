@@ -37,12 +37,27 @@ CRM - HR - Project Details
                             <label for="projectname" class="form-label">New Project Name</label>
                             <input class="form-control" type="text" id="projectname" name="projectname" value="{{values.ProjectName}}" placeholder="Project CRM" autofocus=""  >
                           </div>  -->
-                <div class="mb-3 col-md-8">
+                <div class="mb-3 col-md-7">
                   <label for="projectname" class="form-label">New Project Name</label>
                   <input class="form-control" type="text" id="projectname" name="projectname"
                     value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="">
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-5">
+                    <label for="admin" class="form-label">ADMIN Name</label>
+                    {% if adminslist and values.Admin %}
+                      <select name="admin" class="select2 form-select">
+                          <option value="" {%if values.AdminsFullName == 'None' %} selected {%endif%}>Select
+                              Admin</option>
+                          {% for adminsset in adminslist%}
+                          <option value="{{adminsset.id}}" {%if values.Admin == adminsset.id %} selected {%endif%}>{{adminsset.FullName}}</option>
+                          {% endfor %}
+                      </select>
+                    {% else %}
+                      <input class="form-control" type="text" id="assignto" name="assignto" value="{{values.Admin}}"
+                    placeholder="None" autofocus="" readonly>
+                    {% endif %}
+                </div>
+                <div class="mb-3 col-md-3">
                   <label for="programminglanguage" class="form-label">Programming Language</label>
                   <select name="programminglanguage" class="select2 form-select">
                     <option value="None" {%if values.ProgrammingLanguage == 'None' %} selected {%endif%}>Select Language
@@ -66,7 +81,7 @@ CRM - HR - Project Details
                     Here put the main <b>'programming language'</b>.
                   </div>
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-3">
                   <label for="frontend" class="form-label">Front-End</label>
                   <select name="frontend" class="select2 form-select">
                     <option value="None" {%if values.FrontEnd  == 'None' %} selected {%endif%}>Select Language</option>
@@ -80,7 +95,7 @@ CRM - HR - Project Details
                     Here <b>'simple'</b> means <b>'html, css and js'</b> languages.
                   </div>
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-3">
                   <label for="backend" class="form-label">Back-End</label>
                   <select name="backend" class="select2 form-select">
                     <option value="None" {%if values.BackEnd == 'None' %} selected {%endif%}>Select Language</option>
@@ -94,7 +109,7 @@ CRM - HR - Project Details
                     <option value="Other" {%if values.BackEnd == 'Other' %} selected {%endif%}>Other</option>
                   </select>
                 </div>
-                <div class="mb-3 col-md-4">
+                <div class="mb-3 col-md-3">
                   <label for="database" class="form-label">Database</label>
                   <select name="database" class="select2 form-select">
                     <!-- <option value="{{location_.id}}" {% if emp.location_id == location_.id %} selected {% endif %}>{{location_.name}}</option> -->

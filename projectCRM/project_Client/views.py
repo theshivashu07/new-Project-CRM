@@ -112,14 +112,15 @@ def projectdetailsedit(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
-	ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
-	return render(request,"otherapps/client/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug, 'path':request.path,'ClientFullName':ClientFullName});
+	values.Admin=Employee.objects.get(pk=values.Admin).FullName
+	return render(request,"otherapps/client/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug, 'path':request.path});
 
 
 def allprojectsrequests(request):
 	# values=ProjectInfo.objects.all().values('id')
-	values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClienMain)\
-					| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClienMain))
+	values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClienMain))
+	# values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClienMain)\
+					# | ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClienMain))
 	return render(request,"otherapps/client/allprojectsrequests.html",{'values':values});
 
 # currently we refer both urls to a duplicate page
@@ -168,8 +169,24 @@ def completedprojectdetails(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
+	temp=DeveloperBox.objects.filter(ProjectInfosID_id=key)
 	AdminFullName=Employee.objects.get(pk=values.Admin).FullName
-	return render(request,"otherapps/client/completedprojectdetails.html",{'values':values, 'projectslug':projectslug, 'AdminFullName':AdminFullName});
+	projectmanagerslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Project Manager')
+	developerslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Developer')
+	selectedprojectmanager=selecteddeveloperslist=0
+	if(values.ProjectManager):
+		selectedprojectmanager=Employee.objects.get(pk=values.ProjectManager)
+	if(values.Developer):
+		selecteddeveloperslist=list()
+		developers,developerslist=developerslist,list()
+		for devdataset in developers:
+			temp=DeveloperBox.objects.filter(ProjectInfosID=values,DeveloperID=devdataset.id)
+			if(temp):
+				selecteddeveloperslist.append(devdataset)
+			else:
+				developerslist.append(devdataset)
+	return render(request,"otherapps/client/completedprojectdetails.html",{'values':values, 'projectslug':projectslug, 'AdminFullName':AdminFullName, 
+		'selecteddeveloperslist':selecteddeveloperslist, 'selectedprojectmanager':selectedprojectmanager});
 
 def alldiscussions(request):
 	return render(request,"otherapps/client/alldiscussions.html");

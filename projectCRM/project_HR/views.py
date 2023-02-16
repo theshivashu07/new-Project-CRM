@@ -83,8 +83,7 @@ def completedprojectdetails(request,projectslug):
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
 	values.Client=ClientInfo.objects.get(id=values.Client).FullName
-	if(values.Admin):
-		values.Admin=Employee.objects.get(id=values.Admin).FullName
+	values.Admin=Employee.objects.get(id=values.Admin).FullName
 	developerslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Developer')
 	selectedprojectmanager=selecteddeveloperslist=0
 	if(values.ProjectManager):
@@ -95,7 +94,12 @@ def completedprojectdetails(request,projectslug):
 			temp=DeveloperBox.objects.filter(ProjectInfosID=values,DeveloperID=developer.id)
 			if(temp):
 				selecteddeveloperslist.append(developer)
-	return render(request, "otherapps/hr/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'selectedprojectmanager':selectedprojectmanager, 'selecteddeveloperslist':selecteddeveloperslist})
+	adminslist=None
+	if('active' in request.path):
+		print(request.path)
+		adminslist = Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
+	# elif(values.Admin):
+	return render(request, "otherapps/hr/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'selectedprojectmanager':selectedprojectmanager, 'selecteddeveloperslist':selecteddeveloperslist, 'adminslist':adminslist})
 
 def projectdetails(request):
 	if request.method=="POST":
@@ -132,8 +136,8 @@ def projectdetailsslug(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	values=ProjectInfo.objects.get(pk=projectslug.split('-')[-1])   
 	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
-	adminslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
-	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'projectslug':projectslug, 'adminslist':adminslist});
+	ShowEditButton = True if('active' in request.path) else False
+	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'projectslug':projectslug, 'ShowEditButton':ShowEditButton});
 
 def projectdetailsedit(request,projectslug):
 	if request.method=="POST":
@@ -160,7 +164,9 @@ def projectdetailsedit(request,projectslug):
 	overallURL=request.META['HTTP_REFERER']
 	prevPATH=overallURL[21:]  #''.join(overallURL.split('/')[3:])
 	comingFrom = ('Active' if('active' in overallURL) else 'New')
-	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'path':request.path, 'prevPATH':prevPATH, 'comingFrom':comingFrom});
+	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
+	adminslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
+	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'path':request.path, 'prevPATH':prevPATH, 'adminslist':adminslist, 'comingFrom':comingFrom});
 
 
 # new 

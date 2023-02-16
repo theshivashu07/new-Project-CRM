@@ -76,7 +76,7 @@ def projectdetailsslug(request,projectslug):
 			values.ProjectInfosID=lock
 			values.DeveloperID=request.POST["developer"];
 			values.save()
-		print("ComingUPs...")
+		# print("ComingUPs...")
 		overallURL=(request.META['HTTP_REFERER'])
 		orignalURL=overallURL[21:]
 		return redirect(orignalURL)
@@ -121,6 +121,7 @@ def projectdetailsremoveteammember(request,projectslug):
 
 def projectdetailsedit(request,projectslug):
 	if request.method=="POST":
+		comingFrom=request.POST["comingFrom"]
 		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
 		lock.ProjectName=request.POST["projectname"]
 		lock.ProgrammingLanguage=request.POST["programminglanguage"]
@@ -133,7 +134,9 @@ def projectdetailsedit(request,projectslug):
 		lock.EndingAmount=request.POST["endingamount"]
 		lock.HardDiscription=request.POST["harddiscription"]
 		lock.save()
-		return redirect('/admin/projectdetails/'+projectslug)
+		overallURL=(request.META['HTTP_REFERER'])
+		# print(overallURL)
+		return redirect('/admin/projectdetails/'+comingFrom.lower()+'/'+projectslug)
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)

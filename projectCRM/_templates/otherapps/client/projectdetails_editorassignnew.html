@@ -29,19 +29,19 @@ CRM - Client
               <input type="hidden" id="projectID" name="projectID" value="{{values.id}}">
               <input type="hidden" id="prevPATH" name="prevPATH" value="{{prevPATH}}">
               <div class="row">
-                <div class="mb-3 col-md-6">
+                <div class="mb-3 col-md-7">
                   <label for="projectname" class="form-label">New Project Name</label>
                   <input class="form-control" type="text" id="projectname" name="projectname"
                     value="{{values.ProjectName}}" placeholder="Project CRM" autofocus="" readonly>
                 </div>
-                <div class="mb-3 col-md-3">
+                <!-- <div class="mb-3 col-md-3">
                   <label for="assignto" class="form-label">CLIENT Name </label>
                   <input class="form-control" type="text" id="assignto" name="assignto" value="{{ClientFullName}}"
                     placeholder="None" autofocus="" readonly>
-                </div>
-                <div class="mb-3 col-md-3">
+                </div> -->
+                <div class="mb-3 col-md-5">
                   <label for="assignto" class="form-label">ADMIN Name</label>
-                  <input class="form-control" type="text" id="assignto" name="assignto" value="{{AdminFullName}}"
+                  <input class="form-control" type="text" id="assignto" name="assignto" value="{{values.Admin}}"
                     placeholder="None" autofocus="" readonly>
                 </div>
                 <div class="mb-3 col-md-3">

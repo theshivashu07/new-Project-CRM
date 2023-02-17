@@ -42,8 +42,8 @@ CRM - HR - Project Details
                   <input class="form-control" type="text" id="assignto" name="assignto" value="{{values.Client}}"
                     placeholder="None" autofocus="" readonly>
                 </div>
-                <div class="mb-3 col-md-3">
-                    <label for="admin" class="form-label">ADMIN Name {{values.Admin}}</label>
+                <!-- <div class="mb-3 col-md-3">
+                    <label for="admin" class="form-label">ADMIN Name</label>
                     {% if adminslist and values.Admin %}
                       <select name="admin" class="select2 form-select">
                           <option value="" {%if values.AdminsFullName == 'None' %} selected {%endif%}>Select
@@ -56,6 +56,11 @@ CRM - HR - Project Details
                       <input class="form-control" type="text" id="assignto" name="assignto" value="{{values.Admin}}"
                     placeholder="None" autofocus="" readonly>
                     {% endif %}
+                </div> -->
+                <div class="mb-3 col-md-3">
+                    <label for="admin" class="form-label">ADMIN Name</label>
+                    <input class="form-control" type="text" id="assignto" name="assignto" value="{{values.Admin}}"
+                    placeholder="None" autofocus="" readonly>
                 </div>
                 <div class="mb-3 col-md-3">
                   <label for="language" class="form-label">Programming Language</label>

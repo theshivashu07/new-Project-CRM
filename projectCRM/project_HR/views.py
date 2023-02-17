@@ -94,12 +94,9 @@ def completedprojectdetails(request,projectslug):
 			temp=DeveloperBox.objects.filter(ProjectInfosID=values,DeveloperID=developer.id)
 			if(temp):
 				selecteddeveloperslist.append(developer)
-	adminslist=None
-	if('active' in request.path):
-		print(request.path)
-		adminslist = Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
-	# elif(values.Admin):
-	return render(request, "otherapps/hr/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'selectedprojectmanager':selectedprojectmanager, 'selecteddeveloperslist':selecteddeveloperslist, 'adminslist':adminslist})
+	ShowEditButton = True if('active' in request.path) else False
+	return render(request, "otherapps/hr/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'ShowEditButton':ShowEditButton, 
+	 'selectedprojectmanager':selectedprojectmanager, 'selecteddeveloperslist':selecteddeveloperslist})
 
 def projectdetails(request):
 	if request.method=="POST":
@@ -128,16 +125,17 @@ def projectdetailsslug(request,projectslug):
 	if request.method=="POST":
 		values=ProjectInfo.objects.get(pk=request.POST["projectID"])
 		if(request.POST["admin"]):
+			print("Before : ",values.ReportStatus,values.Admin)
 			values.Admin=AdminsID=request.POST["admin"];
-			print(values.Admin,AdminsID)
 			values.ReportStatus="Active"
+			print("After : ",values.ReportStatus,values.Admin,AdminsID)
 		values.save()
 		return redirect('/hr/allprojectsrequests/')
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	values=ProjectInfo.objects.get(pk=projectslug.split('-')[-1])   
 	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
-	ShowEditButton = True if('active' in request.path) else False
-	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'projectslug':projectslug, 'ShowEditButton':ShowEditButton});
+	adminslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
+	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'projectslug':projectslug, 'adminslist':adminslist});
 
 def projectdetailsedit(request,projectslug):
 	if request.method=="POST":
@@ -153,6 +151,7 @@ def projectdetailsedit(request,projectslug):
 		lock.StartingAmount=request.POST["startingamount"]
 		lock.EndingAmount=request.POST["endingamount"]
 		lock.SoftDiscription=request.POST["softdiscription"]
+		# lock.HardDiscription=request.POST["harddiscription"]
 		lock.save()
 		return redirect(prevPATH)
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...

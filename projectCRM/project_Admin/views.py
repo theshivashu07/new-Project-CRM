@@ -228,3 +228,4 @@ def sendreportsopen(request,projectslug=None):
 # 	return render(request,"otherapps/admin/creativeteam.html");
 
 
+

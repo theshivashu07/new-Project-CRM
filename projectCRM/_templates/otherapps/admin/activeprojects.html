@@ -88,7 +88,11 @@ CRM - Admin
                           </center>
                           </td>
                           <td>
-                            <a href="/admin/latestreport/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info" style="line-height: 15px">Open It</a>
+                            {% if value.Developer and value.ProjectManager %}
+                            <a href="/admin/latestreport/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info" style="line-height:15px" >Open It</a>
+                            {% else %}
+                            <a href="#" class="bedge btn btn-dark" style="line-height:15px;" >Open It</a>
+                            {% endif %}
                           </td>
                           <td>
                             <a href="/admin/projectdetails/active/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info" style="line-height: 15px">Click to Open</a>

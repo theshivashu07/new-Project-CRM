@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from project_HR.models import Employee
 from project_Client.models import ClientInfo,ProjectInfo,DeveloperBox
+from .models import ReportsOrMessages
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -30,7 +31,23 @@ def mynotification(request):
 	return render(request,"otherapps/admin/mynotification.html");
 
 def projectdetails(request):
-	return render(request,"otherapps/admin/projectdetails.html");
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	getting=projectslug.split('-')
+	key=int(getting[-1])
+	values=ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager")
+	lastrecordsDateTime = values.reverse()[0].SendingDateTime if(values) else datetime.date.today()
+	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
+	for value in values:
+		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment 
+	return render(request, "otherapps/admin/reportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet}) 
 
 def latestreport(request,projectslug):
 	return render(request, "otherapps/admin/reportsopen.html", {'projectslug':projectslug}) 

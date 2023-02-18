@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from project_HR.models import Employee
 from project_Client.models import ClientInfo,ProjectInfo,DeveloperBox
+from project_Admin.models import ReportsOrMessages
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -30,7 +31,23 @@ def mynotification(request):
 
 
 def latestreport(request,projectslug):  #✓
-	return render(request, "otherapps/developer/reportsopen.html", {'projectslug':projectslug}) 
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	getting=projectslug.split('-')
+	key=int(getting[-1])
+	values=ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager")
+	lastrecordsDateTime = values.reverse()[0].SendingDateTime if(values) else datetime.date.today()
+	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
+	for value in values:
+		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment 
+	return render(request, "otherapps/developer/reportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet}) 
 
 
 def allprojectsrequests(request):  #✓
@@ -152,10 +169,41 @@ def sendreports(request):  #✓
 				lock.ProfilePick=temp.ProfilePick
 			getting.Developer=locks
 			values.append(getting)
-	print(values)
 	return render(request,"otherapps/developer/sendreports.html", {'values':values});
 def sendreportsopen(request,projectslug=None):  #✓
-	return render(request,"otherapps/developer/sendreportsopen.html", {'projectslug':projectslug});
+	if request.method=="POST":
+		# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+		key=int(projectslug.split('-')[-1])
+		values=ReportsOrMessages()
+		values.ProjectID=key
+		values.WhatIsIt=request.POST["whatisit"]
+		values.SenderID=DeveloperMain
+		values.SenderRole="Developer"  #projectmanager/developer
+		values.ContentData=request.POST["contentdata"]
+		values.save()
+		return redirect(request.path)
+	getting=projectslug.split('-')
+	key=int(getting[-1])
+	detailsSet={'Date':datetime.date.today(), 'ProjectUsername':''.join(getting[:-1])}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment
+	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=datetime.date.today())
+	for value in values:
+		if(value.SenderID==DeveloperMain):
+			detailsSet['textareaReadonly']=True
+		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	return render(request,"otherapps/developer/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'selfID':DeveloperMain, 'detailsSet':detailsSet});
+
+
+
+
+
+
 
 
 

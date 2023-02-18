@@ -37,85 +37,35 @@ CRM - Admin
                         </select>
                       </div>
                     </span>
-                    <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">Project Manager : </span> Shivashu
-                      Shukla
-                      <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                        style="padding-left:0;">
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla">
-                          <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                            class="rounded-circle">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla">
-                          <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar" class="rounded-circle">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Angle Viston">
-                          <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar" class="rounded-circle">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Merry Cluster">
-                          <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                            class="rounded-circle">
-                        </li>
-                      </ul>
-                    </h4>
+                        <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">{{ detailsSet.Date |date:'d-m-Y'}}  /</span> @{{ detailsSet.ProjectUsername }} 
+                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left:0">
+                          {% for detail in detailsSet.PMnDevs%}
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{detail.id}}-{{detail.FullName}}">
+                              <img src="/_uploads/{{detail.ProfilePick|default:'employee/user.png'}}" alt="Avatar" class="rounded-circle">
+                            </li>
+                          {% endfor %}
+                        </ul> 
+                      </h4>
 
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:#ffffff; color:black;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;"><b>Shivam Shukla</b></h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
+                      {% for value in values %}
+                        <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
+                          {% if value.WhatIsIt == 'Report' %}
+                            <div class="card" style="background-color:#ffffff; color:black;">
+                          {% else %}
+                            <div class="card" style="background-color:black; color:#ffffff;">
+                          {% endif %}
+                            <div class="card-body" style="padding: 10px;">
+                              <span class="primary" style="float: right;color: gray;">—  {{value.SendingDateTime|time:"g:i A"}}</span>
+                              <h5 class="card-title" style="margin-bottom: 5px;">
+                                <b>{{value.SenderID.FullName}} ({{value.SenderID.Role}})</b>
+                              </h5>
+                              <p class="card-text">
+                                {{value.ContentData}}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:#ffffff; color:black;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;"><b>Shri Shukla</b></h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:#ffffff; color:black;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;"><b>Angle Viston</b></h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:black; color:#ffffff;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;">
-                            <b>Merry Cluster</b>
-                          </h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                      {% endfor %}
 
                   </div>
                   <br>

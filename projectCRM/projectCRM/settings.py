@@ -112,13 +112,17 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-# I'm changing our time-zone #
+# Dont use below line, because if we using this then automatically our time is now showing well, and save less 05:30 hours of actual timing...
 # TIME_ZONE = 'UTC'
+# USE_TZ = True 
+# I'm changing our time-zone, so that we save our time according to india date and time...
 TIME_ZONE =  'Asia/Kolkata'
+
+
 
 USE_I18N = True 
 
-USE_TZ = True 
+
 
 
 # Static files (CSS, JavaScript, Images) 

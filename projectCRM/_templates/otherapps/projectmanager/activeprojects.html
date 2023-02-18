@@ -91,9 +91,11 @@ CRM - Project Manager
                           </center>
                           </td>
                           <td>
-                            <!-- <button type="button" class="btn rounded-pill btn-dark">Dark</button> -->
-                            <a href="/projectmanager/latestreport/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info" style="line-height: 15px">Open It</a>
-                            <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter" style="background-color: #1d242e;">Promote</button> -->
+                            {% if value.Developer and value.ProjectManager %}
+                            <a href="/projectmanager/latestreport/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info" style="line-height:15px" >Open It</a>
+                            {% else %}
+                            <a href="#" class="bedge btn btn-dark" style="line-height:15px;" >Open It</a>
+                            {% endif %}
                           </td>
                           <td>
                             <a href="/projectmanager/projectdetails/active/{{value.ProjectSlug}}-{{value.id}}" class="bedge btn btn-info" style="line-height: 15px">Click to Open</a>

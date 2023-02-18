@@ -20,7 +20,8 @@ CRM - Project Manager
           <!-- Account -->
           <hr class="my-0">
           <div class="card-body" style="background-color: #1d242e;">
-            <form id="formAccountSettings" method="POST" onsubmit="return false">
+            <form id="formAccountSettings" method="POST">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-md">
                   <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
@@ -34,83 +35,37 @@ CRM - Project Manager
                         </a>
                       </div>
                     </span>
-                    <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">20-01-2023 /</span> @projectcrm
-                      <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                        style="padding-left:0">
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla">
-                          <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                            class="rounded-circle">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla">
-                          <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar" class="rounded-circle">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Angle Viston">
-                          <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar" class="rounded-circle">
-                        </li>
-                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                          class="avatar avatar-xs pull-up" title="" data-bs-original-title="Merry Cluster">
-                          <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                            class="rounded-circle">
-                        </li>
-                      </ul>
-                    </h4>
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:#ffffff; color:black;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;"><b>Shivam Shukla</b></h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
+                        <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">{{ detailsSet.Date |date:'d-m-Y'}}  /</span> @{{ detailsSet.ProjectUsername }} 
+                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left:0">
+                          {% for detail in detailsSet.PMnDevs%}
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{detail.id}} — {{detail.FullName}}">
+                              <img src="/_uploads/{{detail.ProfilePick|default:'employee/user.png'}}" alt="Avatar" class="rounded-circle">
+                            </li>
+                          {% endfor %}
+                        </ul> 
+                      </h4>
+
+
+
+                      {% for value in values %}
+                        <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
+                          {% if value.WhatIsIt == 'Report' %}
+                            <div class="card" style="background-color:#ffffff; color:black;">
+                          {% else %}
+                            <div class="card" style="background-color:black; color:#ffffff;">
+                          {% endif %}
+                            <div class="card-body" style="padding: 10px;">
+                              <span class="primary" style="float: right;color: gray;">—  {{value.SendingDateTime|time:"g:i A"}}</span>
+                              <h5 class="card-title" style="margin-bottom: 5px;">
+                                <b>{{value.SenderID.FullName}} ({{value.SenderID.Role}})</b>
+                              </h5>
+                              <p class="card-text">
+                                {{value.ContentData}}
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:#ffffff; color:black;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;"><b>Shri Shukla</b></h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:#ffffff; color:black;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;"><b>Angle Viston</b></h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                      <div class="card" style="background-color:black; color:#ffffff;">
-                        <div class="card-body" style="padding: 10px;">
-                          <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                          <h5 class="card-title" style="margin-bottom: 5px;">
-                            <b>Merry Cluster</b>
-                          </h5>
-                          <p class="card-text">
-                            This is another card with title and supporting text below. This card has some additional
-                            content to make it slightly taller overall. This is another card with title and supporting
-                            text below. This card has some additional content to make it slightly taller overall.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                      {% endfor %}
 
                   </div>
                   <br>
@@ -118,12 +73,23 @@ CRM - Project Manager
               </div>
               <div class="card mb-12">
                 <div class="modal-footer" style="background-color: #1d242e; padding: 15px;">
+                  <select id="whatisit" name="whatisit" class="select2 form-select" style="background-color:#11191c; width:100px; border-color: #283848;">
+                      <!-- <option value="">Select Project</option> -->
+                      <option value="Report" selected="">Report</option>
+                      <!-- <option value="Message">Message</option> -->
+                  </select>
                   <div class="input-group">
-                    <textarea class="form-control" aria-label="With textarea" placeholder="Create New Report"
-                      style="height:100px"></textarea>
-                    <button type="button" class="btn btn-primary" style="background-color: #2c3c4c;">
+                    <textarea class="form-control" aria-label="With textarea" placeholder="Create New Report" name="contentdata" style="height:100px;" {% if detailsSet.textareaReadonly %} readonly {% endif %}></textarea>
+                    {% if not detailsSet.textareaReadonly %} 
+                    <button  type="submit"  class="btn btn-primary" style="background-color: #2c3c4c;"> 
                       <i class="bx bx-send"></i>
                     </button>
+                    {% else %}
+                    <div  type="submit"  class="btn btn-primary" style="background-color: #2c3c4c;"> 
+                      <br>
+                      <i class="bx bx-send"></i>
+                    </div>
+                    {% endif %}
                   </div>
                 </div>
               </div>

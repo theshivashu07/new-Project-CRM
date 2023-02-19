@@ -15,7 +15,7 @@ urlpatterns=[
 		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
 
 		path('activeprojects/',views.activeprojects,name='activeprojects'),
-		path('activeprojects/latestreport/<slug:projectslug>',views.reportsopen,name='reportsopen'),
+		path('activeprojects/latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),
 		path('completedprojects/',views.completedprojects,name='completedprojects'),
 		path('projectdetails/active/<slug:projectslug>',views.completedprojectdetails,name='activeprojectdetails'),
 		path('projectdetails/completed/<slug:projectslug>',views.completedprojectdetails,name='projectdetailsopen'),

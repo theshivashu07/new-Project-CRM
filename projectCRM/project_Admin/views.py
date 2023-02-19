@@ -31,14 +31,20 @@ def mynotification(request):
 	return render(request,"otherapps/admin/mynotification.html");
 
 def projectdetails(request):
+	return render(request,"otherapps/admin/projectdetails.html");
+
+def latestreport(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	getting=projectslug.split('-')
 	key=int(getting[-1])
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager")
-	lastrecordsDateTime = values.reverse()[0].SendingDateTime if(values) else datetime.date.today()
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
-	for value in values:
-		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	# here is we getting our last date on which project manager giving a response, because only then reports approved...
+	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
+	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
+	values=list()
+	if(lastRecord):
+		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
+		for value in values:
+			value.SenderID=Employee.objects.get(pk=value.SenderID)
 	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
 	templist=list()
 	temp=ProjectInfo.objects.get(pk=key).ProjectManager
@@ -48,9 +54,6 @@ def projectdetails(request):
 		templist.append(Employee.objects.get(pk=temp.DeveloperID))
 	detailsSet['PMnDevs']=templist   # third assignment 
 	return render(request, "otherapps/admin/reportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet}) 
-
-def latestreport(request,projectslug):
-	return render(request, "otherapps/admin/reportsopen.html", {'projectslug':projectslug}) 
 
 def completedprojectdetails(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
@@ -239,8 +242,27 @@ def sendreports(request):
 			lock.ProfilePick=temp.ProfilePick
 		value.Developer=locks
 	return render(request,"otherapps/admin/sendreports.html", {'values':values});
-def sendreportsopen(request,projectslug=None):
-	return render(request,"otherapps/admin/sendreportsopen.html", {'projectslug':projectslug});
+def sendreportsopen(request,projectslug):
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	getting=projectslug.split('-')
+	key=int(getting[-1])
+	# here is we getting our last date on which project manager giving a response, because only then reports approved...
+	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
+	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
+	values=list()
+	if(lastRecord):
+		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
+		for value in values:
+			value.SenderID=Employee.objects.get(pk=value.SenderID)
+	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment 
+	return render(request,"otherapps/admin/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
 # def creativeteam(request):
 # 	return render(request,"otherapps/admin/creativeteam.html");
 

@@ -9,7 +9,6 @@ import datetime
 
 
 DeveloperMain=5
-ProjectManagerMain=15
 
 
 '''
@@ -34,11 +33,14 @@ def latestreport(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	getting=projectslug.split('-')
 	key=int(getting[-1])
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager")
-	lastrecordsDateTime = values.reverse()[0].SendingDateTime if(values) else datetime.date.today()
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
-	for value in values:
-		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	# here is we getting our last date on which project manager giving a response, because only then reports approved...
+	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
+	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
+	values=list()
+	if(lastRecord):
+		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
+		for value in values:
+			value.SenderID=Employee.objects.get(pk=value.SenderID)
 	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
 	templist=list()
 	temp=ProjectInfo.objects.get(pk=key).ProjectManager
@@ -101,8 +103,6 @@ def projectdetailsedit(request,projectslug):  #✓
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):  #✓
-	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
-	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
@@ -171,7 +171,7 @@ def sendreports(request):  #✓
 			values.append(getting)
 	return render(request,"otherapps/developer/sendreports.html", {'values':values});
 def sendreportsopen(request,projectslug=None):  #✓
-	if request.method=="POST":
+	if request.method=="POST":   
 		# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 		key=int(projectslug.split('-')[-1])
 		values=ReportsOrMessages()
@@ -197,7 +197,7 @@ def sendreportsopen(request,projectslug=None):  #✓
 		if(value.SenderID==DeveloperMain):
 			detailsSet['textareaReadonly']=True
 		value.SenderID=Employee.objects.get(pk=value.SenderID)
-	return render(request,"otherapps/developer/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'selfID':DeveloperMain, 'detailsSet':detailsSet});
+	return render(request,"otherapps/developer/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
 
 
 

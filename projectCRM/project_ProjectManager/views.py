@@ -35,13 +35,14 @@ def latestreport(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	getting=projectslug.split('-')
 	key=int(getting[-1])
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").reverse()
-	print(values)
-	lastrecordsDateTime = values[0].SendingDateTime if(values) else datetime.date.today()
-	print(lastrecordsDateTime)
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
-	for value in values:
-		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	# here is we getting our last date on which project manager giving a response, because only then reports approved...
+	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
+	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
+	values=list()
+	if(lastRecord):
+		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
+		for value in values:
+			value.SenderID=Employee.objects.get(pk=value.SenderID)
 	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
 	templist=list()
 	temp=ProjectInfo.objects.get(pk=key).ProjectManager
@@ -49,7 +50,7 @@ def latestreport(request,projectslug):  #✓
 	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
 	for temp in temps:
 		templist.append(Employee.objects.get(pk=temp.DeveloperID))
-	detailsSet['PMnDevs']=templist   # third assignment
+	detailsSet['PMnDevs']=templist   # third assignment 
 	return render(request, "otherapps/projectmanager/reportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet}) 
 
 
@@ -180,7 +181,6 @@ def sendreportsopen(request,projectslug=None):  #✓
 		values.SenderID=ProjectManagerMain
 		values.SenderRole="Project Manager"  # Project Manager / Developer
 		values.ContentData=request.POST["contentdata"]
-		values.FinalSubmission=True
 		values.save()
 		return redirect(request.path)
 	getting=projectslug.split('-')
@@ -199,7 +199,7 @@ def sendreportsopen(request,projectslug=None):  #✓
 			detailsSet['textareaReadonly']=True
 		value.SenderID=Employee.objects.get(pk=value.SenderID)
 	print('>>',detailsSet)
-	return render(request,"otherapps/projectmanager/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'selfID':ProjectManagerMain, 'detailsSet':detailsSet});
+	return render(request,"otherapps/projectmanager/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
 
 
 

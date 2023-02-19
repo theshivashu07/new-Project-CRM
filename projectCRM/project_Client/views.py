@@ -5,6 +5,7 @@ from project_HR.models import Employee
 from project_Admin.models import ReportsOrMessages
 # from django.utils import timezone
 from django.db.models import Q
+import datetime
 
 
 ClienMain=1
@@ -164,8 +165,28 @@ def completedprojects(request):
 			value.Developer=locks
 	return render(request,"otherapps/client/completedprojects.html", {'values':values});
 
-def reportsopen(request,projectslug):
-	return render(request,"otherapps/client/reportsopen.html",{'projectslug':projectslug});
+def latestreport(request,projectslug):
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	getting=projectslug.split('-')
+	key=int(getting[-1])
+	# here is we getting our last date on which project manager giving a response, because only then reports approved...
+	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
+	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
+	values=list()
+	if(lastRecord):
+		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
+		for value in values:
+			value.SenderID=Employee.objects.get(pk=value.SenderID)
+	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment 
+	return render(request,"otherapps/client/reportsopen.html",{'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
+
 def completedprojectdetails(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])

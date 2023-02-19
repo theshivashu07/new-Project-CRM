@@ -8,8 +8,7 @@ class ReportsOrMessages(models.Model):
 	SenderRole = models.CharField(max_length=25);  		# Project Manager / Developer
 	ContentData = models.CharField(max_length=750);
 	SendingDateTime = models.DateTimeField(auto_now_add=True);
-	FinalSubmission = models.BooleanField(max_length=20,default=False);  #null=True
 	def __str__(self):
-		return self.SenderRole+" sending a "+self.SenderRole+" to XYZ Project. (ID:"+str(self.id)+' Date:'+str(SendingDateTime)+")";
+		return self.SenderRole+" sending a "+self.SenderRole+" to XYZ Project. (ID:"+str(self.id)+' Date:'+str(self.SendingDateTime)+")";
 
 

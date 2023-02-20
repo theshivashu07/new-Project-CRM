@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import ClientInfo,ProjectInfo,DeveloperBox
 from project_HR.models import Employee
-from project_Admin.models import ReportsOrMessages
+from project_Admin.models import ReportsOrMessages,AllMessages,AllSuggestions
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -50,7 +50,6 @@ def mynotification(request):
 
 
 def projectdetails(request):
-	print("We are here to RUN!!!")
 	values=list()
 	if request.method=="POST":
 		values=ProjectInfo(

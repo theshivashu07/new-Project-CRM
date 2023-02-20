@@ -94,6 +94,9 @@ CRM - Project Manager
                   </div>
                 </div>
           <!--/ Custom content with heading -->
+
+        <form id="formAccountSettings" method="POST">
+          {% csrf_token %}
           <div class="col-sm-8" style="height:520px; padding:0;">
             <div class="modal-content" style="height: 100%; margin: 0 0 0 0;">
               <h5 class="card-header" style="background-color:#0099ff; padding: 15px;">
@@ -117,18 +120,11 @@ CRM - Project Manager
                 <b style="color: white;">{{values.ProjectName}}</b>
                 <br>
                 <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                    class="avatar avatar-xs pull-up" title="" data-bs-original-title="Lilian Fuller">
-                    <img src="/_static/otherapps/img/avatars/5.png" alt="Avatar" class="rounded-circle">
+                {% for detail in detailsSet%}
+                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{detail.id}} — {{detail.FullName}}">
+                  <img src="/_uploads/{{detail.ProfilePick|default:'employee/user.png'}}" alt="Avatar" class="rounded-circle">
                   </li>
-                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                    class="avatar avatar-xs pull-up" title="" data-bs-original-title="Sophia Wilkerson">
-                    <img src="/_static/otherapps/img/avatars/6.png" alt="Avatar" class="rounded-circle">
-                  </li>
-                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                    class="avatar avatar-xs pull-up" title="" data-bs-original-title="Christina Parker">
-                    <img src="/_static/otherapps/img/avatars/7.png" alt="Avatar" class="rounded-circle">
-                  </li>
+                {% endfor %}
                 </ul>
               </h5>
               <div class="modal-body" style="overflow: auto;">
@@ -149,344 +145,64 @@ CRM - Project Manager
                   </div>
                 </div>
                 <!-- chatting -->
+
+            {% for value in myAllSuggestions %}
+              {% if profileData.id == value.SenderID.id and profileData.Role == value.SenderRole %}
+                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
+                  <div class="card" style="background-color:#fff999f9; color:black;">
+                    <div class="card-body" style="padding: 10px;">
+                      <!-- <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span> -->
+                      <p class="card-text">
+                        <!-- <b class="card-title" style="color:#ff7700;">You 
+                          <u style="color: black;font-size:12px;">({% if value.SenderID %} {{value.SenderRole}} {% else %} HR {% endif %}):</u></b> -->
+                        {{value.ContentData}}
+                      <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              {% else %}
                 <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
                   <div class="card" style="background-color:#ffffff; color:black;">
                     <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
+                      <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span>
                       <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
+                        <b class="card-title" style="color:#ff7700;"> <u> {% if value.SenderID %} {{value.SenderID.FullName}} {% else %} ShriVashu Shukla {% endif %} </u>
+                          <u style="color: black;font-size:12px;">({% if value.SenderID %}{{value.SenderRole}}{% else %}HR{% endif %}):</u></b>
+                          <br>
+                        {{value.ContentData}}
+                      <!-- <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span> -->
                       </p>
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:23 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:23 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:24 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:25 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:34 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:35 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:35 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:58 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:58 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:59 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:00 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:02 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:04 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:05 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:06 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:08 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:08 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:10 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Vashu Shukla <u style="color: black;font-size:12px;">(HR):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:10 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:11 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:11 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:12 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-right:25%;">
-                  <div class="card" style="background-color: #ffffff; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">Shri Shukla <u style="color: black;font-size:12px;">(Client):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 12:12 AM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-sm-9" style="padding: 2px; margin-left:25%;">
-                  <div class="card" style="background-color:#fff999f9; color:black;">
-                    <div class="card-body" style="padding: 10px;">
-                      <!-- <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span> -->
-                      <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;">You <u style="color: black;font-size:12px;">(Admin):</u></b>
-                        This is another card with title and supporting text below. This card has some additional content
-                        to make it slightly taller overall.
-                      <span class="primary" style="float: right;color: gray;">— 11:12 PM.</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
+              {% endif %}
+            {% endfor %}
+
               </div>
               <!-- last button -->
               <div class="modal-footer" style="background-color: #1d242e; padding:5px;">
                 <div class="input-group">
-                  <textarea class="form-control" aria-label="With textarea" placeholder="Drop your Suggetions..." style="height: 20px;"></textarea>
-                  <button type="button" class="btn btn-primary" style="background-color: #2c3c4c;">
-                    <i class='bx bx-send'></i>
-                  </button>
+                  <textarea class="form-control" aria-label="With textarea" placeholder="Drop your Suggetions..." name="contentdata" style="height: 20px;"></textarea>
+                    <button  type="submit"  class="btn btn-primary" style="background-color: #2c3c4c;"> 
+                      <i class="bx bx-send"></i>
+                    </button>
+                    <!-- {% if not detailsSet.textareaReadonly %} 
+                    <button  type="submit"  class="btn btn-primary" style="background-color: #2c3c4c;"> 
+                      <i class="bx bx-send"></i>
+                    </button>
+                    {% else %}
+                    <div type="submit"  class="btn btn-primary" style="background-color: #2c3c4c;"> 
+                      <br>
+                      <i class="bx bx-send"></i>
+                    </div>
+                    {% endif %} -->
                 </div>
               </div>
             </div>
           </div>
-
+        </form>
+        
               <br><br>
               <br><br>
 

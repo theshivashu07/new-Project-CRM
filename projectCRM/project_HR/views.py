@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Employee
 from project_Client.models import ClientInfo,ProjectInfo,DeveloperBox
-from project_Admin.models import ReportsOrMessages
+from project_Admin.models import ReportsOrMessages,AllMessages,AllSuggestions
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -145,10 +145,8 @@ def projectdetailsslug(request,projectslug):
 	if request.method=="POST":
 		values=ProjectInfo.objects.get(pk=request.POST["projectID"])
 		if(request.POST["admin"]):
-			print("Before : ",values.ReportStatus,values.Admin)
 			values.Admin=AdminsID=request.POST["admin"];
 			values.ReportStatus="Active"
-			print("After : ",values.ReportStatus,values.Admin,AdminsID)
 		values.save()
 		return redirect('/hr/allprojectsrequests/')
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
@@ -179,7 +177,6 @@ def projectdetailsedit(request,projectslug):
 	values=ProjectInfo.objects.get(pk=key)
 	# --------------------------------------------------------------
 	# NOTE : below we are getting our previous url...
-	# print(request.META.get('HTTP_REFERER'))
 	overallURL=request.META['HTTP_REFERER']
 	prevPATH=overallURL[21:]  #''.join(overallURL.split('/')[3:])
 	comingFrom = ('Active' if('active' in overallURL) else 'New')
@@ -210,7 +207,6 @@ def newjoinees(request,username):
 		values.save()
 		return redirect('/hr/listof/newjoinees/')
 	values = Employee.objects.get(Username=username)
-	print(values)
 	return render(request,"otherapps/hr/newjoinees.html",{'values':values});
 
 def recruitments(request):
@@ -219,7 +215,6 @@ def recruitments(request):
 			n=str(Employee.objects.count()+1)
 			temp='0'*(4-len(n))+n
 			temp='googler'+'emp'+temp
-			print(temp)
 			return temp
 		values=Employee()
 		values.Username = request.POST["username"]

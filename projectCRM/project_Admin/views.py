@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from project_HR.models import Employee
 from project_Client.models import ClientInfo,ProjectInfo,DeveloperBox
-from .models import ReportsOrMessages
+from .models import ReportsOrMessages,AllMessages,AllSuggestions
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -96,7 +96,6 @@ def projectdetailsslug(request,projectslug):
 			values.ProjectInfosID=lock
 			values.DeveloperID=request.POST["developer"];
 			values.save()
-		# print("ComingUPs...")
 		overallURL=(request.META['HTTP_REFERER'])
 		orignalURL=overallURL[21:]
 		return redirect(orignalURL)
@@ -139,31 +138,34 @@ def projectdetailsremoveteammember(request,projectslug):
 	orignalURL=overallURL[21:]
 	return redirect(orignalURL)
 
-def projectdetailsedit(request,projectslug):
-	if request.method=="POST":
-		comingFrom=request.POST["comingFrom"]
-		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
-		lock.ProjectName=request.POST["projectname"]
-		lock.ProgrammingLanguage=request.POST["programminglanguage"]
-		lock.FrontEnd=request.POST["frontend"]
-		lock.BackEnd=request.POST["backend"]
-		lock.DataBase=request.POST["database"]
-		lock.BeginningDate=request.POST["beginningdate"]
-		lock.EndingDate=request.POST["endingdate"]
-		lock.StartingAmount=request.POST["startingamount"]
-		lock.EndingAmount=request.POST["endingamount"]
-		lock.HardDiscription=request.POST["harddiscription"]
-		lock.save()
-		overallURL=(request.META['HTTP_REFERER'])
-		# print(overallURL)
-		return redirect('/admin/projectdetails/'+comingFrom.lower()+'/'+projectslug)
+
+def projectdetailsedit(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
+	if request.method=="POST":   
+		values=AllSuggestions()
+		values.ProjectID = key
+		values.SenderID = AdminMain
+		values.SenderRole = Employee.objects.get(pk=AdminMain).Role
+		values.ContentData = request.POST["contentdata"]
+		values.save()
+		return redirect(request.path)
 	values=ProjectInfo.objects.get(pk=key)
-	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
+	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
+	values.Admin=Employee.objects.get(id=values.Admin).FullName
 	overallURL=(request.META['HTTP_REFERER'])
 	comingFrom = ('Active' if('active' in overallURL) else 'New')
-	return render(request,"otherapps/admin/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug, 'comingFrom':comingFrom});
+	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
+	for temp in myAllSuggestions:
+		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
+			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		detailsSet.append(Employee.objects.get(pk=temp.DeveloperID))
+	profileData=Employee.objects.get(pk=AdminMain)
+	return render(request,"otherapps/admin/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom, 'profileData':profileData, 'myAllSuggestions':myAllSuggestions, 'detailsSet':detailsSet});
 
 
 # currently we refer both urls to a duplicate page

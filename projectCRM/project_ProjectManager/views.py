@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from project_HR.models import Employee
 from project_Client.models import ClientInfo,ProjectInfo,DeveloperBox
-from project_Admin.models import ReportsOrMessages
+from project_Admin.models import ReportsOrMessages,AllMessages,AllSuggestions
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -87,17 +87,33 @@ def projectdetailsslug(request,projectslug):  #✓
 	return render(request,"otherapps/projectmanager/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName,  'projectslug':projectslug,
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
 
-
 def projectdetailsedit(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
+	if request.method=="POST":   
+		values=AllSuggestions()
+		values.ProjectID = key
+		values.SenderID = ProjectManagerMain
+		values.SenderRole = Employee.objects.get(pk=ProjectManagerMain).Role
+		values.ContentData = request.POST["contentdata"]
+		values.save()
+		return redirect(request.path)
 	values=ProjectInfo.objects.get(pk=key)
-	# ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
 	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
 	values.Admin=Employee.objects.get(id=values.Admin).FullName
 	overallURL=(request.META['HTTP_REFERER'])
 	comingFrom = ('Active' if('active' in overallURL) else 'New')
-	return render(request,"otherapps/projectmanager/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom});
+	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
+	for temp in myAllSuggestions:
+		if(temp.SenderID): # if sender is not HR, because its SenderID have None, so its official ERROR...
+			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		detailsSet.append(Employee.objects.get(pk=temp.DeveloperID))
+	profileData=Employee.objects.get(pk=ProjectManagerMain)
+	return render(request,"otherapps/projectmanager/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom, 'profileData':profileData, 'myAllSuggestions':myAllSuggestions, 'detailsSet':detailsSet});
 
 
 # currently we refer both urls to a duplicate page
@@ -198,7 +214,6 @@ def sendreportsopen(request,projectslug=None):  #✓
 		if(value.SenderID==ProjectManagerMain):
 			detailsSet['textareaReadonly']=True
 		value.SenderID=Employee.objects.get(pk=value.SenderID)
-	print('>>',detailsSet)
 	return render(request,"otherapps/projectmanager/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
 
 

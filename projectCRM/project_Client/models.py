@@ -52,7 +52,6 @@ class ProjectInfo(models.Model):
 		# return target.FullName+" added a new project "+self.ProjectName+".";
 
 
-
 class DeveloperBox(models.Model):
 	ProjectInfosID = models.ForeignKey(ProjectInfo, on_delete=models.CASCADE)
 	DeveloperID = models.IntegerField(default=None, null=True);

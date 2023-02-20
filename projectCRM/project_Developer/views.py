@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from project_HR.models import Employee
 from project_Client.models import ClientInfo,ProjectInfo,DeveloperBox
-from project_Admin.models import ReportsOrMessages
+from project_Admin.models import ReportsOrMessages,AllMessages,AllSuggestions
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -54,14 +54,12 @@ def latestreport(request,projectslug):  #✓
 
 def allprojectsrequests(request):  #✓
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
-	print(querysets)
 	values=list()
 	for queryset in querysets:
 		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
 		if(getting.ReportStatus=="Active"):	
 			getting.Client=ClientInfo.objects.get(pk=getting.Client).FullName
 			values.append(getting)
-	print(values)
 	return render(request,"otherapps/developer/allprojectsrequests.html",{'values':values});
 
 
@@ -92,13 +90,30 @@ def projectdetailsslug(request,projectslug):  #✓
 def projectdetailsedit(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
+	if request.method=="POST":   
+		values=AllSuggestions()
+		values.ProjectID = key
+		values.SenderID = DeveloperMain
+		values.SenderRole = Employee.objects.get(pk=DeveloperMain).Role
+		values.ContentData = request.POST["contentdata"]
+		values.save()
+		return redirect(request.path)
 	values=ProjectInfo.objects.get(pk=key)
-	# ClientFullName=ClientInfo.objects.get(pk=values.Client).FullName
 	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
 	values.Admin=Employee.objects.get(id=values.Admin).FullName
 	overallURL=(request.META['HTTP_REFERER'])
 	comingFrom = ('Active' if('active' in overallURL) else 'New')
-	return render(request,"otherapps/developer/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom});
+	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
+	for temp in myAllSuggestions:
+		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
+			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		detailsSet.append(Employee.objects.get(pk=temp.DeveloperID))
+	profileData=Employee.objects.get(pk=DeveloperMain)
+	return render(request,"otherapps/developer/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom, 'profileData':profileData, 'myAllSuggestions':myAllSuggestions, 'detailsSet':detailsSet});
 
 
 # currently we refer both urls to a duplicate page
@@ -119,13 +134,11 @@ def activeprojects(request):  #✓
 				lock.ProfilePick=temp.ProfilePick
 			getting.Developer=locks
 			values.append(getting)
-	print(values)
 	return render(request,"otherapps/developer/activeprojects.html", {'values':values});
 
 
 def completedprojects(request):  #✓
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
-	print(querysets)
 	values=list()
 	for queryset in querysets:
 		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
@@ -141,7 +154,6 @@ def completedprojects(request):  #✓
 				lock.ProfilePick=temp.ProfilePick
 			getting.Developer=locks
 			values.append(getting)
-	print(values)
 	return render(request,"otherapps/developer/completedprojects.html", {'values':values});
 
 
@@ -170,6 +182,7 @@ def sendreports(request):  #✓
 			getting.Developer=locks
 			values.append(getting)
 	return render(request,"otherapps/developer/sendreports.html", {'values':values});
+
 def sendreportsopen(request,projectslug=None):  #✓
 	if request.method=="POST":   
 		# get key from url's slug ---> 'shivam-shukla-77' to '77'...

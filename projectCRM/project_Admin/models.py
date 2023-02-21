@@ -42,3 +42,8 @@ class AllSuggestions(models.Model):
 
 
 
+
+
+
+
+

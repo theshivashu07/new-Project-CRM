@@ -152,7 +152,8 @@ CRM - Developer
                       <!-- <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span> -->
                       <p class="card-text">
                         <!-- <b class="card-title" style="color:#ff7700;">You 
-                          <u style="color: black;font-size:12px;">({% if value.SenderID %} {{value.SenderRole}} {% else %} HR {% endif %}):</u></b> -->
+                                <b class="card-title" style="color:#ff7700;"> <u> {{value.FullName}} </u>
+                                <u style="color: black;font-size:12px;">({{value.Role}}):</u></b> -->
                         {{value.ContentData}}
                       <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span>
                       </p>
@@ -165,8 +166,8 @@ CRM - Developer
                     <div class="card-body" style="padding: 10px;">
                       <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span>
                       <p class="card-text">
-                        <b class="card-title" style="color:#ff7700;"> <u> {% if value.SenderID %} {{value.SenderID.FullName}} {% else %} ShriVashu Shukla {% endif %} </u>
-                          <u style="color: black;font-size:12px;">({% if value.SenderID %}{{value.SenderRole}}{% else %}HR{% endif %}):</u></b>
+                        <b class="card-title" style="color:#ff7700;"> <u> {{value.SenderID.FullName}} </u>
+                          <u style="color: black;font-size:12px;">({{value.SenderRole}}):</u></b>
                           <br>
                         {{value.ContentData}}
                       <!-- <span class="primary" style="float:right;color:gray; font-size:12px;">— {{value.SendingDateTime|time:"g:i A"}}</span> -->

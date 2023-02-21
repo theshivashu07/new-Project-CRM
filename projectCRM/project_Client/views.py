@@ -8,7 +8,7 @@ from django.db.models import Q
 import datetime
 
 
-ClienMain=1
+ClientMain=1
 
 
 
@@ -69,7 +69,7 @@ def projectdetails(request):
 		slug="{}-{}".format(values.ProjectSlug,values.id)  #slug_creation
 		return redirect("/client/projectdetails/"+slug)
 		# return render(request,"otherapps/client/projectdetails.html", {'value':values});
-	return render(request,"otherapps/client/projectdetails.html", {'value':values, 'clientID':ClienMain});
+	return render(request,"otherapps/client/projectdetails.html", {'value':values, 'clientID':ClientMain});
 
 
 def projectdetailsslug(request,projectslug):
@@ -95,8 +95,9 @@ def projectdetailsslug(request,projectslug):
 	return render(request,"otherapps/client/projectdetails.html",{'values':values, 'projectslug':projectslug, 'path':request.path});
 
 def projectdetailsedit(request,projectslug):
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
 	if request.method=="POST":
-		prevPATH=request.POST["prevPATH"];
 		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
 		lock.ProjectName=request.POST["projectname"]
 		lock.ProgrammingLanguage=request.POST["programminglanguage"]
@@ -109,25 +110,47 @@ def projectdetailsedit(request,projectslug):
 		lock.EndingAmount=request.POST["endingamount"]
 		lock.HardDiscription=request.POST["harddiscription"]
 		lock.save()
-		return redirect('/'+prevPATH)
-	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	key=int(projectslug.split('-')[-1])
+		if(request.POST["contentdata"]):
+			values=AllSuggestions()
+			values.ProjectID = key
+			values.SenderID = ClientMain
+			# values.SenderRole = ClientInfo.objects.get(pk=ClientMain).Role  # not use this because here is not Role field!!!
+			values.SenderRole = 'Client'
+			values.ContentData = request.POST["contentdata"]
+			values.save()
+			return redirect(request.path)
+		return redirect('/client/projectdetails/active/'+projectslug)
 	values=ProjectInfo.objects.get(pk=key)
-	values.Admin=Employee.objects.get(pk=values.Admin).FullName
-	return render(request,"otherapps/client/projectdetails_editorassignnew.html",{'values':values, 'projectslug':projectslug, 'path':request.path});
+	# values.Client=ClientInfo.objects.get(id=values.Client).FullName
+	values.Admin=Employee.objects.get(id=values.Admin).FullName
+	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
+	for temp in myAllSuggestions:
+		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
+			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+		else:
+			temp.SenderID = {'FullName': 'ShivaShu'}
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		detailsSet.append(Employee.objects.get(pk=temp.DeveloperID))
+	# profileData=ClientInfo.objects.get(pk=ClientMain)  # not use this because here is not Role field!!!
+	profileData={'id':ClientMain, 'Role':'Client'}
+	return render(request,"otherapps/client/projectdetails_editorassignnew.html",{'values':values, 'profileData':profileData, 'projectslug':projectslug, 'myAllSuggestions':myAllSuggestions, 'detailsSet':detailsSet});
+
 
 
 def allprojectsrequests(request):
 	# values=ProjectInfo.objects.all().values('id')
-	values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClienMain))
-	# values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClienMain)\
-					# | ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClienMain))
+	values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClientMain))
+	# values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClientMain)\
+					# | ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClientMain))
 	return render(request,"otherapps/client/allprojectsrequests.html",{'values':values});
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):
 	# values=ProjectInfo.objects.get(pk=AdminMain)
-	values=ProjectInfo.objects.filter(ReportStatus="Active", Client=ClienMain)
+	values=ProjectInfo.objects.filter(ReportStatus="Active", Client=ClientMain)
 	for value in values:
 		if(value.Client):
 			value.Client=ClientInfo.objects.get(pk=value.Client)
@@ -146,8 +169,8 @@ def activeprojects(request):
 
 def completedprojects(request):
 	# values=ProjectInfo.objects.get(pk=AdminMain)
-	values=ProjectInfo.objects.filter(ReportStatus="Completed", Client=ClienMain) \
-				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClienMain)
+	values=ProjectInfo.objects.filter(ReportStatus="Completed", Client=ClientMain) \
+				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClientMain)
 	for value in values:
 		if(value.Client):
 			value.Client=ClientInfo.objects.get(pk=value.Client)

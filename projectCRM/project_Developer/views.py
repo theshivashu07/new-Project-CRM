@@ -107,6 +107,8 @@ def projectdetailsedit(request,projectslug):  #✓
 	for temp in myAllSuggestions:
 		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
 			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+		else:
+			temp.SenderID = {'FullName': 'ShivaShu'}
 	temp=ProjectInfo.objects.get(pk=key).ProjectManager
 	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
 	temps=DeveloperBox.objects.filter(ProjectInfosID=key)

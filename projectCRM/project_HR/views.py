@@ -156,10 +156,13 @@ def projectdetailsslug(request,projectslug):
 	return render(request,"otherapps/hr/projectdetails_proceed.html",{'values':values, 'projectslug':projectslug, 'adminslist':adminslist});
 
 def projectdetailsedit(request,projectslug):
+	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
+	key=int(projectslug.split('-')[-1])
 	if request.method=="POST":
 		prevPATH=request.POST["prevPATH"];
 		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
 		lock.ProjectName=request.POST["projectname"]
+		lock.Admin=request.POST["admin"]
 		lock.ProgrammingLanguage=request.POST["programminglanguage"]
 		lock.FrontEnd=request.POST["frontend"]
 		lock.BackEnd=request.POST["backend"]
@@ -168,21 +171,40 @@ def projectdetailsedit(request,projectslug):
 		lock.EndingDate=request.POST["endingdate"]
 		lock.StartingAmount=request.POST["startingamount"]
 		lock.EndingAmount=request.POST["endingamount"]
-		lock.SoftDiscription=request.POST["softdiscription"]
-		# lock.HardDiscription=request.POST["harddiscription"]
+		# lock.SoftDiscription=request.POST["softdiscription"]  # there is never need comes to rewrite this, its one time!!!
+		# lock.HardDiscription=request.POST["harddiscription"]   # and ignore this because only admin can able to fill this!!!
 		lock.save()
+		if(request.POST["contentdata"]):
+			values=AllSuggestions()
+			values.ProjectID = key
+			# values.SenderID = None   # for HR there is no ID...
+			values.SenderRole = 'HR'
+			values.ContentData = request.POST["contentdata"]
+			values.save()
+			return redirect(request.path)
 		return redirect(prevPATH)
-	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	key=int(projectslug.split('-')[-1])
 	values=ProjectInfo.objects.get(pk=key)
-	# --------------------------------------------------------------
-	# NOTE : below we are getting our previous url...
-	overallURL=request.META['HTTP_REFERER']
-	prevPATH=overallURL[21:]  #''.join(overallURL.split('/')[3:])
-	comingFrom = ('Active' if('active' in overallURL) else 'New')
-	values.Client=ClientInfo.objects.get(pk=values.Client).FullName
+	values.Client=ClientInfo.objects.get(id=values.Client).FullName
+	# if(values.Admin):
+		# values.Admin=Employee.objects.get(id=values.Admin).FullName
+	comingFrom = ('Active' if(values.Admin) else 'New')
+	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
+	for temp in myAllSuggestions:
+		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
+			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+		else:
+			temp.SenderID = {'FullName': 'ShivaShu'}
+	temp=ProjectInfo.objects.get(pk=key).ProjectManager
+	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
+	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
+	for temp in temps:
+		detailsSet.append(Employee.objects.get(pk=temp.DeveloperID))
+	profileData={'id':None, 'Role':'HR'}
 	adminslist=Employee.objects.filter(~Q(CompanyJoiningDate=None), Role='Admin')
-	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'path':request.path, 'prevPATH':prevPATH, 'adminslist':adminslist, 'comingFrom':comingFrom});
+	orignalURL=(request.META['HTTP_REFERER'])[21:]
+	return render(request,"otherapps/hr/projectdetails_editorassignnew.html",{'values':values, 'comingFrom':comingFrom, 'profileData':profileData, 'myAllSuggestions':myAllSuggestions, 'detailsSet':detailsSet, 'adminslist':adminslist, 'prevPATH':orignalURL});
+
+
 
 
 # new 

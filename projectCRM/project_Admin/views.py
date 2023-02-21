@@ -139,26 +139,43 @@ def projectdetailsremoveteammember(request,projectslug):
 	return redirect(orignalURL)
 
 
-def projectdetailsedit(request,projectslug):  #✓
+def projectdetailsedit(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
-	if request.method=="POST":   
-		values=AllSuggestions()
-		values.ProjectID = key
-		values.SenderID = AdminMain
-		values.SenderRole = Employee.objects.get(pk=AdminMain).Role
-		values.ContentData = request.POST["contentdata"]
-		values.save()
-		return redirect(request.path)
+	if request.method=="POST":
+		comingFrom=request.POST["comingFrom"]
+		lock=ProjectInfo.objects.get(pk=request.POST["projectID"])
+		lock.ProjectName=request.POST["projectname"]
+		lock.ProgrammingLanguage=request.POST["programminglanguage"]
+		lock.FrontEnd=request.POST["frontend"]
+		lock.BackEnd=request.POST["backend"]
+		lock.DataBase=request.POST["database"]
+		lock.BeginningDate=request.POST["beginningdate"]
+		lock.EndingDate=request.POST["endingdate"]
+		lock.StartingAmount=request.POST["startingamount"]
+		lock.EndingAmount=request.POST["endingamount"]
+		lock.HardDiscription=request.POST["harddiscription"]
+		lock.save()
+		if(request.POST["contentdata"]):
+			values=AllSuggestions()
+			values.ProjectID = key
+			values.SenderID = AdminMain
+			values.SenderRole = Employee.objects.get(pk=AdminMain).Role
+			values.ContentData = request.POST["contentdata"]
+			values.save()
+			return redirect(request.path)
+		overallURL=(request.META['HTTP_REFERER'])
+		return redirect('/admin/projectdetails/'+comingFrom.lower()+'/'+projectslug)
 	values=ProjectInfo.objects.get(pk=key)
-	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
+	values.Client=ClientInfo.objects.get(id=values.Client).FullName
 	values.Admin=Employee.objects.get(id=values.Admin).FullName
-	overallURL=(request.META['HTTP_REFERER'])
-	comingFrom = ('Active' if('active' in overallURL) else 'New')
+	comingFrom = ('Active' if(values.ProjectManager or values.Developer) else 'New')
 	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
 	for temp in myAllSuggestions:
 		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
 			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+		else:
+			temp.SenderID = {'FullName': 'ShivaShu'}
 	temp=ProjectInfo.objects.get(pk=key).ProjectManager
 	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
 	temps=DeveloperBox.objects.filter(ProjectInfosID=key)

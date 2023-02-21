@@ -87,6 +87,7 @@ def projectdetailsslug(request,projectslug):  #✓
 	return render(request,"otherapps/projectmanager/projectdetails.html", {'values':values, 'ClientFullName':ClientFullName,  'projectslug':projectslug,
 		'projectmanagerslist':projectmanagerslist, 'developerslist':developerslist, 'selectedprojectmanager':selectedprojectmanager , 'selecteddeveloperslist':selecteddeveloperslist});
 
+
 def projectdetailsedit(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
@@ -107,6 +108,8 @@ def projectdetailsedit(request,projectslug):  #✓
 	for temp in myAllSuggestions:
 		if(temp.SenderID): # if sender is not HR, because its SenderID have None, so its official ERROR...
 			temp.SenderID = ClientInfo.objects.get(pk=temp.SenderID) if(temp.SenderRole=="Client") else Employee.objects.get(pk=temp.SenderID)
+		else:
+			temp.SenderID = {'FullName': 'ShivaShu'}
 	temp=ProjectInfo.objects.get(pk=key).ProjectManager
 	detailsSet = [Employee.objects.get(pk=temp)] if(temp) else []
 	temps=DeveloperBox.objects.filter(ProjectInfosID=key)

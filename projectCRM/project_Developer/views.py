@@ -31,25 +31,14 @@ def mynotification(request):
 
 def latestreport(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	getting=projectslug.split('-')
-	key=int(getting[-1])
+	ProjectID=int(projectslug.split('-')[-1])
 	# here is we getting our last date on which project manager giving a response, because only then reports approved...
-	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
-	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
-	values=list()
-	if(lastRecord):
-		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
-		for value in values:
-			value.SenderID=Employee.objects.get(pk=value.SenderID)
-	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
-	templist=list()
-	temp=ProjectInfo.objects.get(pk=key).ProjectManager
-	templist.append(Employee.objects.get(pk=temp))
-	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
-	for temp in temps:
-		templist.append(Employee.objects.get(pk=temp.DeveloperID))
-	detailsSet['PMnDevs']=templist   # third assignment 
-	return render(request, "otherapps/developer/reportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet}) 
+	lastRecord = ReportsOrMessages.objects.filter(ProjectID=ProjectID, SenderRole="Project Manager").last()
+	SelectedDate = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
+	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+	holdingDict = setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+	holdingDict |= {'projectslug':projectslug}
+	return render(request, "otherapps/developer/reportsopen.html", holdingDict) 
 
 
 def allprojectsrequests(request):  #✓
@@ -57,7 +46,8 @@ def allprojectsrequests(request):  #✓
 	values=list()
 	for queryset in querysets:
 		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
-		if(getting.ReportStatus=="Active"):	
+		passing = AllSuggestions.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer")
+		if(getting.ReportStatus=="Active" and not passing):
 			getting.Client=ClientInfo.objects.get(pk=getting.Client).FullName
 			values.append(getting)
 	return render(request,"otherapps/developer/allprojectsrequests.html",{'values':values});
@@ -101,8 +91,10 @@ def projectdetailsedit(request,projectslug):  #✓
 	values=ProjectInfo.objects.get(pk=key)
 	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
 	values.Admin=Employee.objects.get(id=values.Admin).FullName
-	overallURL=(request.META['HTTP_REFERER'])
-	comingFrom = ('Active' if('active' in overallURL) else 'New')
+	passing=len(AllSuggestions.objects.filter(ProjectID=key, SenderID=DeveloperMain, SenderRole="Developer"))
+	print(passing)
+	comingFrom = ('Active' if(passing) else 'New')
+	print(comingFrom)
 	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
 	for temp in myAllSuggestions:
 		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
@@ -124,7 +116,8 @@ def activeprojects(request):  #✓
 	values=list()
 	for queryset in querysets:
 		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
-		if(getting.ReportStatus=="Active"):	
+		passing = AllSuggestions.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer")
+		if(getting.ReportStatus=="Active" and passing):	
 			getting.Client=ClientInfo.objects.get(pk=getting.Client)
 			getting.Admin=Employee.objects.get(pk=getting.Admin)
 			if(getting.ProjectManager):
@@ -165,8 +158,89 @@ def allmessages(request,projectslug=None):  #✓
 	return render(request,"otherapps/developer/allmessages.html", {'projectslug':projectslug});
 
 
+# this function helps just below function, where we needed a dataset for a need...
+def setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values):
+	holdingDict=dict()
+	# getting=ProjectInfo.objects.get(pk=ProjectID).ProjectSlug.split('-')
+	detailsSet={'Date':SelectedDate, 
+			'ProjectUsername':''.join(ProjectInfo.objects.get(pk=ProjectID).ProjectSlug.split('-'))}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=ProjectID).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=ProjectID)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment
+	for value in values:
+		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	holdingDict={'detailsSet':detailsSet, 'values':values}
+	return holdingDict
+
 def reportscollection(request):  #✓
-	return render(request,"otherapps/developer/reportscollection.html");
+	QueryDataSets=list()
+	SelectedDataSets=dict()
+	if request.method=="POST":   
+		SelectedDate=request.POST["selecteddate"] if(request.POST["selecteddate"]) else None
+		ProjectID=int(request.POST["projectid"]) if(request.POST["projectid"]) else None
+		print(SelectedDate,ProjectID)
+		SelectedDataSets={'SelectedDate':SelectedDate, 'ProjectID':ProjectID}
+		if(ProjectID):   # here is take ProjectID's ProjectName, but we take it if it existing there!!!
+			SelectedDataSets['ProjectName']=ProjectInfo.objects.get(pk=ProjectID).ProjectName
+		if(SelectedDate):  # first here is we convert this date to a original format of date, but if it is exist!!!
+			SelectedDate=datetime.datetime.strptime(SelectedDate, '%Y-%m-%dT%H:%M')
+		print(SelectedDate,ProjectID) 
+		print(">>>>> 1")
+		if(SelectedDate and ProjectID):
+			print(">>>>> 2")
+			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+			if(values):   #
+				holdingDict = setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+				QueryDataSets.append(holdingDict)
+		elif(SelectedDate):
+			print(">>>>> 3")
+			values=ReportsOrMessages.objects.filter(SendingDateTime__date=SelectedDate)
+			collections = dict()
+			for value in values:
+				getting = collections.get(value.ProjectID,[]) + [value]
+				collections[value.ProjectID]=getting
+			keys=collections.keys()
+			keys=list(keys)
+			keys.sort()
+			valuesDataSets=[ collections[key] for key in keys ]
+			print(valuesDataSets)
+			for values in valuesDataSets:
+				ProjectID=values[0].ProjectID
+				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+				QueryDataSets.append(holdingDict)
+		elif(ProjectID):
+			print(">>>>> 4")
+			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID)
+			collections = dict()
+			for value in values:
+				getting = collections.get(str(value.SendingDateTime)[:10],[]) + [value]
+				collections[str(value.SendingDateTime)[:10]]=getting
+			keys=collections.keys()
+			keys=list(keys)
+			keys.sort()
+			valuesDataSets=[ collections[key] for key in keys ]
+			for values in valuesDataSets:
+				SelectedDate=values[0].SendingDateTime
+				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+				QueryDataSets.append(holdingDict)
+		else:  #
+			print(">>>>> 5")
+			pass
+		print(">>>>> 6")
+	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
+	values=list()
+	for queryset in querysets:
+		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(getting.ReportStatus=="Active"):
+			values.append(getting)
+	todayDate=datetime.date.today()
+	return render(request,"otherapps/developer/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
+
+
 def sendreports(request):  #✓
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
@@ -197,23 +271,15 @@ def sendreportsopen(request,projectslug=None):  #✓
 		values.ContentData=request.POST["contentdata"]
 		values.save()
 		return redirect(request.path)
-	getting=projectslug.split('-')
-	key=int(getting[-1])
-	detailsSet={'Date':datetime.date.today(), 'ProjectUsername':''.join(getting[:-1])}
-	templist=list()
-	temp=ProjectInfo.objects.get(pk=key).ProjectManager
-	templist.append(Employee.objects.get(pk=temp))
-	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
-	for temp in temps:
-		templist.append(Employee.objects.get(pk=temp.DeveloperID))
-	detailsSet['PMnDevs']=templist   # third assignment
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=datetime.date.today())
-	for value in values:
-		if(value.SenderID==DeveloperMain):
-			detailsSet['textareaReadonly']=True
-		value.SenderID=Employee.objects.get(pk=value.SenderID)
-	return render(request,"otherapps/developer/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
+	ProjectID=int(projectslug.split('-')[-1])
+	SelectedDate=datetime.date.today()   #datetime.date(2023, 2, 18) // for trial
+	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+	holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+	holdingDict |= {'projectslug':projectslug}
+	return render(request,"otherapps/developer/sendreportsopen.html", holdingDict);
 
+
+                                         
 
 
 

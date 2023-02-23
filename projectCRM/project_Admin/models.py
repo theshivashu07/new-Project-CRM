@@ -12,7 +12,7 @@ class ReportsOrMessages(models.Model):
 	ContentData = models.CharField(max_length=750);
 	SendingDateTime = models.DateTimeField(auto_now_add=True);
 	def __str__(self):
-		return self.SenderRole+" sending a "+self.SenderRole+" to XYZ Project. ( ID:"+str(self.id)+', Date:'+str(self.SendingDateTime)+" )";
+		return self.SenderRole+" sending a "+self.WhatIsIt+" to XYZ Project. ( ID:"+str(self.id)+', Date:'+str(self.SendingDateTime)+" )";
 
 class AllMessages(models.Model):
 	'''Well, here chats feature i'm giving to only employees, else tracking problems happens...'''
@@ -38,6 +38,15 @@ class AllSuggestions(models.Model):
 		TheNameOfClass = locals()[  'ClientInfo' if(self.SenderRole=="Client") else 'Employee' ]
 		sender = TheNameOfClass.objects.get(pk=self.SenderID).FullName
 		return sender+" gives a suggestion on "+project+" project. ( ID:"+str(self.id)+', Date:'+str(self.SendingDateTime)+" )";
+
+	# def __str__(self):
+	# 	ProjectName = ProjectInfo.objects.get(pk=self.ProjectID).ProjectName
+	# 	if(self.SenderRole!='HR'):
+	# 		TheNameOfClass = locals()[  'ClientInfo' if(self.SenderRole=="Client") else 'Employee' ]
+	# 		SenderName = TheNameOfClass.objects.get(pk=self.SenderID).FullName
+	# 	else:
+	# 		SenderName = 'ShivaShu'
+	# 	return SenderName+"("+self.SenderRole+")"+" gives a suggestion on "+ProjectName+" project. ( ID:"+str(self.id)+', Date:'+str(self.SendingDateTime)+" )";
 
 
 

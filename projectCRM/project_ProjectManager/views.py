@@ -59,8 +59,13 @@ def allprojectsrequests(request):  #✓
 	querysets=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
 	values=list()
 	for queryset in querysets:
-		queryset.Client=ClientInfo.objects.get(pk=queryset.Client).FullName
-		values.append(queryset)
+		# print(queryset.id, ProjectManagerMain, "Project Manager", end='  ')
+		passing = len(AllSuggestions.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager"))
+		# print(passing,end=" ")
+		if(not passing):
+			queryset.Client=ClientInfo.objects.get(pk=queryset.Client).FullName
+			values.append(queryset)
+		# print("  Done")
 	return render(request,"otherapps/projectmanager/allprojectsrequests.html",{'values':values});
 
 
@@ -121,22 +126,23 @@ def projectdetailsedit(request,projectslug):  #✓
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):  #✓
-	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
-	values=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
-	for value in values:
-		if(value.Client):
-			value.Client=ClientInfo.objects.get(pk=value.Client)
-		if(value.Admin):
-			value.Admin=Employee.objects.get(pk=value.Admin)
-		if(value.ProjectManager):
-			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
-		if(value.Developer):
-			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
-			for lock in locks:
-				temp=Employee.objects.get(pk=lock.DeveloperID)
-				lock.FullName=temp.FullName
-				lock.ProfilePick=temp.ProfilePick
-			value.Developer=locks
+	# querysets=ProjectInfo.objects.get(pk=ProjectManagerMain)
+	querysets=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
+	values=list()
+	for queryset in querysets:
+		passing = len(AllSuggestions.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager"))
+		if(passing):
+			queryset.Client=ClientInfo.objects.get(pk=queryset.Client)
+			queryset.Admin=Employee.objects.get(pk=queryset.Admin)
+			queryset.ProjectManager=Employee.objects.get(pk=queryset.ProjectManager)
+			if(queryset.Developer):
+				locks=DeveloperBox.objects.filter(ProjectInfosID=queryset.id)
+				for lock in locks:
+					temp=Employee.objects.get(pk=lock.DeveloperID)
+					lock.FullName=temp.FullName
+					lock.ProfilePick=temp.ProfilePick
+				queryset.Developer=locks
+			values.append(queryset)
 	return render(request,"otherapps/projectmanager/activeprojects.html", {'values':values});
 
 
@@ -169,6 +175,7 @@ def allmessages(request,projectslug=None):  #✓
 
 def reportscollection(request):  #✓
 	return render(request,"otherapps/projectmanager/reportscollection.html");
+	
 def sendreports(request):  #✓
 	values=ProjectInfo.objects.filter(~Q(Developer=None), ProjectManager=ProjectManagerMain, ReportStatus="Active")
 	for value in values:

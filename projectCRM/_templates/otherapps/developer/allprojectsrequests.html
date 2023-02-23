@@ -27,32 +27,31 @@ CRM - Developer
 
     <!-- <div class="row mb-5"> -->
     <div class="row mb-5" style="--bs-gutter-y: 15px;">
-
-      {% for value in values %}
-      <div class="col-md-4">
-        <div class="card">
-          <div class="card-header">
-            <!-- <span class="primary" style="float: right; top:50%;">2 days ago.</span> -->
-            <h5 style="margin-bottom: 0;"><b>by {{value.Client}}.</b></h5>
-          </div>
-          <div class="card-body">
-            <div>
+        {% for value in values %}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">
               <!-- <span class="primary" style="float: right; top:50%;">2 days ago.</span> -->
-              <h5 class="card-title" style="color:white">{{value.ProjectName}}</h5>
+              <h5 style="margin-bottom: 0;"><b>by {{value.Client}}.</b></h5>
             </div>
-            <p class="card-text">
-              {{value.SoftDiscription}}
-            </p>
-            <div>
-              <a href="/developer/projectdetails/new/{{value.ProjectSlug}}-{{value.id}}"
-                class="btn btn-primary">Edit / Add More</a>
-              <!-- <small class="text-muted">Last updated 3 mins ago.</small> -->
-              <span class="primary" style="float: right; top:50%;"><br>— {{value.JoiningDate}}</span>
+            <div class="card-body">
+              <div>
+                <!-- <span class="primary" style="float: right; top:50%;">2 days ago.</span> -->
+                <h5 class="card-title" style="color:white">{{value.ProjectName}}</h5>
+              </div>
+              <p class="card-text">
+                {{value.SoftDiscription}}
+              </p>
+              <div>
+                <a href="/developer/projectdetails/new/{{value.ProjectSlug}}-{{value.id}}"
+                  class="btn btn-primary">Edit / Add More</a>
+                <!-- <small class="text-muted">Last updated 3 mins ago.</small> -->
+                <span class="primary" style="float: right; top:50%;"><br>— {{value.JoiningDate}}</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
     </div>
     <!--/ Content types -->
   </div>

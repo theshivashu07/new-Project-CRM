@@ -49,6 +49,7 @@ CRM - Client - All Projects
                         </ul> 
                       </h4>
 
+                    {% if values %}
                       {% for value in values %}
                         <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
                           {% if value.WhatIsIt == 'Report' %}
@@ -68,6 +69,13 @@ CRM - Client - All Projects
                           </div>
                         </div>
                       {% endfor %}
+                    {% else %}
+                    <br>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        There is no any single data available for this project — check it out!
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endif %}
 
                   </div>
                   <br>

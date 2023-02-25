@@ -207,7 +207,7 @@
                 <div data-i18n="Analytics">Request for Projects</div>
               </a> 
             </li>
-            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/activeprojects/latestreport/'|add:projectslug or request.path == '/client/projectdetails/active/'|add:projectslug or request.path == '/client/projectdetails/edits/'|add:projectslug %}active{% endif %}">
+            <li class="menu-item {% if request.path == '/client/activeprojects/' or request.path == '/client/latestreport/'|add:projectslug or request.path == '/client/projectdetails/active/'|add:projectslug or request.path == '/client/projectdetails/edits/'|add:projectslug %}active{% endif %}">
               <a href="/client/activeprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-run"></i>
                 <div data-i18n="Analytics">Active Projects</div>
@@ -217,6 +217,15 @@
               <a href="/client/completedprojects/" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-data"></i>
                 <div data-i18n="Analytics">Completed Projects</div>
+              </a> 
+            </li>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Task's to do!!</span>
+            </li>
+            <li class="menu-item {% if request.path == '/client/reportscollection/' %}active{% endif %}">
+              <a href="/client/reportscollection" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-file-blank'></i>
+                <div data-i18n="Analytics">Reports Collections</div>
               </a> 
             </li>
             <li class="menu-header small text-uppercase">

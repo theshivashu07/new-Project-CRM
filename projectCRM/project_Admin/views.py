@@ -33,27 +33,20 @@ def mynotification(request):
 def projectdetails(request):
 	return render(request,"otherapps/admin/projectdetails.html");
 
-def latestreport(request,projectslug):
+
+def latestreport(request,projectslug):  #✓
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	getting=projectslug.split('-')
-	key=int(getting[-1])
+	ProjectID=int(projectslug.split('-')[-1])
 	# here is we getting our last date on which project manager giving a response, because only then reports approved...
-	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
-	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
+	lastRecord = ReportsOrMessages.objects.filter(ProjectID=ProjectID, SenderRole="Project Manager").last()
+	SelectedDate = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
 	values=list()
-	if(lastRecord):
-		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
-		for value in values:
-			value.SenderID=Employee.objects.get(pk=value.SenderID)
-	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
-	templist=list()
-	temp=ProjectInfo.objects.get(pk=key).ProjectManager
-	templist.append(Employee.objects.get(pk=temp))
-	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
-	for temp in temps:
-		templist.append(Employee.objects.get(pk=temp.DeveloperID))
-	detailsSet['PMnDevs']=templist   # third assignment 
-	return render(request, "otherapps/admin/reportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet}) 
+	if(lastRecord):  # if we getting lastRecord, then its running, else no need to go with this IF...
+		values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+	holdingDict = setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+	holdingDict |= {'projectslug':projectslug}
+	return render(request, "otherapps/admin/reportsopen.html", holdingDict) 
+
 
 def completedprojectdetails(request,projectslug):
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
@@ -245,8 +238,89 @@ def alldiscussions(request):
 def allmessages(request):
 	return render(request,"otherapps/admin/allmessages.html");
 
-def reportscollection(request):
-	return render(request,"otherapps/admin/reportscollection.html");
+
+
+# this function helps just below function, where we needed a dataset for a need...
+def setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,SenderID=None):
+	holdingDict=dict()
+	# getting=ProjectInfo.objects.get(pk=ProjectID).ProjectSlug.split('-')
+	detailsSet={'Date':SelectedDate, 
+			'ProjectUsername':''.join(ProjectInfo.objects.get(pk=ProjectID).ProjectSlug.split('-'))}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=ProjectID).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=ProjectID)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment
+	for value in values:
+		if(value.SenderID==SenderID):
+			detailsSet['textareaReadonly']=True
+		value.SenderID=Employee.objects.get(pk=value.SenderID)
+	holdingDict={'detailsSet':detailsSet, 'values':values}
+	return holdingDict
+
+
+def reportscollection(request):  #✓
+	QueryDataSets=list()
+	SelectedDataSets=dict()
+	if request.method=="POST":   
+		SelectedDate=request.POST["selecteddate"] if(request.POST["selecteddate"]) else None
+		ProjectID=int(request.POST["projectid"]) if(request.POST["projectid"]) else None
+		print(SelectedDate,ProjectID)
+		SelectedDataSets={'SelectedDate':SelectedDate, 'ProjectID':ProjectID}
+		if(ProjectID):   # here is take ProjectID's ProjectName, but we take it if it existing there!!!
+			SelectedDataSets['ProjectName']=ProjectInfo.objects.get(pk=ProjectID).ProjectName
+		if(SelectedDate):  # first here is we convert this date to a original format of date, but if it is exist!!!
+			SelectedDate=datetime.datetime.strptime(SelectedDate, '%Y-%m-%dT%H:%M')
+		print(SelectedDate,ProjectID) 
+		print(">>>>> 1")
+		if(SelectedDate and ProjectID):
+			print(">>>>> 2")
+			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+			if(values):   #
+				holdingDict = setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+				QueryDataSets.append(holdingDict)
+		elif(SelectedDate):
+			print(">>>>> 3")
+			values=ReportsOrMessages.objects.filter(SendingDateTime__date=SelectedDate)
+			collections = dict()
+			for value in values:
+				getting = collections.get(value.ProjectID,[]) + [value]
+				collections[value.ProjectID]=getting
+			keys=collections.keys()
+			keys=list(keys)
+			keys.sort()
+			valuesDataSets=[ collections[key] for key in keys ]
+			print(valuesDataSets)
+			for values in valuesDataSets:
+				ProjectID=values[0].ProjectID
+				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+				QueryDataSets.append(holdingDict)
+		elif(ProjectID):
+			print(">>>>> 4")
+			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID)
+			collections = dict()
+			for value in values:
+				getting = collections.get(str(value.SendingDateTime)[:10],[]) + [value]
+				collections[str(value.SendingDateTime)[:10]]=getting
+			keys=collections.keys()
+			keys=list(keys)
+			keys.sort()
+			valuesDataSets=[ collections[key] for key in keys ]
+			for values in valuesDataSets:
+				SelectedDate=values[0].SendingDateTime
+				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
+				QueryDataSets.append(holdingDict)
+		else:  #
+			print(">>>>> 5")
+			pass
+		print(">>>>> 6")
+	values=ProjectInfo.objects.filter(Admin=AdminMain,ReportStatus="Active")
+	print(values)
+	return render(request,"otherapps/admin/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
+
+
 def sendreports(request):
 	# values=ProjectInfo.objects.get(pk=AdminMain)
 	values=ProjectInfo.objects.filter(~Q(ProjectManager=None) & ~Q(Developer=None), ReportStatus="Active", Admin=AdminMain)
@@ -261,29 +335,15 @@ def sendreports(request):
 			lock.ProfilePick=temp.ProfilePick
 		value.Developer=locks
 	return render(request,"otherapps/admin/sendreports.html", {'values':values});
-def sendreportsopen(request,projectslug):
-	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-	getting=projectslug.split('-')
-	key=int(getting[-1])
-	# here is we getting our last date on which project manager giving a response, because only then reports approved...
-	lastRecord = ReportsOrMessages.objects.filter(ProjectID=key, SenderRole="Project Manager").last()
-	lastrecordsDateTime = lastRecord.SendingDateTime if(lastRecord) else datetime.date.today()
-	values=list()
-	if(lastRecord):
-		values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=lastrecordsDateTime)
-		for value in values:
-			value.SenderID=Employee.objects.get(pk=value.SenderID)
-	detailsSet={'Date':lastrecordsDateTime, 'ProjectUsername':''.join(getting[:-1])}
-	templist=list()
-	temp=ProjectInfo.objects.get(pk=key).ProjectManager
-	templist.append(Employee.objects.get(pk=temp))
-	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
-	for temp in temps:
-		templist.append(Employee.objects.get(pk=temp.DeveloperID))
-	detailsSet['PMnDevs']=templist   # third assignment 
-	return render(request,"otherapps/admin/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
-# def creativeteam(request):
-# 	return render(request,"otherapps/admin/creativeteam.html");
 
+
+def sendreportsopen(request,projectslug=None):  #✓
+	ProjectID=int(projectslug.split('-')[-1])
+	SelectedDate=datetime.date.today()   #datetime.date(2023, 2, 18) // for trial
+	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+	holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,AdminMain)
+	holdingDict |= {'projectslug':projectslug}
+	print(holdingDict)
+	return render(request,"otherapps/admin/sendreportsopen.html", holdingDict);
 
 

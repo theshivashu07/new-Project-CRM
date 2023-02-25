@@ -15,12 +15,11 @@ urlpatterns=[
 		path('projectdetails/new/<slug:projectslug>',views.projectdetailsslug,name='projectdetailsslug'),
 		path('projectdetails/edits/<slug:projectslug>',views.projectdetailsedit,name='projectdetailsedit'),
 
-		path('latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),
 		path('projectdetails/active/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
 		path('projectdetails/completed/<slug:projectslug>',views.completedprojectdetails,name='completedprojectdetails'),
 
 		path('activeprojects/',views.activeprojects,name='activeprojects'),
-		path('activeprojects/@<str:username>',views.activeprojects,name='activeprojects'),
+		path('latestreport/<slug:projectslug>',views.latestreport,name='latestreport'),  #✓
 		path('completedprojects/',views.completedprojects,name='completedprojects'),
 		path('completedprojects/@<str:username>',views.completedprojects,name='completedprojects'),
 
@@ -33,9 +32,10 @@ urlpatterns=[
 		path('listof/<str:target>/',views.listof,name='listof'),
 
 		path('alldiscussions/',views.alldiscussions,name='alldiscussions'),
-		# path('allsuggestions/',views.allsuggestions,name='allsuggestions'),
 		path('allmessages/',views.allmessages,name='allmessages'),
 
+		path('reportscollection/',views.reportscollection,name='reportscollection'),  #✓
+		
 		# path('trialcenter/<str:key>',views.trialcenter,name='trialcenter'),
 		#path('/',views.,name=''),
 ]

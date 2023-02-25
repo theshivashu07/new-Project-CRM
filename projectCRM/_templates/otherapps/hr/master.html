@@ -221,7 +221,7 @@
               </a> 
             </li>
             <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Task's to do!!</span>
+              <span class="menu-header-text">Employee Related</span>
             </li>
             <li class="menu-item {% if request.path == '/hr/listof/newjoinees/' or request.path == '/hr/newjoinees/@'|add:values.Username %}active{% endif %}">
               <a href="/hr/listof/newjoinees" class="menu-link">
@@ -251,6 +251,15 @@
               <a href="/hr/listof/decrements" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-trending-down"></i>
                 <div data-i18n="Analytics">Decrement's</div>
+              </a> 
+            </li>
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Task's to do!!</span>
+            </li>
+            <li class="menu-item {% if request.path == '/hr/reportscollection/' %}active{% endif %}">
+              <a href="/hr/reportscollection" class="menu-link">
+                <i class='menu-icon tf-icons bx bxs-file-blank'></i>
+                <div data-i18n="Analytics">Reports Collections</div>
               </a> 
             </li>
             <li class="menu-header small text-uppercase">

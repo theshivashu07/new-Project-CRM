@@ -23,7 +23,8 @@ CRM - Project Manager
           <!-- Account -->
           <hr class="my-0">
           <div class="card-body" style="background-color: #1d242e;">
-            <form id="formAccountSettings" method="" onsubmit="return false">
+            <form id="formAccountSettings" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
               <div class="row">
                 <div class="col-md">
                   <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
@@ -31,17 +32,17 @@ CRM - Project Manager
                       <div class="row gx-3 gy-2 align-items-center">
                         <div class="col-md-5">
                           <label class="form-label" for="selectTypeOpt">Date:</label>
-                          <input class="form-control" type="date" id="html5-date-input" value="" required>
+                          <input class="form-control" type="datetime-local" id="html5-date-input" value="{{selected.SelectedDate}}" name="selecteddate">
+                          <!-- <input class="form-control" type="date" id="html5-date-input" value="{{selected.SelectedDate|date:'Y-m-d'}}" name="selecteddate" required> -->
                         </div>
                         <div class="col-md-5">
-                          <label class="form-label" for="selectPlacement">Project's</label>
-                          <select id="language" class="select2 form-select" required>
-                            <!-- <option value="">Select Language</option> -->
+                          <label class="form-label" for="selectPlacement">Project's:</label>
+                          <select id="projectid" name="projectid" class="select2 form-select">
+                          <!-- <select id="projectid" name="projectid" class="select2 form-select" required> -->
                             <option value="" selected="">Select Project</option>
-                            <option value="projectcrm">Project CRM</option>
-                            <option value="shoppingsite">Shopping Site</option>
-                            <option value="schoolmanagement">School Management</option>
-                            <option value="portfoliosite">Portfolio Site</option>
+                            {% for value in values %}
+                              <option value="{{value.id}}" {% if selected.ProjectID == value.id %} selected {%endif%}> {{value.ProjectName}} </option>
+                            {% endfor %}
                           </select>
                         </div>
                         <div class="col-md-2">
@@ -51,20 +52,22 @@ CRM - Project Manager
                       </div>
                     <!-- </div> -->
                     <h4 class="fw-bold py-3 mb-4">
-                      <span class="badge bg-label-dark">20-01-2023</span>  
-                      <span class="badge bg-label-danger">None</span> 
+                      <!-- <button type="button" class="btn btn-dark">Dark</button> -->
+                      <span class="btn btn-{%if selected.SelectedDate%}success{%else%}danger{%endif%}">{{selected.SelectedDate|default:None}}</span>
+                      <span class="btn btn-{%if selected.ProjectName%}success{%else%}danger{%endif%}">{{selected.ProjectName|default:None}}</span>
                     </h4>
-
+                  {% for querydataset in QueryDataSets %}
                     <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> 20-01-2023 / </span> None </h4> -->
                     <div class="accordion-item card" style="padding: 5px;">
                       <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconOne">
                         <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                          data-bs-target="#accordionIcon-1" aria-controls="accordionIcon-1" aria-expanded="false">
+                          data-bs-target="#accordionIcon-{{forloop.counter}}" aria-controls="accordionIcon-{{forloop.counter}}" aria-expanded="false">
                           <!-- <b>Shivam Shukla</b> -->
-                          <b style="color: dimgray; font-size:20px;">20-02-2023 / <u style="color:#ff7700;">@projectcrm</u></b>
+                          <b style="color: dimgray; font-size:20px;">{{ querydataset.detailsSet.Date|date:'Y-m-d'}}  /<u style="color:#ff7700;">@{{ querydataset.detailsSet.ProjectUsername }} </u></b>
+                          <!-- <b style="color: dimgray; font-size:20px;">{{ querydataset.detailsSet.Date |date:'d-m-Y'}}  /<u style="color:#ff7700;">@{{ querydataset.detailsSet.ProjectUsername }} </u></b> -->
                         </button>
                       </h2>
-                      <div id="accordionIcon-1" class="accordion-collapse collapse" data-bs-parent="#accordionIcon"
+                      <div id="accordionIcon-{{forloop.counter}}" class="accordion-collapse collapse" data-bs-parent="#accordionIcon"
                         style="background-color: #1d242e;">
                         <div class="accordion-body">
                           <br><br>
@@ -80,435 +83,42 @@ CRM - Project Manager
                               </select>
                             </div>
                           </span>
-                          <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">Project Manager : </span>
-                            Shivashu Shukla
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                              style="padding-left:0;">
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla">
-                                <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla">
-                                <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Angle Viston">
-                                <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Merry Cluster">
-                                <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                            </ul>
-                          </h4>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
+                        <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">{{ querydataset.detailsSet.Date|date:'Y-m-d'}}  /</span> @{{ querydataset.detailsSet.ProjectUsername }} 
+                        <!-- <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">{{ querydataset.detailsSet.Date |date:'d-m-Y'}}  /</span> @{{ querydataset.detailsSet.ProjectUsername }}  -->
+                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left:0">
+                          {% for detail in querydataset.detailsSet.PMnDevs%}
+                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{detail.id}}-{{detail.FullName}}">
+                              <img src="/_uploads/{{detail.ProfilePick|default:'employee/user.png'}}" alt="Avatar" class="rounded-circle">
+                            </li>
+                          {% endfor %}
+                        </ul> 
+                      </h4>
+
+                      {% for value in querydataset.values %}
+                        <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
+                          {% if value.WhatIsIt == 'Report' %}
                             <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Shivam Shukla</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Shri Shukla</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Angle Viston</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
+                          {% else %}
                             <div class="card" style="background-color:black; color:#ffffff;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;">
-                                  <b>Merry Cluster</b>
-                                </h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
+                          {% endif %}
+                            <div class="card-body" style="padding: 10px;">
+                              <span class="primary" style="float: right;color: gray;">—  {{value.SendingDateTime|time:"g:i A"}}</span>
+                              <h5 class="card-title" style="margin-bottom: 5px;">
+                                <b>{{value.SenderID.FullName}} ({{value.SenderID.Role}})</b>
+                              </h5>
+                              <p class="card-text">
+                                {{value.ContentData}}
+                              </p>
                             </div>
                           </div>
+                        </div>
+                      {% endfor %}
+
                           <br><br>
                         </div>
                       </div>
                     </div>
-                    <div class="accordion-item card" style="padding: 5px;">
-                      <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconTwo">
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                          data-bs-target="#accordionIcon-2" aria-controls="accordionIcon-2" aria-expanded="false">
-                          <!-- <b>Shri Shukla</b> -->
-                          <b style="color: dimgray; font-size:20px;">20-02-2023 / <u
-                              style="color:#ff7700;">@shoppingsite</u></b>
-                        </button>
-                      </h2>
-                      <div id="accordionIcon-2" class="accordion-collapse collapse" data-bs-parent="#accordionIcon"
-                        style="background-color: #1d242e;">
-                        <div class="accordion-body">
-                          <br><br>
-                          <span class="badge" style="float: right; font-size: 15px; color: white;">
-                            <div class="col-md-5">
-                              <select id="language" class="select2 form-select"
-                                style="background-color:#11191c; width:150px; border-color: #283848;">
-                                <!-- <option value="">Select Project</option> -->
-                                <option value="pm">Project Manager</option>
-                                <option value="report" selected="">All</option>
-                                <option value="report">Reports</option>
-                                <option value="message">Message</option>
-                              </select>
-                            </div>
-                          </span>
-                          <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">Project Manager : </span>
-                            Shivashu Shukla
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                              style="padding-left:0;">
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla">
-                                <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla">
-                                <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Angle Viston">
-                                <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Merry Cluster">
-                                <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                            </ul>
-                          </h4>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Shivam Shukla</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Shri Shukla</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Angle Viston</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:black; color:#ffffff;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;">
-                                  <b>Merry Cluster</b>
-                                </h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <br><br>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item card" style="padding: 5px;">
-                      <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconThree">
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                          data-bs-target="#accordionIcon-3" aria-expanded="false" aria-controls="accordionIcon-3">
-                          <!-- <b>Shivashu Shukla</b> -->
-                          <b style="color: dimgray; font-size:20px;">20-02-2023 / <u
-                              style="color:#ff7700;">@schoolmanagement</u></b>
-                        </button>
-                      </h2>
-                      <div id="accordionIcon-3" class="accordion-collapse collapse" data-bs-parent="#accordionIcon"
-                        style="background-color: #1d242e;">
-                        <div class="accordion-body">
-                          <br><br>
-                          <span class="badge" style="float: right; font-size: 15px; color: white;">
-                            <div class="col-md-5">
-                              <select id="language" class="select2 form-select"
-                                style="background-color:#11191c; width:150px; border-color: #283848;">
-                                <!-- <option value="">Select Project</option> -->
-                                <option value="pm">Project Manager</option>
-                                <option value="report" selected="">All</option>
-                                <option value="report">Reports</option>
-                                <option value="message">Message</option>
-                              </select>
-                            </div>
-                          </span>
-                          <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">Project Manager : </span>
-                            Shivashu Shukla
-                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                              style="padding-left:0;">
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla">
-                                <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla">
-                                <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Angle Viston">
-                                <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                              <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                class="avatar avatar-xs pull-up" title="" data-bs-original-title="Merry Cluster">
-                                <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                                  class="rounded-circle">
-                              </li>
-                            </ul>
-                          </h4>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Shivam Shukla</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Shri Shukla</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:#ffffff; color:black;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;"><b>Angle Viston</b></h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                            <div class="card" style="background-color:black; color:#ffffff;">
-                              <div class="card-body" style="padding: 10px;">
-                                <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                <h5 class="card-title" style="margin-bottom: 5px;">
-                                  <b>Merry Cluster</b>
-                                </h5>
-                                <p class="card-text">
-                                  This is another card with title and supporting text below. This card has some
-                                  additional content to make it slightly taller overall. This is another card with title
-                                  and supporting text below. This card has some additional content to make it slightly
-                                  taller overall.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          <br><br>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item card" style="padding: 5px;">
-                      <h2 class="accordion-header text-body d-flex justify-content-between" id="accordionIconFour">
-                        <button type="button" class="accordion-button collapsed" data-bs-toggle="collapse"
-                          data-bs-target="#accordionIcon-4" aria-controls="accordionIcon-4" aria-expanded="false">
-                          <!-- <b>Shrivashu Shukla</b> -->
-                          <b style="color: dimgray; font-size:20px;">20-02-2023 / <u
-                              style="color:#ff7700;">@portfoliosite</u></b>
-                        </button>
-                      </h2>
-                      <div id="accordionIcon-4" class="accordion-collapse collapse" data-bs-parent="#accordionIcon"
-                        style="background-color: #1d242e;">
-                        <div class="accordion-body">
-                          <div class="accordion-body">
-                            <br><br>
-                            <span class="badge" style="float: right; font-size: 15px; color: white;">
-                              <div class="col-md-5">
-                                <select id="language" class="select2 form-select"
-                                  style="background-color:#11191c; width:150px; border-color: #283848;">
-                                  <!-- <option value="">Select Project</option> -->
-                                  <option value="pm">Project Manager</option>
-                                  <option value="report" selected="">All</option>
-                                  <option value="report">Reports</option>
-                                  <option value="message">Message</option>
-                                </select>
-                              </div>
-                            </span>
-                            <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">Project Manager : </span>
-                              Shivashu Shukla
-                              <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                                style="padding-left:0;">
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                  class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shivashu Shukla">
-                                  <img src="/_static/otherapps/img/avatars/shivashushukla.jpg" alt="Avatar"
-                                    class="rounded-circle">
-                                </li>
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                  class="avatar avatar-xs pull-up" title="" data-bs-original-title="Shri Shukla">
-                                  <img src="/_static/otherapps/img/avatars/shrishukla.jpg" alt="Avatar"
-                                    class="rounded-circle">
-                                </li>
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                  class="avatar avatar-xs pull-up" title="" data-bs-original-title="Angle Viston">
-                                  <img src="/_static/otherapps/img/avatars/angleviston.jpg" alt="Avatar"
-                                    class="rounded-circle">
-                                </li>
-                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                  class="avatar avatar-xs pull-up" title="" data-bs-original-title="Merry Cluster">
-                                  <img src="/_static/otherapps/img/avatars/merrycluster.jpg" alt="Avatar"
-                                    class="rounded-circle">
-                                </li>
-                              </ul>
-                            </h4>
-                            <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                              <div class="card" style="background-color:#ffffff; color:black;">
-                                <div class="card-body" style="padding: 10px;">
-                                  <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                  <h5 class="card-title" style="margin-bottom: 5px;"><b>Shivam Shukla</b></h5>
-                                  <p class="card-text">
-                                    This is another card with title and supporting text below. This card has some
-                                    additional content to make it slightly taller overall. This is another card with
-                                    title and supporting text below. This card has some additional content to make it
-                                    slightly taller overall.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                              <div class="card" style="background-color:#ffffff; color:black;">
-                                <div class="card-body" style="padding: 10px;">
-                                  <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                  <h5 class="card-title" style="margin-bottom: 5px;"><b>Shri Shukla</b></h5>
-                                  <p class="card-text">
-                                    This is another card with title and supporting text below. This card has some
-                                    additional content to make it slightly taller overall. This is another card with
-                                    title and supporting text below. This card has some additional content to make it
-                                    slightly taller overall.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                              <div class="card" style="background-color:#ffffff; color:black;">
-                                <div class="card-body" style="padding: 10px;">
-                                  <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                  <h5 class="card-title" style="margin-bottom: 5px;"><b>Angle Viston</b></h5>
-                                  <p class="card-text">
-                                    This is another card with title and supporting text below. This card has some
-                                    additional content to make it slightly taller overall. This is another card with
-                                    title and supporting text below. This card has some additional content to make it
-                                    slightly taller overall.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-sm-12" style="padding: 2px; margin-right:25%;">
-                              <div class="card" style="background-color:black; color:#ffffff;">
-                                <div class="card-body" style="padding: 10px;">
-                                  <span class="primary" style="float: right;color: gray;">— 11:22 PM.</span>
-                                  <h5 class="card-title" style="margin-bottom: 5px;">
-                                    <b>Merry Cluster</b>
-                                  </h5>
-                                  <p class="card-text">
-                                    This is another card with title and supporting text below. This card has some
-                                    additional content to make it slightly taller overall. This is another card with
-                                    title and supporting text below. This card has some additional content to make it
-                                    slightly taller overall.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-                            <br><br>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    {% endfor %}
 
                   </div>
                   <br>

@@ -49,8 +49,10 @@ def allprojectsrequests(request):  #✓
 	values=list()
 	for queryset in querysets:
 		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
-		passing = AllSuggestions.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer")
-		if(getting.ReportStatus=="Active" and not passing):
+		# actually if this persongiving any single report or suggestion on that project then come true, and for true we not pick this to show...
+		passing = len(AllSuggestions.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer")) \
+				| len(ReportsOrMessages.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer"))
+		if(getting.ReportStatus=="Active" and not passing): 
 			getting.Client=ClientInfo.objects.get(pk=getting.Client).FullName
 			values.append(getting)
 	return render(request,"otherapps/developer/allprojectsrequests.html",{'values':values});
@@ -95,9 +97,7 @@ def projectdetailsedit(request,projectslug):  #✓
 	values.Client=ClientFullName=ClientInfo.objects.get(id=values.Client).FullName
 	values.Admin=Employee.objects.get(id=values.Admin).FullName
 	passing=len(AllSuggestions.objects.filter(ProjectID=key, SenderID=DeveloperMain, SenderRole="Developer"))
-	print(passing)
 	comingFrom = ('Active' if(passing) else 'New')
-	print(comingFrom)
 	myAllSuggestions=AllSuggestions.objects.filter(ProjectID=key)
 	for temp in myAllSuggestions:
 		if(temp.SenderID):  # if sender is not HR, because its SenderID have None, so its official ERROR...
@@ -119,7 +119,9 @@ def activeprojects(request):  #✓
 	values=list()
 	for queryset in querysets:
 		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
-		passing = AllSuggestions.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer")
+		# actually if this persongiving any single report or suggestion on that project then come true, and for true we not pick this to show...
+		passing = len(AllSuggestions.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer")) \
+				| len(ReportsOrMessages.objects.filter(ProjectID=getting.id, SenderID=DeveloperMain, SenderRole="Developer"))
 		if(getting.ReportStatus=="Active" and passing):	
 			getting.Client=ClientInfo.objects.get(pk=getting.Client)
 			getting.Admin=Employee.objects.get(pk=getting.Admin)

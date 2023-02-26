@@ -24,20 +24,20 @@ def index(request):
 def myaccount(request):
 	if request.method=="POST":
 		values=ClientInfo(
-						Username=request.POST["username"],
-						Password=request.POST["password"],
-						FirstName=request.POST["firstname"],
-						LastName=request.POST["lastname"],
-						FullName=request.POST["firstname"]+' '+request.POST["lastname"],
-						EmailId=request.POST["email"],
-						MobileNo=request.POST["mobileno"],
-						Organization=request.POST["organization"],
-						Language=request.POST["language"],
-						Address=request.POST["address"],
-						ZipCode=request.POST["zipcode"],
-						State=request.POST["state"],
-						Country=request.POST["country"],
-						ProfilePick=request.FILES["upload"], )
+				Username=request.POST["username"],
+				Password=request.POST["password"],
+				FirstName=request.POST["firstname"],
+				LastName=request.POST["lastname"],
+				FullName=request.POST["firstname"]+' '+request.POST["lastname"],
+				EmailId=request.POST["email"],
+				MobileNo=request.POST["mobileno"],
+				Organization=request.POST["organization"],
+				Language=request.POST["language"],
+				Address=request.POST["address"],
+				ZipCode=request.POST["zipcode"],
+				State=request.POST["state"],
+				Country=request.POST["country"],
+				ProfilePick=request.FILES["upload"], )
 		values.save()
 	return render(request,"otherapps/client/myaccount.html");
 
@@ -81,9 +81,9 @@ def projectdetails(request):
 						ReportStatus="Not Received", )
 		values.save()
 		slug="{}-{}".format(values.ProjectSlug,values.id)  #slug_creation
-		return redirect("/client/projectdetails/"+slug)
-		# return render(request,"otherapps/client/projectdetails.html", {'value':values});
-	return render(request,"otherapps/client/projectdetails.html", {'value':values, 'clientID':ClientMain});
+		return redirect("/client/projectdetails/"+slug) 
+	# values=ProjectInfo.objects.get(id=1)   #default 
+	return render(request,"otherapps/client/projectdetails.html", {'values':values, 'clientID':ClientMain});
 
 
 def projectdetailsslug(request,projectslug):
@@ -246,13 +246,10 @@ def setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,SenderI
 	for temp in temps:
 		templist.append(Employee.objects.get(pk=temp.DeveloperID))
 	detailsSet['PMnDevs']=templist   # third assignment
-	print('>>>',values)
 	for value in values:
-		print(value)
 		if(value.SenderID==SenderID):
 			detailsSet['textareaReadonly']=True
 		value.SenderID=Employee.objects.get(pk=value.SenderID)
-	print('>>',values)
 	holdingDict={'detailsSet':detailsSet, 'values':values}
 	return holdingDict
 
@@ -263,22 +260,17 @@ def reportscollection(request):  #✓
 	if request.method=="POST":   
 		SelectedDate=request.POST["selecteddate"] if(request.POST["selecteddate"]) else None
 		ProjectID=int(request.POST["projectid"]) if(request.POST["projectid"]) else None
-		print(SelectedDate,ProjectID)
 		SelectedDataSets={'SelectedDate':SelectedDate, 'ProjectID':ProjectID}
 		if(ProjectID):   # here is take ProjectID's ProjectName, but we take it if it existing there!!!
 			SelectedDataSets['ProjectName']=ProjectInfo.objects.get(pk=ProjectID).ProjectName
 		if(SelectedDate):  # first here is we convert this date to a original format of date, but if it is exist!!!
 			SelectedDate=datetime.datetime.strptime(SelectedDate, '%Y-%m-%dT%H:%M')
-		print(SelectedDate,ProjectID) 
-		print(">>>>> 1")
 		if(SelectedDate and ProjectID):
-			print(">>>>> 2")
 			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
 			if(values):   #
 				holdingDict = setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
 				QueryDataSets.append(holdingDict)
 		elif(SelectedDate):
-			print(">>>>> 3")
 			values=ReportsOrMessages.objects.filter(SendingDateTime__date=SelectedDate)
 			collections = dict()
 			for value in values:
@@ -288,13 +280,11 @@ def reportscollection(request):  #✓
 			keys=list(keys)
 			keys.sort()
 			valuesDataSets=[ collections[key] for key in keys ]
-			print(valuesDataSets)
 			for values in valuesDataSets:
 				ProjectID=values[0].ProjectID
 				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
 				QueryDataSets.append(holdingDict)
 		elif(ProjectID):
-			print(">>>>> 4")
 			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID)
 			collections = dict()
 			for value in values:
@@ -309,12 +299,19 @@ def reportscollection(request):  #✓
 				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
 				QueryDataSets.append(holdingDict)
 		else:  #
-			print(">>>>> 5")
 			pass
-		print(">>>>> 6")
-	values=ProjectInfo.objects.filter(HR=None,ReportStatus="Active")
-	print(values)
+	values=ProjectInfo.objects.filter(Client=ClientMain,ReportStatus="Active")
 	return render(request,"otherapps/client/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -50,13 +50,12 @@ def allprojectsrequests(request):  #✓
 	querysets=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
 	values=list()
 	for queryset in querysets:
-		# print(queryset.id, ProjectManagerMain, "Project Manager", end='  ')
-		passing = len(AllSuggestions.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager"))
-		# print(passing,end=" ")
+		# actually if this persongiving any single report or suggestion on that project then come true, and for true we not pick this to show...
+		passing = len(AllSuggestions.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager")) \
+				| len(ReportsOrMessages.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager"))
 		if(not passing):
 			queryset.Client=ClientInfo.objects.get(pk=queryset.Client).FullName
 			values.append(queryset)
-		# print("  Done")
 	return render(request,"otherapps/projectmanager/allprojectsrequests.html",{'values':values});
 
 
@@ -121,7 +120,9 @@ def activeprojects(request):  #✓
 	querysets=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
 	values=list()
 	for queryset in querysets:
-		passing = len(AllSuggestions.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager"))
+		# actually if this persongiving any single report or suggestion on that project then come true, and for true we not pick this to show...
+		passing = len(AllSuggestions.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager")) \
+				| len(ReportsOrMessages.objects.filter(ProjectID=queryset.id, SenderID=ProjectManagerMain, SenderRole="Project Manager"))
 		if(passing):
 			queryset.Client=ClientInfo.objects.get(pk=queryset.Client)
 			queryset.Admin=Employee.objects.get(pk=queryset.Admin)
@@ -190,22 +191,17 @@ def reportscollection(request):  #✓
 	if request.method=="POST":   
 		SelectedDate=request.POST["selecteddate"] if(request.POST["selecteddate"]) else None
 		ProjectID=int(request.POST["projectid"]) if(request.POST["projectid"]) else None
-		print(SelectedDate,ProjectID)
 		SelectedDataSets={'SelectedDate':SelectedDate, 'ProjectID':ProjectID}
 		if(ProjectID):   # here is take ProjectID's ProjectName, but we take it if it existing there!!!
 			SelectedDataSets['ProjectName']=ProjectInfo.objects.get(pk=ProjectID).ProjectName
 		if(SelectedDate):  # first here is we convert this date to a original format of date, but if it is exist!!!
 			SelectedDate=datetime.datetime.strptime(SelectedDate, '%Y-%m-%dT%H:%M')
-		print(SelectedDate,ProjectID) 
-		print(">>>>> 1")
 		if(SelectedDate and ProjectID):
-			print(">>>>> 2")
 			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
 			if(values):   #
 				holdingDict = setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
 				QueryDataSets.append(holdingDict)
 		elif(SelectedDate):
-			print(">>>>> 3")
 			values=ReportsOrMessages.objects.filter(SendingDateTime__date=SelectedDate)
 			collections = dict()
 			for value in values:
@@ -215,13 +211,11 @@ def reportscollection(request):  #✓
 			keys=list(keys)
 			keys.sort()
 			valuesDataSets=[ collections[key] for key in keys ]
-			print(valuesDataSets)
 			for values in valuesDataSets:
 				ProjectID=values[0].ProjectID
 				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
 				QueryDataSets.append(holdingDict)
 		elif(ProjectID):
-			print(">>>>> 4")
 			values=ReportsOrMessages.objects.filter(ProjectID=ProjectID)
 			collections = dict()
 			for value in values:
@@ -236,11 +230,8 @@ def reportscollection(request):  #✓
 				holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values)
 				QueryDataSets.append(holdingDict)
 		else:  #
-			print(">>>>> 5")
 			pass
-		print(">>>>> 6")
 	values=ProjectInfo.objects.filter(ProjectManager=ProjectManagerMain,ReportStatus="Active")
-	print(values)
 	return render(request,"otherapps/projectmanager/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
 
 	
@@ -311,7 +302,6 @@ def sendreportsopen(request,projectslug=None):  #✓
 	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
 	holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,ProjectManagerMain)
 	holdingDict |= {'projectslug':projectslug}
-	print(holdingDict)
 	return render(request,"otherapps/projectmanager/sendreportsopen.html", holdingDict);
 
 

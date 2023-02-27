@@ -39,15 +39,6 @@ class AllSuggestions(models.Model):
 		sender = TheNameOfClass.objects.get(pk=self.SenderID).FullName
 		return sender+" gives a suggestion on "+project+" project. ( ID:"+str(self.id)+', Date:'+str(self.SendingDateTime)+" )";
 
-	# def __str__(self):
-	# 	ProjectName = ProjectInfo.objects.get(pk=self.ProjectID).ProjectName
-	# 	if(self.SenderRole!='HR'):
-	# 		TheNameOfClass = locals()[  'ClientInfo' if(self.SenderRole=="Client") else 'Employee' ]
-	# 		SenderName = TheNameOfClass.objects.get(pk=self.SenderID).FullName
-	# 	else:
-	# 		SenderName = 'ShivaShu'
-	# 	return SenderName+"("+self.SenderRole+")"+" gives a suggestion on "+ProjectName+" project. ( ID:"+str(self.id)+', Date:'+str(self.SendingDateTime)+" )";
-
 
 
 

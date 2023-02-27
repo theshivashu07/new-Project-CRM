@@ -27,6 +27,10 @@ urlpatterns=[
 		path('reportscollection/',views.reportscollection,name='reportscollection'),  #✓
 		path('sendreports/',views.sendreports,name='sendreports'),  #✓
 		path('sendreports/<slug:projectslug>',views.sendreportsopen,name='sendreportsopen'),  #✓
+
+		path('assigntasks/',views.assigntasks,name='assigntasks'),  #✓
+		path('assigntasks/<slug:projectslug>',views.assigntasksopen,name='assigntasksopen'),  #✓
+
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),

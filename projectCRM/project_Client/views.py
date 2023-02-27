@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import ClientInfo,ProjectInfo,DeveloperBox
 from project_HR.models import Employee
 from project_Admin.models import ReportsOrMessages,AllMessages,AllSuggestions
+from project_ProjectManager.models import AllTasks
 # from django.utils import timezone
 from django.db.models import Q
 import datetime

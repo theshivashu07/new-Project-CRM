@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from project_HR.models import Employee
 from project_Client.models import ClientInfo,ProjectInfo,DeveloperBox
 from project_Admin.models import ReportsOrMessages,AllMessages,AllSuggestions
+from project_ProjectManager.models import AllTasks
 # from django.utils import timezone
 from django.db.models import Q
 import datetime
@@ -252,38 +253,6 @@ def sendreports(request):  #✓
 				lock.ProfilePick=temp.ProfilePick
 			value.Developer=locks
 	return render(request,"otherapps/projectmanager/sendreports.html", {'values':values});
-def sendreportsopen(request,projectslug=None):  #✓
-	return render(request,"otherapps/projectmanager/sendreportsopen.html", {'projectslug':projectslug});
-
-
-def sendreportsopen(request,projectslug=None):  #✓
-	if request.method=="POST":
-		# get key from url's slug ---> 'shivam-shukla-77' to '77'...
-		key=int(projectslug.split('-')[-1])
-		values=ReportsOrMessages()
-		values.ProjectID=key
-		values.WhatIsIt=request.POST["whatisit"]
-		values.SenderID=ProjectManagerMain
-		values.SenderRole="Project Manager"  # Project Manager / Developer
-		values.ContentData=request.POST["contentdata"]
-		values.save()
-		return redirect(request.path)
-	getting=projectslug.split('-')
-	key=int(getting[-1])
-	detailsSet={'Date':datetime.date.today(), 'ProjectUsername':''.join(getting[:-1])}
-	templist=list()
-	temp=ProjectInfo.objects.get(pk=key).ProjectManager
-	templist.append(Employee.objects.get(pk=temp))
-	temps=DeveloperBox.objects.filter(ProjectInfosID=key)
-	for temp in temps:
-		templist.append(Employee.objects.get(pk=temp.DeveloperID))
-	detailsSet['PMnDevs']=templist   # third assignment
-	values=ReportsOrMessages.objects.filter(ProjectID=key, SendingDateTime__date=datetime.date.today())
-	for value in values:
-		if(value.SenderID==ProjectManagerMain):
-			detailsSet['textareaReadonly']=True
-		value.SenderID=Employee.objects.get(pk=value.SenderID)
-	return render(request,"otherapps/projectmanager/sendreportsopen.html", {'projectslug':projectslug, 'values':values, 'detailsSet':detailsSet});
 
 def sendreportsopen(request,projectslug=None):  #✓
 	if request.method=="POST":
@@ -306,6 +275,49 @@ def sendreportsopen(request,projectslug=None):  #✓
 
 
 
+def assigntasks(request):
+	values=ProjectInfo.objects.filter(~Q(Developer=None), ProjectManager=ProjectManagerMain, ReportStatus="Active")
+	for value in values:
+		if(value.Client):
+			value.Client=ClientInfo.objects.get(pk=value.Client)
+		if(value.Admin):
+			value.Admin=Employee.objects.get(pk=value.Admin)
+		if(value.ProjectManager):
+			value.ProjectManager=Employee.objects.get(pk=value.ProjectManager)
+		if(value.Developer):
+			locks=DeveloperBox.objects.filter(ProjectInfosID=value.id)
+			for lock in locks:
+				temp=Employee.objects.get(pk=lock.DeveloperID)
+				lock.FullName=temp.FullName
+				lock.ProfilePick=temp.ProfilePick
+			value.Developer=locks
+	return render(request,"otherapps/projectmanager/assigntasks.html", {'values':values});
+
+def assigntasksopen(request,projectslug):
+	ProjectID=int(projectslug.split('-')[-1])
+	if request.method=="POST":
+		values=AllTasks()
+		values.ProjectID = ProjectID
+		values.ReceiverID=request.POST["developerID"]
+		values.ContentData=request.POST["contentdata"]
+		values.save()
+		print( values.ProjectID, '--', values.ReceiverID, '--', values.ContentData )
+		return redirect(request.path)
+	SelectedDate=datetime.date.today()   #datetime.date(2023, 2, 18) // for trial
+	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+	holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,ProjectManagerMain)
+	holdingDict |= {'projectslug':projectslug}
+	print(holdingDict,end="\n\n")
+	print(holdingDict['detailsSet'],end="\n\n")
+	print(holdingDict['detailsSet']['PMnDevs'],end="\n\n")
+	pastTasksAssigningList=list()
+	for value in holdingDict['detailsSet']['PMnDevs']:
+		temp=AllTasks.objects.filter(ProjectID=ProjectID,ReceiverID=value.id)
+		pastTasksAssigningList.append(temp)
+		print(ProjectID,value.id,temp)
+	holdingDict['detailsSet']['tasksAssign']=pastTasksAssigningList
+	print('\n\n',holdingDict['detailsSet'])
+	return render(request,"otherapps/projectmanager/assigntasksopen.html", holdingDict);
 
 
 

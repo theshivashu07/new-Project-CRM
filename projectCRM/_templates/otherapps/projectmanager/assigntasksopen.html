@@ -1,0 +1,83 @@
+{% extends 'otherapps/projectmanager/master.html' %}
+
+{% block tcontent %}
+CRM - Project Manager
+{% endblock %}
+
+
+
+
+{% block childcontent %}
+<div class="content-wrapper">
+  <!-- Content -->
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4>
+    <div class="row">
+      <!-- Basic -->
+      <div class="col-md-12">
+        <!-- <div class="card mb-4"> -->
+          <!-- Account -->
+          <div class="card-body" style="background-color: #1d242e; border-radius:4px">
+            <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
+              <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">{{ detailsSet.Date |date:'d-m-Y'}}  /</span> @{{ detailsSet.ProjectUsername }} 
+                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left:0">
+                  {% for detail in detailsSet.PMnDevs%}
+                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{detail.id}} — {{detail.FullName}}">
+                      <img src="/_uploads/{{detail.ProfilePick|default:'employee/user.png'}}" alt="Avatar" class="rounded-circle">
+                    </li>
+                  {% endfor %}
+                </ul> 
+              </h4>
+            </div>
+            <br>
+            <br>
+
+                <!-- <div class="card mb-12" style="background-color:white">
+                    <h4 class="fw-bold py-3 mb-12" style="font-size:15px; margin: 0px; margin-left: 10px;">
+                      <i class="bx bx-task bx-sm" style="padding-right:5px;"></i>
+                        SHivam SHukla
+                    </h4>
+                    <div class="input-group">
+                      <textarea class="form-control" aria-label="With textarea" placeholder="Assign tasks to 'Shivam Shukla'." name="contentdata" style="height:100px; border-top-left-radius: 0px;" {% if detailsSet.textareaReadonly %} readonly {% endif %}></textarea>
+                      <button  type="submit"  class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px;"> 
+                        <i class="bx bx-task bx-sm"></i>
+                      </button>
+                    </div>
+                </div> -->
+
+            {% for value,tasks in zip(detailsSet.PMnDevs,detailsSet.tasksAssign) %}
+            <!-- {% for value,tasks in detailsSet.PMnDevs|zip(detailsSet.tasksAssign) %} -->
+              {{value}}-{{tasks}}
+              <!-- {% if value.Role == 'Developer' %}
+                <form id="formAccountSettings" method="POST">
+                {% csrf_token %}
+                  <input type="hidden" id="developerID" name="developerID" value="{{value.id}}">
+                  <div class="card mb-12" style="background-color:white">
+                      <h4 class="fw-bold py-3 mb-12" style="font-size:15px; margin: 0px; margin-left: 10px;">
+                        <i class="bx bx-task bx-sm" style="padding-right:5px;"></i>
+                          {{value.FullName}} — {{value.As}} (As)
+                      </h4>
+                      <div class="input-group">
+                        <textarea class="form-control" aria-label="With textarea" placeholder="Assign tasks to '{{value.FullName}}'." name="contentdata" style="height:90px; border-top-left-radius: 0px;" {% if detailsSet.textareaReadonly %} readonly {% endif %}></textarea>
+                        <button  type="submit"  class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:10px;"> 
+                          <i class="bx bxs-chevrons-right bx-sm bx-fade-right"></i>
+                        </button>
+                      </div>
+                  </div>
+                </form>
+                <br>
+              {% endif %} -->
+            {% endfor %}
+
+            <br>
+            <br>
+          </div>
+        </div>
+      <!-- /Account -->
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

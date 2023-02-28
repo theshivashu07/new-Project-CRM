@@ -296,27 +296,23 @@ def assigntasks(request):
 def assigntasksopen(request,projectslug):
 	ProjectID=int(projectslug.split('-')[-1])
 	if request.method=="POST":
-		values=AllTasks()
-		values.ProjectID = ProjectID
-		values.ReceiverID=request.POST["developerID"]
-		values.ContentData=request.POST["contentdata"]
-		values.save()
-		print( values.ProjectID, '--', values.ReceiverID, '--', values.ContentData )
+		if(request.POST["contentdata"]):
+			values=AllTasks()
+			values.ProjectID = ProjectID
+			values.ReceiverID=request.POST["developerID"]
+			values.ContentData=request.POST["contentdata"]
+			values.save()
+			# print( values.ProjectID, '--', values.ReceiverID, '--', values.ContentData )
 		return redirect(request.path)
 	SelectedDate=datetime.date.today()   #datetime.date(2023, 2, 18) // for trial
 	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
 	holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,ProjectManagerMain)
 	holdingDict |= {'projectslug':projectslug}
-	print(holdingDict,end="\n\n")
-	print(holdingDict['detailsSet'],end="\n\n")
-	print(holdingDict['detailsSet']['PMnDevs'],end="\n\n")
 	pastTasksAssigningList=list()
 	for value in holdingDict['detailsSet']['PMnDevs']:
 		temp=AllTasks.objects.filter(ProjectID=ProjectID,ReceiverID=value.id)
-		pastTasksAssigningList.append(temp)
-		print(ProjectID,value.id,temp)
+		pastTasksAssigningList.append([value,temp])
 	holdingDict['detailsSet']['tasksAssign']=pastTasksAssigningList
-	print('\n\n',holdingDict['detailsSet'])
 	return render(request,"otherapps/projectmanager/assigntasksopen.html", holdingDict);
 
 

@@ -239,6 +239,8 @@ def reportscollection(request):  #✓
 	return render(request,"otherapps/developer/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
 
 
+
+
 def sendreports(request):  #✓
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
@@ -277,9 +279,46 @@ def sendreportsopen(request,projectslug=None):  #✓
 	return render(request,"otherapps/developer/sendreportsopen.html", holdingDict);
 
 
-                                         
 
+def assignedtasks(request):
+	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
+	values=list()
+	for queryset in querysets:
+		getting = ProjectInfo.objects.get(pk=queryset.ProjectInfosID_id)
+		if(getting.ReportStatus=="Active" and getting.ProjectManager and getting.Developer):	
+			getting.Client=ClientInfo.objects.get(pk=getting.Client)
+			getting.Admin=Employee.objects.get(pk=getting.Admin)
+			getting.ProjectManager=Employee.objects.get(pk=getting.ProjectManager)
+			locks=DeveloperBox.objects.filter(ProjectInfosID=getting.id)
+			for lock in locks:
+				temp=Employee.objects.get(pk=lock.DeveloperID)
+				lock.FullName=temp.FullName
+				lock.ProfilePick=temp.ProfilePick
+			getting.Developer=locks
+			values.append(getting)
+	return render(request,"otherapps/developer/assignedtasks.html", {'values':values});
 
+def assignedtasksopen(request,projectslug):
+	ProjectID=int(projectslug.split('-')[-1])
+	if request.method=="POST":
+		if(request.POST["contentdata"]):
+			values=AllTasks()
+			values.ProjectID = ProjectID
+			values.ReceiverID=request.POST["developerID"]
+			values.ContentData=request.POST["contentdata"]
+			values.save()
+			# print( values.ProjectID, '--', values.ReceiverID, '--', values.ContentData )
+		return redirect(request.path)
+	SelectedDate=datetime.date.today()   #datetime.date(2023, 2, 18) // for trial
+	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
+	holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,DeveloperMain)
+	holdingDict |= {'projectslug':projectslug}
+	pastTasksAssigningList=list()
+	for value in holdingDict['detailsSet']['PMnDevs']:
+		temp=AllTasks.objects.filter(ProjectID=ProjectID,ReceiverID=value.id)
+		pastTasksAssigningList.append([value,temp])
+	holdingDict['detailsSet']['tasksAssign']=pastTasksAssigningList
+	return render(request,"otherapps/developer/assignedtasksopen.html", holdingDict);
 
 
 

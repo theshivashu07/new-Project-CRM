@@ -223,6 +223,12 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Task's to do!!</span>
             </li>
+            <li class="menu-item {% if request.path == '/developer/assignedtasks/' or request.path == '/developer/assignedtasks/'|add:projectslug %}active{% endif %}">
+              <a href="/developer/assignedtasks" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-code-alt' ></i>
+                <div data-i18n="Analytics">Assigned Task's</div>
+              </a> 
+            </li>
             <!-- <li class="menu-item {% if request.path == '/developer/creativeteam/' %}active{% endif %}">
               <a href="/developer/creativeteam" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-bolt-circle"></i>

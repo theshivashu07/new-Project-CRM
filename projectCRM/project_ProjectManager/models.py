@@ -9,6 +9,7 @@ class AllTasks(models.Model):
 	ReceiverID = models.IntegerField(default=None, null=True);
 	ContentData = models.CharField(max_length=750);
 	SendingDateTime = models.DateTimeField(auto_now_add=True);
+	TaskStatus = models.BooleanField(default=False);
 	def __str__(self):
 		project = ProjectInfo.objects.get(pk=self.ProjectID).ProjectName
 		tempPM = ProjectInfo.objects.get(id=self.ProjectID).ProjectManager
@@ -18,5 +19,7 @@ class AllTasks(models.Model):
 
 
 
+
+ 
 
  

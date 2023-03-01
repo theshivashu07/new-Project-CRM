@@ -30,6 +30,7 @@ urlpatterns=[
 
 		path('assignedtasks/',views.assignedtasks,name='assignedtasks'),  #✓
 		path('assignedtasks/<slug:projectslug>',views.assignedtasksopen,name='assignedtasksopen'),  #✓
+		path('allassignedtasks/',views.allassignedtasks,name='allassignedtasks'),  #✓
 
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),

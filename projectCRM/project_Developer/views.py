@@ -298,27 +298,49 @@ def assignedtasks(request):
 			values.append(getting)
 	return render(request,"otherapps/developer/assignedtasks.html", {'values':values});
 
+
 def assignedtasksopen(request,projectslug):
 	ProjectID=int(projectslug.split('-')[-1])
-	if request.method=="POST":
-		if(request.POST["contentdata"]):
-			values=AllTasks()
-			values.ProjectID = ProjectID
-			values.ReceiverID=request.POST["developerID"]
-			values.ContentData=request.POST["contentdata"]
-			values.save()
-			# print( values.ProjectID, '--', values.ReceiverID, '--', values.ContentData )
+	if request.method=="POST":   
+		if(request.POST["githublink"]):
+			lock=AllTasks.objects.get(pk=request.POST["thistasksID"])
+			lock.GitHubLink=request.POST["githublink"]
+			lock.TaskStatus=True
+			lock.save()
 		return redirect(request.path)
-	SelectedDate=datetime.date.today()   #datetime.date(2023, 2, 18) // for trial
-	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)
-	holdingDict=setupaccordingtoProjectIDnSelectedDate(ProjectID,SelectedDate,values,DeveloperMain)
-	holdingDict |= {'projectslug':projectslug}
-	pastTasksAssigningList=list()
-	for value in holdingDict['detailsSet']['PMnDevs']:
-		temp=AllTasks.objects.filter(ProjectID=ProjectID,ReceiverID=value.id)
-		pastTasksAssigningList.append([value,temp])
-	holdingDict['detailsSet']['tasksAssign']=pastTasksAssigningList
+	# values=AllTasks.objects.filter(ReceiverID=DeveloperMain, TaskStatus=False)
+	values=AllTasks.objects.filter(ProjectID=ProjectID,ReceiverID=DeveloperMain,TaskStatus=False)
+	# getting=ProjectInfo.objects.get(pk=ProjectID).ProjectSlug.split('-')
+	detailsSet={'ProjectUsername':''.join(ProjectInfo.objects.get(pk=ProjectID).ProjectSlug.split('-'))}
+	templist=list()
+	temp=ProjectInfo.objects.get(pk=ProjectID).ProjectManager
+	templist.append(Employee.objects.get(pk=temp))
+	temps=DeveloperBox.objects.filter(ProjectInfosID=ProjectID)
+	for temp in temps:
+		templist.append(Employee.objects.get(pk=temp.DeveloperID))
+	detailsSet['PMnDevs']=templist   # third assignment
+	for value in values:
+		value.ProjectID=ProjectInfo.objects.get(pk=value.ProjectID)
+	holdingDict={'detailsSet':detailsSet, 'values':values, 'projectslug':projectslug}
 	return render(request,"otherapps/developer/assignedtasksopen.html", holdingDict);
+
+
+def allassignedtasks(request):
+	if request.method=="POST":   
+		if(request.POST["githublink"]):
+			lock=AllTasks.objects.get(pk=request.POST["thistasksID"])
+			lock.GitHubLink=request.POST["githublink"]
+			lock.TaskStatus=True
+			lock.save()
+		return redirect(request.path)
+	values=AllTasks.objects.filter(ReceiverID=DeveloperMain,TaskStatus=False)
+	for value in values:
+		value.ProjectID=ProjectInfo.objects.get(pk=value.ProjectID)
+	return render(request,"otherapps/developer/allassignedtasks.html", {'values':values});
+
+
+
+
 
 
 

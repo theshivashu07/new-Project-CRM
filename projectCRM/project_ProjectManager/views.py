@@ -316,6 +316,11 @@ def assigntasksopen(request,projectslug):
 	return render(request,"otherapps/projectmanager/assigntasksopen.html", holdingDict);
 
 
+def completedtasks(request,projectslug=None):
+	if request.method=="POST":
+		???
+	values=AllTasks.objects.filter(TaskStatus=True, IsTaskFinished=False)
+	return render(request,"otherapps/projectmanager/completedtasks.html", {'values':values});
 
 
 

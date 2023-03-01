@@ -19,19 +19,16 @@ CRM - Developer
           <!-- Account -->
           <div class="card-body" style="background-color: #1d242e; border-radius:4px">
             <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
-              <h4 class="fw-bold py-3 mb-12"><span class="text-muted fw-light">Project: </span> @{{ detailsSet.ProjectUsername }} 
-                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center" style="padding-left:0">
-                  {% for detail in detailsSet.PMnDevs%}
-                    <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{detail.id}} — {{detail.FullName}}">
-                      <img src="/_uploads/{{detail.ProfilePick|default:'employee/user.png'}}" alt="Avatar" class="rounded-circle">
-                    </li>
-                  {% endfor %}
-                </ul> 
+              <h4 class="fw-bold mb-12">#{{ values|length }}'tasks<span class="text-muted fw-light"> are panding here...</span>
               </h4>
             </div>
+            <hr class="my-0">
+            <hr class="my-0">
+            <hr class="my-0">
             <br>
             <br>
-
+            <br>
+            <br>
             {% for value in values %}
                 <form id="formAccountSettings" method="POST">
                 {% csrf_token %}

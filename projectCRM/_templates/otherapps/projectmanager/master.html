@@ -229,6 +229,12 @@
                 <div data-i18n="Analytics">Assign Task's</div>
               </a> 
             </li>
+            <li class="menu-item {% if request.path == '/projectmanager/completedtasks/' or request.path == '/projectmanager/completedtasks/'|add:projectslug %}active{% endif %}">
+              <a href="/projectmanager/completedtasks" class="menu-link">
+                <i class='menu-icon tf-icons bx bx-code-alt' ></i>
+                <div data-i18n="Analytics">Completed Task's</div>
+              </a> 
+            </li>
             <li class="menu-item {% if request.path == '/projectmanager/sendreports/' or request.path == '/projectmanager/sendreports/'|add:projectslug %}active{% endif %}">
               <a href="/projectmanager/sendreports" class="menu-link">
                 <i class='menu-icon tf-icons bx bxs-file-export' ></i>

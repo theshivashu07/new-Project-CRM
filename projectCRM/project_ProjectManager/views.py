@@ -316,10 +316,27 @@ def assigntasksopen(request,projectslug):
 	return render(request,"otherapps/projectmanager/assigntasksopen.html", holdingDict);
 
 
-def completedtasks(request,projectslug=None):
+def completedtasks(request,comingfrom=None):
 	if request.method=="POST":
-		???
+		if "reassigned" in request.POST:
+			if(request.POST["message"]):
+				lock=AllTasks.objects.get(pk=request.POST["thistasksID"])
+				# if(request.POST["message"]):
+				#	 lock.OptionalMSG=request.POST["message"]
+				lock.OptionalMSG=request.POST["message"]
+				# lock.GitHubLink=None
+				lock.TaskStatus=False
+				lock.save()
+		elif "accept" in request.POST:
+			lock=AllTasks.objects.get(pk=request.POST["thistasksID"])
+			lock.IsTaskFinished=True
+			lock.save()
+		else:
+			pass
+		return redirect(request.path)
 	values=AllTasks.objects.filter(TaskStatus=True, IsTaskFinished=False)
+	for value in values:
+		value.ProjectID=ProjectInfo.objects.get(pk=value.ProjectID)
 	return render(request,"otherapps/projectmanager/completedtasks.html", {'values':values});
 
 

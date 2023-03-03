@@ -19,7 +19,7 @@ CRM - Project Manager
           <!-- Account -->
           <div class="card-body" style="background-color: #1d242e; border-radius:4px">
             <div id="accordionIcon" class="accordion mt-3 accordion-without-arrow">
-              <h4 class="fw-bold mb-12">#{{ values|length }}'tasks<span class="text-muted fw-light"> are panding here...</span>
+              <h4 class="fw-bold mb-12">#{{ values|length }}'tasks<span class="text-muted fw-light"> submission's are here...</span>
               </h4>
             </div>
             <hr class="my-0">
@@ -50,29 +50,32 @@ CRM - Project Manager
                           {{value.ProjectID.ProjectName}} — {{ value.SendingDateTime }}
                         <!-- </li> -->
                       </h4>
-                        <textarea class="form-control" aria-label="With textarea" name="contentdata" style="height:111px; border-radius: 0px; color:lightgray;" readonly>{{value.ContentData}}</textarea>
-                        <textarea class="form-control" aria-label="With textarea" placeholder="Enter your feedback/message..." name="message" style="height:20px; border-top-left-radius: 0px; color:#3333ff" >{{value.GitHubLink}}</textarea>
+                        <textarea class="form-control" aria-label="With textarea" style="height:111px; border-radius: 0px; color:lightgray;" readonly>{{value.ContentData}}</textarea>
+                        <div class="input-group">
+                          <span class="input-group-text" id="basic-addon11" style="border-radius: 0px; height: 30px; font-weight: bold; width:80px; background-color: white;" >Link: </span>
+                          <input class="form-control" type="text" style="border-radius: 0px; height: 30px; font-style: italic; bold; color:#4444ff;" value="{{value.GitHubLink}}" readonly>
+                        </div>
+
+
                         {% if value.OptionalMSG %}
-                          <textarea class="form-control" aria-label="With textarea" name="contentdata" style="height:30px; border-radius: 0px; background-color:#3a4a5a; font-style: italic;" readonly>{{value.OptionalMSG}}</textarea>
+                          <div class="input-group">
+                            <span class="input-group-text" id="basic-addon11" style="border-radius: 0px; height: 30px; font-weight: bold; width:80px; background-color: white;" >Note: </span>
+                            <input class="form-control" type="text" style="border-radius: 0px; height: 30px; font-style: italic; bold; color:#b2b2b2;" value="{{value.OptionalMSG}}" readonly>
+                          </div>
                         {% endif %}
                       <div class="input-group">
-                        <!-- <button  type="submit"  class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:25px; padding-right:10px;"> 
-                          <i class="bx bxs-chevrons-left bx-sm bx-fade-left"></i>
-                          Re-Assigned
-                        </button> -->
-                        <button  href="/" class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:25px; padding-right:10px;"> 
+                        <!-- <a href="/projectmanager/completedtasks/reassigned"></a> -->
+                          <!-- <a href="/projectmanager/completedtasks/accept"></a> -->
+                        <button  type="submit" name="reassigned" class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:25px; padding-right:10px;"> 
                           <i class="bx bxs-chevrons-left bx-sm bx-fade-left"></i>
                           Re-Assigned
                         </button>
-                        <textarea class="form-control" aria-label="With textarea" placeholder="Enter your feedback/message..." name="message" style="height:20px; border-top-left-radius: 0px; background-color:white; color: blue;" ></textarea>
-                        <button href="/" class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:10px; padding-right:25px;"> 
+                        <input class="form-control" type="text" style="border-radius: 0px; background-color:white; color:black;" placeholder="Enter your feedback/message..." name="message">
+
+                        <button type="submit" name="accept" class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:10px; padding-right:25px;"> 
                           Accept
                           <i class="bx bxs-chevrons-right bx-sm bx-fade-right"></i>
                         </button>
-                        <!-- <button type="submit"  class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:10px; padding-right:25px;"> 
-                          Accept
-                          <i class="bx bxs-chevrons-right bx-sm bx-fade-right"></i>
-                        </button> -->
                       </div>
                   </div>
                 </form>

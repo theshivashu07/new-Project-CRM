@@ -50,12 +50,23 @@ CRM - Developer
                           {{value.ProjectID.ProjectName}} — {{ value.SendingDateTime }}
                         <!-- </li> -->
                       </h4>
-                        <textarea class="form-control" aria-label="With textarea" name="contentdata" style="height:111px; border-radius: 0px; color:lightgray;" readonly>{{value.ContentData}}</textarea>
+                        <textarea class="form-control" aria-label="With textarea" style="height:111px; border-radius: 0px; color:lightgray;" readonly>{{value.ContentData}}</textarea>
                         {% if value.OptionalMSG %}
-                          <textarea class="form-control" aria-label="With textarea" name="contentdata" style="height:30px; border-radius: 0px; background-color:#3a4a5a; font-style: italic;" readonly>{{value.OptionalMSG}}</textarea>
-                        {% endif %}
                       <div class="input-group">
-                        <textarea class="form-control" aria-label="With textarea" placeholder="After tasks completion giving @github url there..." name="githublink" style="height:20px; border-top-left-radius: 0px; background-color:white; color: blue;" ></textarea>
+                        <span class="input-group-text" id="basic-addon11" style="border-radius: 0px; height: 30px; font-weight: bold; width:80px; background-color: white;" >Link: </span>
+                        <input class="form-control" type="text" style="border-radius: 0px; height: 30px; font-style: italic; color:#4444ff;" value="{{value.GitHubLink}}" readonly>
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text" id="basic-addon11" style="border-radius: 0px; height: 30px; font-weight: bold; width:80px; background-color: white;" >Note: </span>
+                        <!-- <input class="form-control" type="text" style="border-radius: 0px; height: 30px; font-weight: bold; color:#4444ff;" value="{{value.GitHubLink}}" readonly> -->
+                        <input class="form-control" type="text" style="border-radius: 0px; height: 30px; font-style: italic; color:#b2b2b2;" value="{{value.OptionalMSG}}" readonly>
+                      </div>
+                      {% endif %}
+                          
+                          
+                      <div class="input-group">
+                        <input class="form-control" type="text" style="border-top-left-radius: 0px; background-color:white; color: blue;" placeholder="After tasks completion giving @github url there..." name="githublink">
+                        <!-- <textarea class="form-control" aria-label="With textarea" placeholder="After tasks completion giving @github url there..." name="githublink" style="height:20px; border-top-left-radius: 0px; background-color:white; color: blue;" ></textarea> -->
                         <button type="submit"  class="btn btn-primary" style="background-color: #2c3c4c; border-top-right-radius:0px; padding-left:10px; padding-right:30px;"> 
                           <i class="bx bxs-chevrons-right bx-sm bx-fade-right"></i>
                         </button>
@@ -64,7 +75,6 @@ CRM - Developer
                 </form>
                 <br>
             {% endfor %}
-
             <br>
             <br>
           </div>

@@ -31,6 +31,7 @@ urlpatterns=[
 		path('assigntasks/',views.assigntasks,name='assigntasks'),  #✓
 		path('assigntasks/<slug:projectslug>',views.assigntasksopen,name='assigntasksopen'),  #✓
 		path('completedtasks/',views.completedtasks,name='completedtasks'),  #✓
+		path('completedtasks/<str:comingfrom>',views.completedtasks,name='completedtasks'),  #✓
 
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),

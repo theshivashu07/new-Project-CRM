@@ -135,7 +135,7 @@
               
                   <span class="app-brand-text demo menu-text fw-bolder ms-2" style="color:lightyellow;">
                     <center>
-                      ||  @theshivashu07  ||
+                      ||  {{request.session.WholeRepresentative.UserUsername}}  ||
                     </center>
                   </span>
             </a>
@@ -297,15 +297,14 @@
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
                   <center >
-                    <b style="color: #ffd60d; font-size: 18px;">Shivam Shukla</b><br><b style="color: #848484;">Client</b>
-                    <!-- <b style="color: red">Shivam Shukla</b><br><b style="color: green;">Developer</b> -->
+                    <b style="color: #ffd60d; font-size: 18px;">{{request.session.WholeRepresentative.UserFullName}}</b><br><b style="color: #848484;">{{request.session.WholeRepresentative.UserRole}}</b>
                 </center>
                 </li>
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="/_static/otherapps/img/avatars/@theshivashu07.jpg" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="/_uploads/{{request.session.WholeRepresentative.UserProfilePick|default:'client/user.png'}}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">

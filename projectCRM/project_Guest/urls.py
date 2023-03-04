@@ -7,9 +7,10 @@ urlpatterns=[
 		path('workprocess/',views.workprocess,name='workprocess'),
 		path('aboutus/',views.aboutus,name='aboutus'),
 		path('contactus/',views.contactus,name='contactus'),
-		path('admin/login/',views.loginMethod,name='login',),
-		path('projectmanager/login/',views.loginMethod,name='login'),
-		path('developer/login/',views.loginMethod,name='login'),
+		# path('admin/login/',views.loginMethod,name='login',),
+		# path('projectmanager/login/',views.loginMethod,name='login'),
+		# path('developer/login/',views.loginMethod,name='login'),
+		path('login/',views.loginMethod,name='login'),
 		path('visit/',views.visit,name='visit'),
 		#path('/',views.,name=''),
 		#path('/',views.,name=''),
@@ -19,6 +20,10 @@ urlpatterns=[
 		#path('/',views.,name=''),
 		
 ]
+
+
+
+
 
 
 

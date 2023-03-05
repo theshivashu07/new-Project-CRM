@@ -9,7 +9,8 @@ from django.db.models import Q
 import datetime
 
 
-DeveloperMain=5
+# DeveloperMain=5
+
 
 
 '''
@@ -46,6 +47,7 @@ def latestreport(request,projectslug):  #✓
 
 
 def allprojectsrequests(request):  #✓
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
@@ -84,6 +86,7 @@ def projectdetailsslug(request,projectslug):  #✓
 
 
 def projectdetailsedit(request,projectslug):  #✓
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	if request.method=="POST":   
@@ -116,6 +119,7 @@ def projectdetailsedit(request,projectslug):  #✓
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):  #✓
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
@@ -139,6 +143,7 @@ def activeprojects(request):  #✓
 
 
 def completedprojects(request):  #✓
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
@@ -230,6 +235,7 @@ def reportscollection(request):  #✓
 				QueryDataSets.append(holdingDict)
 		else:  #
 			pass
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
@@ -242,6 +248,7 @@ def reportscollection(request):  #✓
 
 
 def sendreports(request):  #✓
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
@@ -260,6 +267,7 @@ def sendreports(request):  #✓
 	return render(request,"otherapps/developer/sendreports.html", {'values':values});
 
 def sendreportsopen(request,projectslug=None):  #✓
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	if request.method=="POST":   
 		# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 		key=int(projectslug.split('-')[-1])
@@ -281,6 +289,7 @@ def sendreportsopen(request,projectslug=None):  #✓
 
 
 def assignedtasks(request):
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	querysets=DeveloperBox.objects.filter(DeveloperID=DeveloperMain)
 	values=list()
 	for queryset in querysets:
@@ -308,6 +317,7 @@ def assignedtasksopen(request,projectslug):
 			lock.TaskStatus=True
 			lock.save()
 		return redirect(request.path)
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=AllTasks.objects.filter(ReceiverID=DeveloperMain, TaskStatus=False)
 	values=AllTasks.objects.filter(ProjectID=ProjectID,ReceiverID=DeveloperMain,TaskStatus=False)
 	# getting=ProjectInfo.objects.get(pk=ProjectID).ProjectSlug.split('-')
@@ -326,6 +336,7 @@ def assignedtasksopen(request,projectslug):
 
 
 def allassignedtasks(request):
+	DeveloperMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	if request.method=="POST":   
 		if(request.POST["githublink"]):
 			lock=AllTasks.objects.get(pk=request.POST["thistasksID"])

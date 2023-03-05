@@ -1,0 +1,88 @@
+{% extends 'guest/master.html' %}
+
+{% block tcontent %}
+CRM - Work Process
+{% endblock %}
+
+{% block childcontent %}
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+<!-- ***** Home Parallax Start ***** -->
+<section class="mini" id="work-process" style="color: #07051a;">
+    <div class="mini-content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-lg-3 col-lg-6">
+                    <div class="info">
+                        <h1><b>Main's Table</b></h1>
+                        <!-- <p>Aenean nec tempor metus. Maecenas ligula dolor, commodo in imperdiet interdum, vehicula ut -->
+                            <!-- ex. Donec ante diam.</p> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ***** Mini Box Start ***** -->
+            <div class="row">
+
+
+
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Input groups</h4> -->
+
+              <!-- Bootstrap Table with Header - Dark -->
+              <div class="card">
+                <h5 class="card-header">Dark Table head</h5>
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      {% for value in values %}
+                      <tr>
+                        <td>{{value.id}}</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{value.FullName}}</strong></td>
+                        <td>{{value.EmailId}}</td>
+                        <td>{{value.Username}}</td>
+                        <td>{{value.Password}}</td>
+                        <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{value.Role}}</strong></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <!--/ Bootstrap Table with Header Dark -->
+            </div>
+
+
+
+
+            </div>
+            <!-- ***** Mini Box End ***** -->
+        </div>
+    </div>
+</section>
+<!-- ***** Home Parallax End ***** -->
+
+
+<br>
+<br>
+
+
+{% endblock %}

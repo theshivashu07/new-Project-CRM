@@ -9,7 +9,7 @@ from django.db.models import Q
 import datetime
 
 
-AdminMain=1
+# AdminMain=1
 
 
 
@@ -68,6 +68,7 @@ def completedprojectdetails(request,projectslug):
 	return render(request, "otherapps/admin/completedprojectdetails.html", {'values':values, 'projectslug':projectslug, 'selectedprojectmanager':selectedprojectmanager, 'selecteddeveloperslist':selecteddeveloperslist})
 
 def allprojectsrequests(request):
+	AdminMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# We only take it, when both are empty...
 	querysets=ProjectInfo.objects.filter(ReportStatus="Active", Admin=AdminMain, ProjectManager=None, Developer=None)
 	values=list()
@@ -134,6 +135,7 @@ def projectdetailsremoveteammember(request,projectslug):
 
 
 def projectdetailsedit(request,projectslug):
+	AdminMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	if request.method=="POST":
@@ -181,6 +183,7 @@ def projectdetailsedit(request,projectslug):
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):
+	AdminMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.get(pk=AdminMain)
 	values=ProjectInfo.objects.filter(~Q(ProjectManager=None) | ~Q(Developer=None),ReportStatus="Active", Admin=AdminMain)
 	for value in values:
@@ -200,6 +203,7 @@ def activeprojects(request):
 	return render(request,"otherapps/admin/activeprojects.html", {'values':values});
 
 def completedprojects(request):
+	AdminMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.get(pk=AdminMain)
 	values=ProjectInfo.objects.filter(ReportStatus="Completed", Admin=AdminMain) \
 				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Admin=AdminMain)
@@ -308,11 +312,13 @@ def reportscollection(request):  #✓
 				QueryDataSets.append(holdingDict)
 		else:  #
 			pass
+	AdminMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	values=ProjectInfo.objects.filter(Admin=AdminMain,ReportStatus="Active")
 	return render(request,"otherapps/admin/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
 
 
 def sendreports(request):
+	AdminMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.get(pk=AdminMain)
 	values=ProjectInfo.objects.filter(~Q(ProjectManager=None) & ~Q(Developer=None), ReportStatus="Active", Admin=AdminMain)
 	for value in values:
@@ -329,6 +335,7 @@ def sendreports(request):
 
 
 def sendreportsopen(request,projectslug=None):  #✓
+	AdminMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	ProjectID=int(projectslug.split('-')[-1])
 	SelectedDate=datetime.date.today()   #datetime.date(2023, 2, 18) // for trial
 	values=ReportsOrMessages.objects.filter(ProjectID=ProjectID, SendingDateTime__date=SelectedDate)

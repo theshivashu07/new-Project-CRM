@@ -9,7 +9,8 @@ from django.db.models import Q
 import datetime
 
 
-ProjectManagerMain=15
+# ProjectManagerMain=15
+
 
 
 
@@ -47,6 +48,7 @@ def latestreport(request,projectslug):  #✓
 
 
 def allprojectsrequests(request):  #✓
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# Below we use developer because it is the last thing wheich we insert... otherwise also use ProjectManager=None...
 	querysets=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
 	values=list()
@@ -85,6 +87,7 @@ def projectdetailsslug(request,projectslug):  #✓
 
 
 def projectdetailsedit(request,projectslug):  #✓
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	if request.method=="POST":   
@@ -117,6 +120,7 @@ def projectdetailsedit(request,projectslug):  #✓
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):  #✓
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# querysets=ProjectInfo.objects.get(pk=ProjectManagerMain)
 	querysets=ProjectInfo.objects.filter(ReportStatus="Active", ProjectManager=ProjectManagerMain)
 	values=list()
@@ -140,6 +144,7 @@ def activeprojects(request):  #✓
 
 
 def completedprojects(request):  #✓
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.get(pk=ProjectManagerMain)
 	values=ProjectInfo.objects.filter(ReportStatus="Completed", ProjectManager=ProjectManagerMain) \
 				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", ProjectManager=ProjectManagerMain)
@@ -232,11 +237,13 @@ def reportscollection(request):  #✓
 				QueryDataSets.append(holdingDict)
 		else:  #
 			pass
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	values=ProjectInfo.objects.filter(ProjectManager=ProjectManagerMain,ReportStatus="Active")
 	return render(request,"otherapps/projectmanager/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
 
 	
 def sendreports(request):  #✓
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	values=ProjectInfo.objects.filter(~Q(Developer=None), ProjectManager=ProjectManagerMain, ReportStatus="Active")
 	for value in values:
 		if(value.Client):
@@ -255,6 +262,7 @@ def sendreports(request):  #✓
 	return render(request,"otherapps/projectmanager/sendreports.html", {'values':values});
 
 def sendreportsopen(request,projectslug=None):  #✓
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	if request.method=="POST":
 		# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 		key=int(projectslug.split('-')[-1])
@@ -276,6 +284,7 @@ def sendreportsopen(request,projectslug=None):  #✓
 
 
 def assigntasks(request):
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	values=ProjectInfo.objects.filter(~Q(Developer=None), ProjectManager=ProjectManagerMain, ReportStatus="Active")
 	for value in values:
 		if(value.Client):
@@ -294,6 +303,7 @@ def assigntasks(request):
 	return render(request,"otherapps/projectmanager/assigntasks.html", {'values':values});
 
 def assigntasksopen(request,projectslug):
+	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	ProjectID=int(projectslug.split('-')[-1])
 	if request.method=="POST":
 		if(request.POST["contentdata"]):

@@ -9,7 +9,8 @@ from django.db.models import Q
 import datetime
 
 
-ClientMain=1
+# ClientMain=1
+
 
 
 
@@ -83,6 +84,7 @@ def projectdetails(request):
 		values.save()
 		slug="{}-{}".format(values.ProjectSlug,values.id)  #slug_creation
 		return redirect("/client/projectdetails/"+slug) 
+	ClientMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.get(id=1)   #default 
 	return render(request,"otherapps/client/projectdetails.html", {'values':values, 'clientID':ClientMain});
 
@@ -110,6 +112,7 @@ def projectdetailsslug(request,projectslug):
 	return render(request,"otherapps/client/projectdetails.html",{'values':values, 'projectslug':projectslug, 'path':request.path});
 
 def projectdetailsedit(request,projectslug):
+	ClientMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
 	if request.method=="POST":
@@ -156,6 +159,7 @@ def projectdetailsedit(request,projectslug):
 
 
 def allprojectsrequests(request):
+	ClientMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.all().values('id')
 	values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClientMain))
 	# values=reversed(ProjectInfo.objects.filter(ReportStatus="Not Received", Client=ClientMain)\
@@ -164,6 +168,7 @@ def allprojectsrequests(request):
 
 # currently we refer both urls to a duplicate page
 def activeprojects(request):
+	ClientMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.get(pk=AdminMain)
 	values=ProjectInfo.objects.filter(ReportStatus="Active", Client=ClientMain)
 	for value in values:
@@ -183,6 +188,7 @@ def activeprojects(request):
 	return render(request,"otherapps/client/activeprojects.html", {'values':values});
 
 def completedprojects(request):
+	ClientMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# values=ProjectInfo.objects.get(pk=AdminMain)
 	values=ProjectInfo.objects.filter(ReportStatus="Completed", Client=ClientMain) \
 				| ProjectInfo.objects.filter(ReportStatus="Withdrawal", Client=ClientMain)
@@ -301,6 +307,7 @@ def reportscollection(request):  #✓
 				QueryDataSets.append(holdingDict)
 		else:  #
 			pass
+	ClientMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	values=ProjectInfo.objects.filter(Client=ClientMain,ReportStatus="Active")
 	return render(request,"otherapps/client/reportscollection.html", {'values':values, 'selected':SelectedDataSets, 'QueryDataSets':QueryDataSets});
 

@@ -43,7 +43,7 @@ def loginMethod(request):
 		client=ClientInfo.objects.filter(Username=request.POST["username"],Password=request.POST["password"])
 		employee=Employee.objects.filter(Username=request.POST["username"],Password=request.POST["password"])
 		# DataSet = client.id if(client) else (employee.id if(employee) else None)
-		DataSet = client[0] if(client) else (employee[0] if(employee) else None)
+		DataSet = client[0] if(client) else (employee[0] if(employee) else None)  # because i want dataset, not queryset, n thats why!!! 
 		if(DataSet):
 			# print(DataSet.__class__.__name__)
 			InterectWithCookies('set',request,DataSet)
@@ -52,11 +52,23 @@ def loginMethod(request):
 		else:
 			# print("Sorry... you're logged OUT.")
 			pass
+		return redirect(request.path)
 	return render(request,"guest/login.html");
 
 def visit(request):
 	return HttpResponse("Which app you want to test <b>provide its link there</b>!!!");
 	#return redirect("/developer/");
+
+
+def listofmains(request):
+	values=list()
+	temp=ClientInfo.objects.get(pk=1)
+	client={'id':1, 'FullName':temp.FullName, 'EmailId':temp.EmailId, 'Username':temp.Username, 'Password':temp.Password, 'Role':'Client'}
+	hr={'id':'-', 'FullName':'Shivam Shukla', 'EmailId':'theshivashu07@gmail.com', 'Username':'theshivashu07', 'Password':'theshivashu07', 'Role':'HR'}
+	values.extend([client,hr])
+	for id in [1,15,5]:
+		values.append(Employee.objects.get(pk=id))
+	return render(request,"guest/listofmains.html", {'values':values});
 
 
 

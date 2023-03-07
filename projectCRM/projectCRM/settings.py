@@ -24,12 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@v@^$@^_=*fz^09556dmm+=)(y+6*%(^c^l)+=zn4e7355muzs'
 
 
-##### because i want to show 404 error page by default, 
-##### followed link is : https://youtu.be/gsW5gYTNi34
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
 
 
 # Application definition

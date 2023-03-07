@@ -34,9 +34,12 @@ class AllSuggestions(models.Model):
 	ContentData = models.CharField(max_length=750);
 	SendingDateTime = models.DateTimeField(auto_now_add=True);
 	def __str__(self):
-		project = ProjectInfo.objects.get(pk=self.ProjectID).ProjectName
-		TheNameOfClass = locals()[  'ClientInfo' if(self.SenderRole=="Client") else 'Employee' ]
-		sender = TheNameOfClass.objects.get(pk=self.SenderID).FullName
+		project = ProjectInfo.objects.get(pk=int(self.ProjectID)).ProjectName
+		if(self.SenderRole=='HR'):
+			sender = "ShrivaShu Shukla"
+		else:
+			TheNameOfClass = ClientInfo if(self.SenderRole=="Client") else Employee
+			sender = TheNameOfClass.objects.get(pk=self.SenderID).FullName
 		return sender+" gives a suggestion on "+project+" project. ( ID:"+str(self.id)+', Date:'+str(self.SendingDateTime)+" )";
 
 

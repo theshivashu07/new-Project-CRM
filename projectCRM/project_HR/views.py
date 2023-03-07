@@ -165,8 +165,6 @@ def projectdetailsedit(request,projectslug):
 		lock.EndingDate=request.POST["endingdate"]
 		lock.StartingAmount=request.POST["startingamount"]
 		lock.EndingAmount=request.POST["endingamount"]
-		# lock.SoftDiscription=request.POST["softdiscription"]  # there is never need comes to rewrite this, its one time!!!
-		# lock.HardDiscription=request.POST["harddiscription"]   # and ignore this because only admin can able to fill this!!!
 		lock.save()
 		if(request.POST["contentdata"]):
 			values=AllSuggestions()

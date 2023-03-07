@@ -90,7 +90,7 @@ def projectdetailsedit(request,projectslug):  #✓
 	ProjectManagerMain=request.session.get('WholeRepresentative')['UserID']  #must_assign
 	# get key from url's slug ---> 'shivam-shukla-77' to '77'...
 	key=int(projectslug.split('-')[-1])
-	if request.method=="POST":   
+	if request.method=="POST" and request.POST["contentdata"]:   
 		values=AllSuggestions()
 		values.ProjectID = key
 		values.SenderID = ProjectManagerMain

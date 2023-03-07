@@ -12,8 +12,8 @@ def index(request):
 
 
 # its must, because it handle 404 page error...
-def error_404_view(request,exception):
-	return render(request, "404.html")
+# def error_404_view(request,exception):
+	# return render(request, "404.html")
 
 
 
@@ -54,10 +54,8 @@ def loginMethod(request):
 			DummyDataSet.Username='theshivashu07'
 			DummyDataSet.ProfilePick='@theshivashu07.jpg'
 			DummyDataSet.Role='HR'
-			print(DummyDataSet)
 			InterectWithCookies('set',request,DummyDataSet)
 			WholeRepresentative=request.session.get('WholeRepresentative')
-			print(WholeRepresentative)
 			return redirect(WholeRepresentative['UserURL'])
 		client=ClientInfo.objects.filter(Username=Username,Password=Password)
 		employee=Employee.objects.filter(Username=Username,Password=Password)
